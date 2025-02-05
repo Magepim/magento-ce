@@ -432,19 +432,6 @@ class Carrier extends AbstractCarrierOnline implements CarrierInterface
             $unit = $this->getConfigData('unit_of_measure');
         }
         $rowRequest->setUnitMeasure($unit);
-
-        $rowRequest->setPackageHeight($request->getPackageHeight());
-        $rowRequest->setPackageWidth($request->getPackageWidth());
-        $rowRequest->setPackageDepth($request->getPackageDepth());
-
-        if ($rowRequest->getUnitMeasure() == 'KGS') {
-            $rowRequest->setUnitDimensions('CM');
-            $rowRequest->setUnitDimensionsDescription('Centimeter');
-        } else {
-            $rowRequest->setUnitDimensions('IN');
-            $rowRequest->setUnitDimensionsDescription('Inches');
-        }
-
         $rowRequest->setIsReturn($request->getIsReturn());
         $rowRequest->setBaseSubtotalInclTax($request->getBaseSubtotalInclTax());
 
@@ -1147,10 +1134,6 @@ XMLRequest;
             $rateParams['RateRequest']['Shipment']['Service']['Description'] = $serviceDescription;
         }
 
-        $height = $rowRequest->getPackageHeight() ?? 0;
-        $width = $rowRequest->getPackageWidth() ?? 0;
-        $length = $rowRequest->getPackageDepth() ?? 0;
-
         foreach ($rowRequest->getPackages() as $package) {
             $rateParams['RateRequest']['Shipment']['Package'][] = [
                 "PackagingType" => [
@@ -1159,12 +1142,12 @@ XMLRequest;
                 ],
                 "Dimensions" => [
                     "UnitOfMeasurement" => [
-                        "Code" => "{$rowRequest->getUnitDimensions()}",
-                        "Description" => "{$rowRequest->getUnitDimensionsDescription()}"
+                        "Code" => "IN",
+                        "Description" => "Inches"
                     ],
-                    "Length" => "{$length}",
-                    "Width" => "{$width}",
-                    "Height" => "{$height}"
+                    "Length" => "5",
+                    "Width" => "5",
+                    "Height" => "5"
                 ],
                 "PackageWeight" => [
                     "UnitOfMeasurement" => [
@@ -2844,7 +2827,7 @@ XMLAuth;
      * @return array|bool
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
-    public function getContainerTypes(?DataObject $params = null)
+    public function getContainerTypes(DataObject $params = null)
     {
         if ($params === null) {
             return $this->_getAllowedContainers($params);
@@ -2925,7 +2908,7 @@ XMLAuth;
      * @param DataObject|null $params
      * @return array|bool
      */
-    public function getDeliveryConfirmationTypes(?DataObject $params = null)
+    public function getDeliveryConfirmationTypes(DataObject $params = null)
     {
         $countryRecipient = $params != null ? $params->getCountryRecipient() : null;
         $deliveryConfirmationTypes = [];

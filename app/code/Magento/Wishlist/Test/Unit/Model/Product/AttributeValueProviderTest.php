@@ -171,7 +171,7 @@ class AttributeValueProviderTest extends TestCase
     /**
      * @return array
      */
-    public static function attributeDataProvider(): array
+    public function attributeDataProvider(): array
     {
         return [
             [1, 'attribute_code', 'Attribute Text']

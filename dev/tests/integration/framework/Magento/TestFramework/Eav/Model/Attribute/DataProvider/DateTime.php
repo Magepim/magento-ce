@@ -69,10 +69,10 @@ class DateTime extends AbstractBaseAttributeData
             parent::getUpdateProvider(),
             [
                 "{$frontendInput}_other_attribute_code" => [
-                    'postData' => [
+                    'post_data' => [
                         'attribute_code' => 'text_attribute_update',
                     ],
-                    'expectedData' => [
+                    'expected_data' => [
                         'attribute_code' => 'datetime_attribute',
                     ],
                 ],
@@ -90,10 +90,10 @@ class DateTime extends AbstractBaseAttributeData
             parent::getUpdateProviderWithErrorMessage(),
             [
                 "{$frontendInput}_wrong_default_value" => [
-                    'postData' => [
+                    'post_data' => [
                         'default_value_datetime' => '//02/4/2020 6:30 AM',
                     ],
-                    'errorMessage' => (string)__('The default date is invalid. Verify the date and try again.'),
+                    'error_message' => (string)__('The default date is invalid. Verify the date and try again.'),
                 ],
             ]
         );

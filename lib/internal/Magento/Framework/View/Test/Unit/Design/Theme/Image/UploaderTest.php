@@ -81,13 +81,13 @@ class UploaderTest extends TestCase
     /**
      * @return array
      */
-    public static function uploadDataProvider()
+    public function uploadDataProvider()
     {
         return [
             [
                 'isUploaded' => true,
                 'isValid' => true,
-                'checkExtension' => true,
+                'checkAllowedExtension' => true,
                 'save' => true,
                 'result' => '/tmp/test_filename',
                 'exception' => null,
@@ -95,7 +95,7 @@ class UploaderTest extends TestCase
             [
                 'isUploaded' => false,
                 'isValid' => true,
-                'checkExtension' => true,
+                'checkAllowedExtension' => true,
                 'save' => true,
                 'result' => false,
                 'exception' => null
@@ -103,7 +103,7 @@ class UploaderTest extends TestCase
             [
                 'isUploaded' => true,
                 'isValid' => false,
-                'checkExtension' => true,
+                'checkAllowedExtension' => true,
                 'save' => true,
                 'result' => false,
                 'exception' => LocalizedException::class
@@ -111,7 +111,7 @@ class UploaderTest extends TestCase
             [
                 'isUploaded' => true,
                 'isValid' => true,
-                'checkExtension' => false,
+                'checkAllowedExtension' => false,
                 'save' => true,
                 'result' => false,
                 'exception' => LocalizedException::class
@@ -119,7 +119,7 @@ class UploaderTest extends TestCase
             [
                 'isUploaded' => true,
                 'isValid' => true,
-                'checkExtension' => true,
+                'checkAllowedExtension' => true,
                 'save' => false,
                 'result' => false,
                 'exception' => LocalizedException::class

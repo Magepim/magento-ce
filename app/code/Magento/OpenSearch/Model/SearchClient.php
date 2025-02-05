@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2022 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
@@ -165,11 +165,11 @@ class SearchClient implements ClientInterface
      * Performs bulk query over OpenSearch  index
      *
      * @param array $query
-     * @return array
+     * @return void
      */
     public function bulkQuery(array $query)
     {
-        return $this->getOpenSearchClient()->bulk($query);
+        $this->getOpenSearchClient()->bulk($query);
     }
 
     /**
@@ -377,27 +377,5 @@ class SearchClient implements ClientInterface
             $properties = $preprocessor->process($properties);
         }
         return $properties;
-    }
-
-    /**
-     * Open point in time
-     *
-     * @param array $params
-     * @return array
-     */
-    public function openPointInTime(array $params = []): array
-    {
-        return $this->getOpenSearchClient()->createPointInTime($params);
-    }
-
-    /**
-     * Close point in time
-     *
-     * @param array $params
-     * @return array
-     */
-    public function closePointInTime(array $params = []): array
-    {
-        return $this->getOpenSearchClient()->deletePointInTime($params);
     }
 }

@@ -127,11 +127,11 @@ class ContainerTest extends TestCase
      * @return array
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public static function processDataProvider()
+    public function processDataProvider()
     {
         return [
             'container' => [
-                'elementCurrent' => self::getElement(
+                'elementCurrent' => $this->getElement(
                     '<container name="container" id="id_add" tag="body"/>',
                     'container'
                 ),
@@ -150,12 +150,12 @@ class ContainerTest extends TestCase
                         'unchanged' => 'unchanged_value',
                     ],
                 ],
-                'getStructureCondition' => self::once(),
-                'setStructureCondition' => self::once(),
-                'setRemoveCondition' => self::never(),
+                'getStructureCondition' => $this->once(),
+                'setStructureCondition' => $this->once(),
+                'setRemoveCondition' => $this->never(),
             ],
             'referenceContainer' => [
-                'elementCurrent' => self::getElement(
+                'elementCurrent' => $this->getElement(
                     '<referenceContainer name="reference" htmlTag="span" htmlId="id_add" htmlClass="new" label="Add"/>',
                     'referenceContainer'
                 ),
@@ -170,12 +170,12 @@ class ContainerTest extends TestCase
                         Container::CONTAINER_OPT_DISPLAY    => null,
                     ],
                 ],
-                'getStructureCondition' => self::once(),
-                'setStructureCondition' => self::once(),
-                'setRemoveCondition' => self::never(),
+                'getStructureCondition' => $this->once(),
+                'setStructureCondition' => $this->once(),
+                'setRemoveCondition' => $this->never(),
             ],
             'referenceContainerNoRemove' => [
-                'elementCurrent' => self::getElement(
+                'elementCurrent' => $this->getElement(
                     '<referenceContainer name="reference" remove="false"/>',
                     'referenceContainer'
                 ),
@@ -190,36 +190,36 @@ class ContainerTest extends TestCase
                         Container::CONTAINER_OPT_DISPLAY    => null,
                     ],
                 ],
-                'getStructureCondition' => self::once(),
-                'setStructureCondition' => self::once(),
-                'setRemoveCondition' => self::never(),
+                'getStructureCondition' => $this->once(),
+                'setStructureCondition' => $this->once(),
+                'setRemoveCondition' => $this->never(),
             ],
             'referenceContainerRemove' => [
-                'elementCurrent' => self::getElement(
+                'elementCurrent' => $this->getElement(
                     '<referenceContainer name="reference" remove="1"/>',
                     'referenceContainer'
                 ),
                 'containerName' => 'reference',
                 'structureElement' => [],
                 'expectedData' => [],
-                'getStructureCondition' => self::never(),
-                'setStructureCondition' => self::never(),
-                'setRemoveCondition' => self::once(),
+                'getStructureCondition' => $this->never(),
+                'setStructureCondition' => $this->never(),
+                'setRemoveCondition' => $this->once(),
             ],
             'referenceContainerRemove2' => [
-                'elementCurrent' => self::getElement(
+                'elementCurrent' => $this->getElement(
                     '<referenceContainer name="reference" remove="true"/>',
                     'referenceContainer'
                 ),
                 'containerName' => 'reference',
                 'structureElement' => [],
                 'expectedData' => [],
-                'getStructureCondition' => self::never(),
-                'setStructureCondition' => self::never(),
-                'setRemoveCondition' => self::once(),
+                'getStructureCondition' => $this->never(),
+                'setStructureCondition' => $this->never(),
+                'setRemoveCondition' => $this->once(),
             ],
             'referenceContainerDisplayFalse' => [
-                'elementCurrent' => self::getElement(
+                'elementCurrent' => $this->getElement(
                     '<referenceContainer name="reference" htmlTag="span" htmlId="id_add" htmlClass="new" label="Add"'
                     . ' display="true"/>',
                     'referenceContainer'
@@ -235,9 +235,9 @@ class ContainerTest extends TestCase
                         Container::CONTAINER_OPT_DISPLAY    => 'true',
                     ],
                 ],
-                'getStructureCondition' => self::once(),
-                'setStructureCondition' => self::once(),
-                'setRemoveCondition' => self::never(),
+                'getStructureCondition' => $this->once(),
+                'setStructureCondition' => $this->once(),
+                'setRemoveCondition' => $this->never(),
             ]
         ];
     }
@@ -247,7 +247,7 @@ class ContainerTest extends TestCase
      * @param string $elementType
      * @return Element
      */
-    protected static function getElement($xml, $elementType)
+    protected function getElement($xml, $elementType)
     {
         $xml = simplexml_load_string(
             '<parent_element>' . $xml . '</parent_element>',

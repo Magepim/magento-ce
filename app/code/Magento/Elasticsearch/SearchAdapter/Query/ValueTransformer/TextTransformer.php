@@ -12,8 +12,6 @@ use Magento\Framework\Search\Adapter\Preprocessor\PreprocessorInterface;
 
 /**
  * Value transformer for fields with text types.
- * @deprecated Elasticsearch is no longer supported by Adobe
- * @see this class will be responsible for ES only
  */
 class TextTransformer implements ValueTransformerInterface
 {

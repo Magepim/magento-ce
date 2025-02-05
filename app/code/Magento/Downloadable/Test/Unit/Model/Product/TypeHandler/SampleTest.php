@@ -90,13 +90,12 @@ class SampleTest extends TestCase
 
     /**
      * @dataProvider saveDataProvider
-     * @param \Closure $product
+     * @param \Magento\Catalog\Model\Product|MockObject $product
      * @param array $data
      * @param array $modelData
      */
-    public function testSave(\Closure $product, array $data, array $modelData)
+    public function testSave($product, array $data, array $modelData)
     {
-        $product = $product($this);
         $link = $this->createSampleModel($product, $modelData);
         $this->metadataMock->expects($this->once())->method('getLinkField')->willReturn('id');
         $this->sampleFactory->expects($this->once())
@@ -108,11 +107,11 @@ class SampleTest extends TestCase
     /**
      * @return array
      */
-    public static function saveDataProvider()
+    public function saveDataProvider()
     {
         return [
             [
-                'product' => static fn (self $testCase) => $testCase->createProductMock(100500, 1, 10, [10]),
+                'product' => $this->createProductMock(100500, 1, 10, [10]),
                 'data' => [
                     'sample' => [
                         [
@@ -136,14 +135,13 @@ class SampleTest extends TestCase
     }
 
     /**
-     * @param \Closure $product
+     * @param \Magento\Catalog\Model\Product|MockObject $product
      * @param array $data
      * @param array $expectedItems
      * @dataProvider deleteDataProvider
      */
-    public function testDelete(\Closure $product, array $data, array $expectedItems)
+    public function testDelete($product, array $data, array $expectedItems)
     {
-        $product = $product($this);
         $this->sampleResource->expects($this->once())
             ->method('deleteItems')
             ->with($expectedItems);
@@ -153,11 +151,11 @@ class SampleTest extends TestCase
     /**
      * @return array
      */
-    public static function deleteDataProvider()
+    public function deleteDataProvider()
     {
         return [
             [
-                'product' =>  static fn (self $testCase) => $testCase->createProductMock(1, 1, 1, [1]),
+                'product' => $this->createProductMock(1, 1, 1, [1]),
                 'data' => [
                     'sample' => [
                         [
@@ -240,7 +238,7 @@ class SampleTest extends TestCase
      * @return \Magento\Catalog\Model\Product|MockObject
      * @internal param bool $isUnlimited
      */
-    protected function createProductMock($id, $storeId, $storeWebsiteId, array $websiteIds)
+    private function createProductMock($id, $storeId, $storeWebsiteId, array $websiteIds)
     {
         $product = $this->getMockBuilder(Product::class)
             ->disableOriginalConstructor()

@@ -108,7 +108,7 @@ class AddressSaveTest extends AbstractBackendController
     /**
      * @return array
      */
-    public static function wrongRequestDataProvider(): array
+    public function wrongRequestDataProvider(): array
     {
         return [
             'empty_post' => [

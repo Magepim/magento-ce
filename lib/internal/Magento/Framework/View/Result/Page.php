@@ -9,26 +9,9 @@ namespace Magento\Framework\View\Result;
 use Magento\Framework;
 use Magento\Framework\App\Response\HttpInterface as HttpResponseInterface;
 use Magento\Framework\View;
-use Magento\Framework\View\Element\Template\Context;
-use Magento\Framework\View\LayoutFactory;
-use Magento\Framework\View\Layout\ReaderPool;
-use Magento\Framework\Translate\InlineInterface;
-use Magento\Framework\View\Layout\BuilderFactory;
-use Magento\Framework\View\Layout\GeneratorPool;
-use Magento\Framework\View\Page\Config\RendererInterface as PageConfigRendererInterface;
-use Magento\Framework\View\Page\Config\RendererFactory as PageConfigRendererFactory;
-use Magento\Framework\View\Page\Layout\Reader as PageLayoutReader;
-use Magento\Framework\App\RequestInterface as AppRequestInterface;
-use Magento\Framework\View\Asset\Repository as AssetRepository;
-use Psr\Log\LoggerInterface;
-use Magento\Framework\UrlInterface;
-use Magento\Framework\View\Page\Config as PageConfig;
-use Magento\Framework\View\FileSystem as ViewFileSystem;
-use Magento\Framework\App\ObjectManager;
-use Magento\Framework\View\EntitySpecificHandlesList;
 
 /**
- * Class Page represents a "page" result that encapsulates page type, page configuration
+ * A "page" result that encapsulates page type, page configuration
  * and imposes certain layout handles.
  *
  * The framework convention is that there will be loaded a guaranteed handle for "all pages",
@@ -52,27 +35,27 @@ class Page extends Layout
     protected $pageLayout;
 
     /**
-     * @var PageConfig
+     * @var \Magento\Framework\View\Page\Config
      */
     protected $pageConfig;
 
     /**
-     * @var PageConfigRendererInterface
+     * @var \Magento\Framework\View\Page\Config\RendererInterface
      */
     protected $pageConfigRenderer;
 
     /**
-     * @var PageConfigRendererFactory
+     * @var \Magento\Framework\View\Page\Config\RendererFactory
      */
     protected $pageConfigRendererFactory;
 
     /**
-     * @var PageLayoutReader
+     * @var \Magento\Framework\View\Page\Layout\Reader
      */
     protected $pageLayoutReader;
 
     /**
-     * @var ViewFileSystem
+     * @var \Magento\Framework\View\FileSystem
      */
     protected $viewFileSystem;
 
@@ -87,59 +70,61 @@ class Page extends Layout
     protected $template;
 
     /**
-     * @var AppRequestInterface
+     * @var Framework\App\RequestInterface
      */
     protected $request;
 
     /**
-     * @var AssetRepository
+     * Asset service
+     *
+     * @var \Magento\Framework\View\Asset\Repository
      */
     protected $assetRepo;
 
     /**
-     * @var LoggerInterface
+     * @var \Psr\Log\LoggerInterface
      */
     protected $logger;
 
     /**
-     * @var UrlInterface
+     * @var Framework\UrlInterface
      */
     protected $urlBuilder;
 
     /**
-     * @var EntitySpecificHandlesList
+     * @var View\EntitySpecificHandlesList
      */
     private $entitySpecificHandlesList;
 
     /**
      * Constructor
      *
-     * @param Context $context
-     * @param LayoutFactory $layoutFactory
-     * @param ReaderPool $layoutReaderPool
-     * @param InlineInterface $translateInline
-     * @param BuilderFactory $layoutBuilderFactory
-     * @param GeneratorPool $generatorPool
-     * @param PageConfigRendererFactory $pageConfigRendererFactory
-     * @param PageLayoutReader $pageLayoutReader
+     * @param View\Element\Template\Context $context
+     * @param View\LayoutFactory $layoutFactory
+     * @param View\Layout\ReaderPool $layoutReaderPool
+     * @param Framework\Translate\InlineInterface $translateInline
+     * @param View\Layout\BuilderFactory $layoutBuilderFactory
+     * @param View\Layout\GeneratorPool $generatorPool
+     * @param View\Page\Config\RendererFactory $pageConfigRendererFactory
+     * @param View\Page\Layout\Reader $pageLayoutReader
      * @param string $template
      * @param bool $isIsolated
-     * @param EntitySpecificHandlesList $entitySpecificHandlesList
+     * @param View\EntitySpecificHandlesList $entitySpecificHandlesList
      *
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
-        Context $context,
-        LayoutFactory $layoutFactory,
-        ReaderPool $layoutReaderPool,
-        InlineInterface $translateInline,
-        BuilderFactory $layoutBuilderFactory,
-        GeneratorPool $generatorPool,
-        PageConfigRendererFactory $pageConfigRendererFactory,
-        PageLayoutReader $pageLayoutReader,
+        View\Element\Template\Context $context,
+        View\LayoutFactory $layoutFactory,
+        View\Layout\ReaderPool $layoutReaderPool,
+        Framework\Translate\InlineInterface $translateInline,
+        View\Layout\BuilderFactory $layoutBuilderFactory,
+        View\Layout\GeneratorPool $generatorPool,
+        View\Page\Config\RendererFactory $pageConfigRendererFactory,
+        View\Page\Layout\Reader $pageLayoutReader,
         $template,
         $isIsolated = false,
-        ?EntitySpecificHandlesList $entitySpecificHandlesList = null
+        View\EntitySpecificHandlesList $entitySpecificHandlesList = null
     ) {
         $this->request = $context->getRequest();
         $this->assetRepo = $context->getAssetRepository();
@@ -151,7 +136,7 @@ class Page extends Layout
         $this->pageConfigRendererFactory = $pageConfigRendererFactory;
         $this->template = $template;
         $this->entitySpecificHandlesList = $entitySpecificHandlesList
-            ?: ObjectManager::getInstance()->get(EntitySpecificHandlesList::class);
+            ?: \Magento\Framework\App\ObjectManager::getInstance()->get(View\EntitySpecificHandlesList::class);
         parent::__construct(
             $context,
             $layoutFactory,
@@ -218,7 +203,7 @@ class Page extends Layout
     /**
      * Return page configuration
      *
-     * @return PageConfig
+     * @return \Magento\Framework\View\Page\Config
      */
     public function getConfig()
     {
@@ -235,7 +220,7 @@ class Page extends Layout
      */
     public function addPageLayoutHandles(array $parameters = [], $defaultHandle = null, $entitySpecific = true)
     {
-        $handle = $defaultHandle ?: $this->getDefaultLayoutHandle();
+        $handle = $defaultHandle ? $defaultHandle : $this->getDefaultLayoutHandle();
         $pageHandles = [$handle];
         foreach ($parameters as $key => $value) {
             $handle = $value['handle'] ?? $handle;
@@ -252,13 +237,7 @@ class Page extends Layout
     }
 
     /**
-     * Render the page.
-     *
      * {@inheritdoc}
-     *
-     * @param HttpResponseInterface $response The HTTP response object.
-     * @return $this
-     * @throws \Exception If the template file is not found.
      */
     protected function render(HttpResponseInterface $response)
     {
@@ -266,14 +245,11 @@ class Page extends Layout
         if ($this->getPageLayout()) {
             $config = $this->getConfig();
             $this->addDefaultBodyClasses();
-            $addCritical = $this->getLayout()->getBlock('head.critical');
             $addBlock = $this->getLayout()->getBlock('head.additional'); // todo
             $requireJs = $this->getLayout()->getBlock('require.js');
             $this->assign([
                 'requireJs' => $requireJs ? $requireJs->toHtml() : null,
                 'headContent' => $this->pageConfigRenderer->renderHeadContent(),
-                'headCritical' => $addCritical ? $addCritical->toHtml() : null,
-                'headAssets' => $this->pageConfigRenderer->renderHeadAssets(),
                 'headAdditional' => $addBlock ? $addBlock->toHtml() : null,
                 'htmlAttributes' => $this->pageConfigRenderer->renderElementAttributes($config::ELEMENT_TYPE_HTML),
                 'headAttributes' => $this->pageConfigRenderer->renderElementAttributes($config::ELEMENT_TYPE_HEAD),
@@ -308,9 +284,7 @@ class Page extends Layout
     }
 
     /**
-     * Get the page layout.
-     *
-     * @return string The page layout.
+     * @return string
      */
     protected function getPageLayout()
     {
@@ -320,9 +294,9 @@ class Page extends Layout
     /**
      * Assign variable
      *
-     * @param string|array $key
-     * @param mixed $value
-     * @return $this
+     * @param   string|array $key
+     * @param   mixed $value
+     * @return  $this
      */
     protected function assign($key, $value = null)
     {

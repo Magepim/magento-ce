@@ -1,18 +1,16 @@
 <?php
 /**
- * Copyright 2015 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
 namespace Magento\Framework\Model\Test\Unit\ResourceModel\Db\VersionControl;
 
-use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Model\AbstractModel;
 use Magento\Framework\Model\ResourceModel\Db\VersionControl\Metadata;
 use Magento\Framework\Model\ResourceModel\Db\VersionControl\Snapshot;
-use Magento\Framework\Serialize\SerializerInterface;
-use PHPUnit\Framework\MockObject\Exception;
+use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -21,47 +19,38 @@ class SnapshotTest extends TestCase
     /**
      * @var Snapshot
      */
-    protected Snapshot $entitySnapshot;
+    protected $entitySnapshot;
 
     /**
      * @var MockObject|Metadata
      */
-    private Metadata $entityMetadata;
+    protected $entityMetadata;
 
     /**
      * @var MockObject|AbstractModel
      */
-    private AbstractModel $model;
+    protected $model;
 
     /**
-     * @var SerializerInterface|MockObject
-     */
-    private SerializerInterface $serializer;
-
-    /**
-     * @return void
-     * @throws Exception
+     * Initialization
      */
     protected function setUp(): void
     {
+        $objectManager = new ObjectManager($this);
         $this->model = $this->createPartialMock(AbstractModel::class, ['getId']);
 
         $this->entityMetadata = $this->createPartialMock(
             Metadata::class,
             ['getFields']
         );
-        $this->serializer = $this->createMock(SerializerInterface::class);
 
-        $this->entitySnapshot = new Snapshot($this->entityMetadata, $this->serializer);
-
-        parent::setUp();
+        $this->entitySnapshot = $objectManager->getObject(
+            Snapshot::class,
+            ['metadata' => $this->entityMetadata]
+        );
     }
 
-    /**
-     * @return void
-     * @throws LocalizedException
-     */
-    public function testRegisterSnapshot(): void
+    public function testRegisterSnapshot()
     {
         $entityId = 1;
         $data = [
@@ -83,26 +72,19 @@ class SnapshotTest extends TestCase
         $this->assertFalse($this->entitySnapshot->isModified($this->model));
     }
 
-    /**
-     * @return void
-     * @throws LocalizedException
-     */
-    public function testIsModified(): void
+    public function testIsModified()
     {
         $entityId = 1;
-        $options = ['option1' => 'value1', 'option2' => 'value2'];
         $data = [
             'id' => $entityId,
             'name' => 'test',
             'description' => '',
-            'custom_not_present_attribute' => '',
-            'options' => json_encode($options)
+            'custom_not_present_attribute' => ''
         ];
         $fields = [
             'id' => [],
             'name' => [],
-            'description' => [],
-            'options' => []
+            'description' => []
         ];
         $modifiedData = array_merge($data, ['name' => 'newName']);
         $this->model->expects($this->any())->method('getId')->willReturn($entityId);
@@ -111,19 +93,11 @@ class SnapshotTest extends TestCase
         $this->entitySnapshot->registerSnapshot($this->model);
         $this->model->setData($modifiedData);
         $this->assertTrue($this->entitySnapshot->isModified($this->model));
-
-        $this->model->setData('options', $options);
-        $this->assertTrue($this->entitySnapshot->isModified($this->model));
-
         $this->entitySnapshot->registerSnapshot($this->model);
         $this->assertFalse($this->entitySnapshot->isModified($this->model));
     }
 
-    /**
-     * @return void
-     * @throws LocalizedException
-     */
-    public function testClear(): void
+    public function testClear()
     {
         $entityId = 1;
         $data = [

@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 
 class ProductListTest extends TestCase
 {
-    private const STUB_VIEW_MODE = 'grid';
+    const STUB_VIEW_MODE = 'grid';
     /**
      * @var ScopeConfigInterface|MockObject
      */
@@ -55,18 +55,18 @@ class ProductListTest extends TestCase
         $this->assertSame($expectedReturn, $returnedValue);
     }
 
-    public static function defaultAvailableLimitsDataProvider(): array
+    public function defaultAvailableLimitsDataProvider(): array
     {
         return [
             'limit-available' => [
-                'availableValues' => '10,20,30',
-                'defaultValue' => 10,
-                'expectedReturn' => 10
+                'values' => '10,20,30',
+                'default' => 10,
+                'expected' => 10
             ],
             'limit-not-available' => [
-                'availableValues' => '10,20,30',
-                'defaultValue' => 1,
-                'expectedReturn' => 10
+                'values' => '10,20,30',
+                'default' => 1,
+                'expected' => 10
             ]
         ];
     }

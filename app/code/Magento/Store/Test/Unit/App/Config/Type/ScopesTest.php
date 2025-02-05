@@ -88,7 +88,7 @@ class ScopesTest extends TestCase
      *
      * @return array
      */
-    public static function getDataProvider()
+    public function getDataProvider()
     {
         return [
             [

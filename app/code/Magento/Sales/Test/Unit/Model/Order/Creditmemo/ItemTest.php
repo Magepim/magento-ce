@@ -292,7 +292,7 @@ class ItemTest extends TestCase
     /**
      * @return array
      */
-    public static function calcRowTotalDataProvider()
+    public function calcRowTotalDataProvider()
     {
         return [
             'qty 1' => [1],

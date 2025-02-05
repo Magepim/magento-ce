@@ -76,13 +76,7 @@ class DwstreeTest extends TestCase
                 'storeManager' => $this->storeManagerMock,
             ]
         );
-        $objects = [
-            [
-                Dwstree::class,
-                $this->createMock(Dwstree::class)
-            ]
-        ];
-        $objectManager->prepareObjectManager($objects);
+
         $this->object = $objectManager->getObject(
             Dwstree::class,
             ['context' => $this->context]
@@ -140,11 +134,11 @@ class DwstreeTest extends TestCase
     /**
      * @return array
      */
-    public static function initTabsDataProvider()
+    public function initTabsDataProvider()
     {
         return [
             'matchAll'  => [
-                'section'   => 'Test Scope',
+                'scope'   => 'Test Scope',
                 'website' => [
                     'expected' => ['name' => 'Test Website Name', 'code' => 'Test Website Code'],
                     'actual'   => ['name' => 'Test Website Name', 'code' => 'Test Website Code'],
@@ -155,7 +149,7 @@ class DwstreeTest extends TestCase
                 ],
             ],
             'matchStore'  => [
-                'section'   => 'Test Scope',
+                'scope'   => 'Test Scope',
                 'website' => [
                     'expected' => ['name' => 'Test Website Name', 'code' => 'Test Website Code'],
                     'actual'   => ['name' => false, 'code' => false],
@@ -166,7 +160,7 @@ class DwstreeTest extends TestCase
                 ],
             ],
             'matchWebsite'  => [
-                'section'   => 'Test Scope',
+                'scope'   => 'Test Scope',
                 'website' => [
                     'expected' => ['name' => 'Test Website Name', 'code' => 'Test Website Code'],
                     'actual'   => ['name' => 'Test Website Name', 'code' => 'Test Website Code'],
@@ -177,7 +171,7 @@ class DwstreeTest extends TestCase
                 ],
             ],
             'noMatch'  => [
-                'section'   => 'Test Scope',
+                'scope'   => 'Test Scope',
                 'website' => [
                     'expected' => ['name' => 'Test Website Name', 'code' => 'Test Website Code'],
                     'actual'   => ['name' => false, 'code' => false],

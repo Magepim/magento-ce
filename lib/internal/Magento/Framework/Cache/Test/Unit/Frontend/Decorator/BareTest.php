@@ -22,9 +22,6 @@ class BareTest extends TestCase
      */
     public function testProxyMethod($method, $params, $expectedResult)
     {
-        if (is_callable($expectedResult)) {
-            $expectedResult = $expectedResult($this);
-        }
         $frontendMock = $this->getMockForAbstractClass(FrontendInterface::class);
 
         $object = new Bare($frontendMock);
@@ -36,7 +33,7 @@ class BareTest extends TestCase
     /**
      * @return array
      */
-    public static function proxyMethodDataProvider()
+    public function proxyMethodDataProvider()
     {
         return [
             ['test', ['record_id'], 111],
@@ -44,18 +41,8 @@ class BareTest extends TestCase
             ['save', ['record_value', 'record_id', ['tag'], 555], true],
             ['remove', ['record_id'], true],
             ['clean', [\Zend_Cache::CLEANING_MODE_MATCHING_ANY_TAG, ['tag']], true],
-            ['getBackend', [], static fn (self $testCase) => $testCase->createZendCacheBackendMock()],
-            ['getLowLevelFrontend', [], static fn (self $testCase) => $testCase->createZendCacheCoreMock()],
+            ['getBackend', [], $this->createMock(\Zend_Cache_Backend::class)],
+            ['getLowLevelFrontend', [], $this->createMock(\Zend_Cache_Core::class)],
         ];
-    }
-
-    public function createZendCacheBackendMock()
-    {
-        return $this->createMock(\Zend_Cache_Backend::class);
-    }
-
-    public function createZendCacheCoreMock()
-    {
-        return $this->createMock(\Zend_Cache_Core::class);
     }
 }

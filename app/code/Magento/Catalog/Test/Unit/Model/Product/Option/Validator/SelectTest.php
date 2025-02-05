@@ -98,7 +98,7 @@ class SelectTest extends TestCase
     /**
      * @return array
      */
-    public static function isValidSuccessDataProvider()
+    public function isValidSuccessDataProvider()
     {
         return [
             [
@@ -194,7 +194,7 @@ class SelectTest extends TestCase
     /**
      * @return array
      */
-    public static function isValidateWithInvalidDataDataProvider()
+    public function isValidateWithInvalidDataDataProvider()
     {
         return [
             'invalid_price_type' => ['some_value', '10', 'Title'],

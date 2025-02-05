@@ -45,7 +45,7 @@ class DataTest extends TestCase
     /**
      * @return array
      */
-    public static function setValueDataProvider()
+    public function setValueDataProvider()
     {
         return [
             'simple value' => ['some/config/value', 'test'],

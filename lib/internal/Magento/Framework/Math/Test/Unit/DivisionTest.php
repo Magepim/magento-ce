@@ -30,7 +30,7 @@ class DivisionTest extends TestCase
     /**
      * @return array
      */
-    public static function getExactDivisionDataProvider()
+    public function getExactDivisionDataProvider()
     {
         return [
             [17, 3 , 2],

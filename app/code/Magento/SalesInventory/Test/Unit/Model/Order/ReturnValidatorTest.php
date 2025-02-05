@@ -125,7 +125,7 @@ class ReturnValidatorTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProvider()
+    public function dataProvider()
     {
         return [
             'PostirivValidationTest' => [null, [1], 1, 1],

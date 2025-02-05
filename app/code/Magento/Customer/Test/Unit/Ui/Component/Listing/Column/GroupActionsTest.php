@@ -270,7 +270,7 @@ class GroupActionsTest extends TestCase
      *
      * @return array
      */
-    public static function customerGroupsDataProvider(): array
+    public function customerGroupsDataProvider(): array
     {
         return [
             [

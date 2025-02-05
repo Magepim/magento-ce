@@ -42,7 +42,7 @@ class CalendarTest extends TestCase
     /**
      * @return array
      */
-    public static function localesDataProvider()
+    public function localesDataProvider()
     {
         return [
             ['en_US'],

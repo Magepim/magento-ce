@@ -107,7 +107,7 @@ class TierpriceTest extends TestCase
      *
      * @return array
      */
-    public static function validateDuplicateDataProvider(): array
+    public function validateDuplicateDataProvider(): array
     {
         return [
             [
@@ -222,7 +222,7 @@ class TierpriceTest extends TestCase
     /**
      * @return array
      */
-    public static function saveExistingProductDataProvider(): array
+    public function saveExistingProductDataProvider(): array
     {
         return [
             'same' => [
@@ -329,7 +329,7 @@ class TierpriceTest extends TestCase
     /**
      * @return array
      */
-    public static function saveNewProductDataProvider(): array
+    public function saveNewProductDataProvider(): array
     {
         return [
             [

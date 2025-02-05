@@ -168,7 +168,7 @@ class AbstractFormTest extends TestCase
      *
      * @return array
      */
-    public static function dataProviderSerialize()
+    public function dataProviderSerialize()
     {
         return [
             [[], [], [], ''],

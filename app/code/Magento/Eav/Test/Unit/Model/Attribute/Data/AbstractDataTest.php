@@ -77,7 +77,7 @@ class AbstractDataTest extends TestCase
     /**
      * @return array
      */
-    public static function extractedDataDataProvider()
+    public function extractedDataDataProvider()
     {
         return [
             [
@@ -134,7 +134,7 @@ class AbstractDataTest extends TestCase
     /**
      * @return array
      */
-    public static function getRequestValueDataProvider()
+    public function getRequestValueDataProvider()
     {
         return [
             [

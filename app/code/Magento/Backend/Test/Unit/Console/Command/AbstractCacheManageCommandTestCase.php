@@ -30,26 +30,26 @@ abstract class AbstractCacheManageCommandTestCase extends AbstractCacheCommandTe
     /**
      * @return array
      */
-    public static function executeDataProvider()
+    public function executeDataProvider()
     {
         return [
             'implicit all' => [
                 [],
                 ['A', 'B', 'C', 'full_page'],
                 true,
-                static::getExpectedExecutionOutput(['A', 'B', 'C', 'full_page']),
+                $this->getExpectedExecutionOutput(['A', 'B', 'C', 'full_page']),
             ],
             'specified types' => [
                 ['types' => ['A', 'B']],
                 ['A', 'B'],
                 false,
-                static::getExpectedExecutionOutput(['A', 'B']),
+                $this->getExpectedExecutionOutput(['A', 'B']),
             ],
             'fpc_only' => [
                 ['types' => ['full_page']],
                 ['full_page'],
                 true,
-                static::getExpectedExecutionOutput(['full_page']),
+                $this->getExpectedExecutionOutput(['full_page']),
             ],
         ];
     }

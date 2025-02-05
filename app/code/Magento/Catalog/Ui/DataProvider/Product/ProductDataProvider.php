@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2015 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 namespace Magento\Catalog\Ui\DataProvider\Product;
 
@@ -11,6 +11,12 @@ use Magento\Store\Model\Store;
 use Magento\Ui\DataProvider\Modifier\ModifierInterface;
 use Magento\Ui\DataProvider\Modifier\PoolInterface;
 
+/**
+ * Class ProductDataProvider
+ *
+ * @api
+ * @since 100.0.2
+ */
 class ProductDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
 {
     /**
@@ -55,7 +61,7 @@ class ProductDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
         array $addFilterStrategies = [],
         array $meta = [],
         array $data = [],
-        ?PoolInterface $modifiersPool = null
+        PoolInterface $modifiersPool = null
     ) {
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
         $this->collection = $collectionFactory->create();
@@ -110,7 +116,6 @@ class ProductDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
      */
     public function addFilter(\Magento\Framework\Api\Filter $filter)
     {
-        // @phpstan-ignore-next-line
         if (isset($this->addFilterStrategies[$filter->getField()])) {
             $this->addFilterStrategies[$filter->getField()]
                 ->addFilter(

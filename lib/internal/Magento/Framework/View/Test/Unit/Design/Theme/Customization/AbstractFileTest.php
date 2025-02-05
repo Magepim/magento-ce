@@ -153,7 +153,7 @@ class AbstractFileTest extends TestCase
     /**
      * @return array
      */
-    public static function getTestContent()
+    public function getTestContent()
     {
         return [
             'first_condition' => [

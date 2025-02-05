@@ -109,7 +109,7 @@ class IndexerShowModeCommandTest extends AbstractIndexerCommandCommonSetup
                         'title' => 'Title_indexerThree'
                     ],
                 ],
-                'isScheduled' => [
+                'Is Scheduled' => [
                     'id_indexerOne' => true,
                     'id_indexerTwo' => false,
                     'id_indexerThree' => false,

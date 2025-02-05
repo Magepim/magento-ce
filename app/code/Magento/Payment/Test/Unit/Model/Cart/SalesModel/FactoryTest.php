@@ -48,7 +48,7 @@ class FactoryTest extends TestCase
     /**
      * @return array
      */
-    public static function createDataProvider()
+    public function createDataProvider()
     {
         return [
             [Quote::class, \Magento\Payment\Model\Cart\SalesModel\Quote::class],

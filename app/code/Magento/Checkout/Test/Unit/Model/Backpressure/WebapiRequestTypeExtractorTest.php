@@ -56,7 +56,7 @@ class WebapiRequestTypeExtractorTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProvider(): array
+    public function dataProvider(): array
     {
         return [
             [false, 'someMethod', null],

@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2015 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
@@ -154,7 +154,14 @@ class ElasticsearchTest extends TestCase
         $elasticsearchClientMock->expects($this->any())
             ->method('indices')
             ->willReturn($indicesMock);
-        $this->client = $this->createMock(Elasticsearch::class);
+        $this->client = $this->getMockBuilder(Elasticsearch::class)
+            ->setConstructorArgs(
+                [
+                    'options' => $this->getClientOptions(),
+                    'elasticsearchClient' => $elasticsearchClientMock
+                ]
+            )
+            ->getMock();
         $this->connectionManager->expects($this->any())
             ->method('getConnection')
             ->willReturn($this->client);
@@ -293,8 +300,7 @@ class ElasticsearchTest extends TestCase
     public function testAddDocs(): void
     {
         $this->client->expects($this->once())
-            ->method('bulkQuery')
-            ->willReturn(['errors' => false]);
+            ->method('bulkQuery');
         $this->assertSame(
             $this->model,
             $this->model->addDocs(
@@ -690,6 +696,24 @@ class ElasticsearchTest extends TestCase
                 }
             );
         $this->emulateCleanIndex();
+    }
+
+    /**
+     * Get elasticsearch client options
+     *
+     * @return array
+     */
+    protected function getClientOptions(): array
+    {
+        return [
+            'hostname' => 'localhost',
+            'port' => '9200',
+            'timeout' => 15,
+            'index' => 'magento2',
+            'enableAuth' => 1,
+            'username' => 'user',
+            'password' => 'my-password'
+        ];
     }
 
     /**

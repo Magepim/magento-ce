@@ -89,7 +89,7 @@ class DesignExceptionsTest extends TestCase
     /**
      * @return array
      */
-    public static function getThemeByRequestDataProvider()
+    public function getThemeByRequestDataProvider()
     {
         return [
             [false, null, 0, false],

@@ -190,7 +190,7 @@ class ConfigurableProductHandlerTest extends TestCase
     /**
      * @return array[]
      */
-    public static function aroundGetMatchingProductIdsDataProvider(): array
+    public function aroundGetMatchingProductIdsDataProvider(): array
     {
         return [
             [

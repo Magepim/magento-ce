@@ -81,12 +81,12 @@ class SaveTest extends AbstractController
     {
         return [
             'subscribe_customer' => [
-                'isSubscribed' => true,
-                'expectedMessage' => 'We have saved your subscription.',
+                'is_subscribed' => true,
+                'expected_message' => 'We have saved your subscription.',
             ],
             'unsubscribe_customer' => [
-                'isSubscribed' => false,
-                'expectedMessage' => 'We have updated your subscription.',
+                'is_subscribed' => false,
+                'expected_message' => 'We have updated your subscription.',
             ],
         ];
     }

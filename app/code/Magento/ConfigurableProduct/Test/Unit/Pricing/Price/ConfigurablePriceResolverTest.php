@@ -97,7 +97,7 @@ class ConfigurablePriceResolverTest extends TestCase
     /**
      * @return array
      */
-    public static function resolvePriceDataProvider()
+    public function resolvePriceDataProvider()
     {
         return [
             'Single variant at price 0.00 (float), should return 0.00 (float)' => [

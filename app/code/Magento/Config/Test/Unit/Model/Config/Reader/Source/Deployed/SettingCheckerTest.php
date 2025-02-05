@@ -126,7 +126,7 @@ class SettingCheckerTest extends TestCase
     /**
      * @return array
      */
-    public static function isReadonlyDataProvider()
+    public function isReadonlyDataProvider()
     {
         return [
             [

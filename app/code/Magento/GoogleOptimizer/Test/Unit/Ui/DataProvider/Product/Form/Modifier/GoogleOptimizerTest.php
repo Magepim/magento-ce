@@ -149,7 +149,7 @@ class GoogleOptimizerTest extends TestCase
     /**
      * @return array
      */
-    public static function getDataGoogleExperimentEnabledDataProvider()
+    public function getDataGoogleExperimentEnabledDataProvider()
     {
         return [
             ['productId' => 2, 'experimentScript' => 'some script', 'codeId' => '3', 'expectedCalls' => 1],

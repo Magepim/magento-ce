@@ -76,7 +76,7 @@ class CollectionTest extends TestCase
      *
      * @return array
      */
-    public static function setItemObjectClassDataProvider()
+    public function setItemObjectClassDataProvider()
     {
         return [[Url::class], [DataObject::class]];
     }

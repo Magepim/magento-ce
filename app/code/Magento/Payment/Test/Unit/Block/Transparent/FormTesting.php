@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2015 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
@@ -17,10 +17,10 @@ class FormTesting extends Form
     /**
      * Return values for processHtml() method
      */
-    public const PROCESS_HTML_RESULT = 'parent_result';
+    const PROCESS_HTML_RESULT = 'parent_result';
 
     /**
-     * {@inheritDoc}
+     * {inheritdoc}
      */
     protected function processHtml()
     {

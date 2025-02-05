@@ -24,11 +24,6 @@ class SaveTest extends AbstractCreditmemoControllerTest
     /**
      * @var string
      */
-    protected $resource = 'Magento_Sales::creditmemo';
-
-    /**
-     * @var string
-     */
     protected $uri = 'backend/sales/order_creditmemo/save';
 
     /**

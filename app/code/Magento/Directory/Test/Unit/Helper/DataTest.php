@@ -178,7 +178,7 @@ class DataTest extends TestCase
     /**
      * @return array
      */
-    public static function getRegionJsonDataProvider(): array
+    public function getRegionJsonDataProvider(): array
     {
         return [
             [
@@ -353,7 +353,7 @@ class DataTest extends TestCase
     /**
      * @return array
      */
-    public static function topCountriesDataProvider()
+    public function topCountriesDataProvider()
     {
         return [
             [null, []],

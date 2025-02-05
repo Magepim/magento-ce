@@ -168,11 +168,11 @@ class UiComponentTest extends TestCase
     /**
      * @return array
      */
-    public static function interpretDataProvider()
+    public function interpretDataProvider()
     {
         return [
             [
-                self::getElement(
+                $this->getElement(
                     '<uiComponent
                         name="cms_block_listing"
                         aclResource="test_acl"
@@ -190,7 +190,7 @@ class UiComponentTest extends TestCase
      * @param string $elementType
      * @return Element
      */
-    protected static function getElement($xml, $elementType)
+    protected function getElement($xml, $elementType)
     {
         $xml = simplexml_load_string(
             '<parent_element>' . $xml . '</parent_element>',

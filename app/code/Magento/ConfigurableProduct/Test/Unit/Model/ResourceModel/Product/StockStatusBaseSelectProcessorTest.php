@@ -107,7 +107,7 @@ class StockStatusBaseSelectProcessorTest extends TestCase
     /**
      * @return array
      */
-    public static function processDataProvider()
+    public function processDataProvider()
     {
         return [
             'Out of stock products are being displayed' => [true],

@@ -200,7 +200,7 @@ class DynamicStorageTest extends TestCase
      * @return array
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public static function findProductRewriteByRequestPathDataProvider(): array
+    public function findProductRewriteByRequestPathDataProvider(): array
     {
         return [
             [

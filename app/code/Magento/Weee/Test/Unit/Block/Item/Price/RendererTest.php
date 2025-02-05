@@ -196,19 +196,19 @@ class RendererTest extends TestCase
     }
 
     /**
-     * @param int $price
-     * @param int $weeeTax
-     * @param bool $weeeEnabled
-     * @param bool $includeWeee
-     * @param int $expectedValue
+     * @param $priceInclTax
+     * @param $weeeTaxInclTax
+     * @param $weeeEnabled
+     * @param $includeWeee
+     * @param $expectedValue
      * @dataProvider getDisplayPriceDataProvider
      */
     public function testGetUnitDisplayPriceInclTax(
-        int $price,
-        int $weeeTax,
-        bool $weeeEnabled,
-        bool $includeWeee,
-        int $expectedValue
+        $priceInclTax,
+        $weeeTaxInclTax,
+        $weeeEnabled,
+        $includeWeee,
+        $expectedValue
     ) {
         $this->weeeHelper->expects($this->once())
             ->method('isEnabled')
@@ -217,11 +217,11 @@ class RendererTest extends TestCase
         $this->weeeHelper->expects($this->any())
             ->method('getWeeeTaxInclTax')
             ->with($this->item)
-            ->willReturn($weeeTax);
+            ->willReturn($weeeTaxInclTax);
 
         $this->item->expects($this->once())
             ->method('getPriceInclTax')
-            ->willReturn($price);
+            ->willReturn($priceInclTax);
 
         $this->weeeHelper->expects($this->any())
             ->method('typeOfDisplay')
@@ -232,19 +232,19 @@ class RendererTest extends TestCase
     }
 
     /**
-     * @param int $price
-     * @param int $weeeTax
-     * @param bool $weeeEnabled
-     * @param bool $includeWeee
-     * @param int $expectedValue
+     * @param $basePriceInclTax
+     * @param $baseWeeeTaxInclTax
+     * @param $weeeEnabled
+     * @param $includeWeee
+     * @param $expectedValue
      * @dataProvider getDisplayPriceDataProvider
      */
     public function testGetBaseUnitDisplayPriceInclTax(
-        int $price,
-        int $weeeTax,
-        bool $weeeEnabled,
-        bool $includeWeee,
-        int $expectedValue
+        $basePriceInclTax,
+        $baseWeeeTaxInclTax,
+        $weeeEnabled,
+        $includeWeee,
+        $expectedValue
     ) {
         $this->weeeHelper->expects($this->once())
             ->method('isEnabled')
@@ -253,11 +253,11 @@ class RendererTest extends TestCase
         $this->weeeHelper->expects($this->any())
             ->method('getBaseWeeeTaxInclTax')
             ->with($this->item)
-            ->willReturn($weeeTax);
+            ->willReturn($baseWeeeTaxInclTax);
 
         $this->item->expects($this->once())
             ->method('getBasePriceInclTax')
-            ->willReturn($price);
+            ->willReturn($basePriceInclTax);
 
         $this->weeeHelper->expects($this->any())
             ->method('typeOfDisplay')
@@ -268,19 +268,19 @@ class RendererTest extends TestCase
     }
 
     /**
-     * @param int $price
-     * @param int $weeeTax
-     * @param bool $weeeEnabled
-     * @param bool $includeWeee
-     * @param int $expectedValue
+     * @param $priceExclTax
+     * @param $weeeTaxExclTax
+     * @param $weeeEnabled
+     * @param $includeWeee
+     * @param $expectedValue
      * @dataProvider getDisplayPriceDataProvider
      */
     public function testGetUnitDisplayPriceExclTax(
-        int $price,
-        int $weeeTax,
-        bool $weeeEnabled,
-        bool $includeWeee,
-        int $expectedValue
+        $priceExclTax,
+        $weeeTaxExclTax,
+        $weeeEnabled,
+        $includeWeee,
+        $expectedValue
     ) {
         $this->weeeHelper->expects($this->once())
             ->method('isEnabled')
@@ -288,11 +288,11 @@ class RendererTest extends TestCase
 
         $this->item->expects($this->any())
             ->method('getWeeeTaxAppliedAmount')
-            ->willReturn($weeeTax);
+            ->willReturn($weeeTaxExclTax);
 
         $this->item->expects($this->once())
             ->method('getCalculationPrice')
-            ->willReturn($price);
+            ->willReturn($priceExclTax);
 
         $this->weeeHelper->expects($this->any())
             ->method('typeOfDisplay')
@@ -303,19 +303,19 @@ class RendererTest extends TestCase
     }
 
     /**
-     * @param int $price
-     * @param int $weeeTax
-     * @param bool $weeeEnabled
-     * @param bool $includeWeee
-     * @param int $expectedValue
+     * @param $basePriceExclTax
+     * @param $baseWeeeTaxExclTax
+     * @param $weeeEnabled
+     * @param $includeWeee
+     * @param $expectedValue
      * @dataProvider getDisplayPriceDataProvider
      */
     public function testGetBaseUnitDisplayPriceExclTax(
-        int $price,
-        int $weeeTax,
-        bool $weeeEnabled,
-        bool $includeWeee,
-        int $expectedValue
+        $basePriceExclTax,
+        $baseWeeeTaxExclTax,
+        $weeeEnabled,
+        $includeWeee,
+        $expectedValue
     ) {
         $this->weeeHelper->expects($this->once())
             ->method('isEnabled')
@@ -323,11 +323,11 @@ class RendererTest extends TestCase
 
         $this->item->expects($this->any())
             ->method('getBaseWeeeTaxAppliedAmount')
-            ->willReturn($weeeTax);
+            ->willReturn($baseWeeeTaxExclTax);
 
         $this->item->expects($this->once())
             ->method('getBaseRowTotal')
-            ->willReturn($price);
+            ->willReturn($basePriceExclTax);
 
         $this->item->expects($this->once())
             ->method('getQtyOrdered')
@@ -342,19 +342,19 @@ class RendererTest extends TestCase
     }
 
     /**
-     * @param int $price
-     * @param int $weeeTax
-     * @param bool $weeeEnabled
-     * @param bool $includeWeee
-     * @param int $expectedValue
+     * @param $rowTotal
+     * @param $rowWeeeTaxExclTax
+     * @param $weeeEnabled
+     * @param $includeWeee
+     * @param $expectedValue
      * @dataProvider getDisplayPriceDataProvider
      */
     public function testGetRowDisplayPriceExclTax(
-        int $price,
-        int $weeeTax,
-        bool $weeeEnabled,
-        bool $includeWeee,
-        int $expectedValue
+        $rowTotal,
+        $rowWeeeTaxExclTax,
+        $weeeEnabled,
+        $includeWeee,
+        $expectedValue
     ) {
         $this->weeeHelper->expects($this->once())
             ->method('isEnabled')
@@ -362,11 +362,11 @@ class RendererTest extends TestCase
 
         $this->item->expects($this->any())
             ->method('getWeeeTaxAppliedRowAmount')
-            ->willReturn($weeeTax);
+            ->willReturn($rowWeeeTaxExclTax);
 
         $this->item->expects($this->once())
             ->method('getRowTotal')
-            ->willReturn($price);
+            ->willReturn($rowTotal);
 
         $this->weeeHelper->expects($this->any())
             ->method('typeOfDisplay')
@@ -377,19 +377,19 @@ class RendererTest extends TestCase
     }
 
     /**
-     * @param int $price
-     * @param int $weeeTax
-     * @param bool $weeeEnabled
-     * @param bool $includeWeee
-     * @param int $expectedValue
+     * @param $baseRowTotal
+     * @param $baseRowWeeeTaxExclTax
+     * @param $weeeEnabled
+     * @param $includeWeee
+     * @param $expectedValue
      * @dataProvider getDisplayPriceDataProvider
      */
     public function testGetBaseRowDisplayPriceExclTax(
-        int $price,
-        int $weeeTax,
-        bool $weeeEnabled,
-        bool $includeWeee,
-        int $expectedValue
+        $baseRowTotal,
+        $baseRowWeeeTaxExclTax,
+        $weeeEnabled,
+        $includeWeee,
+        $expectedValue
     ) {
         $this->weeeHelper->expects($this->once())
             ->method('isEnabled')
@@ -397,11 +397,11 @@ class RendererTest extends TestCase
 
         $this->item->expects($this->any())
             ->method('getBaseWeeeTaxAppliedRowAmnt')
-            ->willReturn($weeeTax);
+            ->willReturn($baseRowWeeeTaxExclTax);
 
         $this->item->expects($this->once())
             ->method('getBaseRowTotal')
-            ->willReturn($price);
+            ->willReturn($baseRowTotal);
 
         $this->weeeHelper->expects($this->any())
             ->method('typeOfDisplay')
@@ -412,19 +412,19 @@ class RendererTest extends TestCase
     }
 
     /**
-     * @param int $price
-     * @param int $weeeTax
-     * @param bool $weeeEnabled
-     * @param bool $includeWeee
-     * @param int $expectedValue
+     * @param $rowTotalInclTax
+     * @param $rowWeeeTaxInclTax
+     * @param $weeeEnabled
+     * @param $includeWeee
+     * @param $expectedValue
      * @dataProvider getDisplayPriceDataProvider
      */
     public function testGetRowDisplayPriceInclTax(
-        int $price,
-        int $weeeTax,
-        bool $weeeEnabled,
-        bool $includeWeee,
-        int $expectedValue
+        $rowTotalInclTax,
+        $rowWeeeTaxInclTax,
+        $weeeEnabled,
+        $includeWeee,
+        $expectedValue
     ) {
         $this->weeeHelper->expects($this->once())
             ->method('isEnabled')
@@ -433,11 +433,11 @@ class RendererTest extends TestCase
         $this->weeeHelper->expects($this->any())
             ->method('getRowWeeeTaxInclTax')
             ->with($this->item)
-            ->willReturn($weeeTax);
+            ->willReturn($rowWeeeTaxInclTax);
 
         $this->item->expects($this->once())
             ->method('getRowTotalInclTax')
-            ->willReturn($price);
+            ->willReturn($rowTotalInclTax);
 
         $this->weeeHelper->expects($this->any())
             ->method('typeOfDisplay')
@@ -448,19 +448,19 @@ class RendererTest extends TestCase
     }
 
     /**
-     * @param int $price
-     * @param int $weeeTax
-     * @param bool $weeeEnabled
-     * @param bool $includeWeee
-     * @param int $expectedValue
+     * @param $baseRowTotalInclTax
+     * @param $baseRowWeeeTaxInclTax
+     * @param $weeeEnabled
+     * @param $includeWeee
+     * @param $expectedValue
      * @dataProvider getDisplayPriceDataProvider
      */
     public function testGetBaseRowDisplayPriceInclTax(
-        int $price,
-        int $weeeTax,
-        bool $weeeEnabled,
-        bool $includeWeee,
-        int $expectedValue
+        $baseRowTotalInclTax,
+        $baseRowWeeeTaxInclTax,
+        $weeeEnabled,
+        $includeWeee,
+        $expectedValue
     ) {
         $this->weeeHelper->expects($this->once())
             ->method('isEnabled')
@@ -469,11 +469,11 @@ class RendererTest extends TestCase
         $this->weeeHelper->expects($this->any())
             ->method('getBaseRowWeeeTaxInclTax')
             ->with($this->item)
-            ->willReturn($weeeTax);
+            ->willReturn($baseRowWeeeTaxInclTax);
 
         $this->item->expects($this->once())
             ->method('getBaseRowTotalInclTax')
-            ->willReturn($price);
+            ->willReturn($baseRowTotalInclTax);
 
         $this->weeeHelper->expects($this->any())
             ->method('typeOfDisplay')
@@ -491,48 +491,48 @@ class RendererTest extends TestCase
         $data = [
             'weee_disabled_true' => [
                 'price' => 100,
-                'weeeTax' => 10,
-                'weeeEnabled' => false,
-                'includeWeee' => true,
-                'expectedValue' => 100,
+                'weee' => 10,
+                'weee_enabled' => false,
+                'include_weee' => true,
+                'expected_value' => 100,
             ],
             'weee_disabled_false' => [
                 'price' => 100,
-                'weeeTax' => 10,
-                'weeeEnabled' => false,
-                'includeWeee' => false,
-                'expectedValue' => 100,
+                'weee' => 10,
+                'weee_enabled' => false,
+                'include_weee' => false,
+                'expected_value' => 100,
             ],
             'weee_enabled_include_weee' => [
                 'price' => 100,
-                'weeeTax' => 10,
-                'weeeEnabled' => true,
-                'includeWeee' => true,
-                'expectedValue' => 110,
+                'weee' => 10,
+                'weee_enabled' => true,
+                'include_weee' => true,
+                'expected_value' => 110,
             ],
             'weee_enabled_not_include_weee' => [
                 'price' => 100,
-                'weeeTax' => 10,
-                'weeeEnabled' => true,
-                'includeWeee' => false,
-                'expectedValue' => 100,
+                'weee' => 10,
+                'weee_enabled' => true,
+                'include_weee' => false,
+                'expected_value' => 100,
             ],
         ];
         return $data;
     }
 
     /**
-     * @param int $rowTotal
-     * @param int $weeeTax
-     * @param bool $weeeEnabled
-     * @param int $expectedValue
+     * @param $priceInclTax
+     * @param $weeeTaxInclTax
+     * @param $weeeEnabled
+     * @param $expectedValue
      * @dataProvider getFinalDisplayPriceDataProvider
      */
     public function testGetFinalUnitDisplayPriceInclTax(
-        int $rowTotal,
-        int $weeeTax,
-        bool $weeeEnabled,
-        int $expectedValue
+        $priceInclTax,
+        $weeeTaxInclTax,
+        $weeeEnabled,
+        $expectedValue
     ) {
         $this->weeeHelper->expects($this->once())
             ->method('isEnabled')
@@ -541,27 +541,27 @@ class RendererTest extends TestCase
         $this->weeeHelper->expects($this->any())
             ->method('getWeeeTaxInclTax')
             ->with($this->item)
-            ->willReturn($weeeTax);
+            ->willReturn($weeeTaxInclTax);
 
         $this->item->expects($this->once())
             ->method('getPriceInclTax')
-            ->willReturn($rowTotal);
+            ->willReturn($priceInclTax);
 
         $this->assertEquals($expectedValue, $this->renderer->getFinalUnitDisplayPriceInclTax());
     }
 
     /**
-     * @param int $rowTotal
-     * @param int $weeeTax
-     * @param bool $weeeEnabled
-     * @param int $expectedValue
+     * @param $basePriceInclTax
+     * @param $baseWeeeTaxInclTax
+     * @param $weeeEnabled
+     * @param $expectedValue
      * @dataProvider getFinalDisplayPriceDataProvider
      */
     public function testGetBaseFinalUnitDisplayPriceInclTax(
-        int $rowTotal,
-        int $weeeTax,
-        bool $weeeEnabled,
-        int $expectedValue
+        $basePriceInclTax,
+        $baseWeeeTaxInclTax,
+        $weeeEnabled,
+        $expectedValue
     ) {
         $this->weeeHelper->expects($this->once())
             ->method('isEnabled')
@@ -570,27 +570,27 @@ class RendererTest extends TestCase
         $this->weeeHelper->expects($this->any())
             ->method('getBaseWeeeTaxInclTax')
             ->with($this->item)
-            ->willReturn($weeeTax);
+            ->willReturn($baseWeeeTaxInclTax);
 
         $this->item->expects($this->once())
             ->method('getBasePriceInclTax')
-            ->willReturn($rowTotal);
+            ->willReturn($basePriceInclTax);
 
         $this->assertEquals($expectedValue, $this->renderer->getBaseFinalUnitDisplayPriceInclTax());
     }
 
     /**
-     * @param int $rowTotal
-     * @param int $weeeTax
-     * @param bool $weeeEnabled
-     * @param int $expectedValue
+     * @param $priceExclTax
+     * @param $weeeTaxExclTax
+     * @param $weeeEnabled
+     * @param $expectedValue
      * @dataProvider getFinalDisplayPriceDataProvider
      */
     public function testGetFinalUnitDisplayPriceExclTax(
-        int $rowTotal,
-        int $weeeTax,
-        bool $weeeEnabled,
-        int $expectedValue
+        $priceExclTax,
+        $weeeTaxExclTax,
+        $weeeEnabled,
+        $expectedValue
     ) {
         $this->weeeHelper->expects($this->once())
             ->method('isEnabled')
@@ -598,27 +598,27 @@ class RendererTest extends TestCase
 
         $this->item->expects($this->any())
             ->method('getWeeeTaxAppliedAmount')
-            ->willReturn($weeeTax);
+            ->willReturn($weeeTaxExclTax);
 
         $this->item->expects($this->once())
             ->method('getCalculationPrice')
-            ->willReturn($rowTotal);
+            ->willReturn($priceExclTax);
 
         $this->assertEquals($expectedValue, $this->renderer->getFinalUnitDisplayPriceExclTax());
     }
 
     /**
-     * @param int $rowTotal
-     * @param int $weeeTax
-     * @param bool $weeeEnabled
-     * @param int $expectedValue
+     * @param $basePriceExclTax
+     * @param $baseWeeeTaxExclTax
+     * @param $weeeEnabled
+     * @param $expectedValue
      * @dataProvider getFinalDisplayPriceDataProvider
      */
     public function testGetBaseFinalUnitDisplayPriceExclTax(
-        int $rowTotal,
-        int $weeeTax,
-        bool $weeeEnabled,
-        int $expectedValue
+        $basePriceExclTax,
+        $baseWeeeTaxExclTax,
+        $weeeEnabled,
+        $expectedValue
     ) {
         $this->weeeHelper->expects($this->once())
             ->method('isEnabled')
@@ -626,11 +626,11 @@ class RendererTest extends TestCase
 
         $this->item->expects($this->any())
             ->method('getBaseWeeeTaxAppliedAmount')
-            ->willReturn($weeeTax);
+            ->willReturn($baseWeeeTaxExclTax);
 
         $this->item->expects($this->once())
             ->method('getBaseRowTotal')
-            ->willReturn($rowTotal);
+            ->willReturn($basePriceExclTax);
 
         $this->item->expects($this->once())
             ->method('getQtyOrdered')
@@ -640,17 +640,17 @@ class RendererTest extends TestCase
     }
 
     /**
-     * @param int $rowTotal
-     * @param int $weeeTax
-     * @param bool $weeeEnabled
-     * @param int $expectedValue
+     * @param $rowTotal
+     * @param $rowWeeeTaxExclTax
+     * @param $weeeEnabled
+     * @param $expectedValue
      * @dataProvider getFinalDisplayPriceDataProvider
      */
     public function testGetFianlRowDisplayPriceExclTax(
-        int $rowTotal,
-        int $weeeTax,
-        bool $weeeEnabled,
-        int $expectedValue
+        $rowTotal,
+        $rowWeeeTaxExclTax,
+        $weeeEnabled,
+        $expectedValue
     ) {
         $this->weeeHelper->expects($this->once())
             ->method('isEnabled')
@@ -658,7 +658,7 @@ class RendererTest extends TestCase
 
         $this->item->expects($this->any())
             ->method('getWeeeTaxAppliedRowAmount')
-            ->willReturn($weeeTax);
+            ->willReturn($rowWeeeTaxExclTax);
 
         $this->item->expects($this->once())
             ->method('getRowTotal')
@@ -668,17 +668,17 @@ class RendererTest extends TestCase
     }
 
     /**
-     * @param int $rowTotal
-     * @param int $weeeTax
-     * @param bool $weeeEnabled
-     * @param int $expectedValue
+     * @param $baseRowTotal
+     * @param $baseRowWeeeTaxExclTax
+     * @param $weeeEnabled
+     * @param $expectedValue
      * @dataProvider getFinalDisplayPriceDataProvider
      */
     public function testGetBaseFianlRowDisplayPriceExclTax(
-        int $rowTotal,
-        int $weeeTax,
-        bool $weeeEnabled,
-        int $expectedValue
+        $baseRowTotal,
+        $baseRowWeeeTaxExclTax,
+        $weeeEnabled,
+        $expectedValue
     ) {
         $this->weeeHelper->expects($this->once())
             ->method('isEnabled')
@@ -686,27 +686,27 @@ class RendererTest extends TestCase
 
         $this->item->expects($this->any())
             ->method('getBaseWeeeTaxAppliedRowAmnt')
-            ->willReturn($weeeTax);
+            ->willReturn($baseRowWeeeTaxExclTax);
 
         $this->item->expects($this->once())
             ->method('getBaseRowTotal')
-            ->willReturn($rowTotal);
+            ->willReturn($baseRowTotal);
 
         $this->assertEquals($expectedValue, $this->renderer->getBaseFinalRowDisplayPriceExclTax());
     }
 
     /**
-     * @param int $rowTotal
-     * @param int $weeeTax
-     * @param bool $weeeEnabled
-     * @param int $expectedValue
+     * @param $rowTotalInclTax
+     * @param $rowWeeeTaxInclTax
+     * @param $weeeEnabled
+     * @param $expectedValue
      * @dataProvider getFinalDisplayPriceDataProvider
      */
     public function testGetFinalRowDisplayPriceInclTax(
-        int $rowTotal,
-        int $weeeTax,
-        bool $weeeEnabled,
-        int $expectedValue
+        $rowTotalInclTax,
+        $rowWeeeTaxInclTax,
+        $weeeEnabled,
+        $expectedValue
     ) {
         $this->weeeHelper->expects($this->once())
             ->method('isEnabled')
@@ -715,27 +715,27 @@ class RendererTest extends TestCase
         $this->weeeHelper->expects($this->any())
             ->method('getRowWeeeTaxInclTax')
             ->with($this->item)
-            ->willReturn($weeeTax);
+            ->willReturn($rowWeeeTaxInclTax);
 
         $this->item->expects($this->once())
             ->method('getRowTotalInclTax')
-            ->willReturn($rowTotal);
+            ->willReturn($rowTotalInclTax);
 
         $this->assertEquals($expectedValue, $this->renderer->getFinalRowDisplayPriceInclTax());
     }
 
     /**
-     * @param int $rowTotal
-     * @param int $weeeTax
-     * @param bool $weeeEnabled
-     * @param int $expectedValue
+     * @param $baseRowTotalInclTax
+     * @param $baseRowWeeeTaxInclTax
+     * @param $weeeEnabled
+     * @param $expectedValue
      * @dataProvider getFinalDisplayPriceDataProvider
      */
     public function testGetBaseFinalRowDisplayPriceInclTax(
-        int $rowTotal,
-        int $weeeTax,
-        bool $weeeEnabled,
-        int $expectedValue
+        $baseRowTotalInclTax,
+        $baseRowWeeeTaxInclTax,
+        $weeeEnabled,
+        $expectedValue
     ) {
         $this->weeeHelper->expects($this->once())
             ->method('isEnabled')
@@ -744,11 +744,11 @@ class RendererTest extends TestCase
         $this->weeeHelper->expects($this->any())
             ->method('getBaseRowWeeeTaxInclTax')
             ->with($this->item)
-            ->willReturn($weeeTax);
+            ->willReturn($baseRowWeeeTaxInclTax);
 
         $this->item->expects($this->once())
             ->method('getBaseRowTotalInclTax')
-            ->willReturn($rowTotal);
+            ->willReturn($baseRowTotalInclTax);
 
         $this->assertEquals($expectedValue, $this->renderer->getBaseFinalRowDisplayPriceInclTax());
     }
@@ -760,16 +760,16 @@ class RendererTest extends TestCase
     {
         $data = [
             'weee_disabled_true' => [
-                'rowTotal' => 100,
-                'weeeTax' => 10,
-                'weeeEnabled' => false,
-                'expectedValue' => 100,
+                'price' => 100,
+                'weee' => 10,
+                'weee_enabled' => false,
+                'expected_value' => 100,
             ],
             'weee_enabled_include_weee' => [
-                'rowTotal' => 100,
-                'weeeTax' => 10,
-                'weeeEnabled' => true,
-                'expectedValue' => 110,
+                'price' => 100,
+                'weee' => 10,
+                'weee_enabled' => true,
+                'expected_value' => 110,
             ],
         ];
         return $data;

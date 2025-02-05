@@ -88,7 +88,7 @@ class NotificationsTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderIsDisplayed()
+    public function dataProviderIsDisplayed()
     {
         return [
             [true, true],

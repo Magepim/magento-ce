@@ -133,7 +133,7 @@ class EngineTest extends TestCase
     /**
      * @return array
      */
-    public static function prepareEntityIndexDataProvider()
+    public function prepareEntityIndexDataProvider()
     {
         return [
             [

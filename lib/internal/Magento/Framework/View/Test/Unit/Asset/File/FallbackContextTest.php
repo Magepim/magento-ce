@@ -62,7 +62,7 @@ class FallbackContextTest extends TestCase
     /**
      * @return array
      */
-    public static function getConfigPathDataProvider()
+    public function getConfigPathDataProvider()
     {
         return [
             'http' => [

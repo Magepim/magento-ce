@@ -180,7 +180,7 @@ class CryptographerTest extends TestCase
     /**
      * @return array
      */
-    public static function encodeNotValidSourceDataProvider()
+    public function encodeNotValidSourceDataProvider()
     {
         return [
             'Array' => [[]],

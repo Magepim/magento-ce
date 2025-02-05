@@ -74,7 +74,7 @@ class ValidatorTest extends TestCase
     /**
      * Provider for testIsValid
      */
-    public static function providerIsValid()
+    public function providerIsValid()
     {
         return [
             ['title', 'select', true, []],

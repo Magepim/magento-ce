@@ -37,7 +37,7 @@ class NameBuilderTest extends TestCase
     /**
      * @return array
      */
-    public static function buildClassNameDataProvider()
+    public function buildClassNameDataProvider()
     {
         return [
             [['Checkout', 'Controller', 'Index'], 'Checkout\Controller\Index'],

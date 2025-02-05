@@ -112,7 +112,7 @@ class DbVersionInfoTest extends TestCase
     /**
      * @return array
      */
-    public static function isDbUpToDateDataProvider()
+    public function isDbUpToDateDataProvider()
     {
         return [
             'version in config == version in db' => ['Module_One', '1', true],

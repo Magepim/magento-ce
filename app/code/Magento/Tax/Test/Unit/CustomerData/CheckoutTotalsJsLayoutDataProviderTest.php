@@ -70,7 +70,7 @@ class CheckoutTotalsJsLayoutDataProviderTest extends TestCase
      *
      * @return array
      */
-    public static function getDataDataProvider()
+    public function getDataDataProvider()
     {
         return [
             'Test with settings display cart incl and excl is Yes' => [

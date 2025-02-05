@@ -96,7 +96,7 @@ class QuoteTest extends TestCase
     /**
      * @return array
      */
-    public static function getAllItemsDataProvider()
+    public function getAllItemsDataProvider()
     {
         return [
             ['parent item 1', 'name 1', 1, 0.1],
@@ -150,7 +150,7 @@ class QuoteTest extends TestCase
     /**
      * @return array
      */
-    public static function getterDataProvider()
+    public function getterDataProvider()
     {
         return [
             [0, 'getBaseTaxAmount'],

@@ -1179,11 +1179,9 @@ class TypeTest extends TestCase
 
         $this->arrayUtility->expects($this->once())->method('flatten')->willReturn($bundleOptions);
 
-        $callCount = 0;
-        $selectionCollection->method('getItems')
-            ->willReturnCallback(function () use (&$callCount, $selection) {
-                return $callCount++ === 0 ? [$selection] : [];
-            });
+        $selectionCollection
+            ->method('getItems')
+            ->willReturnOnConsecutiveCalls([$selection], []);
         $selectionCollection
             ->method('getSize')
             ->willReturnOnConsecutiveCalls(1, 0);
@@ -1364,7 +1362,6 @@ class TypeTest extends TestCase
 
     /**
      * @return void
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
     public function testPrepareForCartAdvancedAllRequiredOption(): void
     {
@@ -1455,14 +1452,12 @@ class TypeTest extends TestCase
         $buyRequest->expects($this->once())
             ->method('getBundleOption')
             ->willReturn([3 => 5]);
-        $callCount = 0;
         $option->method('getId')
-            ->willReturnCallback(function () use (&$callCount) {
-                return $callCount++ === 0 ? 3 : '';
-            });
+            ->willReturnOnConsecutiveCalls(3);
         $option->expects($this->once())
             ->method('getRequired')
             ->willReturn(true);
+
         $result = $this->model->prepareForCartAdvanced($buyRequest, $product);
         $this->assertEquals('Please select all required options.', $result);
     }
@@ -1635,11 +1630,9 @@ class TypeTest extends TestCase
         $selectionMock->expects(($this->any()))
             ->method('getItemByColumnValue')
             ->willReturn($selectionItemMock);
-        $callCount = 0;
-        $selectionItemMock->method('getEntityId')
-            ->willReturnCallback(function () use (&$callCount) {
-                return $callCount++ === 0 ? 1 : '';
-            });
+        $selectionItemMock
+            ->method('getEntityId')
+            ->willReturnOnConsecutiveCalls(1);
         $selectionItemMock->expects($this->once())
             ->method('getSku')
             ->willReturn($itemSku);
@@ -2492,9 +2485,6 @@ class TypeTest extends TestCase
      */
     public function testCheckProductBuyStateMissedOptionException($element, $expectedMessage, $check): void
     {
-        if (is_callable($element)) {
-            $element = $element($this);
-        }
         $this->expectException(LocalizedException::class);
 
         $this->mockBundleCollection();
@@ -2606,24 +2596,17 @@ class TypeTest extends TestCase
         $selectionCollectionMock->method('setOptionIdsFilter')->willReturn($selectionCollectionMock);
     }
 
-    protected function getMockForSectionClass()
-    {
-        $falseSelection = $this->getMockBuilder(Selection::class)->disableOriginalConstructor()
-            ->addMethods(['isSalable'])
-            ->getMock();
-        $falseSelection->method('isSalable')->willReturn(false);
-        return $falseSelection;
-    }
-
     /**
      * Data provider for not available option.
      *
      * @return array
      */
-    public static function notAvailableOptionProvider(): array
+    public function notAvailableOptionProvider(): array
     {
-        $falseSelection = static fn (self $testCase) => $testCase->getMockForSectionClass();
-
+        $falseSelection = $this->getMockBuilder(Selection::class)->disableOriginalConstructor()
+            ->addMethods(['isSalable'])
+            ->getMock();
+        $falseSelection->method('isSalable')->willReturn(false);
         return [
             [
                 false,

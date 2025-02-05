@@ -272,7 +272,7 @@ class UpdateTest extends TestCase
      *
      * @return array
      */
-    public static function getWishlistDataProvider(): array
+    public function getWishlistDataProvider(): array
     {
         return
             [

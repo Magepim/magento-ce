@@ -9,15 +9,13 @@ define([
     'uiElement',
     'uiLayout',
     'Magento_Paypal/js/in-context/paypal-sdk',
-    'Magento_Customer/js/customer-data',
     'domReady!'
 ], function (
     $,
     ko,
     Component,
     layout,
-    paypalSdk,
-    customerData
+    paypalSdk
 ) {
     'use strict';
 
@@ -39,7 +37,6 @@ define([
         },
         paypal: null,
         amount: null,
-        buyerCountry: null,
 
         /**
          * Initialize
@@ -47,9 +44,6 @@ define([
          * @returns {*}
          */
         initialize: function () {
-            let buyerCountry = customerData.get('paypal-buyer-country');
-
-            this.buyerCountry = buyerCountry().code;
             this._super()
                 .observe(['amount']);
 

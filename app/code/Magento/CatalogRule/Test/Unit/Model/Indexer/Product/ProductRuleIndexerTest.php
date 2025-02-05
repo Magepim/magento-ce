@@ -72,7 +72,7 @@ class ProductRuleIndexerTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderForExecuteList()
+    public function dataProviderForExecuteList()
     {
         return [
             [

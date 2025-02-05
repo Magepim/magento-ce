@@ -99,14 +99,6 @@ class PaymentVaultConfigurationProcessTest extends TestCase
      */
     public function testBeforeProcess($jsLayout, $activeVaultList, $activePaymentList, $expectedResult)
     {
-        if (!empty($activeVaultList)) {
-            $activeVaultList[0] = $activeVaultList[0]($this);
-        }
-
-        if (!empty($activePaymentList)) {
-            $activePaymentList[0] = $activePaymentList[0]($this);
-        }
-
         $this->store->expects($this->once())->method('getId')->willReturn(1);
         $this->storeManager->expects($this->once())->method('getStore')->willReturn($this->store);
         $this->vaultList->expects($this->once())->method('getActiveList')->with(1)->willReturn($activeVaultList);
@@ -118,25 +110,12 @@ class PaymentVaultConfigurationProcessTest extends TestCase
         $this->assertEquals($result[0], $expectedResult);
     }
 
-    protected function getMockForVaultPayment() {
-        $vaultPaymentMethod = $this
-            ->getMockBuilder(PaymentMethodListInterface::class)
-            ->disableOriginalConstructor()
-            ->addMethods(['getCode', 'getProviderCode'])
-            ->getMockForAbstractClass();
-
-        $vaultPaymentMethod->expects($this->any())->method('getCode')->willReturn('payflowpro_cc_vault');
-        $vaultPaymentMethod->expects($this->any())->method('getProviderCode')->willReturn('payflowpro');
-
-        return $vaultPaymentMethod;
-    }
-
     /**
      * Data provider for BeforeProcess.
      *
      * @return array
      */
-    public static function beforeProcessDataProvider()
+    public function beforeProcessDataProvider()
     {
         $jsLayout['components']['checkout']['children']['steps']['children']['billing-step']
         ['children']['payment']['children']['renders']['children'] = [
@@ -164,7 +143,14 @@ class PaymentVaultConfigurationProcessTest extends TestCase
             ]
         ];
 
-        $vaultPaymentMethod = static fn (self $testCase) => $testCase->getMockForVaultPayment();
+        $vaultPaymentMethod = $this
+            ->getMockBuilder(PaymentMethodListInterface::class)
+            ->disableOriginalConstructor()
+            ->addMethods(['getCode', 'getProviderCode'])
+            ->getMockForAbstractClass();
+
+        $vaultPaymentMethod->expects($this->any())->method('getCode')->willReturn('payflowpro_cc_vault');
+        $vaultPaymentMethod->expects($this->any())->method('getProviderCode')->willReturn('payflowpro');
 
         return [
             [$jsLayout, [], [], $result1],

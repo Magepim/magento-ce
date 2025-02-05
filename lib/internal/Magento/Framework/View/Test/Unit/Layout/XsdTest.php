@@ -50,7 +50,7 @@ class XsdTest extends TestCase
      *
      * @return array
      */
-    public static function schemaCorrectlyIdentifiesInvalidXmlDataProvider()
+    public function schemaCorrectlyIdentifiesInvalidXmlDataProvider()
     {
         return include __DIR__ . '/_files/invalidLayoutArgumentsXmlArray.php';
     }

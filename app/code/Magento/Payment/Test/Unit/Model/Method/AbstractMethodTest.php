@@ -163,7 +163,7 @@ class AbstractMethodTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderForTestIsAvailable()
+    public function dataProviderForTestIsAvailable()
     {
         return [
             [

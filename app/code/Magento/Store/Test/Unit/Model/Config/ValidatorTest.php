@@ -33,7 +33,7 @@ class ValidatorTest extends TestCase
     /**
      * @return array
      */
-    public static function validateDataProvider()
+    public function validateDataProvider()
     {
         $errorMessage = 'Scopes data should have at least one not admin website, group and store.';
         return [

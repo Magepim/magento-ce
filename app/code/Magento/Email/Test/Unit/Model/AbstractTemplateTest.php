@@ -316,7 +316,7 @@ class AbstractTemplateTest extends TestCase
     /**
      * @return array
      */
-    public static function getProcessedTemplateProvider()
+    public function getProcessedTemplateProvider()
     {
         return [
             'default' => [
@@ -397,7 +397,7 @@ class AbstractTemplateTest extends TestCase
     /**
      * @return array
      */
-    public static function invalidInputParametersDataProvider()
+    public function invalidInputParametersDataProvider()
     {
         return [[[]], [['area' => 'some_area']], [['store' => 'any_store']]];
     }

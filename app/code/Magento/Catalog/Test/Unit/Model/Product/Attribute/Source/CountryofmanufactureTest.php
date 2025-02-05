@@ -104,7 +104,7 @@ class CountryofmanufactureTest extends TestCase
      *
      * @return array
      */
-    public static function getAllOptionsDataProvider()
+    public function getAllOptionsDataProvider()
     {
         return
             [

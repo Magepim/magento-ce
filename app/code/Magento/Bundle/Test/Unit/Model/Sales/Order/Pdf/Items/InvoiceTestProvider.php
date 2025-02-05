@@ -18,7 +18,7 @@ class InvoiceTestProvider
      * @return array[]
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public static function getData(): array
+    public function getData(): array
     {
         return [
             'display_both' => [
@@ -171,7 +171,7 @@ class InvoiceTestProvider
                         ],
                     ],
                 ],
-                'method' => 'displaySalesBothPrices',
+                'tax_mock_method' => 'displaySalesBothPrices',
             ],
             'including_tax' => [
                 'expected' => [
@@ -246,7 +246,7 @@ class InvoiceTestProvider
                         ],
                     ],
                 ],
-                'method' => 'displaySalesPriceInclTax',
+                'tax_mock_method' => 'displaySalesPriceInclTax',
             ],
             'excluding_tax' => [
                 'expected' => [
@@ -322,7 +322,7 @@ class InvoiceTestProvider
                         ],
                     ],
                 ],
-                'method' => 'displaySalesPriceExclTax',
+                'tax_mock_method' => 'displaySalesPriceExclTax',
             ],
         ];
     }

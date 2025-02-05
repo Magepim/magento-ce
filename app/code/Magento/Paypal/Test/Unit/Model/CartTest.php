@@ -28,7 +28,7 @@ class CartTest extends TestCase
     /**
      * @var DataObject
      */
-    protected static $_validItem;
+    protected $_validItem;
 
     /**
      * @var SalesModelInterface|MockObject
@@ -43,7 +43,7 @@ class CartTest extends TestCase
     public function __construct($name = null, array $data = [], string $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
-        self::$_validItem = new DataObject(
+        $this->_validItem = new DataObject(
             [
                 'parent_item' => null,
                 'price' => 2.0,
@@ -99,9 +99,9 @@ class CartTest extends TestCase
     /**
      * @return array
      */
-    public static function invalidGetAllItemsDataProvider()
+    public function invalidGetAllItemsDataProvider()
     {
-        self::$_validItem = new DataObject(
+        $this->_validItem = new DataObject(
             [
                 'parent_item' => null,
                 'price' => 2.0,
@@ -126,7 +126,7 @@ class CartTest extends TestCase
             ],
             [
                 [
-                    self::$_validItem,
+                    $this->_validItem,
                     new DataObject(
                         [
                             'price' => 2.0,
@@ -139,7 +139,7 @@ class CartTest extends TestCase
             ],
             [
                 [
-                    self::$_validItem,
+                    $this->_validItem,
                     new DataObject(
                         [
                             'price' => sqrt(2),
@@ -181,7 +181,7 @@ class CartTest extends TestCase
     /**
      * @return array
      */
-    public static function invalidTotalsGetAllItemsDataProvider()
+    public function invalidTotalsGetAllItemsDataProvider()
     {
         return [
             [
@@ -220,9 +220,9 @@ class CartTest extends TestCase
             [
                 new DataObject(
                     [
-                        'name' => self::$_validItem->getName(),
-                        'qty' => self::$_validItem->getQty(),
-                        'amount' => self::$_validItem->getPrice(),
+                        'name' => $this->_validItem->getName(),
+                        'qty' => $this->_validItem->getQty(),
+                        'amount' => $this->_validItem->getPrice(),
                     ]
                 ),
             ],
@@ -258,10 +258,10 @@ class CartTest extends TestCase
     /**
      * @return array
      */
-    public static function invalidGetAmountsDataProvider()
+    public function invalidGetAmountsDataProvider()
     {
         $data = [];
-        $invalidTotalsData = self::invalidTotalsGetAllItemsDataProvider();
+        $invalidTotalsData = $this->invalidTotalsGetAllItemsDataProvider();
         foreach ($invalidTotalsData as $dataItem) {
             $data[] = [$dataItem[0], $dataItem[1], true];
             $data[] = [$dataItem[0], $dataItem[1], false];
@@ -299,7 +299,7 @@ class CartTest extends TestCase
         )->method(
             'getAllItems'
         )->willReturn(
-            [self::$_validItem]
+            [$this->_validItem]
         );
         $this->_salesModel->expects(
             $this->once()
@@ -364,7 +364,7 @@ class CartTest extends TestCase
         )->method(
             'getAllItems'
         )->willReturn(
-            [self::$_validItem]
+            [$this->_validItem]
         );
         $this->_salesModel->expects(
             $this->once()

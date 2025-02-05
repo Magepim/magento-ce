@@ -22,7 +22,7 @@ class CustomLayoutTest extends PageLayoutTest
     /**
      * {@inheritdoc}
      */
-    public static function getOptionsDataProvider()
+    public function getOptionsDataProvider()
     {
         return [
             [

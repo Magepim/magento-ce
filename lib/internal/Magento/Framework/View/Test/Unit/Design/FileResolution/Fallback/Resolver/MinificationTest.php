@@ -94,7 +94,7 @@ class MinificationTest extends TestCase
     /**
      * @return array
      */
-    public static function resolveDataProvider()
+    public function resolveDataProvider()
     {
         return [
             [true, 'file.css', 'file.min.css', 'found.min.css', false, 'found.min.css'],

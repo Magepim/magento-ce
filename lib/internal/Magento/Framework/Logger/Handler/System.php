@@ -11,7 +11,6 @@ use Exception;
 use Magento\Framework\Filesystem\DriverInterface;
 use Magento\Framework\Logger\Handler\Exception as ExceptionHandler;
 use Monolog\Logger;
-use Monolog\LogRecord;
 
 /**
  * System stream handler
@@ -54,7 +53,7 @@ class System extends Base
      * @param array $record The record metadata
      * @return void
      */
-    public function write(LogRecord $record): void
+    public function write(array $record): void
     {
         if (isset($record['context']['exception'])) {
             $this->exceptionHandler->handle($record);

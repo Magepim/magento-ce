@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2016 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
@@ -92,7 +92,7 @@ class DeleteTest extends TestCase
 
         $this->userMock = $this->getMockBuilder(User::class)
             ->disableOriginalConstructor()
-            ->onlyMethods(['getId', 'performIdentityCheck', 'delete', 'load'])
+            ->onlyMethods(['getId', 'performIdentityCheck', 'delete'])
             ->getMock();
 
         $this->userFactoryMock = $this->getMockBuilder(UserFactory::class)
@@ -197,7 +197,7 @@ class DeleteTest extends TestCase
      *
      * @return array
      */
-    public static function executeDataProvider()
+    public function executeDataProvider()
     {
         return [
             [

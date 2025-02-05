@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2012 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 namespace Magento\Sales\Model\AdminOrder;
 
@@ -780,12 +780,6 @@ class CreateTest extends \PHPUnit\Framework\TestCase
              */
             $session->setCustomerId(0);
         }
-
-        /** Save changes and reload the quote to make sure future changes to the quote trigger collectTotals */
-        $quoteRepository = $this->objectManager->create(\Magento\Quote\Api\CartRepositoryInterface::class);
-        $quoteRepository->save($this->model->getQuote());
-        $quote = $quoteRepository->get($this->model->getQuote()->getId(), [$this->model->getQuote()->getStoreId()]);
-        $this->model->setQuote($quote);
 
         /** Emulate availability of shipping method (all are disabled by default) */
         /** @var $rate Quote\Address\Rate */

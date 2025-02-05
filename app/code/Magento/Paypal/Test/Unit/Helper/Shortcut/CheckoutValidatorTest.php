@@ -118,7 +118,7 @@ class CheckoutValidatorTest extends TestCase
     /**
      * @return array
      */
-    public static function methodAvailabilityDataProvider()
+    public function methodAvailabilityDataProvider()
     {
         return [[true], [false]];
     }

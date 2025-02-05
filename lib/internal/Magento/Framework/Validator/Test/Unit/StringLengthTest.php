@@ -45,7 +45,7 @@ class StringLengthTest extends TestCase
     /**
      * @return array
      */
-    public static function isValidDataProvider()
+    public function isValidDataProvider()
     {
         return [
             ['строка', 6, true],

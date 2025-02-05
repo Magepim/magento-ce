@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2011 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 
 namespace Magento\Catalog\Api\Data;
@@ -15,72 +15,72 @@ interface ProductCustomOptionInterface extends \Magento\Framework\Api\Extensible
     /**
      * Product text options group.
      */
-    public const OPTION_GROUP_TEXT = 'text';
+    const OPTION_GROUP_TEXT = 'text';
 
     /**
      * Product file options group.
      */
-    public const OPTION_GROUP_FILE = 'file';
+    const OPTION_GROUP_FILE = 'file';
 
     /**
      * Product select options group.
      */
-    public const OPTION_GROUP_SELECT = 'select';
+    const OPTION_GROUP_SELECT = 'select';
 
     /**
      * Product date options group.
      */
-    public const OPTION_GROUP_DATE = 'date';
+    const OPTION_GROUP_DATE = 'date';
 
     /**
      * Product field option type.
      */
-    public const OPTION_TYPE_FIELD = 'field';
+    const OPTION_TYPE_FIELD = 'field';
 
     /**
      * Product area option type.
      */
-    public const OPTION_TYPE_AREA = 'area';
+    const OPTION_TYPE_AREA = 'area';
 
     /**
      * Product file option type.
      */
-    public const OPTION_TYPE_FILE = 'file';
+    const OPTION_TYPE_FILE = 'file';
 
     /**
      * Product drop-down option type.
      */
-    public const OPTION_TYPE_DROP_DOWN = 'drop_down';
+    const OPTION_TYPE_DROP_DOWN = 'drop_down';
 
     /**
      * Product radio option type.
      */
-    public const OPTION_TYPE_RADIO = 'radio';
+    const OPTION_TYPE_RADIO = 'radio';
 
     /**
      * Product checkbox option type.
      */
-    public const OPTION_TYPE_CHECKBOX = 'checkbox';
+    const OPTION_TYPE_CHECKBOX = 'checkbox';
 
     /**
      * Product multiple option type.
      */
-    public const OPTION_TYPE_MULTIPLE = 'multiple';
+    const OPTION_TYPE_MULTIPLE = 'multiple';
 
     /**
      * Product date option type.
      */
-    public const OPTION_TYPE_DATE = 'date';
+    const OPTION_TYPE_DATE = 'date';
 
     /**
      * Product datetime option type.
      */
-    public const OPTION_TYPE_DATE_TIME = 'date_time';
+    const OPTION_TYPE_DATE_TIME = 'date_time';
 
     /**
      * Product time option type.
      */
-    public const OPTION_TYPE_TIME = 'time';
+    const OPTION_TYPE_TIME = 'time';
 
     /**
      * Get product SKU
@@ -219,79 +219,59 @@ interface ProductCustomOptionInterface extends \Magento\Framework\Api\Extensible
     public function setSku($sku);
 
     /**
-     * Get File extension
-     *
      * @return string|null
      */
     public function getFileExtension();
 
     /**
-     * Set File extension
-     *
      * @param string $fileExtension
      * @return $this
      */
     public function setFileExtension($fileExtension);
 
     /**
-     * Get Max characters
-     *
      * @return int|null
      */
     public function getMaxCharacters();
 
     /**
-     * Set Max characters
-     *
      * @param int $maxCharacters
      * @return $this
      */
     public function setMaxCharacters($maxCharacters);
 
     /**
-     * Get Image x size
-     *
      * @return int|null
      */
     public function getImageSizeX();
 
     /**
-     * Set Image x size
-     *
      * @param int $imageSizeX
      * @return $this
      */
     public function setImageSizeX($imageSizeX);
 
     /**
-     * Get Image Y size
-     *
      * @return int|null
      */
     public function getImageSizeY();
 
     /**
-     * Set Image Y size
-     *
      * @param int $imageSizeY
      * @return $this
      */
     public function setImageSizeY($imageSizeY);
 
     /**
-     * Get Values
-     *
      * @return \Magento\Catalog\Api\Data\ProductCustomOptionValuesInterface[]|null
      */
     public function getValues();
 
     /**
-     * Set Values
-     *
      * @param \Magento\Catalog\Api\Data\ProductCustomOptionValuesInterface[] $values
      * @return $this
      */
-    public function setValues(?array $values = null);
+    public function setValues(array $values = null);
 
     /**
      * Retrieve existing extension attributes object or create a new one.

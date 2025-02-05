@@ -8,7 +8,6 @@ namespace Magento\Sales\Model\Service;
 use Magento\Framework\App\ObjectManager;
 use Magento\Payment\Gateway\Command\CommandException;
 use Magento\Sales\Api\OrderManagementInterface;
-use Magento\Sales\Model\Order\Config;
 use Magento\Sales\Model\OrderMutexInterface;
 use Psr\Log\LoggerInterface;
 
@@ -68,11 +67,6 @@ class OrderService implements OrderManagementInterface
     private $orderMutex;
 
     /**
-     * @var Config
-     */
-    private $orderConfig;
-
-    /**
      * Constructor
      *
      * @param \Magento\Sales\Api\OrderRepositoryInterface $orderRepository
@@ -85,7 +79,6 @@ class OrderService implements OrderManagementInterface
      * @param \Magento\Sales\Api\PaymentFailuresInterface $paymentFailures
      * @param LoggerInterface $logger
      * @param OrderMutexInterface|null $orderMutex
-     * @param Config|null $orderConfig
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
@@ -98,8 +91,7 @@ class OrderService implements OrderManagementInterface
         \Magento\Sales\Model\Order\Email\Sender\OrderCommentSender $orderCommentSender,
         \Magento\Sales\Api\PaymentFailuresInterface $paymentFailures,
         LoggerInterface $logger,
-        ?OrderMutexInterface $orderMutex = null,
-        ?Config $orderConfig = null
+        ?OrderMutexInterface $orderMutex = null
     ) {
         $this->orderRepository = $orderRepository;
         $this->historyRepository = $historyRepository;
@@ -111,7 +103,6 @@ class OrderService implements OrderManagementInterface
         $this->paymentFailures = $paymentFailures;
         $this->logger = $logger;
         $this->orderMutex = $orderMutex ?: ObjectManager::getInstance()->get(OrderMutexInterface::class);
-        $this->orderConfig = $orderConfig ?: ObjectManager::getInstance()->get(Config::class);
     }
 
     /**
@@ -174,26 +165,16 @@ class OrderService implements OrderManagementInterface
     public function addComment($id, \Magento\Sales\Api\Data\OrderStatusHistoryInterface $statusHistory)
     {
         $order = $this->orderRepository->get($id);
-        $statuses = $this->orderConfig->getStateStatuses($order->getState());
-        $orderStatus = $order->getStatus();
-        $orderStatusHistory = $statusHistory->getStatus();
-        if ($orderStatusHistory) {
-            /**
-             * change order status in the scope of different state is not allowed during add comment to the order
-             */
-            if (!array_key_exists($orderStatusHistory, $statuses)) {
-                throw new \Magento\Framework\Exception\LocalizedException(
-                    __(
-                        'Unable to add comment: The status "%1" is not part of the order status history.',
-                        $orderStatusHistory
-                    )
-                );
-            }
-            $orderStatus = $orderStatusHistory;
-        }
-        $statusHistory->setStatus($orderStatus);
-        $order->setStatus($orderStatus);
 
+        /**
+         * change order status is not allowed during add comment to the order
+         */
+        if ($statusHistory->getStatus() && $statusHistory->getStatus() != $order->getStatus()) {
+            throw new \Magento\Framework\Exception\LocalizedException(
+                __('Unable to add comment: The status "%1" is not part of the order
+                 status history.', $statusHistory->getStatus())
+            );
+        }
         $order->addStatusHistory($statusHistory);
         $this->orderRepository->save($order);
         $notify = $statusHistory['is_customer_notified'] ?? false;

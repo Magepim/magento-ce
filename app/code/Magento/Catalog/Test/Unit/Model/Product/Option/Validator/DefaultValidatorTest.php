@@ -78,7 +78,7 @@ class DefaultValidatorTest extends TestCase
      * Data provider for testIsValidSuccess
      * @return array
      */
-    public static function isValidTitleDataProvider()
+    public function isValidTitleDataProvider()
     {
         $mess = ['option required fields' => 'Missed values for option required fields'];
         return [
@@ -119,7 +119,7 @@ class DefaultValidatorTest extends TestCase
      *
      * @return array
      */
-    public static function isValidFailDataProvider()
+    public function isValidFailDataProvider()
     {
         return [
             [new DataObject(['store_id' => 1])],
@@ -153,7 +153,7 @@ class DefaultValidatorTest extends TestCase
      * Data provider for testValidationNegativePrice
      * @return array
      */
-    public static function validationPriceDataProvider()
+    public function validationPriceDataProvider()
     {
         return [
             ['option_title', 'name 1.1', 'fixed', -12, new DataObject(['store_id' => 1])],

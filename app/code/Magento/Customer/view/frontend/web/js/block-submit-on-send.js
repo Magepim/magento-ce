@@ -13,7 +13,6 @@ define([
         var dataForm = $('#' + config.formId);
 
         dataForm.on('submit', function () {
-            $('#' + this.id + ' div.mage-error').remove();
             $(this).find(':submit').attr('disabled', 'disabled');
 
             if (this.isValid === false) {

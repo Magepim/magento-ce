@@ -47,14 +47,14 @@ class AdminConfigFixtureTest extends TestCase
     {
         return [
             'simple_record' => [
-                'fixture' => 'section/group/field value',
+                'current_fixture' => 'section/group/field value',
                 'attributes' => [
                     'path' => 'section/group/field',
                     'value' => 'value',
                 ],
             ],
             'simple_record_many_spaces' => [
-                'fixture' => '   section/group/field    value',
+                'current_fixture' => '   section/group/field    value',
                 'attributes' => [
                     'path' => 'section/group/field',
                     'value' => 'value',
@@ -82,7 +82,7 @@ class AdminConfigFixtureTest extends TestCase
     {
         return [
             'another_path_record' => [
-                'fixture' => 'section/group/another_field value',
+                'current_fixture' => 'section/group/another_field value',
                 'attributes' => [
                     'path' => 'section/group/field',
                     'value' => 'value',
@@ -117,14 +117,14 @@ class AdminConfigFixtureTest extends TestCase
                     'path' => 'section/group/field',
                     'value' => 'value',
                 ],
-                'expectedValue' => 'section/group/field value',
+                'expected_value' => 'section/group/field value',
             ],
             'with_new_value' => [
                 'attributes' => [
                     'path' => 'section/group/field',
                     'newValue' => 'new_value',
                 ],
-                'expectedValue' => 'section/group/field new_value',
+                'expected_value' => 'section/group/field new_value',
             ],
         ];
     }

@@ -16,7 +16,7 @@ use Magento\TestFramework\CodingStandard\Tool\PhpCompatibility;
 use Magento\TestFramework\CodingStandard\Tool\PhpStan;
 use Magento\TestFramework\Utility\AddedFiles;
 use Magento\TestFramework\Utility\FilesSearch;
-use PHPMD\TextUI\ExitCode;
+use PHPMD\TextUI\Command;
 
 /**
  * Set of tests for static code analysis, e.g. code style, code complexity, copy paste detecting, etc.
@@ -289,7 +289,7 @@ class LiveCodeTest extends \PHPUnit\Framework\TestCase
         }
 
         $this->assertEquals(
-            ExitCode::Success,
+            Command::EXIT_SUCCESS,
             $result,
             "PHP Code Mess has found error(s):" . PHP_EOL . $output
         );

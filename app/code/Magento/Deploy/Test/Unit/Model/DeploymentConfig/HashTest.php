@@ -103,7 +103,7 @@ class HashTest extends TestCase
     /**
      * @return array
      */
-    public static function getDataProvider()
+    public function getDataProvider()
     {
         return [
             [['section' => 'hash'], ['section' => 'hash']],

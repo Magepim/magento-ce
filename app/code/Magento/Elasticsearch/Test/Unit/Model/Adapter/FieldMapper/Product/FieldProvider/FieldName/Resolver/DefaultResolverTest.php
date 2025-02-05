@@ -109,7 +109,7 @@ class DefaultResolverTest extends TestCase
     /**
      * @return array
      */
-    public static function getFieldNameProvider()
+    public function getFieldNameProvider()
     {
         return [
             ['', 'code', '', false, [], 'code'],

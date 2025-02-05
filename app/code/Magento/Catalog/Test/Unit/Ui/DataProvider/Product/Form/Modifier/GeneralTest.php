@@ -1,76 +1,75 @@
 <?php
 /**
- * Copyright 2016 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
 namespace Magento\Catalog\Test\Unit\Ui\DataProvider\Product\Form\Modifier;
 
 use Magento\Catalog\Api\Data\ProductAttributeInterface;
-use Magento\Catalog\Api\Data\ProductInterface;
-use Magento\Catalog\Model\Locator\LocatorInterface;
-use Magento\Catalog\Model\ResourceModel\Eav\Attribute;
 use Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\General;
 use Magento\Eav\Api\AttributeRepositoryInterface;
 use Magento\Eav\Api\Data\AttributeInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Stdlib\ArrayManager;
-use Magento\Store\Model\Store;
-use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
 
-class GeneralTest extends TestCase
+/**
+ * @method General getModel
+ */
+class GeneralTest extends AbstractModifierTestCase
 {
     /**
      * @var AttributeRepositoryInterface|MockObject
      */
-    private AttributeRepositoryInterface $attributeRepositoryMock;
+    private $attributeRepositoryMock;
 
     /**
-     * @var ArrayManager|MockObject
+     * @var General
      */
-    private ArrayManager $arrayManager;
+    private $generalModifier;
 
-    /**
-     * @var LocatorInterface|LocatorInterface&MockObject|MockObject
-     */
-    private LocatorInterface $locatorMock;
-
-    /**
-     * @inheritDoc
-     */
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->attributeRepositoryMock = $this->createMock(AttributeRepositoryInterface::class);
-        $this->arrayManager = $this->createMock(ArrayManager::class);
-        $this->locatorMock = $this->createMock(LocatorInterface::class);
+        $this->attributeRepositoryMock = $this->getMockBuilder(AttributeRepositoryInterface::class)
+            ->getMockForAbstractClass();
+
+        $arrayManager = $this->objectManager->getObject(ArrayManager::class);
+
+        $this->generalModifier = $this->objectManager->getObject(
+            General::class,
+            [
+                'attributeRepository' => $this->attributeRepositoryMock,
+                'locator' => $this->locatorMock,
+                'arrayManager' => $arrayManager,
+            ]
+        );
     }
 
     /**
-     * @return void
-     * @throws Exception
+     * {@inheritdoc}
      */
-    public function testModifyMeta(): void
+    protected function createModel()
     {
-        $attribute = $this->createMock(Attribute::class);
-        $this->attributeRepositoryMock->expects($this->any())
-            ->method('get')
-            ->willReturn($attribute);
-        $this->arrayManager->expects($this->any())
+        return $this->objectManager->getObject(
+            General::class,
+            [
+                'locator' => $this->locatorMock,
+                'arrayManager' => $this->arrayManagerMock,
+            ]
+        );
+    }
+
+    public function testModifyMeta()
+    {
+        $this->arrayManagerMock->expects($this->any())
             ->method('merge')
             ->willReturnArgument(2);
-        $store = $this->createMock(Store::class);
-        $this->locatorMock->expects($this->any())->method('getStore')->willReturn($store);
-        $product = $this->createMock(ProductInterface::class);
-        $this->locatorMock->expects($this->any())->method('getProduct')->willReturn($product);
-
-        $generalModifier = new General($this->locatorMock, $this->arrayManager, $this->attributeRepositoryMock);
         $this->assertNotEmpty(
-            $generalModifier->modifyMeta(
+            $this->getModel()->modifyMeta(
                 [
                     'first_panel_code' => [
                         'arguments' => [
@@ -87,28 +86,27 @@ class GeneralTest extends TestCase
     }
 
     /**
-     * @param array $data
-     * @param int $defaultStatusValue
-     * @param array $expectedResult
-     * @return void
-     * @throws NoSuchEntityException
-     * @throws Exception
+     * @param        array $data
+     * @param        int   $defaultStatusValue
+     * @param        array $expectedResult
+     * @throws       NoSuchEntityException
      * @dataProvider modifyDataDataProvider
      */
-    public function testModifyDataNewProduct(array $data, int $defaultStatusValue, array $expectedResult): void
+    public function testModifyDataNewProduct(array $data, int $defaultStatusValue, array $expectedResult)
     {
-        $attributeMock = $this->createMock(AttributeInterface::class);
+        $attributeMock = $this->getMockBuilder(AttributeInterface::class)
+            ->getMockForAbstractClass();
         $attributeMock
             ->method('getDefaultValue')
             ->willReturn($defaultStatusValue);
         $this->attributeRepositoryMock
             ->method('get')
+            ->with(
+                ProductAttributeInterface::ENTITY_TYPE_CODE,
+                ProductAttributeInterface::CODE_STATUS
+            )
             ->willReturn($attributeMock);
-        $this->arrayManager->expects($this->any())->method('replace')->willReturn($data);
-        $product = $this->createMock(ProductInterface::class);
-        $this->locatorMock->expects($this->any())->method('getProduct')->willReturn($product);
-        $generalModifier = new General($this->locatorMock, $this->arrayManager, $this->attributeRepositoryMock);
-        $this->assertSame($expectedResult, $generalModifier->modifyData($data));
+        $this->assertSame($expectedResult, $this->generalModifier->modifyData($data));
     }
 
     /**
@@ -119,7 +117,7 @@ class GeneralTest extends TestCase
      * @param        int    $defaultStatus
      * @param        int    $statusAttributeValue
      * @param        array  $expectedResult
-     * @throws       NoSuchEntityException|Exception
+     * @throws       NoSuchEntityException
      * @dataProvider modifyDataOfExistingProductDataProvider
      */
     public function testModifyDataOfExistingProduct(
@@ -128,32 +126,31 @@ class GeneralTest extends TestCase
         int $defaultStatus,
         int $statusAttributeValue,
         array $expectedResult
-    ): void {
-        $attributeMock = $this->createMock(AttributeInterface::class);
+    ) {
+        $attributeMock = $this->getMockForAbstractClass(AttributeInterface::class);
         $attributeMock->expects($this->any())
             ->method('getDefaultValue')
             ->willReturn($defaultStatus);
         $this->attributeRepositoryMock->expects($this->any())
             ->method('get')
+            ->with(
+                ProductAttributeInterface::ENTITY_TYPE_CODE,
+                ProductAttributeInterface::CODE_STATUS
+            )
             ->willReturn($attributeMock);
-        $product = $this->createMock(ProductInterface::class);
-        $product->expects($this->any())
+        $this->productMock->expects($this->any())
             ->method('getId')
             ->willReturn($modelId);
-        $product->expects($this->any())
+        $this->productMock->expects($this->any())
             ->method('getStatus')
             ->willReturn($statusAttributeValue);
-        $this->locatorMock->expects($this->any())->method('getProduct')->willReturn($product);
-        $this->arrayManager->expects($this->any())->method('replace')->willReturn($data);
-
-        $generalModifier = new General($this->locatorMock, $this->arrayManager, $this->attributeRepositoryMock);
-        $this->assertSame($expectedResult, current($generalModifier->modifyData($data)));
+        $this->assertSame($expectedResult, current($this->generalModifier->modifyData($data)));
     }
 
     /**
      * @return array
      */
-    public static function modifyDataOfExistingProductDataProvider(): array
+    public function modifyDataOfExistingProductDataProvider(): array
     {
         return [
             'With enable status value' => [
@@ -206,12 +203,12 @@ class GeneralTest extends TestCase
     /**
      * @return array
      */
-    public static function modifyDataDataProvider(): array
+    public function modifyDataDataProvider(): array
     {
         return [
             'With default status value' => [
                 'data' => [],
-                'defaultStatusValue' => 5,
+                'defaultStatusAttributeValue' => 5,
                 'expectedResult' => [
                     null => [
                         General::DATA_SOURCE_DEFAULT => [
@@ -222,7 +219,7 @@ class GeneralTest extends TestCase
             ],
             'Without default status value' => [
                 'data' => [],
-                'defaultStatusValue' => 0,
+                'defaultStatusAttributeValue' => 0,
                 'expectedResult' => [
                     null => [
                         General::DATA_SOURCE_DEFAULT => [

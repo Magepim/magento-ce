@@ -25,7 +25,7 @@ class DefaultBackendTest extends TestCase
      *
      * @return array
      */
-    public static function getAttributeConfigurations(): array
+    public function getAttributeConfigurations(): array
     {
         return [
             'basic-attribute' => [true, false, true, 'basic', 'value', false, true, false],

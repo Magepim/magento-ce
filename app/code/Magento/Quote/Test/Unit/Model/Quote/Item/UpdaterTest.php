@@ -149,7 +149,7 @@ class UpdaterTest extends TestCase
     /**
      * @return array
      */
-    public static function qtyProvider()
+    public function qtyProvider()
     {
         return [
             [1, 1],
@@ -164,7 +164,7 @@ class UpdaterTest extends TestCase
     /**
      * @return array
      */
-    public static function qtyProviderDecimal()
+    public function qtyProviderDecimal()
     {
         return [
             [1, 1],

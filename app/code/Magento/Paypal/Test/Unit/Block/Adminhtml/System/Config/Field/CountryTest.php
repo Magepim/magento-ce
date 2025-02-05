@@ -173,7 +173,7 @@ class CountryTest extends TestCase
     /**
      * @return array
      */
-    public static function renderDataProvider(): array
+    public function renderDataProvider(): array
     {
         return [
             [null, null, false, false],

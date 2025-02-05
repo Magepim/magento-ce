@@ -460,7 +460,7 @@ class AbstractElementTest extends TestCase
     /**
      * @return array
      */
-    public static function addElementValuesDataProvider()
+    public function addElementValuesDataProvider()
     {
         return [
             [
@@ -513,7 +513,7 @@ class AbstractElementTest extends TestCase
     /**
      * @return array
      */
-    public static function serializeDataProvider()
+    public function serializeDataProvider()
     {
         return [
             [
@@ -547,7 +547,7 @@ class AbstractElementTest extends TestCase
     /**
      * @return array
      */
-    public static function testGetDefaultHtmlDataProvider()
+    public function testGetDefaultHtmlDataProvider()
     {
         return [
             [
@@ -593,7 +593,7 @@ class AbstractElementTest extends TestCase
     /**
      * @return array
      */
-    public static function getLabelHtmlDataProvider()
+    public function getLabelHtmlDataProvider()
     {
         return [
             [
@@ -629,7 +629,7 @@ class AbstractElementTest extends TestCase
     /**
      * @return array
      */
-    public static function getElementHtmlDataProvider()
+    public function getElementHtmlDataProvider()
     {
         return [
             [

@@ -27,9 +27,8 @@ class ByFixed extends AbstractDiscount
         $itemPrice = $this->validator->getItemPrice($item);
         $baseItemPrice = $this->validator->getItemBasePrice($item);
 
-        $discountAmountMin = min(($itemPrice * $item->getQty()) - $itemDiscountAmount, $discountAmount * $qty);
-        $baseDiscountAmountMin =
-            min(($baseItemPrice * $item->getQty()) - $itemBaseDiscountAmount, $baseDiscountAmount * $qty);
+        $discountAmountMin = min(($itemPrice * $qty) - $itemDiscountAmount, $discountAmount * $qty);
+        $baseDiscountAmountMin = min(($baseItemPrice * $qty) - $itemBaseDiscountAmount, $baseDiscountAmount * $qty);
 
         $discountData->setAmount($discountAmountMin);
         $discountData->setBaseAmount($baseDiscountAmountMin);

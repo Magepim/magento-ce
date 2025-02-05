@@ -35,7 +35,7 @@ class ParserTest extends TestCase
     /**
      * @return array
      */
-    public static function parseExpressionDataProvider()
+    public function parseExpressionDataProvider()
     {
         return [
             ['1-2', ['1', '2', '-']],
@@ -66,7 +66,7 @@ class ParserTest extends TestCase
     /**
      * @return array
      */
-    public static function isOperationDataProvider()
+    public function isOperationDataProvider()
     {
         return [
             ['+', true],

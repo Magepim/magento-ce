@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2015 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 namespace Magento\Catalog\Model\CustomOptions;
 
@@ -57,7 +57,7 @@ class CustomOptionProcessor implements CartItemProcessorInterface
         \Magento\Quote\Model\Quote\ProductOptionFactory $productOptionFactory,
         \Magento\Quote\Api\Data\ProductOptionExtensionFactory $extensionFactory,
         \Magento\Catalog\Model\CustomOptions\CustomOptionFactory $customOptionFactory,
-        ?\Magento\Framework\Serialize\Serializer\Json $serializer = null
+        \Magento\Framework\Serialize\Serializer\Json $serializer = null
     ) {
         $this->objectFactory = $objectFactory;
         $this->productOptionFactory = $productOptionFactory;
@@ -147,7 +147,6 @@ class CustomOptionProcessor implements CartItemProcessorInterface
             $option->setOptionValue($optionValue);
             $optionValue = $option;
         }
-        return null;
     }
 
     /**
@@ -189,12 +188,9 @@ class CustomOptionProcessor implements CartItemProcessorInterface
     }
 
     /**
-     * Get URL Builder
-     *
      * @return \Magento\Catalog\Model\Product\Option\UrlBuilder
      *
      * @deprecated 101.0.0
-     * @see MAGETWO-71174
      */
     private function getUrlBuilder()
     {

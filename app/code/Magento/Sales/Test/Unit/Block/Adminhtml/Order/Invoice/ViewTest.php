@@ -67,7 +67,7 @@ class ViewTest extends TestCase
     /**
      * @return array
      */
-    public static function isPaymentReviewDataProvider()
+    public function isPaymentReviewDataProvider()
     {
         return [
             [true, true, true],

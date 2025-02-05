@@ -372,7 +372,7 @@ class QuantityValidatorTest extends TestCase
     /**
      * @return array
      */
-    public static function validateWithOptionsDataProvider(): array
+    public function validateWithOptionsDataProvider(): array
     {
         return [
             'when product is enabled and in stock' =>
@@ -457,11 +457,9 @@ class QuantityValidatorTest extends TestCase
         $this->stockRegistryMock
             ->method('getStockItem')
             ->willReturnOnConsecutiveCalls($this->stockItemMock);
-        $callCount = 0;
-        $this->stockRegistryMock->method('getStockStatus')
-            ->willReturnCallback(function () use (&$callCount) {
-                return $callCount++ === 0 ? $this->stockStatusMock : null;
-            });
+        $this->stockRegistryMock
+            ->method('getStockStatus')
+            ->willReturnOnConsecutiveCalls($this->stockStatusMock);
         $this->quoteItemMock->expects($this->any())
             ->method('getParentItem')
             ->willReturn($this->parentItemMock);

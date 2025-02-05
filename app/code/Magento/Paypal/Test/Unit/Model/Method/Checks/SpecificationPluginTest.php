@@ -161,7 +161,7 @@ class SpecificationPluginTest extends TestCase
     /**
      * @return array
      */
-    public static function afterIsApplicableDataProvider()
+    public function afterIsApplicableDataProvider()
     {
         return [[0], [1], [2]];
     }

@@ -77,7 +77,7 @@ class TabAbstractTest extends TestCase
     /**
      * @return array
      */
-    public static function canShowTabDataProvider()
+    public function canShowTabDataProvider()
     {
         return [[true, 1, true], [true, 0, false], [false, 1, false]];
     }

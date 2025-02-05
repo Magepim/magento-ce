@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2018 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
@@ -89,12 +89,6 @@ class StringBinaryTest extends TestCase
             ->method('getLength')
             ->willReturn(50);
         $column->expects($this->any())
-            ->method('getCollation')
-            ->willReturn('utf8mb4_general_ci');
-        $column->expects($this->any())
-            ->method('getCharset')
-            ->willReturn('utf8mb4');
-        $column->expects($this->any())
             ->method('getDefault')
             ->willReturn('test');
         $adapterMock = $this->getMockBuilder(AdapterInterface::class)
@@ -159,7 +153,7 @@ class StringBinaryTest extends TestCase
     /**
      * @return array
      */
-    public static function definitionDataProvider()
+    public function definitionDataProvider()
     {
         return [
             ['char'],

@@ -74,7 +74,7 @@ class CoreTest extends TestCase
     /**
      * @return array
      */
-    public static function setBackendExceptionProvider()
+    public function setBackendExceptionProvider()
     {
         return [
             'string' => ['string'],

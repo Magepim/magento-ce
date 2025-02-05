@@ -28,7 +28,7 @@ class AuthorizeCommandTest extends TestCase
     /**
      * @var string
      */
-    private static $newOrderStatus = 'custom_status';
+    private $newOrderStatus = 'custom_status';
 
     /**
      * @see AuthorizeCommand::execute
@@ -61,21 +61,21 @@ class AuthorizeCommandTest extends TestCase
     /**
      * @return array
      */
-    public static function commandResultDataProvider()
+    public function commandResultDataProvider()
     {
         return [
             [
                 false,
                 false,
                 Order::STATE_PROCESSING,
-                self::$newOrderStatus,
+                $this->newOrderStatus,
                 'Authorized amount of %1.'
             ],
             [
                 true,
                 false,
                 Order::STATE_PAYMENT_REVIEW,
-                self::$newOrderStatus,
+                $this->newOrderStatus,
                 'We will authorize %1 after the payment is approved at the payment gateway.'
             ],
             [
@@ -106,7 +106,7 @@ class AuthorizeCommandTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
         $statusResolver->method('getOrderStatusByState')
-            ->willReturn(self::$newOrderStatus);
+            ->willReturn($this->newOrderStatus);
 
         return $statusResolver;
     }

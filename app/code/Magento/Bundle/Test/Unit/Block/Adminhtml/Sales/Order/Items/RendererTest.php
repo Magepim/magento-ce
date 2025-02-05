@@ -84,7 +84,7 @@ class RendererTest extends TestCase
     /**
      * @return array
      */
-    public static function getChildrenEmptyItemsDataProvider()
+    public function getChildrenEmptyItemsDataProvider()
     {
         return [
             [
@@ -140,7 +140,7 @@ class RendererTest extends TestCase
     /**
      * @return array
      */
-    public static function getChildrenDataProvider()
+    public function getChildrenDataProvider()
     {
         return [
             [true],
@@ -162,7 +162,7 @@ class RendererTest extends TestCase
     /**
      * @return array
      */
-    public static function isShipmentSeparatelyWithoutItemDataProvider()
+    public function isShipmentSeparatelyWithoutItemDataProvider()
     {
         return [
             [['shipment_type' => 1], true],
@@ -194,7 +194,7 @@ class RendererTest extends TestCase
     /**
      * @return array
      */
-    public static function isShipmentSeparatelyWithItemDataProvider()
+    public function isShipmentSeparatelyWithItemDataProvider()
     {
         return [
             [['shipment_type' => 1], false, false],
@@ -218,7 +218,7 @@ class RendererTest extends TestCase
     /**
      * @return array
      */
-    public static function isChildCalculatedWithoutItemDataProvider()
+    public function isChildCalculatedWithoutItemDataProvider()
     {
         return [
             [['product_calculations' => 0], true],
@@ -250,7 +250,7 @@ class RendererTest extends TestCase
     /**
      * @return array
      */
-    public static function isChildCalculatedWithItemDataProvider()
+    public function isChildCalculatedWithItemDataProvider()
     {
         return [
             [['product_calculations' => 0], false, false],
@@ -315,7 +315,7 @@ class RendererTest extends TestCase
     /**
      * @return array
      */
-    public static function canShowPriceInfoDataProvider()
+    public function canShowPriceInfoDataProvider()
     {
         return [
             [true, ['product_calculations' => 0], true],
@@ -343,7 +343,7 @@ class RendererTest extends TestCase
     /**
      * @return array
      */
-    public static function getValueHtmlWithoutShipmentSeparatelyDataProvider()
+    public function getValueHtmlWithoutShipmentSeparatelyDataProvider()
     {
         return [
             [1],

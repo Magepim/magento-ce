@@ -77,7 +77,7 @@ class InitialTest extends TestCase
     /**
      * @return array
      */
-    public static function getDataDataProvider()
+    public function getDataDataProvider()
     {
         return [
             ['default', ['key' => 'default_value']],

@@ -437,7 +437,7 @@ class ShipOrderTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProvider()
+    public function dataProvider()
     {
         return [
             'TestWithNotifyTrue' => [1, [1 => 2], true, true],

@@ -133,7 +133,7 @@ class VarnishPluginTest extends TestCase
     /**
      * @return array
      */
-    public static function afterRenderResultDataProvider()
+    public function afterRenderResultDataProvider()
     {
         return [
             [true, 1, 1, 1],

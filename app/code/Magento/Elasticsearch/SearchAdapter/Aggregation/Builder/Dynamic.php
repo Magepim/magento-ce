@@ -12,11 +12,6 @@ use Magento\Framework\Search\Dynamic\EntityStorageFactory;
 use Magento\Framework\Search\Request\Aggregation\DynamicBucket;
 use Magento\Framework\Search\Request\BucketInterface as RequestBucketInterface;
 
-/**
- * Builder for term buckets.
- * @deprecated Elasticsearch is no longer supported by Adobe
- * @see this class will be responsible for ES only
- */
 class Dynamic implements BucketBuilderInterface
 {
     /**

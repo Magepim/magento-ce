@@ -85,11 +85,11 @@ class AttributeFilterTest extends TestCase
      * @return array
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public static function setupInputDataProvider(): array
+    public function setupInputDataProvider(): array
     {
         return [
             'test case for create new product without custom attribute' => [
-                'requestProductData' => [
+                'productData' => [
                     'name' => 'testName',
                     'sku' => 'testSku',
                     'price' => '100',
@@ -105,7 +105,7 @@ class AttributeFilterTest extends TestCase
                 'attributeList' => null
             ],
             'test case for create new product with custom attribute' => [
-                'requestProductData' => [
+                'productData' => [
                     'name' => 'testName',
                     'sku' => 'testSku',
                     'price' => '100',
@@ -131,7 +131,7 @@ class AttributeFilterTest extends TestCase
                 ]
             ],
             'test case for update product without use_defaults' => [
-                'requestProductData' => [
+                'productData' => [
                     'name' => 'testName2',
                     'sku' => 'testSku2',
                     'price' => '101',
@@ -154,7 +154,7 @@ class AttributeFilterTest extends TestCase
                 'attributeList' => null
             ],
             'test case for update product with custom attribute' => [
-                'requestProductData' => [
+                'productData' => [
                     'name' => 'testName2',
                     'sku' => 'testSku2',
                     'price' => '101',
@@ -185,7 +185,7 @@ class AttributeFilterTest extends TestCase
                 ]
             ],
             'test case for update product without use_defaults_2' => [
-                'requestProductData' => [
+                'productData' => [
                     'name' => 'testName2',
                     'sku' => 'testSku2',
                     'price' => '101',
@@ -209,7 +209,7 @@ class AttributeFilterTest extends TestCase
                 'attributeList' => null
             ],
             'test case for update product with use_defaults' => [
-                'requestProductData' => [
+                'productData' => [
                     'name' => 'testName2',
                     'sku' => 'testSku2',
                     'price' => '101',

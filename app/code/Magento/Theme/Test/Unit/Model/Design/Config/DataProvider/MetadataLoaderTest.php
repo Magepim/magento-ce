@@ -161,7 +161,7 @@ class MetadataLoaderTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderGetData()
+    public function dataProviderGetData()
     {
         return [
             ['default', 0, 1],

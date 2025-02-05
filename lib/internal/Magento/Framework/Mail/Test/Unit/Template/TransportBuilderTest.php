@@ -202,7 +202,7 @@ class TransportBuilderTest extends TestCase
     /**
      * @return array
      */
-    public static function getTransportDataProvider(): array
+    public function getTransportDataProvider(): array
     {
         return [
             [

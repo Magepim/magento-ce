@@ -146,7 +146,7 @@ class CaptchaValidatorTest extends TestCase
      *
      * @return array
      */
-    public static function captchaProvider(): array
+    public function captchaProvider(): array
     {
         return [
             [

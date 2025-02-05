@@ -54,7 +54,7 @@ class FieldsetTest extends TestCase
     /**
      * @var array
      */
-    protected static $testData = [
+    protected $testData = [
         'htmlId' => 'test_field_id',
         'name' => 'test_name',
         'label' => 'test_label',
@@ -149,19 +149,19 @@ class FieldsetTest extends TestCase
 
         $this->_elementMock->expects($this->any())
             ->method('getId')
-            ->willReturn(self::$testData['htmlId']);
+            ->willReturn($this->testData['htmlId']);
         $this->_elementMock->expects($this->any())
             ->method('getHtmlId')
-            ->willReturn(self::$testData['htmlId']);
+            ->willReturn($this->testData['htmlId']);
         $this->_elementMock->expects($this->any())
             ->method('getName')
-            ->willReturn(self::$testData['name']);
+            ->willReturn($this->testData['name']);
         $this->_elementMock->expects($this->any())
             ->method('getLegend')
-            ->willReturn(self::$testData['legend']);
+            ->willReturn($this->testData['legend']);
         $this->_elementMock->expects($this->any())
             ->method('getComment')
-            ->willReturn(self::$testData['comment']);
+            ->willReturn($this->testData['comment']);
     }
 
     /**
@@ -181,9 +181,9 @@ class FieldsetTest extends TestCase
         $this->_elementMock->expects($this->any())->method('getIsNested')->willReturn($nested);
         $this->_elementMock->expects($this->any())->method('getExpanded')->willReturn($expanded);
         $actualHtml = $this->_object->render($this->_elementMock);
-        $this->assertStringContainsString(self::$testData['htmlId'], $actualHtml);
-        $this->assertStringContainsString(self::$testData['legend'], $actualHtml);
-        $this->assertStringContainsString(self::$testData['comment'], $actualHtml);
+        $this->assertStringContainsString($this->testData['htmlId'], $actualHtml);
+        $this->assertStringContainsString($this->testData['legend'], $actualHtml);
+        $this->assertStringContainsString($this->testData['comment'], $actualHtml);
         if ($nested) {
             $this->assertStringContainsString('nested', $actualHtml);
         }
@@ -255,23 +255,23 @@ class FieldsetTest extends TestCase
     /**
      * @return array
      */
-    public static function renderWithoutStoredElementsDataProvider()
+    public function renderWithoutStoredElementsDataProvider()
     {
-        return self::dataProvider();
+        return $this->dataProvider();
     }
 
     /**
      * @return array
      */
-    public static function renderWithStoredElementsDataProvider()
+    public function renderWithStoredElementsDataProvider()
     {
-        return self::dataProvider();
+        return $this->dataProvider();
     }
 
     /**
      * @return array
      */
-    protected static function dataProvider()
+    protected function dataProvider()
     {
         return [
             'expandedNestedExtra' => [
@@ -282,7 +282,7 @@ class FieldsetTest extends TestCase
             'collapsedNotNestedExtra' => [
                 'expanded' => false,
                 'nested'   => false,
-                'extra'    => ['configState' => [self::$testData['htmlId'] => true]],
+                'extra'    => ['configState' => [$this->testData['htmlId'] => true]],
             ],
             'collapsedNotNestedNoExtra' => [
                 'expanded' => true,

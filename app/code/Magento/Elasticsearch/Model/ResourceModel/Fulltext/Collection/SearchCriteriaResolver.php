@@ -3,16 +3,16 @@
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Magento\Elasticsearch\Model\ResourceModel\Fulltext\Collection;
 
 use Magento\CatalogSearch\Model\ResourceModel\Fulltext\Collection\SearchCriteriaResolverInterface;
+use Magento\Framework\Data\Collection;
 use Magento\Framework\Api\Search\SearchCriteriaBuilder;
 use Magento\Framework\Api\Search\SearchCriteria;
 
 /**
  * Resolve specific attributes for search criteria.
- * @deprecated Elasticsearch is no longer supported by Adobe
- * @see this class will be responsible for ES only
  */
 class SearchCriteriaResolver implements SearchCriteriaResolverInterface
 {
@@ -20,6 +20,11 @@ class SearchCriteriaResolver implements SearchCriteriaResolverInterface
      * @var SearchCriteriaBuilder
      */
     private $builder;
+
+    /**
+     * @var Collection
+     */
+    private $collection;
 
     /**
      * @var string
@@ -32,7 +37,7 @@ class SearchCriteriaResolver implements SearchCriteriaResolverInterface
     private $size;
 
     /**
-     * @var array|null
+     * @var array
      */
     private $orders;
 
@@ -42,20 +47,24 @@ class SearchCriteriaResolver implements SearchCriteriaResolverInterface
     private $currentPage;
 
     /**
+     * SearchCriteriaResolver constructor.
      * @param SearchCriteriaBuilder $builder
+     * @param Collection $collection
      * @param string $searchRequestName
      * @param int $currentPage
      * @param int $size
-     * @param array|null $orders
+     * @param array $orders
      */
     public function __construct(
         SearchCriteriaBuilder $builder,
+        Collection $collection,
         string $searchRequestName,
         int $currentPage,
         int $size,
-        ?array $orders = null
+        ?array $orders
     ) {
         $this->builder = $builder;
+        $this->collection = $collection;
         $this->searchRequestName = $searchRequestName;
         $this->currentPage = $currentPage;
         $this->size = $size;

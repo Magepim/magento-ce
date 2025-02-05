@@ -61,13 +61,6 @@ class AbstractCriteriaTest extends TestCase
      */
     public function testAddFilter($name, $field, $condition, $type, array $result)
     {
-        $objectManager = new ObjectManager($this);
-        $result = [
-            'test-filter-name' => $objectManager->getObject(
-                DataObject::class,
-                ['data' => $result]
-            ),
-        ];
         $this->criteria->addFilter($name, $field, $condition, $type);
         $this->assertEquals($result, $this->criteria->toArray()[CriteriaInterface::PART_FILTERS]['list']);
     }
@@ -199,7 +192,7 @@ class AbstractCriteriaTest extends TestCase
      *
      * @return array
      */
-    public static function dataProviderReset()
+    public function dataProviderReset()
     {
         return [
             [
@@ -226,11 +219,11 @@ class AbstractCriteriaTest extends TestCase
      *
      * @return array
      */
-    public static function dataProviderRemoveAllFilters()
+    public function dataProviderRemoveAllFilters()
     {
         return [
             [
-                'actualField' => [
+                'actualResult' => [
                     'test-filter-name',
                     'test-field-name',
                     'test-condition',
@@ -246,11 +239,11 @@ class AbstractCriteriaTest extends TestCase
      *
      * @return array
      */
-    public static function dataProviderRemoveFilter()
+    public function dataProviderRemoveFilter()
     {
         return [
             [
-                'actualField' => [
+                'actualResult' => [
                     'test-filter-name',
                     'test-field-name',
                     'test-condition',
@@ -267,7 +260,7 @@ class AbstractCriteriaTest extends TestCase
      *
      * @return array
      */
-    public static function dataProviderRemoveAllFields()
+    public function dataProviderRemoveAllFields()
     {
         return [
             [
@@ -285,7 +278,7 @@ class AbstractCriteriaTest extends TestCase
      *
      * @return array
      */
-    public static function dataProviderRemoveField()
+    public function dataProviderRemoveField()
     {
         return [
             [
@@ -323,7 +316,7 @@ class AbstractCriteriaTest extends TestCase
      *
      * @return array
      */
-    public static function dataProviderSetLimit()
+    public function dataProviderSetLimit()
     {
         return [
             [
@@ -339,7 +332,7 @@ class AbstractCriteriaTest extends TestCase
      *
      * @return array
      */
-    public static function dataProviderAddOrder()
+    public function dataProviderAddOrder()
     {
         return [
             [
@@ -375,8 +368,9 @@ class AbstractCriteriaTest extends TestCase
      *
      * @return array
      */
-    public static function dataProviderAddFilter()
+    public function dataProviderAddFilter()
     {
+        $objectManager = new ObjectManager($this);
         return [
             [
                 'name' => 'test-filter-name',
@@ -384,10 +378,17 @@ class AbstractCriteriaTest extends TestCase
                 'condition' => 'test-condition',
                 'type' => 'test-type',
                 'result' => [
-                    'name' => 'test-filter-name',
-                    'field' => 'test-field-name',
-                    'condition' => 'test-condition',
-                    'type' => 'test-type',
+                    'test-filter-name' => $objectManager->getObject(
+                        DataObject::class,
+                        [
+                            'data' => [
+                                'name' => 'test-filter-name',
+                                'field' => 'test-field-name',
+                                'condition' => 'test-condition',
+                                'type' => 'test-type',
+                            ]
+                        ]
+                    ),
                 ],
             ]
         ];
@@ -398,7 +399,7 @@ class AbstractCriteriaTest extends TestCase
      *
      * @return array
      */
-    public static function dataProviderAddField()
+    public function dataProviderAddField()
     {
         return [
             [

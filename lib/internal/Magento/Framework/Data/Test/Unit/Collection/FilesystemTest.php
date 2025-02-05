@@ -40,7 +40,7 @@ class FilesystemTest extends TestCase
     /**
      * @return array
      */
-    public static function testFilterCallbackLikeDataProvider()
+    public function testFilterCallbackLikeDataProvider()
     {
         $field     = 'field';
         $testValue = '\'\'\'test\'\'\'Filter\'\'\'Value\'\'\'';

@@ -89,7 +89,7 @@ class IndexResolverTest extends TestCase
     /**
      * @return array
      */
-    public static function getFieldIndexProvider()
+    public function getFieldIndexProvider()
     {
         return [
             [true, true, 'string', null],

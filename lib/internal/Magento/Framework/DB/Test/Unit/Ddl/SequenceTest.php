@@ -44,7 +44,7 @@ class SequenceTest extends TestCase
     /**
      * @return array
      */
-    public static function createSequenceDdlDataProvider()
+    public function createSequenceDdlDataProvider()
     {
         return [
             [

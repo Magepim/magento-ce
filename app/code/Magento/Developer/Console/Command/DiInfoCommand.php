@@ -7,80 +7,51 @@
 namespace Magento\Developer\Console\Command;
 
 use Magento\Developer\Model\Di\Information;
-use Magento\Framework\ObjectManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Exception\InvalidArgumentException;
-use Symfony\Component\Console\Helper\Table;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Magento\Framework\App\AreaList;
-use Magento\Framework\App\Area;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Helper\Table;
 
-/**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- */
 class DiInfoCommand extends Command
 {
     /**
-     * @var ObjectManagerInterface
-     */
-    private ObjectManagerInterface $objectManager;
-
-    /**
      * Command name
      */
-    public const COMMAND_NAME = 'dev:di:info';
+    const COMMAND_NAME = 'dev:di:info';
 
     /**
      * input name
      */
-    public const CLASS_NAME = 'class';
-
-    /**
-     * Area name
-     */
-    public const AREA_CODE = 'area';
+    const CLASS_NAME = 'class';
 
     /**
      * @var Information
      */
-    private Information $diInformation;
-
-    /**
-     * @var AreaList
-     */
-    private AreaList $areaList;
+    private $diInformation;
 
     /**
      * @param Information $diInformation
-     * @param ObjectManagerInterface $objectManager
-     * @param AreaList|null $areaList
      */
     public function __construct(
-        Information            $diInformation,
-        ObjectManagerInterface $objectManager,
-        ?AreaList              $areaList = null
+        Information $diInformation
     ) {
         $this->diInformation = $diInformation;
-        $this->objectManager = $objectManager;
-        $this->areaList = $areaList ?? \Magento\Framework\App\ObjectManager::getInstance()->get(AreaList::class);
         parent::__construct();
     }
 
     /**
-     * Initialization of the command
-     *
+     * {@inheritdoc}
      * @throws InvalidArgumentException
      */
     protected function configure()
     {
         $this->setName(self::COMMAND_NAME)
-            ->setDescription('Provides information on Dependency Injection configuration for the Command.')
-            ->setDefinition([
-                new InputArgument(self::CLASS_NAME, InputArgument::REQUIRED, 'Class name'),
-                new InputArgument(self::AREA_CODE, InputArgument::OPTIONAL, 'Area Code')
-            ]);
+             ->setDescription('Provides information on Dependency Injection configuration for the Command.')
+             ->setDefinition([
+                new InputArgument(self::CLASS_NAME, InputArgument::REQUIRED, 'Class name')
+             ]);
 
         parent::configure();
     }
@@ -122,7 +93,7 @@ class DiInfoCommand extends Command
             $paramsTableArray[] = $parameterRow;
         }
         $paramsTable->setRows($paramsTableArray);
-        $paramsTable->render();
+        $output->writeln($paramsTable->render());
     }
 
     /**
@@ -171,25 +142,19 @@ class DiInfoCommand extends Command
             ->setHeaders(['Plugin', 'Method', 'Type'])
             ->setRows($parameters);
 
-        $table->render();
+        $output->writeln($table->render());
     }
 
     /**
-     * Displays dependency injection configuration information for a class.
-     *
-     * @param InputInterface $input
-     * @param OutputInterface $output
+     * {@inheritdoc}
+     * @throws \InvalidArgumentException
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $area = $input->getArgument(self::AREA_CODE) ?? Area::AREA_GLOBAL;
-        if ($area !== Area::AREA_GLOBAL) {
-            $this->setDiArea($area);
-        }
         $className = $input->getArgument(self::CLASS_NAME);
         $output->setDecorated(true);
         $output->writeln('');
-        $output->writeln(sprintf('DI configuration for the class %s in the %s area', $className, strtoupper($area)));
+        $output->writeln(sprintf('DI configuration for the class %s in the GLOBAL area', $className));
 
         if ($this->diInformation->isVirtualType($className)) {
             $output->writeln(
@@ -204,40 +169,5 @@ class DiInfoCommand extends Command
         $this->printPlugins($preference, $output, 'Plugins for the Preference:');
 
         return \Magento\Framework\Console\Cli::RETURN_SUCCESS;
-    }
-
-    /**
-     * Set Area for DI Configuration
-     *
-     * @param string $area
-     * @return void
-     * @throws \InvalidArgumentException
-     */
-    private function setDiArea(string $area): void
-    {
-        if ($this->validateAreaCodeFromInput($area)) {
-            $areaOmConfiguration = $this->objectManager
-                ->get(\Magento\Framework\App\ObjectManager\ConfigLoader::class)
-                ->load($area);
-
-            $this->objectManager->configure($areaOmConfiguration);
-
-            $this->objectManager->get(\Magento\Framework\Config\ScopeInterface::class)
-                ->setCurrentScope($area);
-        } else {
-            throw new InvalidArgumentException(sprintf('The "%s" area code does not exist', $area));
-        }
-    }
-
-    /**
-     * Validate Input
-     *
-     * @param string $area
-     * @return bool
-     */
-    private function validateAreaCodeFromInput($area): bool
-    {
-        $availableAreaCodes = $this->areaList->getCodes();
-        return in_array($area, $availableAreaCodes, true);
     }
 }

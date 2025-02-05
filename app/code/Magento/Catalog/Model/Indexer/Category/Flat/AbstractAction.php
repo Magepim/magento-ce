@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2014 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 
 namespace Magento\Catalog\Model\Indexer\Category\Flat;
@@ -92,8 +92,8 @@ class AbstractAction
         ResourceConnection $resource,
         StoreManagerInterface $storeManager,
         Helper $resourceHelper,
-        ?MetadataPool $metadataPool = null,
-        ?SkipStaticColumnsProvider $skipStaticColumnsProvider = null
+        MetadataPool $metadataPool = null,
+        SkipStaticColumnsProvider $skipStaticColumnsProvider = null
     ) {
         $this->resource = $resource;
         $this->connection = $resource->getConnection();

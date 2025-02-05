@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2016 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 
 namespace Magento\Theme\Model\Design\Config;
@@ -50,13 +50,22 @@ class Validator
      */
     public function validate(DesignConfigInterface $designConfig)
     {
-        $elements = $this->getElements($designConfig);
+        /** @var DesignConfigDataInterface[] $designConfigData */
+        $designConfigData = $designConfig->getExtensionAttributes()->getDesignConfigData();
+        $elements = [];
+        foreach ($designConfigData as $designElement) {
+            if (!in_array($designElement->getFieldConfig()['field'], $this->fields)) {
+                continue;
+            }
+            /* Save mapping between field names and config paths */
+            $elements[$designElement->getFieldConfig()['field']] = [
+                'config_path' => $designElement->getPath(),
+                'value' => $designElement->getValue()
+            ];
+        }
 
         foreach ($elements as $name => $data) {
             $templateId = $data['value'];
-            if (!$templateId) {
-                continue;
-            }
             $text = $this->getTemplateText($templateId, $designConfig);
             // Check if template body has a reference to the same config path
             if (preg_match_all(Template::CONSTRUCTION_TEMPLATE_PATTERN, $text, $constructions, PREG_SET_ORDER)) {
@@ -75,30 +84,6 @@ class Validator
                 }
             }
         }
-    }
-
-    /**
-     * Get elements from design configuration
-     *
-     * @param DesignConfigInterface $designConfig
-     * @return array
-     */
-    private function getElements(DesignConfigInterface $designConfig)
-    {
-        /** @var DesignConfigDataInterface[] $designConfigData */
-        $designConfigData = $designConfig->getExtensionAttributes()->getDesignConfigData();
-        $elements = [];
-        foreach ($designConfigData as $designElement) {
-            if (!in_array($designElement->getFieldConfig()['field'], $this->fields)) {
-                continue;
-            }
-            /* Save mapping between field names and config paths */
-            $elements[$designElement->getFieldConfig()['field']] = [
-                'config_path' => $designElement->getPath(),
-                'value' => $designElement->getValue()
-            ];
-        }
-        return $elements;
     }
 
     /**

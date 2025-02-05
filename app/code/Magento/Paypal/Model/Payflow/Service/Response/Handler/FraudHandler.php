@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2015 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 namespace Magento\Paypal\Model\Payflow\Service\Response\Handler;
 
@@ -13,8 +13,6 @@ use Magento\Paypal\Model\Info;
 use Magento\Paypal\Model\Payflowpro;
 
 /**
- * Handles fraud detection and prevention.
- *
  * Class FraudHandler
  */
 class FraudHandler implements HandlerInterface
@@ -22,12 +20,12 @@ class FraudHandler implements HandlerInterface
     /**
      * Response message code
      */
-    public const RESPONSE_MESSAGE = 'respmsg';
+    const RESPONSE_MESSAGE = 'respmsg';
 
     /**
      * Fraud rules xml code
      */
-    public const FRAUD_RULES_XML = 'fps_prexmldata';
+    const FRAUD_RULES_XML = 'fps_prexmldata';
 
     /**
      * @var Info
@@ -54,7 +52,7 @@ class FraudHandler implements HandlerInterface
     }
 
     /**
-     * @inheritDoc
+     * {inheritdoc}
      */
     public function handle(InfoInterface $payment, DataObject $response)
     {
@@ -107,7 +105,7 @@ class FraudHandler implements HandlerInterface
             foreach ($rulesXml->{'rule'} as $rule) {
                 $rules[(string)$rule->{'ruleDescription'}] = (string)$rule->{'triggeredMessage'};
             }
-        } catch (\Exception $e) { // @codingStandardsIgnoreLine
+        } catch (\Exception $e) {
         } finally {
             libxml_use_internal_errors(false);
         }

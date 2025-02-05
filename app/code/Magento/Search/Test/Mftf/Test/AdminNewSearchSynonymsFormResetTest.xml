@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-/************************************************************************
- *
- * Copyright 2020 Adobe
- * All Rights Reserved.
- *
- * ************************************************************************
- */
+    /**
+    * Copyright © Magento, Inc. All rights reserved.
+    * See COPYING.txt for license details.
+    */
 -->
 
 <tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -42,7 +39,7 @@
         </actionGroup>
 
         <click selector="{{AdminSearchSynonymsNewSection.resetButton}}" stepKey="clickResetButton"/>
-        <waitForPageLoad stepKey="waitForPageLoaded"/>
+
         <grabValueFrom selector="{{AdminSearchSynonymsNewSection.scope}}" stepKey="grabScopeValue"/>
         <assertEquals stepKey="assertScopeDefaultValue">
             <expectedResult type="string">0:0</expectedResult>
@@ -56,7 +53,7 @@
 
         <grabValueFrom selector="{{AdminSearchSynonymsNewSection.merge}}" stepKey="grabMergeValue"/>
         <assertEquals stepKey="assertMergeDefaultValue">
-            <expectedResult type="string">0</expectedResult>
+            <expectedResult type="string">false</expectedResult>
             <actualResult type="string">$grabMergeValue</actualResult>
         </assertEquals>
     </test>

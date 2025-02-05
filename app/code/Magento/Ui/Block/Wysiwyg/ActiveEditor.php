@@ -17,7 +17,7 @@ use Magento\Ui\Model;
  */
 class ActiveEditor extends \Magento\Framework\View\Element\Template
 {
-    public const DEFAULT_EDITOR_PATH = 'mage/adminhtml/wysiwyg/tiny_mce/tinymceAdapter';
+    const DEFAULT_EDITOR_PATH = 'mage/adminhtml/wysiwyg/tiny_mce/tinymce5Adapter';
 
     /**
      * @var ScopeConfigInterface

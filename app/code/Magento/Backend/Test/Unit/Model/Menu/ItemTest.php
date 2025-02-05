@@ -261,7 +261,7 @@ class ItemTest extends TestCase
     /**
      * @return array
      */
-    public static function toArrayDataProvider()
+    public function toArrayDataProvider()
     {
         return include __DIR__ . '/../_files/menu_item_data.php';
     }
@@ -301,7 +301,7 @@ class ItemTest extends TestCase
     /**
      * @return array
      */
-    public static function populateFromArrayDataProvider()
+    public function populateFromArrayDataProvider()
     {
         return include __DIR__ . '/../_files/menu_item_constructor_data.php';
     }

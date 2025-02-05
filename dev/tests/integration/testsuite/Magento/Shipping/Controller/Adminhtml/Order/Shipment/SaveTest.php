@@ -21,11 +21,6 @@ class SaveTest extends AbstractShipmentControllerTest
     /**
      * @var string
      */
-    protected $resource = 'Magento_Sales::ship';
-
-    /**
-     * @var string
-     */
     protected $uri = 'backend/admin/order_shipment/save';
 
     /**
@@ -110,7 +105,8 @@ class SaveTest extends AbstractShipmentControllerTest
             ]
         );
 
-        $this->getRequest()->setPostValue($params);
+        $data = $params ?? [];
+        $this->getRequest()->setPostValue($data);
 
         return $order;
     }

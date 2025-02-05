@@ -97,7 +97,7 @@ class ReaderTest extends TestCase
     /**
      * @return array
      */
-    public static function readerDataProvider()
+    public function readerDataProvider()
     {
         return [
             [

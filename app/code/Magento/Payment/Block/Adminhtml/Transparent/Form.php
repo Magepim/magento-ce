@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2015 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 namespace Magento\Payment\Block\Adminhtml\Transparent;
 
@@ -22,12 +22,10 @@ class Form extends \Magento\Payment\Block\Transparent\Form
     }
 
     /**
-     * @inheritDoc
+     * {inheritdoc}
      */
     protected function initializeMethod()
     {
-        // @codingStandardsIgnoreStart
         return;
-        // @codingStandardsIgnoreEnd
     }
 }

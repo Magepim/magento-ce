@@ -184,7 +184,7 @@ class CustomerExtractorTest extends TestCase
     /**
      * @return array
      */
-    public static function getDataProvider()
+    public function getDataProvider()
     {
         return [
             'extract data when group id is null' => [

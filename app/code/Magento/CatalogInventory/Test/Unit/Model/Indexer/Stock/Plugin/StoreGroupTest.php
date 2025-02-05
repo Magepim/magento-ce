@@ -63,7 +63,7 @@ class StoreGroupTest extends TestCase
     /**
      * @return array
      */
-    public static function afterSaveDataProvider(): array
+    public function afterSaveDataProvider(): array
     {
         return [
             [

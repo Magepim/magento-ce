@@ -52,7 +52,7 @@ class AsyncTest extends TestCase
     /**
      * @return array
      */
-    public static function getSchemaUrlPathProvider()
+    public function getSchemaUrlPathProvider()
     {
         return [
             [

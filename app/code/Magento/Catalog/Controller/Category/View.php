@@ -1,7 +1,8 @@
 <?php
 /**
- * Copyright 2011 Adobe
- * All Rights Reserved.
+ *
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 namespace Magento\Catalog\Controller\Category;
 
@@ -136,10 +137,10 @@ class View extends Action implements HttpGetActionInterface, HttpPostActionInter
         ForwardFactory $resultForwardFactory,
         Resolver $layerResolver,
         CategoryRepositoryInterface $categoryRepository,
-        ?ToolbarMemorizer $toolbarMemorizer = null,
+        ToolbarMemorizer $toolbarMemorizer = null,
         ?LayoutUpdateManager $layoutUpdateManager = null,
-        ?CategoryHelper $categoryHelper = null,
-        ?LoggerInterface $logger = null
+        CategoryHelper $categoryHelper = null,
+        LoggerInterface $logger = null
     ) {
         parent::__construct($context);
         $this->_storeManager = $storeManager;

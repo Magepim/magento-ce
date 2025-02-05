@@ -1,7 +1,9 @@
 <?php
 /**
- * Copyright 2011 Adobe
- * All Rights Reserved.
+ * Bundle Option Type Source Model
+ *
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 
 namespace Magento\Bundle\Model\Source\Option;
@@ -9,6 +11,10 @@ namespace Magento\Bundle\Model\Source\Option;
 use Magento\Framework\Api\AttributeValueFactory;
 use Magento\Framework\Api\ExtensionAttributesFactory;
 
+/**
+ * Class Type
+ *
+ */
 class Type extends \Magento\Framework\Model\AbstractExtensibleModel implements
     \Magento\Framework\Option\ArrayInterface,
     \Magento\Bundle\Api\Data\OptionTypeInterface
@@ -16,13 +22,11 @@ class Type extends \Magento\Framework\Model\AbstractExtensibleModel implements
     /**#@+
      * Constants
      */
-    public const KEY_LABEL = 'label';
-    public const KEY_CODE = 'code';
+    const KEY_LABEL = 'label';
+    const KEY_CODE = 'code';
     /**#@-*/
 
-    /**
-     * @var array
-     */
+    /**#@-*/
     protected $options = [];
 
     /**
@@ -31,8 +35,8 @@ class Type extends \Magento\Framework\Model\AbstractExtensibleModel implements
      * @param ExtensionAttributesFactory $extensionFactory
      * @param AttributeValueFactory $customAttributeFactory
      * @param array $options
-     * @param \Magento\Framework\Model\ResourceModel\AbstractResource|null $resource
-     * @param \Magento\Framework\Data\Collection\AbstractDb|null $resourceCollection
+     * @param \Magento\Framework\Model\ResourceModel\AbstractResource $resource
+     * @param \Magento\Framework\Data\Collection\AbstractDb $resourceCollection
      * @param array $data
      */
     public function __construct(
@@ -41,8 +45,8 @@ class Type extends \Magento\Framework\Model\AbstractExtensibleModel implements
         ExtensionAttributesFactory $extensionFactory,
         AttributeValueFactory $customAttributeFactory,
         array $options,
-        ?\Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
-        ?\Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
+        \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
+        \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = []
     ) {
         $this->options = $options;
@@ -74,7 +78,7 @@ class Type extends \Magento\Framework\Model\AbstractExtensibleModel implements
     //@codeCoverageIgnoreStart
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getLabel()
     {
@@ -82,7 +86,7 @@ class Type extends \Magento\Framework\Model\AbstractExtensibleModel implements
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getCode()
     {
@@ -112,7 +116,7 @@ class Type extends \Magento\Framework\Model\AbstractExtensibleModel implements
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      *
      * @return \Magento\Bundle\Api\Data\OptionTypeExtensionInterface|null
      */
@@ -122,7 +126,7 @@ class Type extends \Magento\Framework\Model\AbstractExtensibleModel implements
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      *
      * @param \Magento\Bundle\Api\Data\OptionTypeExtensionInterface $extensionAttributes
      * @return $this

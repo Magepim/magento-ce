@@ -203,7 +203,7 @@ class CacheTest extends TestCase
     /**
      * @return array
      */
-    protected static function getTestData()
+    protected function getTestData()
     {
         return [
             'product_image' => [

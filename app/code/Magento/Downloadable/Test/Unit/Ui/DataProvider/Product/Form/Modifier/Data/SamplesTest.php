@@ -130,32 +130,32 @@ class SamplesTest extends TestCase
     /**
      * @return array
      */
-    public static function getSamplesTitleDataProvider()
+    public function getSamplesTitleDataProvider()
     {
         return [
             [
                 'id' => 1,
                 'typeId' => Type::TYPE_DOWNLOADABLE,
-                'expectedGetTitle' => self::once(),
-                'expectedGetValue' => self::never(),
+                'expectedGetTitle' => $this->once(),
+                'expectedGetValue' => $this->never(),
             ],
             [
                 'id' => null,
                 'typeId' => Type::TYPE_DOWNLOADABLE,
-                'expectedGetTitle' => self::never(),
-                'expectedGetValue' => self::once(),
+                'expectedGetTitle' => $this->never(),
+                'expectedGetValue' => $this->once(),
             ],
             [
                 'id' => 1,
                 'typeId' => 'someType',
-                'expectedGetTitle' => self::never(),
-                'expectedGetValue' => self::once(),
+                'expectedGetTitle' => $this->never(),
+                'expectedGetValue' => $this->once(),
             ],
             [
                 'id' => null,
                 'typeId' => 'someType',
-                'expectedGetTitle' => self::never(),
-                'expectedGetValue' => self::once(),
+                'expectedGetTitle' => $this->never(),
+                'expectedGetValue' => $this->once(),
             ],
         ];
     }

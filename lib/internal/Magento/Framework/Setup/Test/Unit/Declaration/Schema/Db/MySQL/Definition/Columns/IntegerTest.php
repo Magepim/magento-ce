@@ -176,7 +176,7 @@ class IntegerTest extends TestCase
     /**
      * @return array
      */
-    public static function definitionDataProvider()
+    public function definitionDataProvider()
     {
         return [
             ['int'],

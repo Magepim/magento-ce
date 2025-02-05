@@ -225,7 +225,7 @@ class AuthTest extends \Magento\TestFramework\TestCase\AbstractBackendController
         }
     }
 
-    public static function resetPasswordDataProvider()
+    public function resetPasswordDataProvider()
     {
         $password = uniqid('123q');
         return [

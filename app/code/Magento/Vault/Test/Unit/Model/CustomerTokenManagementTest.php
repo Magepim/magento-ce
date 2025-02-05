@@ -64,7 +64,7 @@ class CustomerTokenManagementTest extends TestCase
     /**
      * @return array
      */
-    public static function getCustomerSessionTokensNegativeDataProvider()
+    public function getCustomerSessionTokensNegativeDataProvider()
     {
         return [
             'not registered customer' => [null, false],

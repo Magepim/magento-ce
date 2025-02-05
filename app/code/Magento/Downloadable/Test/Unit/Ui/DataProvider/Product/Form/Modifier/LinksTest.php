@@ -154,8 +154,8 @@ class LinksTest extends TestCase
     public static function modifyDataDataProvider()
     {
         return [
-            ['isPurchasedSeparatelyBool' => true, 'isPurchasedSeparatelyStr' => '1'],
-            ['isPurchasedSeparatelyBool' => false, 'isPurchasedSeparatelyStr' => '0'],
+            ['isPurchasedSeparatelyBool' => true, 'PurchasedSeparatelyStr' => '1'],
+            ['isPurchasedSeparatelyBool' => false, 'PurchasedSeparatelyStr' => '0'],
         ];
     }
 

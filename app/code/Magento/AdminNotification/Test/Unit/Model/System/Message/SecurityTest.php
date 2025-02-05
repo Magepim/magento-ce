@@ -85,7 +85,7 @@ class SecurityTest extends TestCase
     /**
      * @return array
      */
-    public static function isDisplayedDataProvider()
+    public function isDisplayedDataProvider()
     {
         return [
             'cached_case' => [false, true, ''],

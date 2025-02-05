@@ -174,7 +174,7 @@ class DateTest extends AbstractFormTestCase
     /**
      * @return array
      */
-    public static function validateValueDataProvider()
+    public function validateValueDataProvider()
     {
         return [
             'false value, load original' => [false, [], false, true],
@@ -228,7 +228,7 @@ class DateTest extends AbstractFormTestCase
     /**
      * @return array
      */
-    public static function compactAndRestoreValueDataProvider()
+    public function compactAndRestoreValueDataProvider()
     {
         return [
             [1, 1],

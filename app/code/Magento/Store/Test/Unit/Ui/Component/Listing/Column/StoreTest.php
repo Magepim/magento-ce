@@ -57,7 +57,7 @@ class StoreTest extends TestCase
     /**
      * @var string
      */
-    protected static $name = 'anyname';
+    protected $name = 'anyname';
 
     protected function setUp(): void
     {
@@ -85,7 +85,7 @@ class StoreTest extends TestCase
                 'systemStore' =>  $this->systemStoreMock,
                 'escaper' => $this->escaperMock,
                 'components' => [],
-                'data' => ['name' => self::$name]
+                'data' => ['name' => $this->name]
             ]
         );
 
@@ -172,21 +172,21 @@ class StoreTest extends TestCase
     /**
      * @deprecated
      */
-    public static function prepareDataSourceDataProvider()
+    public function prepareDataSourceDataProvider()
     {
         $content = "website<br/>&nbsp;&nbsp;&nbsp;group<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;store<br/>";
         return [
             'withoutStore' => [
                 'dataSource' => ['data' => ['items' => [['store_id' => null]]]],
-                'expectedResult' => ['data' => ['items' => [['store_id' => null, self::$name => '']]]]
+                'expectedResult' => ['data' => ['items' => [['store_id' => null, $this->name => '']]]]
             ],
             'allStores' => [
                 'dataSource' => ['data' => ['items' => [['store_id' => [0]]]]],
-                'expectedResult' => ['data' => ['items' => [['store_id' => [0], self::$name => __('All Store Views')]]]]
+                'expectedResult' => ['data' => ['items' => [['store_id' => [0], $this->name => __('All Store Views')]]]]
             ],
             'Stores' => [
                 'dataSource' => ['data' => ['items' => [['store_id' => [1]]]]],
-                'expectedResult' => ['data' => ['items' => [['store_id' => [1], self::$name => $content]]]]
+                'expectedResult' => ['data' => ['items' => [['store_id' => [1], $this->name => $content]]]]
             ],
 
         ];

@@ -57,7 +57,7 @@ class ConfigTest extends TestCase
     /**
      * @return array
      */
-    public static function getConfigDataProvider()
+    public function getConfigDataProvider()
     {
         return [
             ['some/valid/path1', 'someValue'],

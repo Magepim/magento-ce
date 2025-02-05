@@ -113,7 +113,7 @@ class EntityAbstractTest extends TestCase
      *
      * @return array
      */
-    public static function generateDataProvider()
+    public function generateDataProvider()
     {
         return [
             'no_source_class' => [

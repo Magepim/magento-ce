@@ -108,14 +108,7 @@ class PaymentMethodListTest extends TestCase
      */
     public function testGetList($storeId, $paymentMethodConfig, $methodInstancesMap, $expected)
     {
-        $methodInstancesMapFinal = array();
-        $i = 0;
-        foreach ($methodInstancesMap as $methodInstances) {
-            $methodInstancesMapFinal[$i][0] = $methodInstances[0];
-            $methodInstancesMapFinal[$i][1] = $methodInstances[1]($this);
-            $i++;
-        }
-        $this->setUpGetList($paymentMethodConfig, $methodInstancesMapFinal);
+        $this->setUpGetList($paymentMethodConfig, $methodInstancesMap);
 
         $codes = array_map(
             function ($method) {
@@ -132,15 +125,15 @@ class PaymentMethodListTest extends TestCase
      *
      * @return array
      */
-    public static function getListDataProvider()
+    public function getListDataProvider()
     {
         return [
             [
                 1,
                 ['method_code_1' => [], 'method_code_2' => []],
                 [
-                    ['method_code_1', static fn (self $testCase) => $testCase->mockPaymentMethodInstance(1, 10, 'method_code_1', 'title', true)],
-                    ['method_code_2', static fn (self $testCase) => $testCase->mockPaymentMethodInstance(1, 5, 'method_code_2', 'title', true)]
+                    ['method_code_1', $this->mockPaymentMethodInstance(1, 10, 'method_code_1', 'title', true)],
+                    ['method_code_2', $this->mockPaymentMethodInstance(1, 5, 'method_code_2', 'title', true)]
                 ],
                 ['method_code_2', 'method_code_1']
             ]
@@ -160,14 +153,7 @@ class PaymentMethodListTest extends TestCase
      */
     public function testGetActiveList($storeId, $paymentMethodConfig, $methodInstancesMap, $expected)
     {
-        $methodInstancesMapFinal = array();
-        $i = 0;
-        foreach ($methodInstancesMap as $methodInstances) {
-            $methodInstancesMapFinal[$i][0] = $methodInstances[0];
-            $methodInstancesMapFinal[$i][1] = $methodInstances[1]($this);
-            $i++;
-        }
-        $this->setUpGetList($paymentMethodConfig, $methodInstancesMapFinal);
+        $this->setUpGetList($paymentMethodConfig, $methodInstancesMap);
 
         $codes = array_map(
             function ($method) {
@@ -184,15 +170,15 @@ class PaymentMethodListTest extends TestCase
      *
      * @return array
      */
-    public static function getActiveListDataProvider()
+    public function getActiveListDataProvider()
     {
         return [
             [
                 1,
                 ['method_code_1' => [], 'method_code_2' => []],
                 [
-                    ['method_code_1', static fn (self $testCase) => $testCase->mockPaymentMethodInstance(1, 10, 'method_code_1', 'title', false)],
-                    ['method_code_2', static fn (self $testCase) => $testCase->mockPaymentMethodInstance(1, 5, 'method_code_2', 'title', true)]
+                    ['method_code_1', $this->mockPaymentMethodInstance(1, 10, 'method_code_1', 'title', false)],
+                    ['method_code_2', $this->mockPaymentMethodInstance(1, 5, 'method_code_2', 'title', true)]
                 ],
                 ['method_code_2']
             ]

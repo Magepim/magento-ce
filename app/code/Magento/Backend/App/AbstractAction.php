@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2013 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 
 namespace Magento\Backend\App;
@@ -34,17 +34,17 @@ abstract class AbstractAction extends \Magento\Framework\App\Action\Action
     /**
      * Name of "is URLs checked" flag
      */
-    public const FLAG_IS_URLS_CHECKED = 'check_url_settings';
+    const FLAG_IS_URLS_CHECKED = 'check_url_settings';
 
     /**
      * Session namespace to refer in other places
      */
-    public const SESSION_NAMESPACE = 'adminhtml';
+    const SESSION_NAMESPACE = 'adminhtml';
 
     /**
      * Authorization level of a basic admin session
      */
-    public const ADMIN_RESOURCE = 'Magento_Backend::admin';
+    const ADMIN_RESOURCE = 'Magento_Backend::admin';
 
     /**
      * Array of actions which can be processed without secret key validation
@@ -369,7 +369,7 @@ abstract class AbstractAction extends \Magento\Framework\App\Action\Action
      * @param array|null $params
      * @return void
      */
-    protected function _forward($action, $controller = null, $module = null, ?array $params = null)
+    protected function _forward($action, $controller = null, $module = null, array $params = null)
     {
         $this->_getSession()->setIsUrlNotice($this->_actionFlag->get('', self::FLAG_IS_URLS_CHECKED));
         parent::_forward($action, $controller, $module, $params);

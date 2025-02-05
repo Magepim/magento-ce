@@ -284,12 +284,12 @@ class MysqlTest extends \PHPUnit\Framework\TestCase
     {
         return [
             'auto increment field' => [
-                'options' => ['identity' => true, 'unsigned' => true, 'nullable' => false, 'primary' => true],
-                'expected' => 'row_id',
+                'field options' => ['identity' => true, 'unsigned' => true, 'nullable' => false, 'primary' => true],
+                'expected result' => 'row_id',
             ],
             'non auto increment field' => [
-                'options' => ['unsigned' => true, 'nullable' => false,],
-                'expected' => false,
+                'field options' => ['unsigned' => true, 'nullable' => false,],
+                'expected result' => false,
             ]
         ];
     }

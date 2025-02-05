@@ -1,13 +1,16 @@
 <?php
 /**
- * Copyright 2011 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 namespace Magento\Catalog\Controller\Adminhtml\Product;
 
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\App\ObjectManager;
 
+/**
+ * Class Wysiwyg
+ */
 class Wysiwyg extends \Magento\Catalog\Controller\Adminhtml\Product implements HttpPostActionInterface
 {
     /**
@@ -37,7 +40,7 @@ class Wysiwyg extends \Magento\Catalog\Controller\Adminhtml\Product implements H
         \Magento\Catalog\Controller\Adminhtml\Product\Builder $productBuilder,
         \Magento\Framework\Controller\Result\RawFactory $resultRawFactory,
         \Magento\Framework\View\LayoutFactory $layoutFactory,
-        ?\Magento\Store\Model\StoreManagerInterface $storeManager = null
+        \Magento\Store\Model\StoreManagerInterface $storeManager = null
     ) {
         parent::__construct($context, $productBuilder);
         $this->resultRawFactory = $resultRawFactory;

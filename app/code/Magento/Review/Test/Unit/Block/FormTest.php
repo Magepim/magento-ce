@@ -155,7 +155,7 @@ class FormTest extends TestCase
     /**
      * @return array
      */
-    public static function getActionDataProvider()
+    public function getActionDataProvider()
     {
         return [
             [false, 'http://localhost/review/product/post', 3],

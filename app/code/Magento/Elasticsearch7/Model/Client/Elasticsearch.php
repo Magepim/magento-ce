@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2015 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
@@ -168,11 +168,11 @@ class Elasticsearch implements ClientInterface
      * Performs bulk query over Elasticsearch 7  index
      *
      * @param array $query
-     * @return array
+     * @return void
      */
     public function bulkQuery(array $query)
     {
-        return $this->getElasticsearchClient()->bulk($query);
+        $this->getElasticsearchClient()->bulk($query);
     }
 
     /**
@@ -380,27 +380,5 @@ class Elasticsearch implements ClientInterface
             $properties = $preprocessor->process($properties);
         }
         return $properties;
-    }
-
-    /**
-     * Open point in time
-     *
-     * @param array $params
-     * @return array
-     */
-    public function openPointInTime(array $params = []): array
-    {
-        return $this->getElasticsearchClient()->openPointInTime($params);
-    }
-
-    /**
-     * Close point in time
-     *
-     * @param array $params
-     * @return array
-     */
-    public function closePointInTime(array $params = []): array
-    {
-        return $this->getElasticsearchClient()->closePointInTime($params);
     }
 }

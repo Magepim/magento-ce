@@ -125,7 +125,7 @@ class StorageTest extends TestCase
      *
      * @return array
      */
-    public static function pathPathDataProvider(): array
+    public function pathPathDataProvider(): array
     {
         return [
             'Non string path' => [2020],

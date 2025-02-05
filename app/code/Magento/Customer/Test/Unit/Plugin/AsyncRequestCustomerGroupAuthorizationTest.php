@@ -102,7 +102,7 @@ class AsyncRequestCustomerGroupAuthorizationTest extends TestCase
     /**
      * @return array
      */
-    public static function customerDataProvider(): array
+    public function customerDataProvider(): array
     {
         return [
             [3, 1, false, 1],

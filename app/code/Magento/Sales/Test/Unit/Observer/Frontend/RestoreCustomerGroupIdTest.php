@@ -90,7 +90,7 @@ class RestoreCustomerGroupIdTest extends TestCase
     /**
      * @return array
      */
-    public static function restoreCustomerGroupIdDataProvider()
+    public function restoreCustomerGroupIdDataProvider()
     {
         return [
             [AbstractAddress::TYPE_SHIPPING],

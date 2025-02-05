@@ -61,7 +61,7 @@ class SpecialAttributeTest extends TestCase
     /**
      * @return array
      */
-    public static function getFieldNameProvider()
+    public function getFieldNameProvider()
     {
         return [
             ['id', 'id'],

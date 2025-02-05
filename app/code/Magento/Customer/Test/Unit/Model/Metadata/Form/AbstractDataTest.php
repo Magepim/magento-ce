@@ -7,7 +7,6 @@ declare(strict_types=1);
 
 namespace Magento\Customer\Test\Unit\Model\Metadata\Form;
 
-use Closure;
 use Laminas\I18n\Validator\Alpha;
 use Laminas\Validator\Date;
 use Laminas\Validator\Digits;
@@ -147,7 +146,7 @@ class AbstractDataTest extends TestCase
     /**
      * @return array
      */
-    public static function trueFalseDataProvider(): array
+    public function trueFalseDataProvider(): array
     {
         return [[true], [false]];
     }
@@ -183,7 +182,7 @@ class AbstractDataTest extends TestCase
     /**
      * @return array
      */
-    public static function applyInputFilterProvider(): array
+    public function applyInputFilterProvider(): array
     {
         return [
             [false, false, false],
@@ -226,7 +225,7 @@ class AbstractDataTest extends TestCase
     /**
      * @return array
      */
-    public static function dateFilterFormatProvider(): array
+    public function dateFilterFormatProvider(): array
     {
         return [[null, 'Whatever I put'], [false, self::MODEL], ['something else', self::MODEL]];
     }
@@ -252,7 +251,7 @@ class AbstractDataTest extends TestCase
      *
      * @return array
      */
-    public static function applyOutputFilterDataProvider(): array
+    public function applyOutputFilterDataProvider(): array
     {
         return [
             [false, false, false],
@@ -298,7 +297,7 @@ class AbstractDataTest extends TestCase
     /**
      * @return array
      */
-    public static function validateInputRuleDataProvider(): array
+    public function validateInputRuleDataProvider(): array
     {
         return [
             [null, null, null, true],
@@ -377,7 +376,7 @@ class AbstractDataTest extends TestCase
     }
 
     /**
-     * @param Closure|null                  $request
+     * @param RequestInterface $request
      * @param string                        $attributeCode
      * @param bool|string                   $requestScope
      * @param bool                          $requestScopeOnly
@@ -393,9 +392,6 @@ class AbstractDataTest extends TestCase
         $requestScopeOnly,
         $expectedValue
     ): void {
-        if ($request != null) {
-            $request = $request($this);
-        }
         $this->attributeMock->expects(
             $this->once()
         )->method(
@@ -409,14 +405,12 @@ class AbstractDataTest extends TestCase
     }
 
     /**
-     * @param $expectedValue
-     *
      * @return array
      */
-    public function getRequestMock($expectedValue): array
+    public function getRequestValueDataProvider(): array
     {
+        $expectedValue = 'EXPECTED_VALUE';
         $requestMock = $this->getMockBuilder(RequestInterface::class)
-            ->disableOriginalConstructor()
             ->getMock();
         $requestMock->method('getParam')
             ->willReturnCallback(
@@ -434,56 +428,20 @@ class AbstractDataTest extends TestCase
                     }
                 }
             );
+
         $requestMockHttp = $this->getMockBuilder(Http::class)
             ->disableOriginalConstructor()
             ->getMock();
         $requestMockHttp
-            ->expects($this->any())
+            ->expects($this->once())
             ->method('getParams')
             ->willReturn(['REQUEST' => ['SCOPE' => ['ATTR_CODE' => $expectedValue]]]);
 
         return [
-            'requestMock' => $requestMock,
-            'requestMockHttp' => $requestMockHttp
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    public static function getRequestValueDataProvider(): array
-    {
-        $expectedValue = 'EXPECTED_VALUE';
-
-        return [
-            [
-                static fn (self $testCase) => $testCase->getRequestMock($expectedValue)['requestMock'],
-                'ATTR_CODE',
-                false,
-                false,
-                $expectedValue
-            ],
-            [
-                static fn (self $testCase) => $testCase->getRequestMock($expectedValue)['requestMock'],
-                'ATTR_CODE',
-                'REQUEST_SCOPE',
-                false,
-                $expectedValue
-            ],
-            [
-                static fn (self $testCase) => $testCase->getRequestMock($expectedValue)['requestMockHttp'],
-                'ATTR_CODE',
-                'REQUEST_SCOPE',
-                false,
-                false
-            ],
-            [
-                static fn (self $testCase) => $testCase->getRequestMock($expectedValue)['requestMockHttp'],
-                'ATTR_CODE',
-                'REQUEST/SCOPE',
-                false,
-                $expectedValue
-            ]
+            [$requestMock, 'ATTR_CODE', false, false, $expectedValue],
+            [$requestMock, 'ATTR_CODE', 'REQUEST_SCOPE', false, $expectedValue],
+            [$requestMock, 'ATTR_CODE', 'REQUEST_SCOPE', false, false],
+            [$requestMockHttp, 'ATTR_CODE', 'REQUEST/SCOPE', false, $expectedValue]
         ];
     }
 }

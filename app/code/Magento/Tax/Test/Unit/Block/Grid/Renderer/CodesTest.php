@@ -71,7 +71,7 @@ class CodesTest extends TestCase
      *
      * @return array
      */
-    public static function ratesCodesDataProvider()
+    public function ratesCodesDataProvider()
     {
         return [
             [['some_code'], 'ESCAPED:some_code'],

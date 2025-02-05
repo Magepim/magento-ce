@@ -177,7 +177,7 @@ class AbstractTest extends AbstractImportTestCase
      *
      * @return array
      */
-    public static function isAttributeValidDataProvider()
+    public function isAttributeValidDataProvider()
     {
         return [
             ['created_at', ['type' => 'datetime'], ['created_at' => '2012-02-29'], 1, true],

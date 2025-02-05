@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2018 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 
 namespace Magento\CatalogGraphQl\Model\Config;
@@ -60,7 +60,7 @@ class AttributeReader implements ReaderInterface
         Type $typeLocator,
         Collection $collection,
         ScopeConfigInterface $config,
-        ?CollectionFactory $collectionFactory = null,
+        CollectionFactory $collectionFactory = null,
     ) {
         $this->mapper = $mapper;
         $this->typeLocator = $typeLocator;

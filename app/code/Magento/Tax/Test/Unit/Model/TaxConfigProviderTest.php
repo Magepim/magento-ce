@@ -129,7 +129,7 @@ class TaxConfigProviderTest extends TestCase
      * @return array
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public static function getConfigDataProvider()
+    public function getConfigDataProvider()
     {
         return [
             [

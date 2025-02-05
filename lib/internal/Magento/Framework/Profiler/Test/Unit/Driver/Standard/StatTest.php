@@ -50,7 +50,7 @@ class StatTest extends TestCase
      *
      * @return array
      */
-    public static function actionsDataProvider()
+    public function actionsDataProvider()
     {
         return [
             'Start only once' => [
@@ -195,20 +195,20 @@ class StatTest extends TestCase
     /**
      * @return array
      */
-    public static function timersSortingDataProvider()
+    public function timersSortingDataProvider()
     {
         return [
             'Without sorting' => [
-                'timers' => [
+                'actions' => [
                     ['start', 'root'],
                     ['start', 'root->init'],
                     ['stop', 'root->init'],
                     ['stop', 'root'],
                 ],
-                'expectedTimerIds' => ['root', 'root->init'],
+                'expected' => ['root', 'root->init'],
             ],
             'Simple sorting' => [
-                'timers' => [
+                'actions' => [
                     ['start', 'root'],
                     ['start', 'root->di'],
                     ['stop', 'root->di'],
@@ -222,7 +222,7 @@ class StatTest extends TestCase
                     ['stop', 'root->dispatch'],
                     ['stop', 'root'],
                 ],
-                'expectedTimerIds' => [
+                'expected' => [
                     'root',
                     'root->di',
                     'root->init',
@@ -232,7 +232,7 @@ class StatTest extends TestCase
                 ],
             ],
             'Nested sorting' => [
-                'timers' => [
+                'actions' => [
                     ['start', 'root'],
                     ['start', 'root->init'],
                     ['start', 'root->system'],
@@ -246,7 +246,7 @@ class StatTest extends TestCase
                     ['stop', 'root->init'],
                     ['stop', 'root'],
                 ],
-                'expectedTimerIds' => [
+                'expected' => [
                     'root',
                     'root->init',
                     'root->init->init_config',
@@ -280,11 +280,11 @@ class StatTest extends TestCase
     /**
      * @return array
      */
-    public static function timersFilteringDataProvider()
+    public function timersFilteringDataProvider()
     {
         return [
             'Filtering by pattern' => [
-                'timers' => [
+                'actions' => [
                     ['start', 'root'],
                     ['start', 'root->init'],
                     ['stop', 'root->init'],
@@ -292,10 +292,10 @@ class StatTest extends TestCase
                 ],
                 'thresholds' => [],
                 'filterPattern' => '/^root$/',
-                'expectedTimerIds' => ['root'],
+                'expected' => ['root'],
             ],
             'Filtering by thresholds' => [
-                'timers' => [
+                'actions' => [
                     ['start', 'root', 'time' => 0, 'realMemory' => 0, 'emallocMemory' => 0],
                     ['start', 'root->init', 0],
                     ['start', 'root->init->init_cache', 'time' => 50, 'realMemory' => 1000],
@@ -309,7 +309,7 @@ class StatTest extends TestCase
                 ],
                 'filterPattern' => null,
                 // TIME >= 1000, REALMEM >= 20000
-                'expectedTimerIds' => ['root', 'root->init->init_cache'],
+                'expected' => ['root', 'root->init->init_cache'],
             ]
         ];
     }
@@ -341,11 +341,11 @@ class StatTest extends TestCase
     /**
      * @return array
      */
-    public static function fetchDataProvider()
+    public function fetchDataProvider()
     {
         return [
             [
-                'timers' => [
+                'actions' => [
                     ['start', 'root', 'time' => 0, 'realMemory' => 0, 'emallocMemory' => 0],
                     ['stop', 'root', 'time' => 1000, 'realMemory' => 500, 'emallocMemory' => 10],
                 ],
@@ -373,7 +373,7 @@ class StatTest extends TestCase
                 ],
             ],
             [
-                'timers' => [
+                'actions' => [
                     ['start', 'root', 'time' => 0],
                     ['stop', 'root', 'time' => 10],
                     ['start', 'root', 'time' => 20],
@@ -388,12 +388,12 @@ class StatTest extends TestCase
                 ]
             ],
             [
-                'timers' => [['start', 'root', 'time' => 0]],
+                'actions' => [['start', 'root', 'time' => 0]],
                 'expects' => [
                     [
                         'timerId' => 'root',
                         'key' => Stat::TIME,
-                        'expectedValue' => self::greaterThan(microtime(true)),
+                        'expectedValue' => $this->greaterThan(microtime(true)),
                     ],
                     [
                         'timerId' => 'root',

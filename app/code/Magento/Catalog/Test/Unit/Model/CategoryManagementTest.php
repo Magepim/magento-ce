@@ -154,9 +154,10 @@ class CategoryManagementTest extends TestCase
     {
         $depth = null;
         $categoriesMock = $this->createMock(Collection::class);
-
-        $categoryMock = $this->getMock(Category::class, 'categoryMock');
-
+        $categoryMock = $this->getMockBuilder(Category::class)
+            ->setMockClassName('categoryMock')
+            ->disableOriginalConstructor()
+            ->getMock();
         $categoriesMock
             ->expects($this->once())
             ->method('getFirstItem')
@@ -198,33 +199,15 @@ class CategoryManagementTest extends TestCase
         $this->model->getTree();
     }
 
-    /**
-     * @param string $class
-     * @param string $mockClassName
-     * @return MockObject
-     */
-    private function getMock(string $class, string $mockClassName): MockObject
-    {
-        if (class_exists($mockClassName)) {
-            return new $mockClassName();
-        }
-
-        $mockBuilder = $this->getMockBuilder($class);
-        $mockBuilder->setMockClassName($mockClassName);
-        $mockBuilder->disableOriginalConstructor();
-        return $mockBuilder->getMockForAbstractClass();
-    }
-
     public function testMove()
     {
         $categoryId = 4;
         $parentId = 40;
         $afterId = null;
-
         $categoryMock = $this->getMockBuilder(Category::class)
+            ->setMockClassName('categoryMock')
             ->disableOriginalConstructor()
             ->getMock();
-
         $parentCategoryMock = $this->getMockBuilder(Category::class)
             ->setMockClassName('parentCategoryMock')
             ->disableOriginalConstructor()
@@ -264,9 +247,11 @@ class CategoryManagementTest extends TestCase
         $parentId = 1;
         $afterId = null;
         $categoryMock = $this->getMockBuilder(Category::class)
+            ->setMockClassName('categoryMock')
             ->disableOriginalConstructor()
             ->getMock();
         $parentCategoryMock = $this->getMockBuilder(Category::class)
+            ->setMockClassName('parentCategoryMock')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -291,9 +276,11 @@ class CategoryManagementTest extends TestCase
         $afterId = null;
         $categoryMock = $this->getMockBuilder(Category::class)
             ->disableOriginalConstructor()
+            ->setMockClassName('categoryMock')
             ->getMock();
         $parentCategoryMock = $this->getMockBuilder(Category::class)
             ->disableOriginalConstructor()
+            ->setMockClassName('parentCategoryMock')
             ->getMock();
 
         $this->categoryRepositoryMock

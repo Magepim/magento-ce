@@ -133,7 +133,7 @@ class FreeTest extends TestCase
     /**
      * @return array
      */
-    public static function getIsAvailableProvider(): array
+    public function getIsAvailableProvider(): array
     {
         return [
             [0, true, true, true],
@@ -147,7 +147,7 @@ class FreeTest extends TestCase
     /**
      * @return array
      */
-    public static function getConfigPaymentActionProvider(): array
+    public function getConfigPaymentActionProvider(): array
     {
         return [
             ['pending', 'action', null],

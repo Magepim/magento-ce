@@ -77,20 +77,20 @@ class GetAssetKeywordsTest extends TestCase
      *
      * @return array
      */
-    public static function casesProvider(): array
+    public function casesProvider(): array
     {
         return [
             'not_found' => [[],0],
             'find_one_keyword' => [
-                'databaseQueryResult' => [['id' => 1, 'keyword' => 'keywordRawData']],
-                'expectedNumberOfFoundKeywords' => 1
+                'result' => [['id' => 1, 'keyword' => 'keywordRawData']],
+                'expectedCount' => 1
             ],
             'find_several_keywords' => [
-                'databaseQueryResult' => [
+                'results' => [
                     ['id' => 1, 'keyword'=> 'keywordRawData'],
                     ['id' => 2, 'keyword' => 'keywordRawData']
                 ],
-                'expectedNumberOfFoundKeywords' => 2
+                'expectedCount' => 2
             ],
         ];
     }

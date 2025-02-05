@@ -76,8 +76,7 @@ class FilteredErrorFormatter implements ErrorFormatter
             $analysisResult->getProjectConfigFile(),
             $analysisResult->isResultCacheSaved(),
             $analysisResult->getPeakMemoryUsageBytes(),
-            $analysisResult->isResultCacheUsed(),
-            $analysisResult->getChangedProjectExtensionFilesOutsideOfAnalysedPaths()
+            $analysisResult->isResultCacheUsed()
         ];
 
         $reflectionClass = new \ReflectionClass(AnalysisResult::class);

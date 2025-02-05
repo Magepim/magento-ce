@@ -85,8 +85,8 @@ class PriceBackendTest extends TestCase
     public static function aroundValidateDataProvider()
     {
         return [
-            ['typeId' => Configurable::TYPE_CODE, 'expectedResult' => true],
-            ['typeId' => Type::TYPE_VIRTUAL, 'expectedResult' => static::CLOSURE_VALUE],
+            ['type' => Configurable::TYPE_CODE, 'result' => true],
+            ['type' => Type::TYPE_VIRTUAL, 'result' => static::CLOSURE_VALUE],
         ];
     }
 }

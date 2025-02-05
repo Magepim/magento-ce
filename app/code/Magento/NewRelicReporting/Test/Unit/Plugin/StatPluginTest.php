@@ -57,9 +57,6 @@ class StatPluginTest extends TestCase
     {
         $this->newRelicWrapperMock
             ->expects($this->never())
-            ->method('startBackgroundTransaction');
-        $this->newRelicWrapperMock
-            ->expects($this->never())
             ->method('setTransactionName');
         $this->newRelicWrapperMock
             ->expects($this->never())
@@ -74,9 +71,6 @@ class StatPluginTest extends TestCase
      */
     public function testNewRelicTransactionNameIsSetForCronjobNamePattern()
     {
-        $this->newRelicWrapperMock
-            ->expects($this->once())
-            ->method('startBackgroundTransaction');
         $this->newRelicWrapperMock
             ->expects($this->once())
             ->method('setTransactionName');
@@ -96,7 +90,7 @@ class StatPluginTest extends TestCase
         if (null === $this->newRelicWrapperMock) {
             $this->newRelicWrapperMock = $this->getMockBuilder(NewRelicWrapper::class)
                 ->disableOriginalConstructor()
-                ->onlyMethods(['setTransactionName', 'endTransaction', 'startBackgroundTransaction'])
+                ->onlyMethods(['setTransactionName', 'endTransaction'])
                 ->getMock();
         }
 

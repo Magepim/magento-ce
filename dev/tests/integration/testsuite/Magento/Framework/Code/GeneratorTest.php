@@ -141,17 +141,17 @@ class GeneratorTest extends TestCase
                 'expectedDataPath' => '/_expected/SourceClassWithNamespaceFactory.php.sample'
             ],
             'factory_with_nested_namespace' => [
-                'className' => self::CLASS_NAME_WITH_NESTED_NAMESPACE,
+                'classToGenerate' => self::CLASS_NAME_WITH_NESTED_NAMESPACE,
                 'generateType' => 'Factory',
                 'expectedDataPath' => '/_expected/SourceClassWithNestedNamespaceFactory.php.sample'
             ],
             'ext_interface_factory_with_namespace' => [
-                'className' => self::EXTENSION_CLASS_NAME_WITH_NAMESPACE,
+                'classToGenerate' => self::EXTENSION_CLASS_NAME_WITH_NAMESPACE,
                 'generateType' => 'InterfaceFactory',
                 'expectedDataPath' => '/_expected/SourceClassWithNamespaceExtensionInterfaceFactory.php.sample'
             ],
             'ext_interface_factory_with_nested_namespace' => [
-                'className' => self::EXTENSION_CLASS_NAME_WITH_NESTED_NAMESPACE,
+                'classToGenerate' => self::EXTENSION_CLASS_NAME_WITH_NESTED_NAMESPACE,
                 'generateType' => 'InterfaceFactory',
                 'expectedDataPath' => '/_expected/SourceClassWithNestedNamespaceExtensionInterfaceFactory.php.sample'
             ],

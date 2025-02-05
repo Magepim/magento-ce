@@ -44,8 +44,8 @@ class CacheDisableCommandTest extends AbstractCacheSetCommandTestCase
     /**
      * {@inheritdoc}
      */
-    public static function getExpectedExecutionOutput(array $changes)
+    public function getExpectedExecutionOutput(array $changes)
     {
-        return static::getExpectedChangeOutput($changes, false);
+        return $this->getExpectedChangeOutput($changes, false);
     }
 }

@@ -90,7 +90,7 @@ class FileTest extends TestCase
     /**
      * @return array
      */
-    public static function getPathDataProvider()
+    public function getPathDataProvider()
     {
         return [
             ['', '', '', ''],
@@ -141,7 +141,7 @@ class FileTest extends TestCase
     /**
      * @return array
      */
-    public static function getContentDataProvider()
+    public function getContentDataProvider()
     {
         return [
             'normal content' => ['content'],

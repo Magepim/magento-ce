@@ -108,7 +108,7 @@ class UpdateRowTest extends TestCase
     /**
      * @return array
      */
-    public static function columnsDataProvider()
+    public function columnsDataProvider()
     {
         $data = [
             'test_link_field' => 1,

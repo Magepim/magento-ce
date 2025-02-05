@@ -65,7 +65,7 @@ class ProcessManagerTest extends TestCase
     {
         return [
             'more_threads_than_functions' => [
-                'userFunctions' => [
+                'user_functions' => [
                     // @codingStandardsIgnoreStart
                     function () {
                         exit(1);
@@ -78,10 +78,10 @@ class ProcessManagerTest extends TestCase
                     },
                     // @codingStandardsIgnoreEnd
                 ],
-                'threadsCount' => 4,
+                'threads_count' => 4,
             ],
             'less_threads_than_functions' => [
-                'userFunctions' => [
+                'user_functions' => [
                     // @codingStandardsIgnoreStart
                     function () {
                         exit(1);
@@ -94,10 +94,10 @@ class ProcessManagerTest extends TestCase
                     },
                     // @codingStandardsIgnoreEnd
                 ],
-                'threadsCount' => 2,
+                'threads_count' => 2,
             ],
             'equal_threads_and_functions' => [
-                'userFunctions' => [
+                'user_functions' => [
                     // @codingStandardsIgnoreStart
                     function () {
                         exit(1);
@@ -110,7 +110,7 @@ class ProcessManagerTest extends TestCase
                     },
                     // @codingStandardsIgnoreEnd
                 ],
-                'threadsCount' => 3,
+                'threads_count' => 3,
             ],
         ];
     }
@@ -157,7 +157,7 @@ class ProcessManagerTest extends TestCase
     {
         return [
             'more_threads_than_functions' => [
-                'userFunctions' => [
+                'user_functions' => [
                     // @codingStandardsIgnoreStart
                     function () {
                         exit(0);
@@ -170,10 +170,10 @@ class ProcessManagerTest extends TestCase
                     },
                     // @codingStandardsIgnoreEnd
                 ],
-                'threadsCount' => 4,
+                'threads_count' => 4,
             ],
             'less_threads_than_functions' => [
-                'userFunctions' => [
+                'user_functions' => [
                     // @codingStandardsIgnoreStart
                     function () {
                         exit(0);
@@ -186,10 +186,10 @@ class ProcessManagerTest extends TestCase
                     },
                     // @codingStandardsIgnoreEnd
                 ],
-                'threadsCount' => 2,
+                'threads_count' => 2,
             ],
             'equal_threads_and_functions' => [
-                'userFunctions' => [
+                'user_functions' => [
                     // @codingStandardsIgnoreStart
                     function () {
                         exit(0);
@@ -202,7 +202,7 @@ class ProcessManagerTest extends TestCase
                     },
                     // @codingStandardsIgnoreEnd
                 ],
-                'threadsCount' => 3,
+                'threads_count' => 3,
             ],
         ];
     }

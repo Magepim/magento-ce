@@ -138,7 +138,7 @@ class DiscountTest extends TestCase
     /**
      * @return array
      */
-    public static function collectInvoiceData(): array
+    public function collectInvoiceData(): array
     {
         return [
             [

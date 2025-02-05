@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2014 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
@@ -40,7 +40,7 @@ class FormTest extends TestCase
     protected $orderConfig;
 
     /**
-     * @inheritDoc
+     * @inheirtDoc
      */
     protected function setUp(): void
     {
@@ -66,8 +66,6 @@ class FormTest extends TestCase
 
     /**
      * @return void
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
-     * @SuppressWarnings(PHPMD.UnusedLocalVariable)
      */
     public function testToHtml(): void
     {
@@ -102,7 +100,6 @@ class FormTest extends TestCase
 
         $fieldset->method('addField')
             ->willReturnCallback(
-                // @phpstan-ignore-next-line
                 function ($arg1, $arg2, $arg3) use ($statusesForField, $statesForField) {
                     if ($arg1 === 'status' && $arg2 === 'select' && $arg3['name'] === 'status') {
                         return null;
@@ -110,10 +107,7 @@ class FormTest extends TestCase
                         return null;
                     } elseif ($arg1 === 'is_default' && $arg2 === 'checkbox' && $arg3['name'] === 'is_default') {
                         return null;
-                    } elseif ($arg1 === 'visible_on_front'
-                        && $arg2 === 'checkbox'
-                        && $arg3['name'] === 'visible_on_front'
-                    ) {
+                    } elseif ($arg1 === 'visible_on_front' && $arg2 === 'checkbox' && $arg3['name'] === 'visible_on_front') {
                         return null;
                     }
                 }

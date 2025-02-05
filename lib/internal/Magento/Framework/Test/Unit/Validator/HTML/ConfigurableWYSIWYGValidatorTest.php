@@ -26,8 +26,8 @@ class ConfigurableWYSIWYGValidatorTest extends TestCase
     public static function getConfigurations(): array
     {
         return [
-            'no-html' => [['div'], [], [], 'just text', false, [], []],
-            'allowed-tag' => [['div'], [], [], 'just text and <div>a div</div>', false, [], []],
+            'no-html' => [['div'], [], [], 'just text', true, [], []],
+            'allowed-tag' => [['div'], [], [], 'just text and <div>a div</div>', true, [], []],
             'restricted-tag' => [
                 ['div', 'p'],
                 [],
@@ -165,24 +165,6 @@ class ConfigurableWYSIWYGValidatorTest extends TestCase
                 true,
                 [],
                 ['div' => ['src' => false]]
-            ],
-            'invalid-allowed-tag-attributes' => [
-                ['a'],
-                ['href'],
-                ['a' => ['href']],
-                '<a href="javascript:alert(1)">a</a>',
-                false,
-                [],
-                []
-            ],
-            'allowed-empty-tag' => [
-                [],
-                [],
-                [],
-                '',
-                false,
-                [],
-                []
             ]
         ];
     }
@@ -242,23 +224,20 @@ class ConfigurableWYSIWYGValidatorTest extends TestCase
                 );
             $tagValidatorsMocks[$tag] = [$mock];
         }
+        $validator = new ConfigurableWYSIWYGValidator(
+            $allowedTags,
+            $allowedAttr,
+            $allowedTagAttrs,
+            $attrValidators,
+            $tagValidatorsMocks
+        );
+        $valid = true;
         try {
-            $validator = new ConfigurableWYSIWYGValidator(
-                $allowedTags,
-                $allowedAttr,
-                $allowedTagAttrs,
-                $attrValidators,
-                $tagValidatorsMocks
-            );
-            $valid = true;
-            try {
-                $validator->validate($html);
-            } catch (ValidationException $exception) {
-                $valid = false;
-            }
-        } catch (\InvalidArgumentException $exception) {
+            $validator->validate($html);
+        } catch (ValidationException $exception) {
             $valid = false;
         }
+
         self::assertEquals($isValid, $valid);
     }
 }

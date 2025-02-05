@@ -85,7 +85,7 @@ class ItemTest extends TestCase
     /**
      * @var int
      */
-    protected static $storeId = 111;
+    protected $storeId = 111;
 
     /**
      * @var MockObject
@@ -107,7 +107,7 @@ class ItemTest extends TestCase
         $this->customerSession = $this->createMock(Session::class);
 
         $store = $this->createPartialMock(Store::class, ['getId', '__wakeup']);
-        $store->expects($this->any())->method('getId')->willReturn(self::$storeId);
+        $store->expects($this->any())->method('getId')->willReturn($this->storeId);
         $this->storeManager = $this->getMockForAbstractClass(
             StoreManagerInterface::class
         );
@@ -226,7 +226,7 @@ class ItemTest extends TestCase
     /**
      * @return array
      */
-    public static function getMaxSaleQtyDataProvider()
+    public function getMaxSaleQtyDataProvider()
     {
         return [
             [
@@ -290,7 +290,7 @@ class ItemTest extends TestCase
         if ($useConfigMinSaleQty) {
             $this->stockConfiguration->expects($this->once())
                 ->method('getMinSaleQty')
-                ->with(self::$storeId, $groupId)
+                ->with($this->storeId, $groupId)
                 ->willReturn($minSaleQty);
         } else {
             $this->setDataArrayValue('min_sale_qty', $minSaleQty);
@@ -301,7 +301,7 @@ class ItemTest extends TestCase
     /**
      * @return array
      */
-    public static function getMinSaleQtyDataProvider()
+    public function getMinSaleQtyDataProvider()
     {
         return [
             'config value' => [
@@ -353,7 +353,7 @@ class ItemTest extends TestCase
     /**
      * @return array
      */
-    public static function setMinQtyDataProvider()
+    public function setMinQtyDataProvider()
     {
         return [
             [true, 3.3],
@@ -379,11 +379,11 @@ class ItemTest extends TestCase
     /**
      * @return array
      */
-    public static function getStoreIdDataProvider()
+    public function getStoreIdDataProvider()
     {
         return [
-            [self::$storeId, self::$storeId],
-            [0, self::$storeId],
+            [$this->storeId, $this->storeId],
+            [0, $this->storeId],
         ];
     }
 
@@ -409,7 +409,7 @@ class ItemTest extends TestCase
         if ($config['use_config_qty_increments']) {
             $this->stockConfiguration->expects($this->once())
                 ->method('getQtyIncrements')
-                ->with(self::$storeId)
+                ->with($this->storeId)
                 ->willReturn($config['qty_increments']);
         } else {
             $this->setDataArrayValue('qty_increments', $config['qty_increments']);
@@ -420,7 +420,7 @@ class ItemTest extends TestCase
     /**
      * @return array
      */
-    public static function getQtyIncrementsDataProvider()
+    public function getQtyIncrementsDataProvider()
     {
         return [
             [
@@ -505,7 +505,7 @@ class ItemTest extends TestCase
     /**
      * @return array
      */
-    public static function eventsDataProvider()
+    public function eventsDataProvider()
     {
         return [
             ['cataloginventory_stock_item_save_before', 'beforeSave', 'item'],

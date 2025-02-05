@@ -85,7 +85,7 @@ class ConfigOptionsListTest extends TestCase
     /**
      * @return array
      */
-    public static function validateInvalidDataProvider()
+    public function validateInvalidDataProvider()
     {
         return [
             [[ConfigOptionsList::INPUT_KEY_BACKEND_FRONTNAME => '**'], "Invalid backend frontname '**'"],

@@ -86,7 +86,7 @@ class MultiStoreConfigurableViewOnProductPageTest extends TestCase
     {
         return [
             [
-                'expectedStoreData' => [
+                'options_first_store' => [
                     'simple_option_1_default_store' => [
                         'label' => 'Option 1 Default Store',
                     ],
@@ -97,7 +97,7 @@ class MultiStoreConfigurableViewOnProductPageTest extends TestCase
                         'label' => 'Option 3 Default Store',
                     ],
                 ],
-                'expectedSecondStoreData' => [
+                'options_second_store' => [
                     'simple_option_1_default_store' => [
                         'label' => 'Option 1 Second Store',
                     ],
@@ -153,8 +153,8 @@ class MultiStoreConfigurableViewOnProductPageTest extends TestCase
     {
         return [
             [
-                'expectedProducts' => ['simple_option_1', 'simple_option_2'],
-                'expectedSecondStoreProducts' => ['simple_option_2'],
+                'expected_store_products' => ['simple_option_1', 'simple_option_2'],
+                'expected_second_store_products' => ['simple_option_2'],
             ],
         ];
     }

@@ -50,7 +50,7 @@ class ConflictCheckerTest extends TestCase
     /**
      * @return array
      */
-    public static function checkConflictWhenEnableModuleDataProvider()
+    public function checkConflictWhenEnableModuleDataProvider()
     {
         return [
             [

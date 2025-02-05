@@ -46,7 +46,7 @@ class PublicCookieMetadataTest extends TestCase
     /**
      * @return array
      */
-    public static function getMethodData()
+    public function getMethodData()
     {
         return [
             "getDomain" => ["setDomain", 'getDomain', "example.com"],
@@ -62,7 +62,7 @@ class PublicCookieMetadataTest extends TestCase
     /**
      * @return array
      */
-    public static function toArrayDataProvider(): array
+    public function toArrayDataProvider(): array
     {
         return [
             [

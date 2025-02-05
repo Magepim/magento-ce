@@ -155,7 +155,7 @@ class HelperTest extends TestCase
     {
         return [
             'children_with_same_image_and_roles' => [
-                'childProducts' => [
+                'child_products' => [
                     'simple_10' => [
                         'media_gallery' => self::getMediaGallery(['ben062bdw2v' => '/m/a/magento_image.jpg.tmp']),
                         'images' => [
@@ -169,7 +169,7 @@ class HelperTest extends TestCase
                         ],
                     ],
                 ],
-                'expectedImages' => [
+                'expected_images' => [
                     'simple_10' => [
                         '/m/a/magento_image_1.jpg' => ['swatch_image', 'small_image', 'image', 'thumbnail'],
                     ],
@@ -179,7 +179,7 @@ class HelperTest extends TestCase
                 ],
             ],
             'children_with_different_images' => [
-                'childProducts' => [
+                'child_products' => [
                     'simple_10' => [
                         'media_gallery' => self::getMediaGallery(['ben062bdw2v' => '/m/a/magento_image.jpg.tmp']),
                         'images' => [
@@ -195,7 +195,7 @@ class HelperTest extends TestCase
                         ],
                     ],
                 ],
-                'expectedImages' => [
+                'expected_images' => [
                     'simple_10' => [
                         '/m/a/magento_image_1.jpg' => ['swatch_image', 'small_image', 'image', 'thumbnail'],
                     ],
@@ -205,7 +205,7 @@ class HelperTest extends TestCase
                 ],
             ],
             'children_with_different_image_roles' => [
-                'childProducts' => [
+                'child_products' => [
                     'simple_10' => [
                         'media_gallery' => self::getMediaGallery(
                             [
@@ -231,7 +231,7 @@ class HelperTest extends TestCase
                         ],
                     ],
                 ],
-                'expectedImages' => [
+                'expected_images' => [
                     'simple_10' => [
                         '/m/a/magento_image_1.jpg' => ['swatch_image', 'small_image'],
                         '/m/a/magento_small_image_1.jpg' => ['image', 'thumbnail'],

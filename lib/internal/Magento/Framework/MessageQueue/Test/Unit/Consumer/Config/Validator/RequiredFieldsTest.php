@@ -39,7 +39,7 @@ class RequiredFieldsTest extends TestCase
     /**
      * @return array
      */
-    public static function validConfigDataProvider()
+    public function validConfigDataProvider()
     {
         return [
             'valid' => [
@@ -77,7 +77,7 @@ class RequiredFieldsTest extends TestCase
      *
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public static function invalidConfigDataProvider()
+    public function invalidConfigDataProvider()
     {
         return [
             'missing name' => [

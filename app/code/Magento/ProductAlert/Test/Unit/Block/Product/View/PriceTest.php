@@ -137,7 +137,7 @@ class PriceTest extends TestCase
     /**
      * @return array
      */
-    public static function setTemplatePriceAlertNotAllowedDataProvider()
+    public function setTemplatePriceAlertNotAllowedDataProvider()
     {
         return [
             'price alert is not allowed' => [false, true],

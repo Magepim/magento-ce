@@ -296,7 +296,7 @@ class QuoteRepositoryTest extends TestCase
         static::assertSame($isSame ? $this->quoteMock : $customerQuote, $this->model->getForCustomer($customerId));
     }
 
-    public static function getForCustomerAfterGetDataProvider(): array
+    public function getForCustomerAfterGetDataProvider(): array
     {
         return [
             [15, 15, true],
@@ -374,16 +374,16 @@ class QuoteRepositoryTest extends TestCase
      *
      * @return array
      */
-    public static function getForCustomerDataProvider()
+    public function getForCustomerDataProvider()
     {
         return [
             [
-                'invokeTimes' => static::never(),
-                'sharedStoreIds' => []
+                'invoke_number_times' => static::never(),
+                'shared_store_ids' => []
             ],
             [
-                'invokeTimes' => static::once(),
-                'sharedStoreIds' => [1]
+                'invoke_number_times' => static::once(),
+                'shared_store_ids' => [1]
             ]
         ];
     }

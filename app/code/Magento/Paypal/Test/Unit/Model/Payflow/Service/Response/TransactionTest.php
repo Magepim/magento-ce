@@ -66,7 +66,7 @@ class TransactionTest extends TestCase
     /**
      * @return array
      */
-    public static function gatewayResponseInvariants()
+    public function gatewayResponseInvariants()
     {
         return [
             "Input data is a string" => ['testInput'],

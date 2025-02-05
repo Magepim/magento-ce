@@ -78,7 +78,7 @@ class CcTest extends TestCase
     /**
      * @return array
      */
-    public static function getCcTypeNameDataProvider()
+    public function getCcTypeNameDataProvider()
     {
         return [
             [['VS', 'MC', 'JCB'], 'JCB', 'JCB'],
@@ -109,7 +109,7 @@ class CcTest extends TestCase
     /**
      * @return array
      */
-    public static function hasCcExpDateDataProvider()
+    public function hasCcExpDateDataProvider()
     {
         return [
             [0, 1, true],
@@ -137,7 +137,7 @@ class CcTest extends TestCase
     /**
      * @return array
      */
-    public static function ccExpMonthDataProvider()
+    public function ccExpMonthDataProvider()
     {
         return [
             [2, '02'],
@@ -176,7 +176,7 @@ class CcTest extends TestCase
     /**
      * @return array
      */
-    public static function getCcExpDateDataProvider()
+    public function getCcExpDateDataProvider()
     {
         return [
             [3, 2015],

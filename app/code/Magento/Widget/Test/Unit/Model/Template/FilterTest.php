@@ -8,10 +8,8 @@ declare(strict_types=1);
 namespace Magento\Widget\Test\Unit\Model\Template;
 
 use Magento\Framework\TestFramework\Unit\Helper\ObjectManager as ObjectManagerHelper;
-use Magento\Framework\Translate\Inline\StateInterface;
 use Magento\Framework\UrlInterface;
 use Magento\Framework\View\LayoutInterface;
-use Magento\Store\Model\Information as StoreInformation;
 use Magento\Store\Model\Store;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Widget\Block\BlockInterface;
@@ -69,18 +67,6 @@ class FilterTest extends TestCase
         $this->widgetMock = $this->createMock(\Magento\Widget\Model\Widget::class);
         $this->layoutMock = $this->getMockForAbstractClass(LayoutInterface::class);
 
-        $objects = [
-            [
-                StoreInformation::class,
-                $this->createMock(StoreInformation::class)
-            ],
-            [
-                StateInterface::class,
-                $this->createMock(StateInterface::class)
-            ]
-        ];
-        $this->objectManagerHelper->prepareObjectManager($objects);
-
         $this->filter = $this->objectManagerHelper->getObject(
             Filter::class,
             [
@@ -100,7 +86,7 @@ class FilterTest extends TestCase
      * @param array $params
      * @param array $preconfigure
      * @param string $widgetXml
-     * @param \Closure|null $widgetBlock
+     * @param BlockInterface|null $widgetBlock
      * @param string $expectedResult
      * @return void
      * @dataProvider generateWidgetDataProvider
@@ -116,9 +102,6 @@ class FilterTest extends TestCase
         $widgetBlock,
         $expectedResult
     ) {
-        if ($widgetBlock!=null) {
-            $widgetBlock = $widgetBlock($this);
-        }
         $this->generalForGenerateWidget($name, $type, $preConfigId, $params, $preconfigure, $widgetXml, $widgetBlock);
         $this->assertSame($expectedResult, $this->filter->generateWidget($construction));
     }
@@ -131,7 +114,7 @@ class FilterTest extends TestCase
      * @param array $params
      * @param array $preconfigure
      * @param string $widgetXml
-     * @param \Closure|null $widgetBlock
+     * @param BlockInterface|null $widgetBlock
      * @param string $expectedResult
      * @return void
      * @dataProvider generateWidgetDataProvider
@@ -147,9 +130,6 @@ class FilterTest extends TestCase
         $widgetBlock,
         $expectedResult
     ) {
-        if ($widgetBlock!=null) {
-            $widgetBlock = $widgetBlock($this);
-        }
         $this->generalForGenerateWidget($name, $type, $preConfigId, $params, $preconfigure, $widgetXml, $widgetBlock);
         $this->assertSame($expectedResult, $this->filter->widgetDirective($construction));
     }
@@ -157,7 +137,7 @@ class FilterTest extends TestCase
     /**
      * @return array
      */
-    public static function generateWidgetDataProvider()
+    public function generateWidgetDataProvider()
     {
         return [
             [
@@ -202,7 +182,7 @@ class FilterTest extends TestCase
                 'params' => ['id' => '1'],
                 'preconfigure' => ['widget_type' => "Widget\\Link", 'parameters' => ['id' => '1']],
                 'widgetXml' => 'some xml',
-                'widgetBlock' => static fn (self $testCase) => $testCase->getBlockMock('widget text'),
+                'widgetBlock' => $this->getBlockMock('widget text'),
                 'expectedResult' => 'widget text'
             ],
             [
@@ -223,7 +203,7 @@ class FilterTest extends TestCase
                 ],
                 'preconfigure' => [],
                 'widgetXml' => 'some xml',
-                'widgetBlock' => static fn (self $testCase) => $testCase->getBlockMock('widget text'),
+                'widgetBlock' => $this->getBlockMock('widget text'),
                 'expectedResult' => 'widget text'
             ],
         ];

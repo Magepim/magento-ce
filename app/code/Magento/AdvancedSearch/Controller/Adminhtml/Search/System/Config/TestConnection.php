@@ -4,27 +4,22 @@
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-declare(strict_types=1);
-
 namespace Magento\AdvancedSearch\Controller\Adminhtml\Search\System\Config;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\AdvancedSearch\Model\Client\ClientResolver;
-use Magento\Framework\App\Action\HttpPostActionInterface;
-use Magento\Framework\Controller\Result\Json;
 use Magento\Framework\Controller\Result\JsonFactory;
-use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Filter\StripTags;
 
-class TestConnection extends Action implements HttpPostActionInterface
+class TestConnection extends Action
 {
     /**
      * Authorization level of a basic admin session.
      *
      * @see _isAllowed()
      */
-    public const ADMIN_RESOURCE = 'Magento_Catalog::config_catalog';
+    const ADMIN_RESOURCE = 'Magento_CatalogSearch::config_catalog_search';
 
     /**
      * @var ClientResolver
@@ -62,7 +57,7 @@ class TestConnection extends Action implements HttpPostActionInterface
     /**
      * Check for connection to server
      *
-     * @return Json
+     * @return \Magento\Framework\Controller\Result\Json
      */
     public function execute()
     {
@@ -74,7 +69,7 @@ class TestConnection extends Action implements HttpPostActionInterface
 
         try {
             if (empty($options['engine'])) {
-                throw new LocalizedException(
+                throw new \Magento\Framework\Exception\LocalizedException(
                     __('Missing search engine parameter.')
                 );
             }
@@ -82,14 +77,14 @@ class TestConnection extends Action implements HttpPostActionInterface
             if ($response) {
                 $result['success'] = true;
             }
-        } catch (LocalizedException $e) {
+        } catch (\Magento\Framework\Exception\LocalizedException $e) {
             $result['errorMessage'] = $e->getMessage();
         } catch (\Exception $e) {
             $message = __($e->getMessage());
             $result['errorMessage'] = $this->tagFilter->filter($message);
         }
 
-        /** @var Json $resultJson */
+        /** @var \Magento\Framework\Controller\Result\Json $resultJson */
         $resultJson = $this->resultJsonFactory->create();
         return $resultJson->setData($result);
     }

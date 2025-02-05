@@ -38,7 +38,7 @@ class JsonValidatorTest extends TestCase
     /**
      * @return array
      */
-    public static function isValidDataProvider()
+    public function isValidDataProvider()
     {
         return [
             ['""', true],

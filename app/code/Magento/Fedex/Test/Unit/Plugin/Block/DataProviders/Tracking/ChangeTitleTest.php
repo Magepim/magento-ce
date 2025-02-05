@@ -70,7 +70,7 @@ class ChangeTitleTest extends TestCase
      *
      * @return array
      */
-    public static function testAfterGetTitleDataProvider(): array
+    public function testAfterGetTitleDataProvider(): array
     {
         return [
             [Carrier::CODE, 'Original Title', __('Expected Delivery:')],

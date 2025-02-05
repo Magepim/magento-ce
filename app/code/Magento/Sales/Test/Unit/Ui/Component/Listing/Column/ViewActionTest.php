@@ -86,7 +86,7 @@ class ViewActionTest extends TestCase
      * Data provider for testPrepareDataSource
      * @return array
      */
-    public static function prepareDataSourceDataProvider()
+    public function prepareDataSourceDataProvider()
     {
         return [
             [

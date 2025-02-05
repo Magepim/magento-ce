@@ -76,7 +76,7 @@ class ConfigCacheTest extends TestCase
     /**
      * @return array
      */
-    public static function getDataProvider()
+    public function getDataProvider()
     {
         return [
             [false, false, 0],

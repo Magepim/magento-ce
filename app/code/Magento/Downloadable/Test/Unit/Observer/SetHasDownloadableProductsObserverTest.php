@@ -143,7 +143,7 @@ class SetHasDownloadableProductsObserverTest extends TestCase
      *
      * @return array
      */
-    public static function executeWithSessionNoDownloadableProductsDataProvider()
+    public function executeWithSessionNoDownloadableProductsDataProvider()
     {
         return [
             'Order has one item is downloadable product' => [
@@ -159,7 +159,7 @@ class SetHasDownloadableProductsObserverTest extends TestCase
                         '1'
                     ]
                 ],
-                self::once()
+                $this->once()
             ],
             'Order has all items are simple product' => [
                 [
@@ -174,7 +174,7 @@ class SetHasDownloadableProductsObserverTest extends TestCase
                         '0'
                     ]
                 ],
-                self::never()
+                $this->never()
             ],
         ];
     }

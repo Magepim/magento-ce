@@ -137,20 +137,20 @@ class SensitiveConfigSetCommandTest extends \PHPUnit\Framework\TestCase
         $assertCallback($config);
     }
 
-    public static function executeDataProvider()
+    public function executeDataProvider()
     {
         return [
             [
                 ScopeConfigInterface::SCOPE_TYPE_DEFAULT,
                 null,
                 function (array $config) {
-                    self::assertTrue(isset($config['system']['default']['some']['config']['path_two']));
-                    self::assertTrue(isset($config['system']['default']['some']['config']['path_three']));
-                    self::assertEquals(
+                    $this->assertTrue(isset($config['system']['default']['some']['config']['path_two']));
+                    $this->assertTrue(isset($config['system']['default']['some']['config']['path_three']));
+                    $this->assertEquals(
                         'sensitiveValue',
                         $config['system']['default']['some']['config']['path_two']
                     );
-                    self::assertEquals(
+                    $this->assertEquals(
                         'sensitiveValue',
                         $config['system']['default']['some']['config']['path_three']
                     );
@@ -160,12 +160,12 @@ class SensitiveConfigSetCommandTest extends \PHPUnit\Framework\TestCase
                 'website',
                 'test',
                 function (array $config) {
-                    self::assertTrue(isset($config['system']['website']['test']['some']['config']['path_two']));
-                    self::assertEquals(
+                    $this->assertTrue(isset($config['system']['website']['test']['some']['config']['path_two']));
+                    $this->assertEquals(
                         'sensitiveValue',
                         $config['system']['website']['test']['some']['config']['path_two']
                     );
-                    self::assertEquals(
+                    $this->assertEquals(
                         'sensitiveValue',
                         $config['system']['website']['test']['some']['config']['path_three']
                     );
@@ -211,25 +211,25 @@ class SensitiveConfigSetCommandTest extends \PHPUnit\Framework\TestCase
         $assertCallback($config);
     }
 
-    public static function executeInteractiveDataProvider()
+    public function executeInteractiveDataProvider()
     {
         return [
             [
                 ScopeConfigInterface::SCOPE_TYPE_DEFAULT,
                 null,
                 function (array $config) {
-                    self::assertTrue(isset($config['system']['default']['some']['config']['path_one']));
-                    self::assertTrue(isset($config['system']['default']['some']['config']['path_two']));
-                    self::assertTrue(isset($config['system']['default']['some']['config']['path_three']));
-                    self::assertEquals(
+                    $this->assertTrue(isset($config['system']['default']['some']['config']['path_one']));
+                    $this->assertTrue(isset($config['system']['default']['some']['config']['path_two']));
+                    $this->assertTrue(isset($config['system']['default']['some']['config']['path_three']));
+                    $this->assertEquals(
                         'sensitiveValue',
                         $config['system']['default']['some']['config']['path_one']
                     );
-                    self::assertEquals(
+                    $this->assertEquals(
                         'sensitiveValue',
                         $config['system']['default']['some']['config']['path_two']
                     );
-                    self::assertEquals(
+                    $this->assertEquals(
                         'sensitiveValue',
                         $config['system']['default']['some']['config']['path_three']
                     );
@@ -239,18 +239,18 @@ class SensitiveConfigSetCommandTest extends \PHPUnit\Framework\TestCase
                 'website',
                 'test',
                 function (array $config) {
-                    self::assertTrue(isset($config['system']['website']['test']['some']['config']['path_one']));
-                    self::assertTrue(isset($config['system']['website']['test']['some']['config']['path_two']));
-                    self::assertTrue(isset($config['system']['website']['test']['some']['config']['path_three']));
-                    self::assertEquals(
+                    $this->assertTrue(isset($config['system']['website']['test']['some']['config']['path_one']));
+                    $this->assertTrue(isset($config['system']['website']['test']['some']['config']['path_two']));
+                    $this->assertTrue(isset($config['system']['website']['test']['some']['config']['path_three']));
+                    $this->assertEquals(
                         'sensitiveValue',
                         $config['system']['website']['test']['some']['config']['path_one']
                     );
-                    self::assertEquals(
+                    $this->assertEquals(
                         'sensitiveValue',
                         $config['system']['website']['test']['some']['config']['path_two']
                     );
-                    self::assertEquals(
+                    $this->assertEquals(
                         'sensitiveValue',
                         $config['system']['website']['test']['some']['config']['path_three']
                     );

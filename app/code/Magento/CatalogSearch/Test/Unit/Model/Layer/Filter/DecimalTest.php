@@ -46,12 +46,12 @@ class DecimalTest extends TestCase
     /**
      * @var Decimal
      */
-    private static $target;
+    private $target;
 
     /**
      * @var RequestInterface|MockObject
      */
-    private static $request;
+    private $request;
 
     /**
      * @var State|MockObject
@@ -73,7 +73,7 @@ class DecimalTest extends TestCase
      */
     protected function setUp(): void
     {
-        self::$request = $this->getMockBuilder(RequestInterface::class)
+        $this->request = $this->getMockBuilder(RequestInterface::class)
             ->disableOriginalConstructor()
             ->onlyMethods(['getParam'])
             ->getMockForAbstractClass();
@@ -150,7 +150,7 @@ class DecimalTest extends TestCase
                     return sprintf('$%01.2f', $number);
                 }
             );
-        self::$target = $objectManagerHelper->getObject(
+        $this->target = $objectManagerHelper->getObject(
             Decimal::class,
             [
                 'filterItemFactory' => $this->filterItemFactory,
@@ -160,7 +160,7 @@ class DecimalTest extends TestCase
             ]
         );
 
-        self::$target->setAttributeModel($this->attribute);
+        $this->target->setAttributeModel($this->attribute);
     }
 
     /**
@@ -170,14 +170,14 @@ class DecimalTest extends TestCase
      * @return void
      * @dataProvider applyWithEmptyRequestDataProvider
      */
-    public static function testApplyWithEmptyRequest(?int $requestValue, $idValue): void
+    public function testApplyWithEmptyRequest(?int $requestValue, $idValue): void
     {
         $requestField = 'test_request_var';
         $idField = 'id';
 
-        self::$target->setRequestVar($requestField);
+        $this->target->setRequestVar($requestField);
 
-        self::$request
+        $this->request
             ->method('getParam')
             ->with($requestField)
             ->willReturnCallback(
@@ -191,27 +191,27 @@ class DecimalTest extends TestCase
                 }
             );
 
-        $result = self::$target->apply(self::$request);
-        self::assertSame(self::$target, $result);
+        $result = $this->target->apply($this->request);
+        $this->assertSame($this->target, $result);
     }
 
     /**
      * @return array
      */
-    public static function applyWithEmptyRequestDataProvider(): array
+    public function applyWithEmptyRequestDataProvider(): array
     {
         return [
             [
                 'requestValue' => null,
-                'idValue' => 0
+                'id' => 0
             ],
             [
                 'requestValue' => 0,
-                'idValue' => false
+                'id' => false
             ],
             [
                 'requestValue' => 0,
-                'idValue' => null
+                'id' => null
             ]
         ];
     }
@@ -224,8 +224,8 @@ class DecimalTest extends TestCase
         $filter = '10-150';
         $requestVar = 'test_request_var';
 
-        self::$target->setRequestVar($requestVar);
-        self::$request->expects($this->exactly(1))
+        $this->target->setRequestVar($requestVar);
+        $this->request->expects($this->exactly(1))
             ->method('getParam')
             ->willReturnCallback(
                 function ($field) use ($requestVar, $filter) {
@@ -243,7 +243,7 @@ class DecimalTest extends TestCase
             ->method('addFieldToFilter')
             ->with($attributeCode)->willReturnSelf();
 
-        self::$target->apply(self::$request);
+        $this->target->apply($this->request);
     }
 
     /**
@@ -262,7 +262,7 @@ class DecimalTest extends TestCase
             ->method('getFacetedData')
             ->willReturn($facets);
         $actual = [];
-        foreach (self::$target->getItems() as $item) {
+        foreach ($this->target->getItems() as $item) {
             $actual[] = ['label' => $item->getLabel(), 'value' => $item->getValue(), 'count' => $item->getCount()];
         }
         $this->assertEquals($expected, $actual);
@@ -271,7 +271,7 @@ class DecimalTest extends TestCase
     /**
      * @return array
      */
-    public static function itemDataDataProvider(): array
+    public function itemDataDataProvider(): array
     {
         return [
             [

@@ -49,7 +49,7 @@ class DataTest extends TestCase
     /**
      * @return array shipping method name
      */
-    public static function shippingMethodDataProvider()
+    public function shippingMethodDataProvider()
     {
         return [
             ['usps_0_FCLE'],   // First-Class Mail Large Envelope

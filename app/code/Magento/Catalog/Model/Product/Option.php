@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2011 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 
 namespace Magento\Catalog\Model\Product;
@@ -30,6 +30,7 @@ use Magento\Framework\Model\AbstractExtensibleModel;
  * @method int getProductId()
  * @method \Magento\Catalog\Model\Product\Option setProductId(int $value)
  *
+ * @author      Magento Core Team <core@magentocommerce.com>
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  * @SuppressWarnings(PHPMD.ExcessivePublicCount)
  * @since 100.0.2
@@ -153,10 +154,10 @@ class Option extends AbstractExtensibleModel implements ProductCustomOptionInter
         \Magento\Catalog\Model\Product\Option\Type\Factory $optionFactory,
         \Magento\Framework\Stdlib\StringUtils $string,
         Option\Validator\Pool $validatorPool,
-        ?\Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
-        ?\Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
+        \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
+        \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = [],
-        ?ProductCustomOptionValuesInterfaceFactory $customOptionValuesFactory = null,
+        ProductCustomOptionValuesInterfaceFactory $customOptionValuesFactory = null,
         array $optionGroups = [],
         array $optionTypesToGroups = []
     ) {
@@ -339,7 +340,7 @@ class Option extends AbstractExtensibleModel implements ProductCustomOptionInter
      * @param Product $product
      * @return $this
      */
-    public function setProduct(?Product $product = null)
+    public function setProduct(Product $product = null)
     {
         $this->product = $product;
         return $this;
@@ -872,7 +873,7 @@ class Option extends AbstractExtensibleModel implements ProductCustomOptionInter
      * @param ProductCustomOptionValuesInterface[] $values
      * @return $this
      */
-    public function setValues(?array $values = null)
+    public function setValues(array $values = null)
     {
         $this->values = $values;
         return $this;
@@ -989,7 +990,7 @@ class Option extends AbstractExtensibleModel implements ProductCustomOptionInter
         $matches = [];
         preg_match_all('/(?<extensions>[a-z0-9]+)/i', strtolower($rawExtensions), $matches);
 
-        if (!empty($matches['extensions'])) {
+        if (!empty($matches)) {
             $extensions = implode(', ', array_unique($matches['extensions']));
             $this->setFileExtension($extensions);
         }

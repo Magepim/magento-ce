@@ -112,7 +112,7 @@ class AttributeMergerTest extends TestCase
      *
      * @return array
      */
-    public static function validationRulesDataProvider(): array
+    public function validationRulesDataProvider(): array
     {
         return [
             ['alpha', 'validate-alpha'],

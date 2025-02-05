@@ -771,40 +771,40 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
 
         return [
             'one product' => [
-                'quoteDetailsData' => $oneProduct,
-                'expected' => $oneProductResults,
+                'quote_details' => $oneProduct,
+                'expected_tax_details' => $oneProductResults,
             ],
             'weee product' => [
-                'quoteDetailsData' => $weeeProduct,
-                'expected' => $weeeProductResults,
+                'quote_details' => $weeeProduct,
+                'expected_tax_details' => $weeeProductResults,
             ],
             'weee products' => [
-                'quoteDetailsData' => $weeeProducts,
-                'expected' => $weeeProductsResults,
+                'quote_details' => $weeeProducts,
+                'expected_tax_details' => $weeeProductsResults,
             ],
             'multi weee products' => [
-                'quoteDetailsData' => $multiWeeeProducts,
-                'expected' => $multiWeeeProductsResults,
+                'quote_details' => $multiWeeeProducts,
+                'expected_tax_details' => $multiWeeeProductsResults,
             ],
             'one product, tax included' => [
-                'quoteDetailsData' => $oneProductInclTax,
-                'expected' => $oneProductInclTaxResults,
+                'quote_details' => $oneProductInclTax,
+                'expected_tax_details' => $oneProductInclTaxResults,
             ],
             'one product, tax included but differs from store rate' => [
-                'quoteDetailsData' => $oneProductInclTaxDiffRate,
-                'expected' => $oneProductInclTaxDiffRateResults,
+                'quote_details' => $oneProductInclTaxDiffRate,
+                'expected_tax_details' => $oneProductInclTaxDiffRateResults,
             ],
             'two products' => [
-                'quoteDetailsData' => $twoProducts,
-                'expected' => $twoProductsResults,
+                'quote_details' => $twoProducts,
+                'expected_tax_details' => $twoProductsResults,
             ],
             'two products, tax included' => [
-                'quoteDetailsData' => $twoProductsInclTax,
-                'expected' => $twoProductInclTaxResults,
+                'quote_details' => $twoProductsInclTax,
+                'expected_tax_details' => $twoProductInclTaxResults,
             ],
             'bundle product' => [
-                'quoteDetailsData' => $bundleProduct,
-                'expected' => $bundleProductResults,
+                'quote_details' => $bundleProduct,
+                'expected_tax_details' => $bundleProductResults,
             ],
         ];
     }
@@ -843,7 +843,7 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
     public static function calculateTaxNoTaxInclDataProvider()
     {
         $prodNoTaxInclBase = [
-            'quoteDetailsData' => [
+            'quote_details' => [
                 'shipping_address' => [
                     'postcode' => '55555',
                     'country_id' => 'US',
@@ -860,14 +860,14 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
                 ],
                 'customer_tax_class_key' => 'DefaultCustomerClass',
             ],
-            'expectedTaxDetails' => [
+            'expected_tax_details' => [
                 'subtotal' => 10.0,
                 'tax_amount' => 0.0,
                 'discount_tax_compensation_amount' => 0.0,
                 'applied_taxes' => [],
                 'items' => [],
             ],
-            'storeId' => null,
+            'store_id' => null,
         ];
 
         $prodQuoteDetailItemBase = [
@@ -949,23 +949,28 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
         $prodWithoutStoreIdWithTaxClassId = $prodNoTaxInclBase;
         $prodWithoutStoreIdWithoutTaxClassId = $prodNoTaxInclBase;
 
-        $prodWithStoreIdWithTaxClassId['storeId'] = 1;
-        $prodWithStoreIdWithTaxClassId['quoteDetailsData']['items'][] = $quoteDetailItemWithDefaultProductTaxClass;
-        $prodWithStoreIdWithTaxClassId['expectedTaxDetails']['tax_amount'] = 0.75;
-        $prodWithStoreIdWithTaxClassId['expectedTaxDetails']['applied_taxes'] = $quoteDetailAppliedTaxesBase;
-        $prodWithStoreIdWithTaxClassId['expectedTaxDetails']['items'] = $prodExpectedItemWithDefaultProductTaxClass;
+        $prodWithStoreIdWithTaxClassId['store_id'] = 1;
+        $prodWithStoreIdWithTaxClassId['quote_details']['items'][] = $quoteDetailItemWithDefaultProductTaxClass;
+        $prodWithStoreIdWithTaxClassId['expected_tax_details']['tax_amount'] = 0.75;
+        $prodWithStoreIdWithTaxClassId['expected_tax_details']['applied_taxes'] = $quoteDetailAppliedTaxesBase;
+        $prodWithStoreIdWithTaxClassId['expected_tax_details']['items'] =
+            $prodExpectedItemWithDefaultProductTaxClass;
 
-        $prodWithStoreIdWithoutTaxClassId['storeId'] = 1;
-        $prodWithStoreIdWithoutTaxClassId['quoteDetailsData']['items'][] = $prodQuoteDetailItemBase;
-        $prodWithStoreIdWithoutTaxClassId['expectedTaxDetails']['items'] = $prodExpectedItemWithNoProductTaxClass;
+        $prodWithStoreIdWithoutTaxClassId['store_id'] = 1;
+        $prodWithStoreIdWithoutTaxClassId['quote_details']['items'][] = $prodQuoteDetailItemBase;
+        $prodWithStoreIdWithoutTaxClassId['expected_tax_details']['items'] =
+            $prodExpectedItemWithNoProductTaxClass;
 
-        $prodWithoutStoreIdWithTaxClassId['quoteDetailsData']['items'][] = $quoteDetailItemWithDefaultProductTaxClass;
-        $prodWithoutStoreIdWithTaxClassId['expectedTaxDetails']['tax_amount'] = 0.75;
-        $prodWithoutStoreIdWithTaxClassId['expectedTaxDetails']['applied_taxes'] = $quoteDetailAppliedTaxesBase;
-        $prodWithoutStoreIdWithTaxClassId['expectedTaxDetails']['items'] = $prodExpectedItemWithDefaultProductTaxClass;
+        $prodWithoutStoreIdWithTaxClassId['quote_details']['items'][] =
+            $quoteDetailItemWithDefaultProductTaxClass;
+        $prodWithoutStoreIdWithTaxClassId['expected_tax_details']['tax_amount'] = 0.75;
+        $prodWithoutStoreIdWithTaxClassId['expected_tax_details']['applied_taxes'] = $quoteDetailAppliedTaxesBase;
+        $prodWithoutStoreIdWithTaxClassId['expected_tax_details']['items'] =
+            $prodExpectedItemWithDefaultProductTaxClass;
 
-        $prodWithoutStoreIdWithoutTaxClassId['quoteDetailsData']['items'][] = $prodQuoteDetailItemBase;
-        $prodWithoutStoreIdWithoutTaxClassId['expectedTaxDetails']['items'] = $prodExpectedItemWithNoProductTaxClass;
+        $prodWithoutStoreIdWithoutTaxClassId['quote_details']['items'][] = $prodQuoteDetailItemBase;
+        $prodWithoutStoreIdWithoutTaxClassId['expected_tax_details']['items'] =
+            $prodExpectedItemWithNoProductTaxClass;
 
         return [
             'product with store id, with tax class id' => $prodWithStoreIdWithTaxClassId,
@@ -981,7 +986,7 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
     public static function calculateTaxTaxInclDataProvider()
     {
         $productTaxInclBase = [
-            'quoteDetailsData' => [
+            'quote_details' => [
                 'shipping_address' => [
                     'postcode' => '55555',
                     'country_id' => 'US',
@@ -1001,14 +1006,14 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
                     Key::KEY_VALUE => 'DefaultCustomerClass',
                 ],
             ],
-            'expectedTaxDetails' => [
+            'expected_tax_details' => [
                 'subtotal' => 10.0,
                 'tax_amount' => 0.0,
                 'discount_tax_compensation_amount' => 0.0,
                 'applied_taxes' => [],
                 'items' => [],
             ],
-            'storeId' => null,
+            'store_id' => null,
         ];
 
         $productTaxInclQuoteDetailItemBase = [
@@ -1087,25 +1092,34 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
         $productInclTaxWithoutStoreIdWithTaxClassId = $productTaxInclBase;
         $productInclTaxWithoutStoreIdWithoutTaxClassId = $productTaxInclBase;
 
-        $productInclTaxWithStoreIdWithTaxClassId['storeId'] = 1;
-        $productInclTaxWithStoreIdWithTaxClassId['quoteDetailsData']['items'][] = $quoteDetailTaxInclItemWithDefaultProductTaxClass;
-        $productInclTaxWithStoreIdWithTaxClassId['expectedTaxDetails']['tax_amount'] = 0.70;
-        $productInclTaxWithStoreIdWithTaxClassId['expectedTaxDetails']['subtotal'] = 9.30;
-        $productInclTaxWithStoreIdWithTaxClassId['expectedTaxDetails']['applied_taxes'] = $quoteDetailAppliedTaxesBase;
-        $productInclTaxWithStoreIdWithTaxClassId['expectedTaxDetails']['items'] = $productTaxInclExpectedItemWithDefaultProductTaxClass;
+        $productInclTaxWithStoreIdWithTaxClassId['store_id'] = 1;
+        $productInclTaxWithStoreIdWithTaxClassId['quote_details']['items'][] =
+            $quoteDetailTaxInclItemWithDefaultProductTaxClass;
+        $productInclTaxWithStoreIdWithTaxClassId['expected_tax_details']['tax_amount'] = 0.70;
+        $productInclTaxWithStoreIdWithTaxClassId['expected_tax_details']['subtotal'] = 9.30;
+        $productInclTaxWithStoreIdWithTaxClassId['expected_tax_details']['applied_taxes'] =
+            $quoteDetailAppliedTaxesBase;
+        $productInclTaxWithStoreIdWithTaxClassId['expected_tax_details']['items'] =
+            $productTaxInclExpectedItemWithDefaultProductTaxClass;
 
-        $productInclTaxWithStoreIdWithoutTaxClassId['storeId'] = 1;
-        $productInclTaxWithStoreIdWithoutTaxClassId['quoteDetailsData']['items'][] = $productTaxInclQuoteDetailItemBase;
-        $productInclTaxWithStoreIdWithoutTaxClassId['expectedTaxDetails']['items'] = $productTaxInclExpectedItemWithNoProductTaxClass;
+        $productInclTaxWithStoreIdWithoutTaxClassId['store_id'] = 1;
+        $productInclTaxWithStoreIdWithoutTaxClassId['quote_details']['items'][] =
+            $productTaxInclQuoteDetailItemBase;
+        $productInclTaxWithStoreIdWithoutTaxClassId['expected_tax_details']['items'] =
+            $productTaxInclExpectedItemWithNoProductTaxClass;
 
-        $productInclTaxWithoutStoreIdWithTaxClassId['quoteDetailsData']['items'][] = $quoteDetailTaxInclItemWithDefaultProductTaxClass;
-        $productInclTaxWithoutStoreIdWithTaxClassId['expectedTaxDetails']['tax_amount'] = 0.70;
-        $productInclTaxWithoutStoreIdWithTaxClassId['expectedTaxDetails']['subtotal'] = 9.30;
-        $productInclTaxWithoutStoreIdWithTaxClassId['expectedTaxDetails']['applied_taxes'] = $quoteDetailAppliedTaxesBase;
-        $productInclTaxWithoutStoreIdWithTaxClassId['expectedTaxDetails']['items'] = $productTaxInclExpectedItemWithDefaultProductTaxClass;
+        $productInclTaxWithoutStoreIdWithTaxClassId['quote_details']['items'][] =
+            $quoteDetailTaxInclItemWithDefaultProductTaxClass;
+        $productInclTaxWithoutStoreIdWithTaxClassId['expected_tax_details']['tax_amount'] = 0.70;
+        $productInclTaxWithoutStoreIdWithTaxClassId['expected_tax_details']['subtotal'] = 9.30;
+        $productInclTaxWithoutStoreIdWithTaxClassId['expected_tax_details']['applied_taxes'] =
+            $quoteDetailAppliedTaxesBase;
+        $productInclTaxWithoutStoreIdWithTaxClassId['expected_tax_details']['items'] =
+            $productTaxInclExpectedItemWithDefaultProductTaxClass;
 
-        $productInclTaxWithoutStoreIdWithoutTaxClassId['quoteDetailsData']['items'][] = $productTaxInclQuoteDetailItemBase;
-        $productInclTaxWithoutStoreIdWithoutTaxClassId['expectedTaxDetails']['items'] = $productTaxInclExpectedItemWithNoProductTaxClass;
+        $productInclTaxWithoutStoreIdWithoutTaxClassId['quote_details']['items'][] = $productTaxInclQuoteDetailItemBase;
+        $productInclTaxWithoutStoreIdWithoutTaxClassId['expected_tax_details']['items'] =
+            $productTaxInclExpectedItemWithNoProductTaxClass;
 
         return [
             'product incl tax with store id, with tax class id' => $productInclTaxWithStoreIdWithTaxClassId,
@@ -1121,7 +1135,7 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
     public static function calculateTaxRoundingDataProvider()
     {
         $prodRoundingNoTaxInclBase = [
-            'quoteDetailsData' => [
+            'quote_details' => [
                 'shipping_address' => [
                     'postcode' => '55555',
                     'country_id' => 'US',
@@ -1138,14 +1152,14 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
                 ],
                 'customer_tax_class_key' => 'DefaultCustomerClass',
             ],
-            'expectedTaxDetails' => [
+            'expected_tax_details' => [
                 'subtotal' => 15.94,
                 'tax_amount' => 0.0,
                 'discount_tax_compensation_amount' => 0.0,
                 'applied_taxes' => [],
                 'items' => [],
             ],
-            'storeId' => null,
+            'store_id' => null,
         ];
 
         $prodQuoteDetailItemBase = [
@@ -1224,23 +1238,29 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
         $prodWithoutStoreIdWithTaxClassId = $prodRoundingNoTaxInclBase;
         $prodWithoutStoreIdWithoutTaxClassId = $prodRoundingNoTaxInclBase;
 
-        $prodWithStoreIdWithTaxClassId['storeId'] = 1;
-        $prodWithStoreIdWithTaxClassId['quoteDetailsData']['items'][] = $quoteDetailItemWithDefaultProductTaxClass;
-        $prodWithStoreIdWithTaxClassId['expectedTaxDetails']['tax_amount'] = 1.20;
-        $prodWithStoreIdWithTaxClassId['expectedTaxDetails']['applied_taxes'] = $quoteDetailAppliedTaxesBase;
-        $prodWithStoreIdWithTaxClassId['expectedTaxDetails']['items'] = $prodExpectedItemWithDefaultProductTaxClass;
+        $prodWithStoreIdWithTaxClassId['store_id'] = 1;
+        $prodWithStoreIdWithTaxClassId['quote_details']['items'][] = $quoteDetailItemWithDefaultProductTaxClass;
+        $prodWithStoreIdWithTaxClassId['expected_tax_details']['tax_amount'] = 1.20;
+        $prodWithStoreIdWithTaxClassId['expected_tax_details']['applied_taxes'] = $quoteDetailAppliedTaxesBase;
+        $prodWithStoreIdWithTaxClassId['expected_tax_details']['items'] =
+            $prodExpectedItemWithDefaultProductTaxClass;
 
-        $prodWithStoreIdWithoutTaxClassId['storeId'] = 1;
-        $prodWithStoreIdWithoutTaxClassId['quoteDetailsData']['items'][] = $prodQuoteDetailItemBase;
-        $prodWithStoreIdWithoutTaxClassId['expectedTaxDetails']['items'] = $prodExpectedItemWithNoProductTaxClass;
+        $prodWithStoreIdWithoutTaxClassId['store_id'] = 1;
+        $prodWithStoreIdWithoutTaxClassId['quote_details']['items'][] = $prodQuoteDetailItemBase;
+        $prodWithStoreIdWithoutTaxClassId['expected_tax_details']['items'] =
+            $prodExpectedItemWithNoProductTaxClass;
 
-        $prodWithoutStoreIdWithTaxClassId['quoteDetailsData']['items'][] = $quoteDetailItemWithDefaultProductTaxClass;
-        $prodWithoutStoreIdWithTaxClassId['expectedTaxDetails']['tax_amount'] = 1.20;
-        $prodWithoutStoreIdWithTaxClassId['expectedTaxDetails']['applied_taxes'] = $quoteDetailAppliedTaxesBase;
-        $prodWithoutStoreIdWithTaxClassId['expectedTaxDetails']['items'] = $prodExpectedItemWithDefaultProductTaxClass;
+        $prodWithoutStoreIdWithTaxClassId['quote_details']['items'][] =
+            $quoteDetailItemWithDefaultProductTaxClass;
+        $prodWithoutStoreIdWithTaxClassId['expected_tax_details']['tax_amount'] = 1.20;
+        $prodWithoutStoreIdWithTaxClassId['expected_tax_details']['applied_taxes'] =
+            $quoteDetailAppliedTaxesBase;
+        $prodWithoutStoreIdWithTaxClassId['expected_tax_details']['items'] =
+            $prodExpectedItemWithDefaultProductTaxClass;
 
-        $prodWithoutStoreIdWithoutTaxClassId['quoteDetailsData']['items'][] = $prodQuoteDetailItemBase;
-        $prodWithoutStoreIdWithoutTaxClassId['expectedTaxDetails']['items'] = $prodExpectedItemWithNoProductTaxClass;
+        $prodWithoutStoreIdWithoutTaxClassId['quote_details']['items'][] = $prodQuoteDetailItemBase;
+        $prodWithoutStoreIdWithoutTaxClassId['expected_tax_details']['items'] =
+            $prodExpectedItemWithNoProductTaxClass;
 
         return [
             'rounding product with store id, with tax class id' => $prodWithStoreIdWithTaxClassId,
@@ -2094,40 +2114,40 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
 
         return [
             'one product' => [
-                'quoteDetailsData' => $oneProduct,
-                'expectedTaxDetails' => $oneProductResults,
+                'quote_details' => $oneProduct,
+                'expected_tax_details' => $oneProductResults,
             ],
             'weee_product' => [
-                'quoteDetailsData' => $weeeProduct,
-                'expectedTaxDetails' => $weeeProductResults,
+                'quote_details' => $weeeProduct,
+                'expected_tax_details' => $weeeProductResults,
             ],
             'weee_products' => [
-                'quoteDetailsData' => $weeeProducts,
-                'expectedTaxDetails' => $weeeProductsResults,
+                'quote_details' => $weeeProducts,
+                'expected_tax_details' => $weeeProductsResults,
             ],
             'multi weee_products' => [
-                'quoteDetailsData' => $multiWeeeProducts,
-                'expectedTaxDetails' => $multiWeeeProductsResults,
+                'quote_details' => $multiWeeeProducts,
+                'expected_tax_details' => $multiWeeeProductsResults,
             ],
             'one product, tax included' => [
-                'quoteDetailsData' => $oneProductInclTax,
-                'expectedTaxDetails' => $oneProductInclTaxResults,
+                'quote_details' => $oneProductInclTax,
+                'expected_tax_details' => $oneProductInclTaxResults,
             ],
             'one product, tax included but differs from store rate' => [
-                'quoteDetailsData' => $oneProductInclTaxDiffRate,
-                'expectedTaxDetails' => $oneProductInclTaxDiffRateResults,
+                'quote_details' => $oneProductInclTaxDiffRate,
+                'expected_tax_details' => $oneProductInclTaxDiffRateResults,
             ],
             'two products' => [
-                'quoteDetailsData' => $twoProducts,
-                'expectedTaxDetails' => $twoProductsResults,
+                'quote_details' => $twoProducts,
+                'expected_tax_details' => $twoProductsResults,
             ],
             'two products, tax included' => [
-                'quoteDetailsData' => $twoProductsInclTax,
-                'expectedTaxDetails' => $twoProductInclTaxResults,
+                'quote_details' => $twoProductsInclTax,
+                'expected_tax_details' => $twoProductInclTaxResults,
             ],
             'one product with two children' => [
-                'quoteDetailsData' => $oneProductWithChildren,
-                'expectedTaxDetails' => $oneProductWithChildrenResults,
+                'quote_details' => $oneProductWithChildren,
+                'expected_tax_details' => $oneProductWithChildrenResults,
             ],
         ];
     }
@@ -2382,8 +2402,8 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
 
         return [
             'multi rules, multi rows' => [
-                'quoteDetailsData' => $quoteDetails,
-                'expectedTaxDetails' => $results,
+                'quote_details' => $quoteDetails,
+                'expected_tax_details' => $results,
             ],
         ];
     }
@@ -2429,8 +2449,8 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
 
         return [
             'multi rules, multi rows' => [
-                'quoteDetailsData' => $quoteDetails,
-                'expectedTaxDetails' => $results,
+                'quote_details' => $quoteDetails,
+                'expected_tax_details' => $results,
             ],
         ];
     }
@@ -2478,8 +2498,8 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
 
         return [
             'multi rules, multi rows' => [
-                'quoteDetailsData' => $quoteDetails,
-                'expectedTaxDetails' => $results,
+                'quote_details' => $quoteDetails,
+                'expected_tax_details' => $results,
             ],
         ];
     }

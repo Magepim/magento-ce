@@ -49,7 +49,7 @@ class HandlersTest extends TestCase
     /**
      * @return array
      */
-    public static function validConfigDataProvider()
+    public function validConfigDataProvider()
     {
         return [
             'valid' => [
@@ -103,7 +103,7 @@ class HandlersTest extends TestCase
     /**
      * @return array
      */
-    public static function invalidConfigDataProvider()
+    public function invalidConfigDataProvider()
     {
         return [
             'invalid, not an array' => [

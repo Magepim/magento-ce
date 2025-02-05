@@ -95,7 +95,7 @@ class ViewTest extends TestCase
     /**
      * @var MockObject
      */
-    protected static $invoiceMock;
+    protected $invoiceMock;
 
     /**
      * @var Config|MockObject
@@ -142,7 +142,7 @@ class ViewTest extends TestCase
      */
     protected function setUp(): void
     {
-        self::$invoiceMock = $this->getMockBuilder(Invoice::class)
+        $this->invoiceMock = $this->getMockBuilder(Invoice::class)
             ->disableOriginalConstructor()
             ->getMock();
         $this->creditmemoMock = $this->getMockBuilder(Creditmemo::class)
@@ -324,11 +324,11 @@ class ViewTest extends TestCase
     /**
      * @return array
      */
-    public static function executeDataProvider()
+    public function executeDataProvider()
     {
         return [
             [false],
-            [self::$invoiceMock]
+            [$this->invoiceMock]
         ];
     }
 

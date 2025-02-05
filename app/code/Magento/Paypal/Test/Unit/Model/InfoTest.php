@@ -156,7 +156,7 @@ class InfoTest extends TestCase
      *
      * @return array
      */
-    public static function additionalInfoDataProvider()
+    public function additionalInfoDataProvider()
     {
         return include __DIR__ . '/_files/additional_info_data.php';
     }
@@ -166,7 +166,7 @@ class InfoTest extends TestCase
      *
      * @return array
      */
-    public static function additionalInfoPublicDataProvider()
+    public function additionalInfoPublicDataProvider()
     {
         return [
             [
@@ -215,7 +215,7 @@ class InfoTest extends TestCase
      *
      * @return array
      */
-    public static function importToPaymentDataProvider()
+    public function importToPaymentDataProvider()
     {
         return [
             [

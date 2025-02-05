@@ -71,7 +71,7 @@ class AvailabilityFlagTest extends TestCase
     /**
      * @return array
      */
-    public static function isEnabledDataProvider()
+    public function isEnabledDataProvider()
     {
         return [
             [

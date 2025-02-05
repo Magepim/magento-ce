@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2013 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 namespace Magento\Backend\Block\Widget;
 
@@ -109,7 +109,7 @@ class Context extends \Magento\Backend\Block\Template\Context
         \Magento\Framework\Code\NameBuilder $nameBuilder,
         Button\ButtonList $buttonList,
         Button\ToolbarInterface $toolbar,
-        ?LockGuardedCacheLoader $lockQuery = null
+        LockGuardedCacheLoader $lockQuery = null
     ) {
         parent::__construct(
             $request,

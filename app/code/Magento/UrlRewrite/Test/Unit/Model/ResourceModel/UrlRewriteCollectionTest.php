@@ -115,7 +115,7 @@ class UrlRewriteCollectionTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderForTestAddStoreIfStoreIsArray()
+    public function dataProviderForTestAddStoreIfStoreIsArray()
     {
         return [
             [[112, 113], false, [112, 113]],
@@ -146,7 +146,7 @@ class UrlRewriteCollectionTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderForTestAddStoreFilterIfStoreIsInt()
+    public function dataProviderForTestAddStoreFilterIfStoreIsInt()
     {
         return [
             [112, false, [112]],

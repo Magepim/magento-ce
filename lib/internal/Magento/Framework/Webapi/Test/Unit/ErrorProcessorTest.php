@@ -269,7 +269,7 @@ class ErrorProcessorTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderForSendResponseExceptions()
+    public function dataProviderForSendResponseExceptions()
     {
         return [
             'NoSuchEntityException' => [

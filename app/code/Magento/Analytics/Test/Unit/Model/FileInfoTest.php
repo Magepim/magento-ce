@@ -51,7 +51,7 @@ class FileInfoTest extends TestCase
     /**
      * @return array
      */
-    public static function constructDataProvider()
+    public function constructDataProvider()
     {
         return [
             'Degenerate object' => [null, null],

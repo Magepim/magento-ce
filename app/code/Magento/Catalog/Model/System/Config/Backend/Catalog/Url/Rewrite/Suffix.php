@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2013 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 
 /**
@@ -82,8 +82,8 @@ class Suffix extends \Magento\Framework\App\Config\Value
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Framework\App\ResourceConnection $appResource,
         \Magento\UrlRewrite\Model\UrlFinderInterface $urlFinder,
-        ?\Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
-        ?\Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
+        \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
+        \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = []
     ) {
         parent::__construct($context, $registry, $config, $cacheTypeList, $resource, $resourceCollection, $data);
@@ -99,7 +99,6 @@ class Suffix extends \Magento\Framework\App\Config\Value
      *
      * @return \Magento\Framework\App\Config
      * @deprecated 102.0.0
-     * @see Updated deprecation doc annotations
      */
     private function getAppConfig()
     {
@@ -123,8 +122,6 @@ class Suffix extends \Magento\Framework\App\Config\Value
     }
 
     /**
-     * After save implementation
-     *
      * @return $this
      */
     public function afterSave()
@@ -142,8 +139,7 @@ class Suffix extends \Magento\Framework\App\Config\Value
     }
 
     /**
-     * @inheritdoc
-     *
+     * {@inheritdoc}
      * @since 102.0.0
      */
     public function afterDeleteCommit()
@@ -213,8 +209,6 @@ class Suffix extends \Magento\Framework\App\Config\Value
     }
 
     /**
-     * Get store Ids implementation
-     *
      * @return array|null
      */
     protected function getStoreIds()
@@ -233,8 +227,6 @@ class Suffix extends \Magento\Framework\App\Config\Value
     }
 
     /**
-     * Get Override StoreIds implementation
-     *
      * @param array $storeIds
      * @return array
      */

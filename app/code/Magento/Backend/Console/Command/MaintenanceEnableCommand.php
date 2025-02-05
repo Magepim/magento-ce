@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2015 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 namespace Magento\Backend\Console\Command;
 
@@ -10,8 +10,6 @@ namespace Magento\Backend\Console\Command;
  */
 class MaintenanceEnableCommand extends AbstractMaintenanceCommand
 {
-    public const NAME = 'maintenance:enable';
-
     /**
      * Initialization of the command
      *
@@ -19,7 +17,7 @@ class MaintenanceEnableCommand extends AbstractMaintenanceCommand
      */
     protected function configure(): void
     {
-        $this->setName(self::NAME)->setDescription('Enables maintenance mode');
+        $this->setName('maintenance:enable')->setDescription('Enables maintenance mode');
 
         parent::configure();
     }

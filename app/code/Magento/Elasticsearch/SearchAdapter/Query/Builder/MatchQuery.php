@@ -16,8 +16,6 @@ use Magento\Framework\Search\Request\QueryInterface as RequestQueryInterface;
 
 /**
  * Builder for match query
- * @deprecated Elasticsearch is no longer supported by Adobe
- * @see this class will be responsible for ES only
  */
 class MatchQuery implements QueryInterface
 {

@@ -75,7 +75,7 @@ class AttributeLoaderTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expectedNumOfAttributesByTable, count($attributesByTable2));
     }
 
-    public static function loadAllAttributesDataProvider()
+    public function loadAllAttributesDataProvider()
     {
         /** @var \Magento\Eav\Model\Entity\Type $entityType */
         $entityType = Bootstrap::getObjectManager()->create(\Magento\Eav\Model\Entity\Type::class)

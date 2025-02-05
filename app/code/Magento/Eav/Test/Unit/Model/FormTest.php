@@ -155,7 +155,7 @@ class FormTest extends TestCase
      *
      * @return array
      */
-    public static function validateDataProvider()
+    public function validateDataProvider()
     {
         return [
             'is_valid' => [true, true, null],

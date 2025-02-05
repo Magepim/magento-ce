@@ -346,16 +346,7 @@ class FilePermissionsTest extends TestCase
     {
         $this->directoryWriteMock
             ->method('isExist')
-            ->willReturnCallback(function () use (&$callCount) {
-                $callCount++;
-                if ($callCount === 1) {
-                    return true;
-                } elseif ($callCount === 2) {
-                    return false;
-                } elseif ($callCount === 3) {
-                    return true;
-                }
-            });
+            ->willReturnOnConsecutiveCalls(true, false, true);
         $this->directoryWriteMock
             ->method('isWritable')
             ->willReturn(true);

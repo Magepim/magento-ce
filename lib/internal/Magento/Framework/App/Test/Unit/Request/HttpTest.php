@@ -285,7 +285,7 @@ class HttpTest extends TestCase
     /**
      * @return array
      */
-    public static function getDistroBaseUrlPathDataProvider()
+    public function getDistroBaseUrlPathDataProvider()
     {
         return [
             [null, '/'],
@@ -302,7 +302,7 @@ class HttpTest extends TestCase
     /**
      * @return array
      */
-    public static function serverVariablesProvider()
+    public function serverVariablesProvider()
     {
         $returnValue = [];
         $defaultServerData = [
@@ -426,7 +426,7 @@ class HttpTest extends TestCase
     /**
      * @return array
      */
-    public static function httpSafeMethodProvider()
+    public function httpSafeMethodProvider()
     {
         return [
             'Test 1' => ['GET'],
@@ -439,7 +439,7 @@ class HttpTest extends TestCase
     /**
      * @return array
      */
-    public static function httpNotSafeMethodProvider()
+    public function httpNotSafeMethodProvider()
     {
         return [
             'Test 1' => ['POST'],
@@ -454,7 +454,7 @@ class HttpTest extends TestCase
     /**
      * @return array
      */
-    public static function isSecureDataProvider()
+    public function isSecureDataProvider()
     {
         /**
          * Data structure:
@@ -512,7 +512,7 @@ class HttpTest extends TestCase
     /**
      * @return array
      */
-    public static function setPathInfoDataProvider()
+    public function setPathInfoDataProvider()
     {
         return [
             ['http://svr.com/', '', ''],

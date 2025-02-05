@@ -66,7 +66,7 @@ class NotEavAttributeTest extends TestCase
     /**
      * @return array
      */
-    public static function getFieldNameProvider()
+    public function getFieldNameProvider()
     {
         return [
             ['code', true, [], ''],

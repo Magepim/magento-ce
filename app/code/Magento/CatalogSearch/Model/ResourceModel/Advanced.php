@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2011 Adobe
- * All rights reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 namespace Magento\CatalogSearch\Model\ResourceModel;
 

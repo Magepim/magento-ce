@@ -70,7 +70,7 @@ class LocaleQuantityProcessorTest extends TestCase
     /**
      * @return array
      */
-    public static function processDataProvider()
+    public function processDataProvider()
     {
         return [
             'positive' => [10.00, 10.00],

@@ -126,7 +126,7 @@ class VersionTest extends TestCase
      *
      * @return array
      */
-    public static function processProvider()
+    public function processProvider()
     {
         return [
             "post" => [true],

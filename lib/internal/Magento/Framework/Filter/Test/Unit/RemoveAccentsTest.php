@@ -28,7 +28,7 @@ class RemoveAccentsTest extends TestCase
     /**
      * @return array
      */
-    public static function removeAccentsDataProvider()
+    public function removeAccentsDataProvider()
     {
         return [
             'general conversion' => ['ABCDEFGHIJKLMNOPQRSTUVWXYZ', false, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'],

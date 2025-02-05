@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2023 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
@@ -110,17 +110,21 @@ class ProductListPluginTest extends TestCase
         $select = $this->createMock(Select::class);
         $select->expects($this->once())
             ->method('from')
-            ->with(['e' => 'catalog_product_entity'], ['entity_table.entity_id'])
+            ->with(['e' => 'catalog_product_entity'], ['link_table.parent_id'])
             ->willReturn($select);
-        $select->expects($this->exactly(2))
+        $select->expects($this->once())
             ->method('joinInner')
-            ->willReturn($select);
+            ->with(
+                ['link_table' => 'catalog_product_super_link'],
+                'link_table.product_id = e.' . $linkField,
+                []
+            )->willReturn($select);
         $select->expects($this->once())->method('where')->with('link_table.product_id IN (?)', [1, 2]);
         $connection = $this->createMock(AdapterInterface::class);
         $connection->expects($this->once())->method('select')->willReturn($select);
         $connection->expects($this->once())->method('fetchCol')->willReturn([2]);
         $this->resource->expects($this->once())->method('getConnection')->willReturn($connection);
-        $this->resource->expects($this->exactly(3))
+        $this->resource->expects($this->exactly(2))
             ->method('getTableName')
             ->willReturnCallback(fn($param) => match ([$param]) {
                 ['catalog_product_entity'] => 'catalog_product_entity',

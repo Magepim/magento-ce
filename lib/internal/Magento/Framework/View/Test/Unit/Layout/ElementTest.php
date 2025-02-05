@@ -27,7 +27,7 @@ class ElementTest extends TestCase
     /**
      * @return array
      */
-    public static function elementNameDataProvider()
+    public function elementNameDataProvider()
     {
         return [
             ['<block name="name" />', 'name'],
@@ -41,7 +41,7 @@ class ElementTest extends TestCase
     /**
      * @return array
      */
-    public static function cacheableDataProvider()
+    public function cacheableDataProvider()
     {
         return [
             ['<containter name="name" />', true],

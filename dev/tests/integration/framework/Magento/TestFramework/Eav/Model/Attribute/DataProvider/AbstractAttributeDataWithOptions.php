@@ -95,7 +95,7 @@ abstract class AbstractAttributeDataWithOptions extends AbstractBaseAttributeDat
         $frontendInput = static::getFrontendInput();
         return [
             "{$frontendInput}_update_options" => [
-                'postData' => [
+                'post_data' => [
                     'options_array' => [
                         'option_1' => [
                             'order' => '5',
@@ -122,7 +122,7 @@ abstract class AbstractAttributeDataWithOptions extends AbstractBaseAttributeDat
                 ],
             ],
             "{$frontendInput}_delete_options" => [
-                'postData' => [
+                'post_data' => [
                     'options_array' => [
                         'option_1' => [
                             'value' => [],

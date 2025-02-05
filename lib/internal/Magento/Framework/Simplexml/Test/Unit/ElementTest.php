@@ -121,7 +121,7 @@ XML;
     /**
      * @return array
      */
-    public static function setAttributeDataProvider()
+    public function setAttributeDataProvider()
     {
         return [
             ['name', 'test'],

@@ -145,7 +145,7 @@ class InstantPurchaseTest extends TestCase
      *
      * @return array
      */
-    public static function getSectionDataProvider()
+    public function getSectionDataProvider()
     {
         return [
             'No Login and available instant purchase' => [

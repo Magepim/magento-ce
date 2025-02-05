@@ -132,7 +132,7 @@ class StoreValidatorTest extends TestCase
      *
      * @return array
      */
-    public static function getConfigDataProvider(): array
+    public function getConfigDataProvider(): array
     {
         return [
             [

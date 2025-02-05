@@ -116,7 +116,7 @@ class ConfigOptionsListTest extends TestCase
     /**
      * @return array
      */
-    public static function validateDataProvider()
+    public function validateDataProvider()
     {
         return [
             'Local File Storage Before Deployment Config Exists' => [
@@ -224,7 +224,7 @@ class ConfigOptionsListTest extends TestCase
     /**
      * @return array
      */
-    public static function createConfigProvider()
+    public function createConfigProvider()
     {
         return [
             'Remote Storage Options Missing and Remote Storage Deployment Config Present' => [

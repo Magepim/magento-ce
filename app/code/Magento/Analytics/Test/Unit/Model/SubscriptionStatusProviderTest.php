@@ -89,17 +89,17 @@ class SubscriptionStatusProviderTest extends TestCase
     /**
      * @return array
      */
-    public static function getStatusShouldBeFailedDataProvider()
+    public function getStatusShouldBeFailedDataProvider()
     {
         return [
             'Subscription update doesn\'t active' => [
-                'flagManagerData' => [
+                'Flag Manager data mapping' => [
                     [SubscriptionUpdateHandler::PREVIOUS_BASE_URL_FLAG_CODE, null],
                     [SubscriptionHandler::ATTEMPTS_REVERSE_COUNTER_FLAG_CODE, null]
                 ],
             ],
             'Subscription update is active' => [
-                'flagManagerData' => [
+                'Flag Manager data mapping' => [
                     [SubscriptionUpdateHandler::PREVIOUS_BASE_URL_FLAG_CODE, 'http://store.com'],
                     [SubscriptionHandler::ATTEMPTS_REVERSE_COUNTER_FLAG_CODE, null]
                 ],
@@ -129,25 +129,25 @@ class SubscriptionStatusProviderTest extends TestCase
     /**
      * @return array
      */
-    public static function getStatusShouldBePendingDataProvider()
+    public function getStatusShouldBePendingDataProvider()
     {
         return [
             'Subscription update doesn\'t active and the token does not exist' => [
-                'flagManagerData' => [
+                'Flag Manager data mapping' => [
                     [SubscriptionUpdateHandler::PREVIOUS_BASE_URL_FLAG_CODE, null],
                     [SubscriptionHandler::ATTEMPTS_REVERSE_COUNTER_FLAG_CODE, 45]
                 ],
                 'isTokenExist' => false,
             ],
             'Subscription update is active and the token does not exist' => [
-                'flagManagerData' => [
+                'Flag Manager data mapping' => [
                     [SubscriptionUpdateHandler::PREVIOUS_BASE_URL_FLAG_CODE, 'http://store.com'],
                     [SubscriptionHandler::ATTEMPTS_REVERSE_COUNTER_FLAG_CODE, 45]
                 ],
                 'isTokenExist' => false,
             ],
             'Subscription update is active and token exist' => [
-                'flagManagerData' => [
+                'Flag Manager data mapping' => [
                     [SubscriptionUpdateHandler::PREVIOUS_BASE_URL_FLAG_CODE, 'http://store.com'],
                     [SubscriptionHandler::ATTEMPTS_REVERSE_COUNTER_FLAG_CODE, null]
                 ],

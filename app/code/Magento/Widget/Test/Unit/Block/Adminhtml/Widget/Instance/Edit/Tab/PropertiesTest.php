@@ -66,7 +66,7 @@ class PropertiesTest extends TestCase
     /**
      * @return array
      */
-    public static function isHiddenDataProvider()
+    public function isHiddenDataProvider()
     {
         return [
             [

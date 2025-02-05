@@ -85,7 +85,7 @@ class LayoutUpdateValidatorTest extends TestCase
         self::assertNull($this->validator->validate($page));
     }
 
-    public static function validationSetDataProvider()
+    public function validationSetDataProvider()
     {
         $layoutError = 'Layout update is invalid';
         $customLayoutError = 'Custom layout update is invalid';

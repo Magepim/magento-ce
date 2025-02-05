@@ -226,7 +226,7 @@ class FixedProductTaxResolverTest extends TestCase
     /**
      * @return array
      */
-    public static function shouldReturnResultDataProvider(): array
+    public function shouldReturnResultDataProvider(): array
     {
         return [
             [

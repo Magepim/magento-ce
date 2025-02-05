@@ -94,7 +94,7 @@ class ChangeDetectorTest extends TestCase
     /**
      * @return array
      */
-    public static function hasChangesDataProvider()
+    public function hasChangesDataProvider()
     {
         return [
             [

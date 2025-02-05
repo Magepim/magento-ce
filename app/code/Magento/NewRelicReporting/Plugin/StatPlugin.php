@@ -64,7 +64,6 @@ class StatPlugin
         $timerName = current($args);
 
         if ($this->isCronJob($timerName)) {
-            $this->newRelicWrapper->startBackgroundTransaction();
             $this->newRelicWrapper->setTransactionName(
                 sprintf('Cron %s', $timerName)
             );

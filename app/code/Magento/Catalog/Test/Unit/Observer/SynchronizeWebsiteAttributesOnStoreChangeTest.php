@@ -37,7 +37,7 @@ class SynchronizeWebsiteAttributesOnStoreChangeTest extends TestCase
     /**
      * @return array
      */
-    public static function executeInvalidStoreDataProvider()
+    public function executeInvalidStoreDataProvider()
     {
         return [
             [
@@ -47,12 +47,11 @@ class SynchronizeWebsiteAttributesOnStoreChangeTest extends TestCase
     }
 
     /**
-     * @param \Closure $store
+     * @param Store $store
      * @dataProvider executeStoreHasNoChangesDataProvider
      */
-    public function testExecuteStoreHasNoChanges(\Closure $store)
+    public function testExecuteStoreHasNoChanges(Store $store)
     {
-        $store = $store($this);
         $eventObserver = new Observer([
             'data_object' => $store,
         ]);
@@ -66,7 +65,10 @@ class SynchronizeWebsiteAttributesOnStoreChangeTest extends TestCase
         $this->assertNull($result);
     }
 
-    protected function getMockForStoreClass()
+    /**
+     * @return array
+     */
+    public function executeStoreHasNoChangesDataProvider()
     {
         $store = $this->getMockBuilder(Store::class)
             ->disableOriginalConstructor()
@@ -85,15 +87,6 @@ class SynchronizeWebsiteAttributesOnStoreChangeTest extends TestCase
         $store->expects($this->never())
             ->method('getOrigData');
 
-        return $store;
-    }
-
-    /**
-     * @return array
-     */
-    public static function executeStoreHasNoChangesDataProvider()
-    {
-        $store = static fn (self $testCase) => $testCase->getMockForStoreClass();
         return [
             [
                 $store,
@@ -102,13 +95,11 @@ class SynchronizeWebsiteAttributesOnStoreChangeTest extends TestCase
     }
 
     /**
-     * @param \Closure $store
+     * @param Store $store
      * @dataProvider executeWebsiteIdIsNoChangedAndNotNewDataProvider
      */
-    public function testExecuteWebsiteIdIsNoChangedAndNotNew(\Closure $store)
+    public function testExecuteWebsiteIdIsNoChangedAndNotNew(Store $store)
     {
-        $store = $store($this);
-
         $eventObserver = new Observer([
             'data_object' => $store,
         ]);
@@ -125,9 +116,44 @@ class SynchronizeWebsiteAttributesOnStoreChangeTest extends TestCase
     /**
      * @return array
      */
-    public static function executeWebsiteIdIsNoChangedAndNotNewDataProvider()
+    public function executeWebsiteIdIsNoChangedAndNotNewDataProvider()
     {
-        $store = static fn (self $testCase) => $testCase->getMockForStoreNew(false);
+        $sameWebsiteId = 1;
+        $store = $this->getMockBuilder(Store::class)
+            ->disableOriginalConstructor()
+            ->onlyMethods([
+                'hasDataChanges',
+                'getOrigData',
+                'getWebsiteId',
+                'isObjectNew',
+            ])
+            ->getMock();
+
+        $store->expects($this->once())
+            ->method('hasDataChanges')
+            ->willReturn(
+                true
+            );
+
+        $store->expects($this->once())
+            ->method('getOrigData')
+            ->with('website_id')
+            ->willReturn(
+                $sameWebsiteId
+            );
+
+        $store->expects($this->once())
+            ->method('getWebsiteId')
+            ->willReturn(
+                $sameWebsiteId
+            );
+
+        $store->expects($this->once())
+            ->method('isObjectNew')
+            ->willReturn(
+                false
+            );
+
         return [
             [
                 $store,
@@ -136,12 +162,11 @@ class SynchronizeWebsiteAttributesOnStoreChangeTest extends TestCase
     }
 
     /**
-     * @param \Closure $store
+     * @param Store $store
      * @dataProvider executeSuccessDataProvider
      */
-    public function testExecuteSuccess(\Closure $store)
+    public function testExecuteSuccess(Store $store)
     {
-        $store = $store($this);
         $eventObserver = new Observer([
             'data_object' => $store,
         ]);
@@ -155,7 +180,10 @@ class SynchronizeWebsiteAttributesOnStoreChangeTest extends TestCase
         $this->assertNull($result);
     }
 
-    protected function getMockForStoreNew($return)
+    /**
+     * @return array
+     */
+    public function executeSuccessDataProvider()
     {
         $sameWebsiteId = 1;
         $storeNew = $this->getMockBuilder(Store::class)
@@ -190,17 +218,11 @@ class SynchronizeWebsiteAttributesOnStoreChangeTest extends TestCase
         $storeNew->expects($this->once())
             ->method('isObjectNew')
             ->willReturn(
-                $return
+                true
             );
 
-        return $storeNew;
-    }
-
-    protected function getStoreChangeWebsite()
-    {
         $sameWebsiteId = 1;
         $newWebsiteId = 2;
-
         $storeChangedWebsite = $this->getMockBuilder(Store::class)
             ->disableOriginalConstructor()
             ->onlyMethods([
@@ -235,17 +257,6 @@ class SynchronizeWebsiteAttributesOnStoreChangeTest extends TestCase
             ->willReturn(
                 false
             );
-
-        return $storeChangedWebsite;
-    }
-    /**
-     * @return array
-     */
-    public static function executeSuccessDataProvider()
-    {
-        $storeNew = static fn (self $testCase) => $testCase->getMockForStoreNew(true);
-
-        $storeChangedWebsite = static fn (self $testCase) => $testCase->getStoreChangeWebsite();
 
         return [
             [

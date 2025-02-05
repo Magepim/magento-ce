@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2018 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
@@ -59,7 +59,7 @@ class Collection implements ResetAfterRequestInterface
     public function __construct(
         CollectionFactory $linkCollectionFactory,
         EnumLookup $enumLookup,
-        ?Uid $uidEncoder = null
+        Uid $uidEncoder = null
     ) {
         $this->linkCollectionFactory = $linkCollectionFactory;
         $this->enumLookup = $enumLookup;

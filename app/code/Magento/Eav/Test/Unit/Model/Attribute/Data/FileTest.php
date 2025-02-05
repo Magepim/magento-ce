@@ -97,7 +97,7 @@ class FileTest extends TestCase
     /**
      * @return array
      */
-    public static function outputValueDataProvider()
+    public function outputValueDataProvider()
     {
         return [
             [
@@ -166,7 +166,7 @@ class FileTest extends TestCase
      * @return array
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public static function validateValueDataProvider()
+    public function validateValueDataProvider()
     {
         return [
             [

@@ -166,7 +166,7 @@ class CustomerRepository implements CustomerRepositoryInterface
         JoinProcessorInterface $extensionAttributesJoinProcessor,
         CollectionProcessorInterface $collectionProcessor,
         NotificationStorage $notificationStorage,
-        ?DelegatedStorage $delegatedStorage = null,
+        DelegatedStorage $delegatedStorage = null,
         ?GroupRepositoryInterface $groupRepository = null
     ) {
         $this->customerFactory = $customerFactory;
@@ -577,16 +577,11 @@ class CustomerRepository implements CustomerRepositoryInterface
         CustomerInterface $customer,
         string $defaultAddressType
     ): void {
-        $defaultAddressId = $defaultAddressType === CustomerInterface::DEFAULT_BILLING ?
-            (int) $customer->getDefaultBilling() : (int) $customer->getDefaultShipping();
-
+        $addressId = $defaultAddressType === CustomerInterface::DEFAULT_BILLING ? $customer->getDefaultBilling()
+            : $customer->getDefaultShipping();
         if ($customer->getAddresses()) {
             foreach ($customer->getAddresses() as $address) {
-                $addressArray = $address->__toArray();
-                $addressId = (int) $address->getId();
-                if (!empty($addressArray[$defaultAddressType])
-                    || empty($addressId)
-                    || $defaultAddressId === $addressId) {
+                if ((int) $addressId === (int) $address->getId()) {
                     return;
                 }
             }

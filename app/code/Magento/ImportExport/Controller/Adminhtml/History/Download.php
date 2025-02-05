@@ -3,18 +3,11 @@
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-
-declare(strict_types=1);
-
 namespace Magento\ImportExport\Controller\Adminhtml\History;
 
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\App\Filesystem\DirectoryList;
-use Magento\Framework\Controller\ResultInterface;
-use Magento\ImportExport\Helper\Report;
 use Magento\ImportExport\Model\Import;
-use Magento\Framework\Controller\Result\Redirect;
-use Magento\Framework\App\ResponseInterface;
 
 /**
  * Download history controller
@@ -51,27 +44,20 @@ class Download extends \Magento\ImportExport\Controller\Adminhtml\History implem
     /**
      * Download backup action
      *
-     * @return ResponseInterface|Redirect|ResultInterface
-     * @throws \Exception
+     * @return void|\Magento\Backend\App\Action
      */
     public function execute()
     {
-        $resultRedirect = $this->resultRedirectFactory->create();
-        $resultRedirect->setPath('*/history');
-
-        $fileName = $this->getRequest()->getParam('filename');
-
-        if (empty($fileName)) {
-            return $resultRedirect;
-        }
-
         // phpcs:ignore Magento2.Functions.DiscouragedFunction
-        $fileName = basename($fileName);
+        $fileName = basename($this->getRequest()->getParam('filename'));
 
-        /** @var Report $reportHelper */
-        $reportHelper = $this->_objectManager->get(Report::class);
+        /** @var \Magento\ImportExport\Helper\Report $reportHelper */
+        $reportHelper = $this->_objectManager->get(\Magento\ImportExport\Helper\Report::class);
 
         if (!$reportHelper->importFileExists($fileName)) {
+            /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
+            $resultRedirect = $this->resultRedirectFactory->create();
+            $resultRedirect->setPath('*/history');
             return $resultRedirect;
         }
 

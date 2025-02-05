@@ -75,7 +75,7 @@ class EnabledTest extends TestCase
      *
      * @return array
      */
-    public static function methodsDataProvider()
+    public function methodsDataProvider()
     {
         return [
             [['allow_multiple_address' => 1], true],

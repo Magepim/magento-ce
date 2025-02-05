@@ -76,7 +76,7 @@ class ProductLinksTest extends TestCase
     /**
      * @return array
      */
-    public static function stockStatusDataProvider()
+    public function stockStatusDataProvider()
     {
         return [
             [0, 1],

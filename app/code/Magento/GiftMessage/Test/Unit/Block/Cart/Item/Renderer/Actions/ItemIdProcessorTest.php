@@ -46,7 +46,7 @@ class ItemIdProcessorTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderProcess()
+    public function dataProviderProcess()
     {
         return [
             [

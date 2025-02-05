@@ -137,7 +137,7 @@ class ArrayBackendTest extends TestCase
     /**
      * @return array
      */
-    public static function beforeSaveDataProvider(): array
+    public function beforeSaveDataProvider(): array
     {
         return [
             [

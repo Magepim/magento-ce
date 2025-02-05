@@ -1,7 +1,9 @@
 <?php
 /**
- * Copyright 2011 Adobe
- * All Rights Reserved.
+ * Cache configuration model. Provides cache configuration data to the application
+ *
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 namespace Magento\Framework\Cache;
 
@@ -21,7 +23,7 @@ class Config implements ConfigInterface
     }
 
     /**
-     * @inheritDoc
+     * {inheritdoc}
      *
      * @return array
      */
@@ -31,7 +33,7 @@ class Config implements ConfigInterface
     }
 
     /**
-     * @inheritDoc
+     * {inheritdoc}
      *
      * @param string $type
      * @return array

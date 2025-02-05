@@ -86,7 +86,7 @@ class ImageTest extends TestCase
     /**
      * @return array
      */
-    public static function validateValueDataProvider()
+    public function validateValueDataProvider()
     {
         return [
             [

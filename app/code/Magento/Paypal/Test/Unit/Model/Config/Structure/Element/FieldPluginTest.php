@@ -76,7 +76,7 @@ class FieldPluginTest extends TestCase
     /**
      * @return array
      */
-    public static function afterGetConfigPathDataProvider()
+    public function afterGetConfigPathDataProvider()
     {
         return [
             ['payment_us/group/field', 'payment/group/field'],

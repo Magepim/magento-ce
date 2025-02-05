@@ -32,25 +32,25 @@ class CsvfileTest extends TestCase
     /**
      * @return array
      */
-    public static function constructorProvider()
+    public function constructorProvider()
     {
         return [
             'Default config' => [
                 'config' => [],
-                'expectedFilePath' => '/var/log/profiler.csv',
-                'expectedDelimiter' => ',',
-                'expectedEnclosure' => '"',
+                'filePath' => '/var/log/profiler.csv',
+                'delimiter' => ',',
+                'enclosure' => '"',
             ],
             'Custom config' => [
                 'config' => [
                     'baseDir' => '/var/www/project/',
                     'filePath' => '/log/example.csv',
-                    'expectedDelimiter' => "\t",
-                    'expectedEnclosure' => '"',
+                    'delimiter' => "\t",
+                    'enclosure' => '"',
                 ],
-                'expectedFilePath' => '/var/www/project/log/example.csv',
-                'expectedDelimiter' => "\t",
-                'expectedEnclosure' => '"',
+                'filePath' => '/var/www/project/log/example.csv',
+                'delimiter' => "\t",
+                'enclosure' => '"',
             ]
         ];
     }

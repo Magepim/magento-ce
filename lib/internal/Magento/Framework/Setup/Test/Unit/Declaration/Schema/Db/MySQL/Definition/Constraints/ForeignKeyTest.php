@@ -127,7 +127,7 @@ class ForeignKeyTest extends TestCase
     /**
      * @return array
      */
-    public static function definitionDataProvider()
+    public function definitionDataProvider()
     {
         return [
             [
@@ -136,7 +136,7 @@ class ForeignKeyTest extends TestCase
                     . 'INDEX `TEST_INDEX` (`col_name`),'
                     . 'CONSTRAINT `fk_name` FOREIGN KEY (`col_name`) '
                     . 'REFERENCES `ref_table` (`ref_col_name`)  ON DELETE CASCADE',
-                'expectedDefinition' => [
+                'excpectedDefiniton' => [
                     'fk_name' => [
                         'type' => Reference::TYPE,
                         'name' => 'fk_name',
@@ -153,7 +153,7 @@ class ForeignKeyTest extends TestCase
                     . 'INDEX `TEST_INDEX` (`col_name`),'
                     . 'CONSTRAINT `fk_name` FOREIGN KEY(`col_name`)'
                     . 'REFERENCES `ref_table`(`ref_col_name`)ON DELETE NO ACTION',
-                'expectedDefinition' => [
+                'excpectedDefiniton' => [
                     'fk_name' => [
                         'type' => Reference::TYPE,
                         'name' => 'fk_name',
@@ -170,7 +170,7 @@ class ForeignKeyTest extends TestCase
                     . 'INDEX `TEST_INDEX` (`col_name`),'
                     . 'CONSTRAINT `fk_name` FOREIGN KEY(`column_name`)'
                     . 'REFERENCES `ref_table`(`ref_col_name`)ON DELETE SET DEFAULT',
-                'expectedDefinition' => [
+                'excpectedDefiniton' => [
                     'fk_name' => [
                         'type' => Reference::TYPE,
                         'name' => 'fk_name',
@@ -187,7 +187,7 @@ class ForeignKeyTest extends TestCase
                     . 'INDEX `TEST_INDEX` (`col_name`),'
                     . 'CONSTRAINT `fk_name` FOREIGN KEY(`column_name`)'
                     . 'REFERENCES `ref_table`(`ref_col_name`)ON DELETE SET NULL',
-                'expectedDefinition' => [
+                'excpectedDefiniton' => [
                     'fk_name' => [
                         'type' => Reference::TYPE,
                         'name' => 'fk_name',
@@ -204,7 +204,7 @@ class ForeignKeyTest extends TestCase
                     . 'INDEX `TEST_INDEX` (`col_name`),'
                     . 'CONSTRAINT `fk_name` FOREIGN KEY(`column_name`)'
                     . 'REFERENCES `ref_table`(`ref_col_name`)ON DELETE RESTRICT ON UPDATE RESTRICT',
-                'expectedDefinition' => [
+                'excpectedDefiniton' => [
                     'fk_name' => [
                         'type' => Reference::TYPE,
                         'name' => 'fk_name',

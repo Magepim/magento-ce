@@ -177,12 +177,12 @@ class BlockTest extends TestCase
     /**
      * @return array
      */
-    public static function processBlockDataProvider()
+    public function processBlockDataProvider()
     {
         return [
             [
                 'block',
-                self::once(),
+                $this->once(),
                 '',
                 [
                     'acl' => [
@@ -192,14 +192,14 @@ class BlockTest extends TestCase
                         ],
                     ],
                 ],
-                self::once(),
-                self::once(),
+                $this->once(),
+                $this->once(),
                 'acl',
                 'test',
             ],
             [
                 'block',
-                self::once(),
+                $this->once(),
                 'config_path',
                 [
                     'acl' => [
@@ -215,14 +215,14 @@ class BlockTest extends TestCase
                         ],
                     ],
                 ],
-                self::once(),
-                self::once(),
+                $this->once(),
+                $this->once(),
                 'aclResource',
                 'test',
             ],
             [
                 'page',
-                self::never(),
+                $this->never(),
                 '',
                 [
                     'acl' => [
@@ -238,8 +238,8 @@ class BlockTest extends TestCase
                         ],
                     ],
                 ],
-                self::never(),
-                self::never(),
+                $this->never(),
+                $this->never(),
                 'aclResource',
                 'test',
             ],
@@ -326,13 +326,13 @@ class BlockTest extends TestCase
     /**
      * @return array
      */
-    public static function processReferenceDataProvider()
+    public function processReferenceDataProvider()
     {
         return [
-            ['referenceBlock', 'false', self::once(), self::once(), self::never()],
-            ['referenceBlock', 'true', self::never(), self::never(), self::once()],
-            ['page', 'false', self::never(), self::never(), self::never()],
-            ['page', 'true', self::never(), self::never(), self::never()],
+            ['referenceBlock', 'false', $this->once(), $this->once(), $this->never()],
+            ['referenceBlock', 'true', $this->never(), $this->never(), $this->once()],
+            ['page', 'false', $this->never(), $this->never(), $this->never()],
+            ['page', 'true', $this->never(), $this->never(), $this->never()],
         ];
     }
 }

@@ -75,7 +75,7 @@ class SalesEventQuoteMergeTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderGiftMessageId(): array
+    public function dataProviderGiftMessageId(): array
     {
         return [
             [null],

@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2017 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 
 namespace Magento\Catalog\Ui\DataProvider\Product\Listing\Collector;
@@ -30,7 +30,7 @@ use Magento\Framework\View\DesignLoader;
 class Image implements ProductRenderCollectorInterface
 {
     /** Key for image information access to, when render product */
-    public const KEY = "images";
+    const KEY = "images";
 
     /**
      * @var ImageFactory
@@ -55,7 +55,6 @@ class Image implements ProductRenderCollectorInterface
     /**
      * @var DesignInterface
      * @deprecated 103.0.1 DesignLoader is used for design theme loading
-     * @see 103.0.1 DesignLoader is used for design theme loading
      */
     private $design;
 
@@ -86,7 +85,7 @@ class Image implements ProductRenderCollectorInterface
         DesignInterface $design,
         ImageInterfaceFactory $imageRenderInfoFactory,
         array $imageCodes = [],
-        ?DesignLoader $designLoader = null
+        DesignLoader $designLoader = null
     ) {
         $this->imageFactory = $imageFactory;
         $this->imageCodes = $imageCodes;

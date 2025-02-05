@@ -99,7 +99,7 @@ class WebsiteTest extends TestCase
      *
      * @return array
      */
-    public static function dataProviderOptionsArray(): array
+    public function dataProviderOptionsArray(): array
     {
         return [
             [

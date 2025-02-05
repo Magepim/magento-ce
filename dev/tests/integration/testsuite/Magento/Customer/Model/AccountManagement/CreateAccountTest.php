@@ -172,73 +172,73 @@ class CreateAccountTest extends TestCase
     {
         return [
             'empty_firstname' => [
-                'customerData' => ['firstname' => ''],
+                'customer_data' => ['firstname' => ''],
                 'password' => '_aPassword1',
-                'errorType' =>  Exception::class,
-                'errorMessage' => ['"%1" is a required value.', 'First Name'],
+                'error_type' =>  Exception::class,
+                'error_message' => ['"%1" is a required value.', 'First Name'],
             ],
             'empty_lastname' => [
-                'customerData' => ['lastname' => ''],
+                'customer_data' => ['lastname' => ''],
                 'password' => '_aPassword1',
-                'errorType' =>  Exception::class,
-                'errorMessage' => ['"%1" is a required value.', 'Last Name'],
+                'error_type' =>  Exception::class,
+                'error_message' => ['"%1" is a required value.', 'Last Name'],
             ],
             'empty_email' => [
-                'customerData' => ['email' => ''],
+                'customer_data' => ['email' => ''],
                 'password' => '_aPassword1',
-                'errorType' => Exception::class,
-                'errorMessage' => ['The customer email is missing. Enter and try again.'],
+                'error_type' => Exception::class,
+                'error_message' => ['The customer email is missing. Enter and try again.'],
             ],
             'invalid_email' => [
-                'customerData' => ['email' => 'zxczxczxc'],
+                'customer_data' => ['email' => 'zxczxczxc'],
                 'password' => '_aPassword1',
-                'errorType' => Exception::class,
-                'errorMessage' => ['"%1" is not a valid email address.', 'Email'],
+                'error_type' => Exception::class,
+                'error_message' => ['"%1" is not a valid email address.', 'Email'],
             ],
             'empty_password' => [
-                'customerData' => [],
+                'customer_data' => [],
                 'password' => '',
-                'errorType' => InputException::class,
-                'errorMessage' => ['The password needs at least 8 characters. Create a new password and try again.'],
+                'error_type' => InputException::class,
+                'error_message' => ['The password needs at least 8 characters. Create a new password and try again.'],
             ],
             'invalid_password_minimum_length' => [
-                'customerData' => [],
+                'customer_data' => [],
                 'password' => 'test',
-                'errorType' => InputException::class,
-                'errorMessage' => ['The password needs at least 8 characters. Create a new password and try again.'],
+                'error_type' => InputException::class,
+                'error_message' => ['The password needs at least 8 characters. Create a new password and try again.'],
             ],
             'invalid_password_maximum_length' => [
-                'customerData' => [],
+                'customer_data' => [],
                 'password' => self::getRandomNumericString(257),
-                'errorType' => InputException::class,
-                'errorMessage' => ['Please enter a password with at most 256 characters.'],
+                'error_type' => InputException::class,
+                'error_message' => ['Please enter a password with at most 256 characters.'],
             ],
             'invalid_password_without_minimum_characters_classes' => [
-                'customerData' => [],
+                'customer_data' => [],
                 'password' => 'test_password',
-                'errorType' => InputException::class,
-                'errorMessage' => [
+                'error_type' => InputException::class,
+                'error_message' => [
                     'Minimum of different classes of characters in password is %1.'
                     . ' Classes of characters: Lower Case, Upper Case, Digits, Special Characters.',
                     3,
                 ],
             ],
             'password_same_as_email' => [
-                'customerData' => ['email' => 'test1@test.com'],
+                'customer_data' => ['email' => 'test1@test.com'],
                 'password' => 'test1@test.com',
-                'errorType' => LocalizedException::class,
-                'errorMessage' => [
+                'error_type' => LocalizedException::class,
+                'error_message' => [
                     'The password can\'t be the same as the email address. Create a new password and try again.',
                 ],
             ],
             'send_email_store_id_not_match_website' => [
-                'customerData' => [
+                'customer_data' => [
                     CustomerInterface::WEBSITE_ID => 1,
                     CustomerInterface::STORE_ID => 5,
                 ],
                 'password' => '_aPassword1',
-                'errorType' => LocalizedException::class,
-                'errorMessage' => [
+                'error_type' => LocalizedException::class,
+                'error_message' => [
                     'The store view is not in the associated website.',
                 ],
             ],

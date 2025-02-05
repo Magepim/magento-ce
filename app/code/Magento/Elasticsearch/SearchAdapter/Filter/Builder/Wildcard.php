@@ -9,10 +9,6 @@ use Magento\Framework\Search\Request\Filter\Wildcard as WildcardFilterRequest;
 use Magento\Framework\Search\Request\FilterInterface as RequestFilterInterface;
 use Magento\Elasticsearch\Model\Adapter\FieldMapperInterface;
 
-/**
- * @deprecated Elasticsearch is no longer supported by Adobe
- * @see this class will be responsible for ES only
- */
 class Wildcard implements FilterInterface
 {
     /**
@@ -29,8 +25,6 @@ class Wildcard implements FilterInterface
     }
 
     /**
-     * Build Filter
-     *
      * @param RequestFilterInterface|WildcardFilterRequest $filter
      * @return array
      */

@@ -43,7 +43,7 @@ class JsonHexTagTest extends TestCase
     /**
      * @return array
      */
-    public static function serializeDataProvider()
+    public function serializeDataProvider()
     {
         $dataObject = new DataObject(['something']);
         return [
@@ -75,7 +75,7 @@ class JsonHexTagTest extends TestCase
     /**
      * @return array
      */
-    public static function unserializeDataProvider(): array
+    public function unserializeDataProvider(): array
     {
         return [
             ['""', ''],
@@ -110,7 +110,7 @@ class JsonHexTagTest extends TestCase
     /**
      * @return array
      */
-    public static function unserializeExceptionDataProvider(): array
+    public function unserializeExceptionDataProvider(): array
     {
         return [
             [''],

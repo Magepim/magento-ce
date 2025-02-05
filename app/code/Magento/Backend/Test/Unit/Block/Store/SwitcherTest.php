@@ -157,7 +157,7 @@ class SwitcherTest extends TestCase
      *
      * @return array
      */
-    public static function getStoreNameDataProvider(): array
+    public function getStoreNameDataProvider(): array
     {
         return [
             'test storeName with valid requested store' =>
@@ -200,7 +200,7 @@ class SwitcherTest extends TestCase
      *
      * @return array
      */
-    public static function getWebsiteNameDataProvider(): array
+    public function getWebsiteNameDataProvider(): array
     {
         return [
             'test websiteName with valid requested website' =>

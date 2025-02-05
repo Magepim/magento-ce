@@ -333,15 +333,9 @@ class AdvancedPricingTest extends AbstractImportTestCase
                 'bunch'
             ]
         ];
-        $count = 0;
         $this->dataSourceModel
             ->method('getNextUniqueBunch')
-            ->willReturnCallback(function () use (&$count, $testBunch) {
-                if ($count == 0) {
-                    $count++;
-                    return $testBunch;
-                }
-            });
+            ->willReturnOnConsecutiveCalls($testBunch);
         $this->advancedPricing->expects($this->once())->method('validateRow')->willReturn(false);
         $this->advancedPricing->method('saveProductPrices')->willReturnSelf();
 
@@ -411,15 +405,9 @@ class AdvancedPricingTest extends AbstractImportTestCase
         $advancedPricing
             ->method('getBehavior')
             ->willReturn(Import::BEHAVIOR_APPEND);
-        $count = 0;
         $this->dataSourceModel
             ->method('getNextUniqueBunch')
-            ->willReturnCallback(function () use (&$count, $data) {
-                if ($count == 0) {
-                    $count++;
-                    return $data;
-                }
-            });
+            ->willReturnOnConsecutiveCalls($data);
         $advancedPricing->method('validateRow')->willReturn(true);
 
         $advancedPricing->method('getCustomerGroupId')->willReturnMap(
@@ -541,16 +529,9 @@ class AdvancedPricingTest extends AbstractImportTestCase
         $this->advancedPricing->method('getBehavior')->willReturn(
             Import::BEHAVIOR_REPLACE
         );
-
-        $count = 0;
         $this->dataSourceModel
             ->method('getNextUniqueBunch')
-            ->willReturnCallback(function () use (&$count, $data) {
-                if ($count == 0) {
-                    $count++;
-                    return $data;
-                }
-            });
+            ->willReturnOnConsecutiveCalls($data);
         $this->advancedPricing->expects($this->once())->method('validateRow')->willReturn(true);
 
         $this->advancedPricing
@@ -601,15 +582,9 @@ class AdvancedPricingTest extends AbstractImportTestCase
             ]
         ];
 
-        $count = 0;
         $this->dataSourceModel
             ->method('getNextUniqueBunch')
-            ->willReturnCallback(function () use (&$count, $data) {
-                if ($count == 0) {
-                    $count++;
-                    return $data;
-                }
-            });
+            ->willReturnOnConsecutiveCalls($data);
         $this->advancedPricing->method('validateRow')->willReturn(true);
         $expectedSkuList = ['sku value'];
         $this->advancedPricing
@@ -670,7 +645,7 @@ class AdvancedPricingTest extends AbstractImportTestCase
         // @codingStandardsIgnoreStart
         return [
             [
-                'data' => [
+                '$data' => [
                     0 => [
                         AdvancedPricing::COL_SKU => 'sku value',
                         //tier
@@ -681,11 +656,11 @@ class AdvancedPricingTest extends AbstractImportTestCase
                         AdvancedPricing::COL_TIER_PRICE_TYPE => AdvancedPricing::TIER_PRICE_TYPE_FIXED
                     ],
                 ],
-                'tierCustomerGroupId' => 'tier customer group id value',
-                'groupCustomerGroupId' => 'group customer group id value',
-                'tierWebsiteId' => 'tier website id value',
-                'groupWebsiteId' => 'group website id value',
-                'expectedTierPrices' => [
+                '$tierCustomerGroupId' => 'tier customer group id value',
+                '$groupCustomerGroupId' => 'group customer group id value',
+                '$tierWebsiteId' => 'tier website id value',
+                '$groupWebsiteId' => 'group website id value',
+                '$expectedTierPrices' => [
                     'sku value' => [
                         [
                             'all_groups' => false,
@@ -699,7 +674,7 @@ class AdvancedPricingTest extends AbstractImportTestCase
                 ]
             ],
             [
-                'data' => [
+                '$data' => [
                     0 => [
                         AdvancedPricing::COL_SKU => 'sku value',
                         //tier
@@ -710,11 +685,11 @@ class AdvancedPricingTest extends AbstractImportTestCase
                         AdvancedPricing::COL_TIER_PRICE_TYPE => AdvancedPricing::TIER_PRICE_TYPE_PERCENT
                     ],
                 ],
-                'tierCustomerGroupId' => 'tier customer group id value',
-                'groupCustomerGroupId' => 'group customer group id value',
-                'tierWebsiteId' => 'tier website id value',
-                'groupWebsiteId' => 'group website id value',
-                'expectedTierPrices' => [
+                '$tierCustomerGroupId' => 'tier customer group id value',
+                '$groupCustomerGroupId' => 'group customer group id value',
+                '$tierWebsiteId' => 'tier website id value',
+                '$groupWebsiteId' => 'group website id value',
+                '$expectedTierPrices' => [
                     'sku value' => [
                         [
                             'all_groups' => false,
@@ -728,7 +703,7 @@ class AdvancedPricingTest extends AbstractImportTestCase
                 ]
             ],
             [// tier customer group is equal to all group
-                'data' => [
+                '$data' => [
                     0 => [
                         AdvancedPricing::COL_SKU => 'sku value',
                         //tier
@@ -739,11 +714,11 @@ class AdvancedPricingTest extends AbstractImportTestCase
                         AdvancedPricing::COL_TIER_PRICE_TYPE => AdvancedPricing::TIER_PRICE_TYPE_FIXED
                     ]
                 ],
-                'tierCustomerGroupId' => 'tier customer group id value',
-                'groupCustomerGroupId' => 'group customer group id value',
-                'tierWebsiteId' => 'tier website id value',
-                'groupWebsiteId' => 'group website id value',
-                'expectedTierPrices' => [
+                '$tierCustomerGroupId' => 'tier customer group id value',
+                '$groupCustomerGroupId' => 'group customer group id value',
+                '$tierWebsiteId' => 'tier website id value',
+                '$groupWebsiteId' => 'group website id value',
+                '$expectedTierPrices' => [
                     'sku value' => [
                         [
                             'all_groups' => true,
@@ -757,7 +732,7 @@ class AdvancedPricingTest extends AbstractImportTestCase
                 ]
             ],
             [
-                'data' => [
+                '$data' => [
                     0 => [
                         AdvancedPricing::COL_SKU => 'sku value',
                         //tier
@@ -768,11 +743,11 @@ class AdvancedPricingTest extends AbstractImportTestCase
                         AdvancedPricing::COL_TIER_PRICE_TYPE => AdvancedPricing::TIER_PRICE_TYPE_FIXED
                     ]
                 ],
-                'tierCustomerGroupId' => 'tier customer group id value',
-                'groupCustomerGroupId' => 'group customer group id value',
-                'tierWebsiteId' => 'tier website id value',
-                'groupWebsiteId' => 'group website id value',
-                'expectedTierPrices' => [
+                '$tierCustomerGroupId' => 'tier customer group id value',
+                '$groupCustomerGroupId' => 'group customer group id value',
+                '$tierWebsiteId' => 'tier website id value',
+                '$groupWebsiteId' => 'group website id value',
+                '$expectedTierPrices' => [
                     'sku value' => [
                         [
                             'all_groups' => false,
@@ -798,25 +773,25 @@ class AdvancedPricingTest extends AbstractImportTestCase
     {
         return [
             [
-                'rowData' => [
+                '$rowData' => [
                     AdvancedPricing::COL_SKU => 'sku value'
                 ],
-                'behavior' => null,
-                'expectedResult' => true
+                '$behavior' => null,
+                '$expectedResult' => true
             ],
             [
-                'rowData' => [
+                '$rowData' => [
                     AdvancedPricing::COL_SKU => null
                 ],
-                'behavior' => Import::BEHAVIOR_DELETE,
-                'expectedResult' => false
+                '$behavior' => Import::BEHAVIOR_DELETE,
+                '$expectedResult' => false
             ],
             [
-                'rowData' => [
+                '$rowData' => [
                     AdvancedPricing::COL_SKU => 'sku value'
                 ],
-                'behavior' => Import::BEHAVIOR_DELETE,
-                'expectedResult' => true
+                '$behavior' => Import::BEHAVIOR_DELETE,
+                '$expectedResult' => true
             ]
         ];
     }
@@ -830,18 +805,18 @@ class AdvancedPricingTest extends AbstractImportTestCase
     {
         return [
             [
-                'rowData' => [
+                '$rowData' => [
                     AdvancedPricing::COL_SKU => null,
                 ],
-                'behavior' => Import::BEHAVIOR_DELETE,
-                'error' => RowValidatorInterface::ERROR_SKU_IS_EMPTY
+                '$behavior' => Import::BEHAVIOR_DELETE,
+                '$error' => RowValidatorInterface::ERROR_SKU_IS_EMPTY
             ],
             [
-                'rowData' => [
+                '$rowData' => [
                     AdvancedPricing::COL_SKU => false
                 ],
-                'behavior' => null,
-                'error' => RowValidatorInterface::ERROR_ROW_IS_ORPHAN
+                '$behavior' => null,
+                '$error' => RowValidatorInterface::ERROR_ROW_IS_ORPHAN
             ]
         ];
     }

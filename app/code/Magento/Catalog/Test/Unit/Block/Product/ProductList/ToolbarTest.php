@@ -248,7 +248,7 @@ class ToolbarTest extends TestCase
     /**
      * @return array
      */
-    public static function setModesDataProvider()
+    public function setModesDataProvider()
     {
         return [
             [['list' => 'List'], ['list' => 'List']],

@@ -116,7 +116,7 @@ class Ga extends Template
     {
         return [
             'optPageUrl' => $this->getOptPageUrl(),
-            'measurementId' => $this->_escaper->escapeHtmlAttr($measurementId, false)
+            'measurementId' => $this->escapeHtmlAttr($measurementId, false)
         ];
     }
 
@@ -133,7 +133,7 @@ class Ga extends Template
     public function getOrdersTrackingData(): array
     {
         $result = [];
-        $orderIds = $this->getData('order_ids');
+        $orderIds = $this->getOrderIds();
         if (empty($orderIds) || !is_array($orderIds)) {
             return $result;
         }
@@ -147,22 +147,21 @@ class Ga extends Template
         foreach ($collection->getItems() as $order) {
             foreach ($order->getAllVisibleItems() as $item) {
                 $result['products'][] = [
-                    'item_id' => $this->_escaper->escapeHtml($item->getSku()),
-                    'item_name' =>  $this->_escaper->escapeHtml($item->getName()),
-                    'affiliation' => $this->_escaper->escapeHtml(
-                        $this->_storeManager->getStore()->getFrontendName()
-                    ),
-                    'price' => round((float) $item->getPrice(), 2),
-                    'quantity' => (int)$item->getQtyOrdered()
+                    'item_id' => $this->escapeJsQuote($item->getSku()),
+                    'item_name' =>  $this->escapeJsQuote($item->getName()),
+                    'price' => number_format((float) $item->getPrice(), 2),
+                    'quantity' => (int)$item->getQtyOrdered(),
                 ];
             }
             $result['orders'][] = [
                 'transaction_id' =>  $order->getIncrementId(),
-                'value' => round((float) $order->getGrandTotal(), 2),
-                'tax' => round((float) $order->getTaxAmount(), 2),
-                'shipping' => round((float) $order->getShippingAmount(), 2),
+                'affiliation' => $this->escapeJsQuote($this->_storeManager->getStore()->getFrontendName()),
+                'value' => number_format((float) $order->getGrandTotal(), 2),
+                'tax' => number_format((float) $order->getTaxAmount(), 2),
+                'shipping' => number_format((float) $order->getShippingAmount(), 2),
                 'currency' => $order->getOrderCurrencyCode(),
             ];
+            $result['currency'] = $order->getOrderCurrencyCode();
         }
         return $result;
     }
@@ -176,8 +175,8 @@ class Ga extends Template
     {
         $optPageURL = '';
         $pageName = $this->getPageName() !== null ? trim($this->getPageName()) : '';
-        if ($pageName && str_starts_with($pageName, '/') && strlen($pageName) > 1) {
-            $optPageURL = ", '" . $this->_escaper->escapeHtmlAttr($pageName, false) . "'";
+        if ($pageName && substr($pageName, 0, 1) === '/' && strlen($pageName) > 1) {
+            $optPageURL = ", '" . $this->escapeHtmlAttr($pageName, false) . "'";
         }
         return $optPageURL;
     }

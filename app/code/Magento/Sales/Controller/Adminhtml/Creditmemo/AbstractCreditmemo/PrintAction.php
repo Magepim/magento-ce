@@ -5,19 +5,18 @@
  */
 namespace Magento\Sales\Controller\Adminhtml\Creditmemo\AbstractCreditmemo;
 
-use Magento\Framework\App\Action\HttpGetActionInterface;
-use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\App\ResponseInterface;
+use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Sales\Api\CreditmemoRepositoryInterface;
 
-class PrintAction extends \Magento\Backend\App\Action implements HttpGetActionInterface
+class PrintAction extends \Magento\Backend\App\Action
 {
     /**
      * Authorization level of a basic admin session
      *
      * @see _isAllowed()
      */
-    public const ADMIN_RESOURCE = 'Magento_Sales::sales_creditmemo';
+    const ADMIN_RESOURCE = 'Magento_Sales::sales_creditmemo';
 
     /**
      * @var \Magento\Framework\App\Response\Http\FileFactory
@@ -53,8 +52,6 @@ class PrintAction extends \Magento\Backend\App\Action implements HttpGetActionIn
     }
 
     /**
-     * Execute action based on request and return result
-     *
      * @return ResponseInterface|\Magento\Backend\Model\View\Result\Forward
      * @throws \Exception
      */
@@ -76,7 +73,7 @@ class PrintAction extends \Magento\Backend\App\Action implements HttpGetActionIn
                 $fileContent = ['type' => 'string', 'value' => $pdf->render(), 'rm' => true];
 
                 return $this->_fileFactory->create(
-                    'creditmemo' . $date . '.pdf',
+                    \creditmemo::class . $date . '.pdf',
                     $fileContent,
                     DirectoryList::VAR_DIR,
                     'application/pdf'

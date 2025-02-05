@@ -113,7 +113,7 @@ class PositionTest extends TestCase
     /**
      * @return array
      */
-    public static function getFieldNameProvider()
+    public function getFieldNameProvider()
     {
         return [
             ['position', [], true, 'position_category_1'],

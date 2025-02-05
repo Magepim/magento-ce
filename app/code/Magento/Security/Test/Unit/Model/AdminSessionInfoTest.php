@@ -118,7 +118,7 @@ class AdminSessionInfoTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderSessionLifetime()
+    public function dataProviderSessionLifetime()
     {
         return [
             ['expectedResult' => true, 'sessionLifetime' => '0'],
@@ -146,7 +146,7 @@ class AdminSessionInfoTest extends TestCase
         $this->model->setUpdatedAt(null);
         $this->assertTrue($this->model->isSessionExpired());
     }
-
+    
     /**
      * @return void
      */
@@ -180,7 +180,7 @@ class AdminSessionInfoTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderIsOtherSessionsTerminated()
+    public function dataProviderIsOtherSessionsTerminated()
     {
         return [[true], [false]];
     }

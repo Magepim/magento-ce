@@ -222,7 +222,7 @@ class ProcessLayoutRenderElementTest extends TestCase
      *
      * @return array
      */
-    public static function processLayoutRenderDataProvider()
+    public function processLayoutRenderDataProvider()
     {
         return [
             'full_page type and Varnish enabled, public scope, ttl is set' => [

@@ -72,7 +72,7 @@ class OperationFactoryTest extends TestCase
     /**
      * @return array
      */
-    public static function aliasesDataProvider()
+    public function aliasesDataProvider()
     {
         return  [
             [OperationFactory::AREA_CONFIG_GENERATOR, [], Area::class],

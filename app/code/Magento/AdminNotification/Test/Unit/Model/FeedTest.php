@@ -217,7 +217,7 @@ class FeedTest extends TestCase
     /**
      * @return array
      */
-    public static function checkUpdateDataProvider(): array
+    public function checkUpdateDataProvider(): array
     {
         return [
             [

@@ -255,10 +255,15 @@ class InventoryTest extends TestCase
         $websiteId = 15;
         $fieldName = 'field';
 
-        $stockItemMock = $this->getMockBuilder(StockItemInterface::class)
-                            ->disableOriginalConstructor()
-                            ->addMethods($methods)
-                            ->getMockForAbstractClass();
+        $stockItemMock = $this->getMockForAbstractClass(
+            StockItemInterface::class,
+            [],
+            '',
+            false,
+            false,
+            false,
+            $methods
+        );
         $productMock = $this->createMock(Product::class);
         $storeMock = $this->createMock(Store::class);
         $productMock->expects($this->once())
@@ -313,10 +318,15 @@ class InventoryTest extends TestCase
         $websiteId = 15;
         $fieldName = 'field';
 
-        $stockItemMock = $this->getMockBuilder(StockItemInterface::class)
-            ->disableOriginalConstructor()
-            ->addMethods($methods)
-            ->getMockForAbstractClass();
+        $stockItemMock = $this->getMockForAbstractClass(
+            StockItemInterface::class,
+            [],
+            '',
+            false,
+            false,
+            false,
+            $methods
+        );
         $productMock = $this->createMock(Product::class);
         $storeMock = $this->createMock(Store::class);
         $productMock->expects($this->once())
@@ -502,14 +512,14 @@ class InventoryTest extends TestCase
      *
      * @return array
      */
-    public static function dataProviderModuleEnabled()
+    public function dataProviderModuleEnabled()
     {
         return [
             [
-                'moduleEnabled' => true,
+                'ModuleEnabled' => true,
             ],
             [
-                'moduleEnabled' => false
+                'ModuleEnabled' => false
             ]
         ];
     }
@@ -519,7 +529,7 @@ class InventoryTest extends TestCase
      *
      * @return array
      */
-    public static function dataProviderGetFieldValue()
+    public function dataProviderGetFieldValue()
     {
         return [
             [
@@ -545,7 +555,7 @@ class InventoryTest extends TestCase
      *
      * @return array
      */
-    public static function dataProviderGetConfigFieldValue()
+    public function dataProviderGetConfigFieldValue()
     {
         return [
             [
@@ -571,7 +581,7 @@ class InventoryTest extends TestCase
      *
      * @return array
      */
-    public static function dataProviderGetId()
+    public function dataProviderGetId()
     {
         return [
             [

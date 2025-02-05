@@ -1,13 +1,12 @@
 <?php
 /**
- * Copyright 2024 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
 namespace Magento\Quote\Model\Cart;
 
-use Magento\CatalogInventory\Api\StockRegistryInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Model\Cart\BuyRequest\BuyRequestBuilder;
@@ -23,21 +22,49 @@ use Magento\Framework\Message\MessageInterface;
 class AddProductsToCart
 {
     /**
+     * @var CartRepositoryInterface
+     */
+    private $cartRepository;
+
+    /**
+     * @var MaskedQuoteIdToQuoteIdInterface
+     */
+    private $maskedQuoteIdToQuoteId;
+
+    /**
+     * @var BuyRequestBuilder
+     */
+    private $requestBuilder;
+
+    /**
+     * @var ProductReaderInterface
+     */
+    private $productReader;
+
+    /**
+     * @var AddProductsToCartError
+     */
+    private $error;
+
+    /**
      * @param CartRepositoryInterface $cartRepository
      * @param MaskedQuoteIdToQuoteIdInterface $maskedQuoteIdToQuoteId
      * @param BuyRequestBuilder $requestBuilder
      * @param ProductReaderInterface $productReader
-     * @param AddProductsToCartError $error
-     * @param StockRegistryInterface $stockRegistry
+     * @param AddProductsToCartError $addProductsToCartError
      */
     public function __construct(
-        private readonly CartRepositoryInterface $cartRepository,
-        private readonly MaskedQuoteIdToQuoteIdInterface $maskedQuoteIdToQuoteId,
-        private readonly BuyRequestBuilder $requestBuilder,
-        private readonly ProductReaderInterface $productReader,
-        private readonly AddProductsToCartError $error,
-        private readonly StockRegistryInterface $stockRegistry
+        CartRepositoryInterface $cartRepository,
+        MaskedQuoteIdToQuoteIdInterface $maskedQuoteIdToQuoteId,
+        BuyRequestBuilder $requestBuilder,
+        ProductReaderInterface $productReader,
+        AddProductsToCartError $addProductsToCartError
     ) {
+        $this->cartRepository = $cartRepository;
+        $this->maskedQuoteIdToQuoteId = $maskedQuoteIdToQuoteId;
+        $this->requestBuilder = $requestBuilder;
+        $this->productReader = $productReader;
+        $this->error = $addProductsToCartError;
     }
 
     /**
@@ -101,16 +128,7 @@ class AddProductsToCart
         );
         $this->productReader->loadProducts($skus, $cart->getStoreId());
         foreach ($cartItems as $cartItemPosition => $cartItem) {
-            $product = $this->productReader->getProductBySku($cartItem->getSku());
-            $stockItemQuantity = 0.0;
-            if ($product) {
-                $stockItem = $this->stockRegistry->getStockItem(
-                    $product->getId(),
-                    $cart->getStore()->getWebsiteId()
-                );
-                $stockItemQuantity = $stockItem->getQty() - $stockItem->getMinQty();
-            }
-            $errors = $this->addItemToCart($cart, $cartItem, $cartItemPosition, $stockItemQuantity);
+            $errors = $this->addItemToCart($cart, $cartItem, $cartItemPosition);
             if ($errors) {
                 $failedCartItems[$cartItemPosition] = $errors;
             }
@@ -125,15 +143,10 @@ class AddProductsToCart
      * @param Quote $cart
      * @param Data\CartItem $cartItem
      * @param int $cartItemPosition
-     * @param float $stockItemQuantity
      * @return array
      */
-    private function addItemToCart(
-        Quote $cart,
-        Data\CartItem $cartItem,
-        int $cartItemPosition,
-        float $stockItemQuantity
-    ): array {
+    private function addItemToCart(Quote $cart, Data\CartItem $cartItem, int $cartItemPosition): array
+    {
         $sku = $cartItem->getSku();
         $errors = [];
         $result = null;
@@ -141,37 +154,31 @@ class AddProductsToCart
         if ($cartItem->getQuantity() <= 0) {
             $errors[] = $this->error->create(
                 __('The product quantity should be greater than 0')->render(),
-                $cartItemPosition,
-                $stockItemQuantity
+                $cartItemPosition
             );
-        }
-
-        $productBySku = $this->productReader->getProductBySku($sku);
-        $product = isset($productBySku) ? clone $productBySku : null;
-
-        if (!$product || !$product->isSaleable() || !$product->isAvailable()) {
-            return [
-                $this->error->create(
+        } else {
+            $productBySku = $this->productReader->getProductBySku($sku);
+            $product = isset($productBySku) ? clone $productBySku : null;
+            if (!$product || !$product->isSaleable() || !$product->isAvailable()) {
+                $errors[] = $this->error->create(
                     __('Could not find a product with SKU "%sku"', ['sku' => $sku])->render(),
-                    $cartItemPosition,
-                    $stockItemQuantity
-                )
-            ];
-        }
+                    $cartItemPosition
+                );
+            } else {
+                try {
+                    $result = $cart->addProduct($product, $this->requestBuilder->build($cartItem));
+                } catch (\Throwable $e) {
+                    $errors[] = $this->error->create(
+                        __($e->getMessage())->render(),
+                        $cartItemPosition
+                    );
+                }
+            }
 
-        try {
-            $result = $cart->addProduct($product, $this->requestBuilder->build($cartItem));
-        } catch (\Throwable $e) {
-            $errors[] = $this->error->create(
-                __($e->getMessage())->render(),
-                $cartItemPosition,
-                $stockItemQuantity
-            );
-        }
-
-        if (is_string($result)) {
-            foreach (array_unique(explode("\n", $result)) as $error) {
-                $errors[] = $this->error->create(__($error)->render(), $cartItemPosition, $stockItemQuantity);
+            if (is_string($result)) {
+                foreach (array_unique(explode("\n", $result)) as $error) {
+                    $errors[] = $this->error->create(__($error)->render(), $cartItemPosition);
+                }
             }
         }
 

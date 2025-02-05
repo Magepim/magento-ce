@@ -141,7 +141,7 @@ class ShowTest extends TestCase
     /**
      * @return array
      */
-    public static function executeWithExceptionDataProvider()
+    public function executeWithExceptionDataProvider()
     {
         return [
             'ExecuteWithLocalizedException' => [new LocalizedException(__('TestMessage'))],

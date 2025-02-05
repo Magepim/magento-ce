@@ -58,9 +58,11 @@ class AutocompleteTest extends TestCase
     {
         $firstItemMock = $this->getMockBuilder(Item::class)
             ->disableOriginalConstructor()
+            ->setMockClassName('FirstItem')
             ->getMock();
         $secondItemMock = $this->getMockBuilder(Item::class)
             ->disableOriginalConstructor()
+            ->setMockClassName('SecondItem')
             ->getMock();
 
         $this->firstDataProvider->expects($this->once())

@@ -74,7 +74,7 @@ class RowTest extends TestCase
     /**
      * @return array
      */
-    public static function getReferenceTypeDataProvider()
+    public function getReferenceTypeDataProvider()
     {
         return [
             ['ODR', __('Order ID')],
@@ -85,7 +85,7 @@ class RowTest extends TestCase
     /**
      * @return array
      */
-    public static function getTransactionEventDataProvider()
+    public function getTransactionEventDataProvider()
     {
         return [
             ['T1502', __('ACH Deposit (Hold for Dispute or Other Investigation)')],
@@ -96,7 +96,7 @@ class RowTest extends TestCase
     /**
      * @return array
      */
-    public static function getDebitCreditTextDataProvider()
+    public function getDebitCreditTextDataProvider()
     {
         return [
             ['CR', __('Credit')],
@@ -107,7 +107,7 @@ class RowTest extends TestCase
     /**
      * @return array
      */
-    public static function getCastedAmountDataProvider()
+    public function getCastedAmountDataProvider()
     {
         return [
             ['fee_amount', ['fee_amount' => 1, 'fee_debit_or_credit' => 'CR'], -1],

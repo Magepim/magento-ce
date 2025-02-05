@@ -221,15 +221,15 @@ class CategoryTest extends TestCase
         return [
             [
                 'requestValue' => null,
-                'idValue' => 0
+                'id' => 0
             ],
             [
                 'requestValue' => 0,
-                'idValue' => false
+                'id' => false
             ],
             [
                 'requestValue' => 0,
-                'idValue' => null
+                'id' => null
             ]
         ];
     }

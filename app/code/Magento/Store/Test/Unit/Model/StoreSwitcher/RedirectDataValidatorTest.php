@@ -93,7 +93,7 @@ class RedirectDataValidatorTest extends TestCase
     /**
      * @return array
      */
-    public static function validationDataProvider(): array
+    public function validationDataProvider(): array
     {
         return [
             [

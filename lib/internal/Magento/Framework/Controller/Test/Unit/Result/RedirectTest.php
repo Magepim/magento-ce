@@ -80,7 +80,7 @@ class RedirectTest extends TestCase
     /**
      * @return array
      */
-    public static function httpRedirectResponseStatusCodes()
+    public function httpRedirectResponseStatusCodes()
     {
         return [
             [302, null],

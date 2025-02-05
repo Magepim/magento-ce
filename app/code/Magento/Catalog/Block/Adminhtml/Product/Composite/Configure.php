@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2013 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 
 namespace Magento\Catalog\Block\Adminhtml\Product\Composite;
@@ -25,6 +25,8 @@ class Configure extends \Magento\Backend\Block\Widget
     protected $_template = 'Magento_Catalog::catalog/product/composite/configure.phtml';
 
     /**
+     * Core registry
+     *
      * @var \Magento\Framework\Registry
      */
     protected $_coreRegistry = null;
@@ -74,7 +76,7 @@ class Configure extends \Magento\Backend\Block\Widget
      * @param \Magento\Catalog\Model\Product $product
      * @return $this
      */
-    public function setProduct(?\Magento\Catalog\Model\Product $product = null)
+    public function setProduct(\Magento\Catalog\Model\Product $product = null)
     {
         $this->_product = $product;
         return $this;

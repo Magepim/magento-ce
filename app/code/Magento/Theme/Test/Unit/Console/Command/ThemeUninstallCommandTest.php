@@ -411,7 +411,7 @@ class ThemeUninstallCommandTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderThemeFormat(): array
+    public function dataProviderThemeFormat(): array
     {
         return [
             ['test1'],

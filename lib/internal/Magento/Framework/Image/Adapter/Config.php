@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2011 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
@@ -12,23 +12,21 @@ namespace Magento\Framework\Image\Adapter;
  */
 class Config implements ConfigInterface, UploadConfigInterface
 {
-    public const XML_PATH_IMAGE_ADAPTER = 'dev/image/default_adapter';
+    const XML_PATH_IMAGE_ADAPTER = 'dev/image/default_adapter';
 
-    public const XML_PATH_IMAGE_ADAPTERS = 'dev/image/adapters';
+    const XML_PATH_IMAGE_ADAPTERS = 'dev/image/adapters';
 
     /**
      * Config path for the maximal image width value
      * @deprecated Used in a method that is deprecated
-     * @see Nothing
      */
-    public const XML_PATH_MAX_WIDTH_IMAGE = 'system/upload_configuration/max_width';
+    const XML_PATH_MAX_WIDTH_IMAGE = 'system/upload_configuration/max_width';
 
     /**
      * Config path for the maximal image height value
      * @deprecated Used in a method that is deprecated
-     * @see Nothing
      */
-    public const XML_PATH_MAX_HEIGHT_IMAGE = 'system/upload_configuration/max_height';
+    const XML_PATH_MAX_HEIGHT_IMAGE = 'system/upload_configuration/max_height';
 
     /**
      * @var \Magento\Framework\App\Config\ScopeConfigInterface
@@ -44,7 +42,7 @@ class Config implements ConfigInterface, UploadConfigInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inherit}
      *
      * @return string
      */
@@ -54,7 +52,7 @@ class Config implements ConfigInterface, UploadConfigInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inherit}
      *
      * @return mixed
      */

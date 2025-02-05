@@ -59,7 +59,7 @@ class CmsPageTest extends TestCase
     /**
      * @return array
      */
-    public static function pageProvider()
+    public function pageProvider()
     {
         return [
             [

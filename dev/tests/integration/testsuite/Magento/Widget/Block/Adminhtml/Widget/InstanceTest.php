@@ -75,7 +75,7 @@ class InstanceTest extends TestCase
                     'limit' => 2,
                     'page' => 1,
                 ],
-                'expectedWidgets' => [
+                'expected_widgets' => [
                     'cms page widget title',
                     'product link widget title',
                 ],
@@ -85,7 +85,7 @@ class InstanceTest extends TestCase
                     'limit' => 2,
                     'page' => 2,
                 ],
-                'expectedWidgets' => [
+                'expected_widgets' => [
                     'recently compared products',
                 ],
             ],
@@ -93,7 +93,7 @@ class InstanceTest extends TestCase
                 'filter' => [
                     'filter' => base64_encode('title=product link widget title'),
                 ],
-                'expectedWidgets' => [
+                'expected_widgets' => [
                     'product link widget title',
                 ],
             ],
@@ -101,7 +101,7 @@ class InstanceTest extends TestCase
                 'filter' => [
                     'filter' => base64_encode('type=Magento%5CCms%5CBlock%5CWidget%5CPage%5CLink'),
                 ],
-                'expectedWidgets' => [
+                'expected_widgets' => [
                     'cms page widget title',
                 ],
             ],
@@ -109,7 +109,7 @@ class InstanceTest extends TestCase
                 'filter' => [
                     'filter' => base64_encode('theme_id=' . self::loadThemeIdByCode('Magento/blank')),
                 ],
-                'expectedWidgets' => [
+                'expected_widgets' => [
                     'recently compared products',
                 ],
             ],
@@ -117,7 +117,7 @@ class InstanceTest extends TestCase
                 'filter' => [
                     'filter' => base64_encode('sort_order=1'),
                 ],
-                'expectedWidgets' => [
+                'expected_widgets' => [
                     'recently compared products',
                 ],
             ],
@@ -127,7 +127,7 @@ class InstanceTest extends TestCase
                         'title=cms page widget title&theme_id=' . self::loadThemeIdByCode('Magento/luma')
                     ),
                 ],
-                'expectedWidgets' => [
+                'expected_widgets' => [
                     'cms page widget title',
                 ],
             ],
@@ -137,7 +137,7 @@ class InstanceTest extends TestCase
                         'title=recently compared products&theme_id=' . self::loadThemeIdByCode('Magento/blank')
                     ),
                 ],
-                'expectedWidgets' => [
+                'expected_widgets' => [
                     'recently compared products',
                 ],
             ],
@@ -168,7 +168,7 @@ class InstanceTest extends TestCase
         return [
             'sort_by_id_asc' => [
                 'filter' => ['sort' => 'instance_id', 'dir' => 'asc'],
-                'expectedWidgets' => [
+                'expected_widgets' => [
                     'cms page widget title',
                     'product link widget title',
                     'recently compared products',
@@ -176,7 +176,7 @@ class InstanceTest extends TestCase
             ],
             'sort_by_id_desc' => [
                 'filter' => ['sort' => 'instance_id', 'dir' => 'desc'],
-                'expectedWidgets' => [
+                'expected_widgets' => [
                     'recently compared products',
                     'product link widget title',
                     'cms page widget title',
@@ -184,7 +184,7 @@ class InstanceTest extends TestCase
             ],
             'sort_by_title_asc' => [
                 'filter' => ['sort' => 'title', 'dir' => 'asc'],
-                'expectedWidgets' => [
+                'expected_widgets' => [
                     'cms page widget title',
                     'product link widget title',
                     'recently compared products',
@@ -192,7 +192,7 @@ class InstanceTest extends TestCase
             ],
             'sort_by_title_desc' => [
                 'filter' => ['sort' => 'title', 'dir' => 'desc'],
-                'expectedWidgets' => [
+                'expected_widgets' => [
                     'recently compared products',
                     'product link widget title',
                     'cms page widget title',
@@ -200,7 +200,7 @@ class InstanceTest extends TestCase
             ],
             'sort_by_type_asc' => [
                 'filter' => ['sort' => 'type', 'dir' => 'asc'],
-                'expectedWidgets' => [
+                'expected_widgets' => [
                     'product link widget title',
                     'recently compared products',
                     'cms page widget title',
@@ -208,7 +208,7 @@ class InstanceTest extends TestCase
             ],
             'sort_by_type_desc' => [
                 'filter' => ['sort' => 'type', 'dir' => 'desc'],
-                'expectedWidgets' => [
+                'expected_widgets' => [
                     'cms page widget title',
                     'recently compared products',
                     'product link widget title',
@@ -216,7 +216,7 @@ class InstanceTest extends TestCase
             ],
             'sort_by_sort_order_asc' => [
                 'filter' => ['sort' => 'sort_order', 'dir' => 'asc'],
-                'expectedWidgets' => [
+                'expected_widgets' => [
                     'recently compared products',
                     'product link widget title',
                     'cms page widget title',
@@ -224,7 +224,7 @@ class InstanceTest extends TestCase
             ],
             'sort_by_sort_order_desc' => [
                 'filter' => ['sort' => 'sort_order', 'dir' => 'desc'],
-                'expectedWidgets' => [
+                'expected_widgets' => [
                     'cms page widget title',
                     'product link widget title',
                     'recently compared products',
@@ -232,7 +232,7 @@ class InstanceTest extends TestCase
             ],
             'sort_by_theme_asc' => [
                 'filter' => ['sort' => 'theme_id', 'dir' => 'asc'],
-                'expectedWidgets' => [
+                'expected_widgets' => [
                     'recently compared products',
                     'cms page widget title',
                     'product link widget title',
@@ -240,7 +240,7 @@ class InstanceTest extends TestCase
             ],
             'sort_by_theme_desc' => [
                 'filter' => ['sort' => 'theme_id', 'dir' => 'asc'],
-                'expectedWidgets' => [
+                'expected_widgets' => [
                     'recently compared products',
                     'cms page widget title',
                     'product link widget title',

@@ -88,7 +88,7 @@ class CalculationTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderCreateSearchPostCodeTemplates()
+    public function dataProviderCreateSearchPostCodeTemplates()
     {
         return [
             'USA basic' => ['78729', null],

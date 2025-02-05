@@ -239,6 +239,7 @@ class BuilderTest extends TestCase
     public static function buildProvider()
     {
         $expectedPrice = 0;
+        $expectedOrder = 1;
         return [
             'price_0' => [
                 [
@@ -250,7 +251,8 @@ class BuilderTest extends TestCase
                         'type' => 'file'
                     ]
                 ],
-                'expectedPrice' => $expectedPrice
+                'expectedPrice' => $expectedPrice,
+                'expectedOrder' => $expectedOrder
             ],
             'price_declared' => [
                 [
@@ -264,7 +266,8 @@ class BuilderTest extends TestCase
                         'type' => 'file'
                     ]
                 ],
-                'expectedPrice' => 150
+                'expectedPrice' => 150,
+                'expectedOrder' => 2
             ]
         ];
     }

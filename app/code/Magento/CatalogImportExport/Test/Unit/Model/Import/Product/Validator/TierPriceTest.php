@@ -106,7 +106,7 @@ class TierPriceTest extends TestCase
     /**
      * @return array
      */
-    public static function tierPriceDataProvider()
+    public function tierPriceDataProvider()
     {
         return [
             'empty' => [

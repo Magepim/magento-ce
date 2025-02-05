@@ -269,15 +269,15 @@ class VariationHandlerTest extends TestCase
         return [
             [
                 'weight' => 333,
-                'typeId' => Type::TYPE_SIMPLE,
+                'type_id' => Type::TYPE_SIMPLE,
             ],
             [
                 'weight' => '',
-                'typeId' => Type::TYPE_VIRTUAL,
+                'type_id' => Type::TYPE_VIRTUAL,
             ],
             [
                 'weight' => null,
-                'typeId' => Type::TYPE_VIRTUAL,
+                'type_id' => Type::TYPE_VIRTUAL,
             ],
         ];
     }
@@ -337,7 +337,7 @@ class VariationHandlerTest extends TestCase
                 [], [],
             ],
             'array only with empty image' => [
-                'productData' => [
+                'given' => [
                     'image',
                 ],
                 'expected' => [
@@ -345,7 +345,7 @@ class VariationHandlerTest extends TestCase
                 ],
             ],
             'empty array with not empty image' => [
-                'productData' => [
+                'given' => [
                     'image' => 1,
                 ],
                 'expected' => [

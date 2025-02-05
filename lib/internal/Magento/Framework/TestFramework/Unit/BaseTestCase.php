@@ -50,7 +50,7 @@ abstract class BaseTestCase extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
-    public static function booleanDataProvider()
+    public function booleanDataProvider()
     {
         return [[true], [false]];
     }

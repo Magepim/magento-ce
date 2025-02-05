@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2024 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
@@ -14,9 +14,13 @@ use Magento\Catalog\Model\Product\Price\Validation\Result;
 use Magento\Catalog\Model\Product\Price\Validation\TierPriceValidator;
 use Magento\Catalog\Model\Product\Type;
 use Magento\Catalog\Model\ProductIdLocatorInterface;
-use Magento\Framework\App\ResourceConnection;
-use Magento\Framework\DB\Adapter\AdapterInterface;
-use Magento\Framework\DB\Select;
+use Magento\Customer\Api\Data\GroupInterface;
+use Magento\Customer\Api\Data\GroupSearchResultsInterface;
+use Magento\Customer\Api\GroupRepositoryInterface;
+use Magento\Framework\Api\AbstractSimpleObject;
+use Magento\Framework\Api\FilterBuilder;
+use Magento\Framework\Api\Search\SearchCriteriaInterface;
+use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
 use Magento\Store\Api\Data\WebsiteInterface;
@@ -40,6 +44,21 @@ class TierPriceValidatorTest extends TestCase
      * @var ProductIdLocatorInterface|MockObject
      */
     private $productIdLocator;
+
+    /**
+     * @var SearchCriteriaBuilder|MockObject
+     */
+    private $searchCriteriaBuilder;
+
+    /**
+     * @var FilterBuilder|MockObject
+     */
+    private $filterBuilder;
+
+    /**
+     * @var GroupRepositoryInterface|MockObject
+     */
+    private $customerGroupRepository;
 
     /**
      * @var WebsiteRepositoryInterface|MockObject
@@ -67,21 +86,20 @@ class TierPriceValidatorTest extends TestCase
     private $productRepository;
 
     /**
-     * @var ResourceConnection|MockObject
-     */
-    private $resourceConnectionMock;
-
-    /**
-     * @var AdapterInterface|MockObject
-     */
-    private $adapterInterface;
-
-    /**
      * {@inheritdoc}
      */
     protected function setUp(): void
     {
         $this->productIdLocator = $this->getMockBuilder(ProductIdLocatorInterface::class)
+            ->disableOriginalConstructor()
+            ->getMockForAbstractClass();
+        $this->searchCriteriaBuilder = $this->getMockBuilder(SearchCriteriaBuilder::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $this->filterBuilder = $this->getMockBuilder(FilterBuilder::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $this->customerGroupRepository = $this->getMockBuilder(GroupRepositoryInterface::class)
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();
         $this->websiteRepository = $this->getMockBuilder(WebsiteRepositoryInterface::class)
@@ -100,24 +118,19 @@ class TierPriceValidatorTest extends TestCase
         $this->productRepository = $this->getMockBuilder(ProductRepositoryInterface::class)
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();
-        $this->resourceConnectionMock = $this->getMockBuilder(ResourceConnection::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $this->adapterInterface = $this->getMockBuilder(AdapterInterface::class)
-            ->disableOriginalConstructor()
-            ->getMockForAbstractClass();
 
         $objectManagerHelper = new ObjectManager($this);
         $this->tierPriceValidator = $objectManagerHelper->getObject(
             TierPriceValidator::class,
             [
                 'productIdLocator' => $this->productIdLocator,
+                'searchCriteriaBuilder' => $this->searchCriteriaBuilder,
+                'filterBuilder' => $this->filterBuilder,
+                'customerGroupRepository' => $this->customerGroupRepository,
                 'websiteRepository' => $this->websiteRepository,
                 'validationResult' => $this->validationResult,
                 'invalidSkuProcessor' => $this->invalidSkuProcessor,
-                'productRepository' => $this->productRepository,
-                'resourceConnection' => $this->resourceConnectionMock
+                'productRepository' => $this->productRepository
             ]
         );
     }
@@ -125,29 +138,31 @@ class TierPriceValidatorTest extends TestCase
     /**
      * Prepare CustomerGroupRepository mock.
      *
+     * @param array $returned
      * @return void
      */
-    private function prepareCustomerGroupRepositoryMock()
+    private function prepareCustomerGroupRepositoryMock(array $returned)
     {
-        $select = $this->createMock(Select::class);
-        $select->expects($this->once())
-            ->method('from')
-            ->with('customer_group', 'customer_group_id')
-            ->willReturnSelf();
-        $select->expects($this->once())
-            ->method('where')
-            ->with('customer_group_code = ?', 'test_group')
-            ->willReturnSelf();
-        $this->adapterInterface->expects($this->once())
-            ->method('select')
-            ->willReturn($select);
-
-        $this->resourceConnectionMock->expects($this->once())
-            ->method('getConnection')
-            ->willReturn($this->adapterInterface);
-        $this->resourceConnectionMock->expects($this->once())
-            ->method('getTableName')
-            ->willReturnArgument(0);
+        $searchCriteria = $this
+            ->getMockBuilder(SearchCriteriaInterface::class)
+            ->disableOriginalConstructor()
+            ->getMockForAbstractClass();
+        $filter = $this->getMockBuilder(AbstractSimpleObject::class)
+            ->disableOriginalConstructor()
+            ->getMockForAbstractClass();
+        $this->filterBuilder->expects($this->atLeastOnce())->method('setField')->willReturnSelf();
+        $this->filterBuilder->expects($this->atLeastOnce())->method('setValue')->willReturnSelf();
+        $this->filterBuilder->expects($this->atLeastOnce())->method('create')->willReturn($filter);
+        $this->searchCriteriaBuilder->expects($this->atLeastOnce())->method('addFilters')->willReturnSelf();
+        $this->searchCriteriaBuilder->expects($this->atLeastOnce())->method('create')->willReturn($searchCriteria);
+        $customerGroupSearchResults = $this
+            ->getMockBuilder(GroupSearchResultsInterface::class)
+            ->disableOriginalConstructor()
+            ->getMockForAbstractClass();
+        $customerGroupSearchResults->expects($this->once())->method('getItems')
+            ->willReturn($returned['customerGroupSearchResults_getItems']);
+        $this->customerGroupRepository->expects($this->atLeastOnce())->method('getList')
+            ->willReturn($customerGroupSearchResults);
     }
 
     /**
@@ -169,13 +184,7 @@ class TierPriceValidatorTest extends TestCase
         $websiteId = 0;
         $invalidWebsiteId = 4;
         $this->tierPrice->expects($this->atLeastOnce())->method('getWebsiteId')
-            ->willReturnCallback(function () use (&$callCount, $websiteId, $invalidWebsiteId) {
-                $callCount++;
-                if ($callCount === 4) {
-                    return $invalidWebsiteId;
-                }
-                return $websiteId;
-            });
+            ->willReturnOnConsecutiveCalls($websiteId, $websiteId, $websiteId, $invalidWebsiteId, $websiteId);
         $this->tierPrice->expects($this->atLeastOnce())->method('getCustomerGroup')
             ->willReturn($returned['tierPrice_getCustomerGroup']);
         $skuDiff = [$sku];
@@ -244,7 +253,7 @@ class TierPriceValidatorTest extends TestCase
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();
         $this->websiteRepository->expects($this->atLeastOnce())->method('getById')->willReturn($website);
-        $this->prepareCustomerGroupRepositoryMock();
+        $this->prepareCustomerGroupRepositoryMock($returned);
 
         $this->assertEquals(
             $this->validationResult,
@@ -257,20 +266,30 @@ class TierPriceValidatorTest extends TestCase
      *
      * @return array
      */
-    public static function retrieveValidationResultDataProvider()
+    public function retrieveValidationResultDataProvider()
     {
         $customerGroupName = 'test_Group';
+        $customerGroup = $this->getMockBuilder(GroupInterface::class)
+            ->onlyMethods(['getCode', 'getId'])
+            ->disableOriginalConstructor()
+            ->getMockForAbstractClass();
+        $customerGroup->expects($this->atLeastOnce())->method('getCode')->willReturn($customerGroupName);
+        $customerGroupId = 23;
+        $customerGroup->expects($this->atLeastOnce())->method('getId')->willReturn($customerGroupId);
+
         return [
             [
                 [
                     'tierPrice_getCustomerGroup' => $customerGroupName,
-                    'tierPrice_getPriceType' => TierPriceInterface::PRICE_TYPE_DISCOUNT
+                    'tierPrice_getPriceType' => TierPriceInterface::PRICE_TYPE_DISCOUNT,
+                    'customerGroupSearchResults_getItems' => [$customerGroup]
                 ]
             ],
             [
                 [
                     'tierPrice_getCustomerGroup' => $customerGroupName,
-                    'tierPrice_getPriceType' => TierPriceInterface::PRICE_TYPE_FIXED
+                    'tierPrice_getPriceType' => TierPriceInterface::PRICE_TYPE_FIXED,
+                    'customerGroupSearchResults_getItems' => []
                 ]
             ]
         ];
@@ -289,12 +308,13 @@ class TierPriceValidatorTest extends TestCase
         $existingPrices = [$this->tierPrice];
         $returned = [
             'tierPrice_getPriceType' => TierPriceInterface::PRICE_TYPE_DISCOUNT,
+            'customerGroupSearchResults_getItems' => [],
             'tierPrice_getCustomerGroup' => $customerGroupName,
         ];
         $this->prepareRetrieveValidationResultMethod($sku, $returned);
         $exception = new NoSuchEntityException();
         $this->websiteRepository->expects($this->atLeastOnce())->method('getById')->willThrowException($exception);
-        $this->prepareCustomerGroupRepositoryMock();
+        $this->prepareCustomerGroupRepositoryMock($returned);
 
         $this->assertEquals(
             $this->validationResult,

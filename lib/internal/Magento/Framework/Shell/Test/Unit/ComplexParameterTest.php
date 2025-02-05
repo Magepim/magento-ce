@@ -34,7 +34,7 @@ class ComplexParameterTest extends TestCase
     /**
      * @return array
      */
-    public static function getFromStringDataProvider()
+    public function getFromStringDataProvider()
     {
         return [
             ['--not-matching', []],

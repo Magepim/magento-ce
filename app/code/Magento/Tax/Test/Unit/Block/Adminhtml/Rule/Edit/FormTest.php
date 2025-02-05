@@ -168,7 +168,7 @@ class FormTest extends TestCase
      *
      * @return array
      */
-    public static function formValuesDataProvider()
+    public function formValuesDataProvider()
     {
         return [
             [['tax_rate' => [1, 2, 3]], [1, 2, 3]],

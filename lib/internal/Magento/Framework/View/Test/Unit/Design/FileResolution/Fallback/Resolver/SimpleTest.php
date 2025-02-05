@@ -121,7 +121,7 @@ class SimpleTest extends TestCase
     /**
      * @return array
      */
-    public static function resolveDataProvider()
+    public function resolveDataProvider()
     {
         return [
             'no area' => [

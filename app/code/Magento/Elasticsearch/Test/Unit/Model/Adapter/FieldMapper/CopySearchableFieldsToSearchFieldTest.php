@@ -33,7 +33,7 @@ class CopySearchableFieldsToSearchFieldTest extends TestCase
     /**
      * @return array
      */
-    public static function processDataProvider(): array
+    public function processDataProvider(): array
     {
         return [
             'index text field should be copied' => [

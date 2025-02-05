@@ -188,7 +188,7 @@ class LoginTest extends TestCase
      *
      * @return array[]
      */
-    public static function isValidBackendUriDataProvider()
+    public function isValidBackendUriDataProvider()
     {
         return [
             'Rewrites on, valid url' => ['/index.php/admin', 'http://magento2.local/', 'admin', true],

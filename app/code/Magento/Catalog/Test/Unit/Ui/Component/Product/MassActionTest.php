@@ -101,7 +101,7 @@ class MassActionTest extends TestCase
      * @return array
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public static function getPrepareDataProvider() : array
+    public function getPrepareDataProvider() : array
     {
         return [
             [
@@ -239,7 +239,7 @@ class MassActionTest extends TestCase
     /**
      * @return array
      */
-    public static function isActionAllowedDataProvider()
+    public function isActionAllowedDataProvider()
     {
         return [
             'other' => [true, 'other', 0],

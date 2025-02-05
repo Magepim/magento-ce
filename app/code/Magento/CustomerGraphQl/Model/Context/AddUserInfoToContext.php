@@ -9,13 +9,11 @@ namespace Magento\CustomerGraphQl\Model\Context;
 
 use Magento\Authorization\Model\UserContextInterface;
 use Magento\Customer\Api\Data\CustomerInterface;
-use Magento\Customer\Model\Config\Share;
 use Magento\Customer\Model\ResourceModel\CustomerRepository;
 use Magento\Customer\Model\Session;
 use Magento\Framework\ObjectManager\ResetAfterRequestInterface;
 use Magento\GraphQl\Model\Query\ContextParametersInterface;
 use Magento\GraphQl\Model\Query\UserContextParametersProcessorInterface;
-use Magento\Store\Model\StoreManagerInterface;
 
 /**
  * @SuppressWarnings(PHPMD.CookieAndSessionMisuse)
@@ -43,34 +41,19 @@ class AddUserInfoToContext implements UserContextParametersProcessorInterface, R
     private $customerRepository;
 
     /**
-     * @var Share
-     */
-    private $configShare;
-
-    /**
-     * @var StoreManagerInterface
-     */
-    private $storeManager;
-    /**
      * @param UserContextInterface $userContext
      * @param Session $session
      * @param CustomerRepository $customerRepository
-     * @param Share $configShare
-     * @param StoreManagerInterface $storeManager
      */
     public function __construct(
         UserContextInterface $userContext,
         Session $session,
-        CustomerRepository $customerRepository,
-        Share $configShare,
-        StoreManagerInterface $storeManager
+        CustomerRepository $customerRepository
     ) {
         $this->userContext = $userContext;
         $this->userContextFromConstructor = $userContext;
         $this->session = $session;
         $this->customerRepository = $customerRepository;
-        $this->configShare = $configShare;
-        $this->storeManager = $storeManager;
     }
 
     /**
@@ -136,14 +119,8 @@ class AddUserInfoToContext implements UserContextParametersProcessorInterface, R
      */
     private function isCustomer(?int $customerId, ?int $customerType): bool
     {
-        $result = !empty($customerId)
+        return !empty($customerId)
             && !empty($customerType)
             && $customerType === UserContextInterface::USER_TYPE_CUSTOMER;
-
-        if ($result && $this->configShare->isWebsiteScope()) {
-            $customer = $this->customerRepository->getById($customerId);
-            return (int)$customer->getWebsiteId() === (int)$this->storeManager->getStore()->getWebsiteId();
-        }
-        return $result;
     }
 }

@@ -128,28 +128,33 @@ class AccountTest extends TestCase
         return [
             [
                 'action' => 'TestAction',
-                'allowedActions' => ['TestAction'],
-                'isAllowed' => true
+                'allowed_actions' => ['TestAction'],
+                'is_action_allowed' => true,
+                'is_authenticated' => false,
             ],
             [
                 'action' => 'testaction',
-                'allowedActions' => ['testaction'],
-                'isAllowed' => true
+                'allowed_actions' => ['testaction'],
+                'is_action_allowed' => true,
+                'is_authenticated' => false,
             ],
             [
                 'action' => 'wrongaction',
-                'allowedActions' => ['testaction'],
-                'isAllowed' => false
+                'allowed_actions' => ['testaction'],
+                'is_action_allowed' => false,
+                'is_authenticated' => false,
             ],
             [
                 'action' => 'wrongaction',
-                'allowedActions' => ['testaction'],
-                'isAllowed' => false
+                'allowed_actions' => ['testaction'],
+                'is_action_allowed' => false,
+                'is_authenticated' => true,
             ],
             [
                 'action' => 'wrongaction',
-                'allowedActions' => [],
-                'isAllowed' => false
+                'allowed_actions' => [],
+                'is_action_allowed' => false,
+                'is_authenticated' => true,
             ],
         ];
     }

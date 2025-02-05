@@ -61,16 +61,16 @@ class ViewModelTest extends TestCase
         $this->plugin->beforeToHtml($this->blockMock);
     }
 
-    public static function dataProvider()
+    public function dataProvider()
     {
         return [
             'view model was not preset before' => [
-                'hasDataResult' => false,
-                'setDataExpects' => self::once(),
+                'hasData' => false,
+                'setData' => $this->once(),
             ],
             'view model was pre-installed before' => [
-                'hasDataResult' => true,
-                'setDataExpects' => self::never(),
+                'hasData' => true,
+                'setData' => $this->never(),
             ]
         ];
     }

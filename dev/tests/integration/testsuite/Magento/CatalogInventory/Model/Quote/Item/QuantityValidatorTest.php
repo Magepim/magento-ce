@@ -263,15 +263,15 @@ class QuantityValidatorTest extends TestCase
         return [
             [
                 'quantity' => 1,
-                'errorMessageRegexp' => '/The fewest you may purchase is 500/'
+                'error_regexp' => '/The fewest you may purchase is 500/'
             ],
             [
                 'quantity' => 501,
-                'errorMessageRegexp' => $qtyRegexp
+                'error_regexp' => $qtyRegexp
             ],
             [
                 'quantity' => 1000,
-                'errorMessageRegexp' => ''
+                'error_regexp' => ''
             ]
         ];
     }

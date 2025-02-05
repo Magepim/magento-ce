@@ -75,7 +75,7 @@ class Move
         $categoryStoreId = $category->getStoreId();
         foreach ($category->getStoreIds() as $storeId) {
             $category->setStoreId($storeId);
-            $this->removeObsoleteUrlPathEntries($category, $categoryStoreId);
+            $this->removeObsoleteUrlPathEntries($category);
             $this->updateCategoryUrlKeyForStore($category);
             $category->unsUrlPath();
             $category->setUrlPath($this->categoryUrlPathGenerator->getUrlPath($category));
@@ -121,10 +121,9 @@ class Move
      * Clean obsolete entries
      *
      * @param Category $category
-     * @param int $categoryStoreId
      * @return void
      */
-    private function removeObsoleteUrlPathEntries(Category $category, $categoryStoreId): void
+    private function removeObsoleteUrlPathEntries(Category $category): void
     {
         if ($this->storeManager->hasSingleStore()) {
             return;
@@ -133,10 +132,6 @@ class Move
         $path = $category->getData('path');
         if ($origPath != null && $path != null && $origPath != $path) {
             $category->unsUrlPath();
-            if ($category->getStoreId() !== $categoryStoreId) {
-                $category->setStoreId($categoryStoreId);
-                $category->setUrlPath($this->categoryUrlPathGenerator->getUrlPath($category));
-            }
             $category->getResource()->saveAttribute($category, 'url_path');
             foreach ($this->childrenCategoriesProvider->getChildren($category, true) as $childCategory) {
                 $childCategory->unsUrlPath();

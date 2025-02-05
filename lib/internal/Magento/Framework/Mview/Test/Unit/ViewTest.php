@@ -513,7 +513,7 @@ class ViewTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderResumeNotSuspended()
+    public function dataProviderResumeNotSuspended()
     {
         return [
             [StateInterface::STATUS_IDLE],
@@ -583,7 +583,7 @@ class ViewTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderIsEnabled()
+    public function dataProviderIsEnabled()
     {
         return [
             [StateInterface::MODE_ENABLED, true],
@@ -609,7 +609,7 @@ class ViewTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderIsIdle()
+    public function dataProviderIsIdle()
     {
         return [
             [StateInterface::STATUS_IDLE, true],
@@ -636,7 +636,7 @@ class ViewTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderIsWorking()
+    public function dataProviderIsWorking()
     {
         return [
             [StateInterface::STATUS_IDLE, false],
@@ -663,7 +663,7 @@ class ViewTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderIsSuspended()
+    public function dataProviderIsSuspended()
     {
         return [
             [StateInterface::STATUS_IDLE, false],

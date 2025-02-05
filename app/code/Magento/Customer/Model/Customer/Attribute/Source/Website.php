@@ -7,6 +7,8 @@ namespace Magento\Customer\Model\Customer\Attribute\Source;
 
 /**
  * Customer website attribute source
+ *
+ * @author      Magento Core Team <core@magentocommerce.com>
  */
 class Website extends \Magento\Eav\Model\Entity\Attribute\Source\Table
 {
@@ -42,8 +44,6 @@ class Website extends \Magento\Eav\Model\Entity\Attribute\Source\Table
     }
 
     /**
-     * Return option text
-     *
      * @param int|string $value
      * @return string|false
      */

@@ -3,38 +3,33 @@
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-declare(strict_types=1);
 
 /**
  *
  * Customer reports admin controller
  *
+ * @author      Magento Core Team <core@magentocommerce.com>
  */
 namespace Magento\Reports\Controller\Adminhtml\Report;
 
-use Magento\Backend\App\Action;
-use Magento\Backend\App\Action\Context;
-use Magento\Framework\App\Response\Http\FileFactory;
-
 /**
- * phpcs:disable Magento2.Classes.AbstractApi
  * @api
  * @since 100.0.2
  */
-abstract class Customer extends Action
+abstract class Customer extends \Magento\Backend\App\Action
 {
     /**
-     * @var FileFactory
+     * @var \Magento\Framework\App\Response\Http\FileFactory
      */
     protected $_fileFactory;
 
     /**
-     * @param Context $context
-     * @param FileFactory $fileFactory
+     * @param \Magento\Backend\App\Action\Context $context
+     * @param \Magento\Framework\App\Response\Http\FileFactory $fileFactory
      */
     public function __construct(
-        Context $context,
-        FileFactory $fileFactory
+        \Magento\Backend\App\Action\Context $context,
+        \Magento\Framework\App\Response\Http\FileFactory $fileFactory
     ) {
         $this->_fileFactory = $fileFactory;
         parent::__construct($context);
@@ -65,15 +60,19 @@ abstract class Customer extends Action
      */
     protected function _isAllowed()
     {
-        return match ($this->getRequest()->getActionName()) {
-            'exportAccountsCsv', 'exportAccountsExcel', 'accounts' =>
-                $this->_authorization->isAllowed('Magento_Reports::accounts'),
-            'exportOrdersCsv', 'exportOrdersExcel','orders' =>
-                $this->_authorization->isAllowed('Magento_Reports::customers_orders'),
-            'exportTotalsCsv', 'exportTotalsExcel', 'totals' =>
-                $this->_authorization->isAllowed('Magento_Reports::totals'),
-            default =>
-                $this->_authorization->isAllowed('Magento_Reports::customers'),
-        };
+        switch ($this->getRequest()->getActionName()) {
+            case 'accounts':
+                return $this->_authorization->isAllowed('Magento_Reports::accounts');
+                break;
+            case 'orders':
+                return $this->_authorization->isAllowed('Magento_Reports::customers_orders');
+                break;
+            case 'totals':
+                return $this->_authorization->isAllowed('Magento_Reports::totals');
+                break;
+            default:
+                return $this->_authorization->isAllowed('Magento_Reports::customers');
+                break;
+        }
     }
 }

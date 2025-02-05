@@ -308,7 +308,7 @@ class OnepageTest extends TestCase
     /**
      * @return array
      */
-    public static function initCheckoutDataProvider()
+    public function initCheckoutDataProvider()
     {
         return [
             [['login' => ''], false, false],
@@ -343,7 +343,7 @@ class OnepageTest extends TestCase
     /**
      * @return array
      */
-    public static function getCheckoutMethodDataProvider()
+    public function getCheckoutMethodDataProvider()
     {
         return [
             // isLoggedIn(), getQuote()->getCheckoutMethod(), isAllowedGuestCheckout(), expected

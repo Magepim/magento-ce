@@ -63,7 +63,7 @@ class TypeResolverTest extends TestCase
     /**
      * @return array
      */
-    public static function resolveDataProvider()
+    public function resolveDataProvider()
     {
         return [
             [

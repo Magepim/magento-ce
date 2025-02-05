@@ -101,7 +101,7 @@ class FrontendPoolTest extends TestCase
     /**
      * @return array
      */
-    public static function getDataProvider()
+    public function getDataProvider()
     {
         $configData1 = [
             'frontend' => [],

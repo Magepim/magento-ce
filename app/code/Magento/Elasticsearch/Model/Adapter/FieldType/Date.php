@@ -9,10 +9,6 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Stdlib\DateTime;
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 
-/**
- * @deprecated Elasticsearch is no longer supported by Adobe
- * @see this class will be responsible for ES only
- */
 class Date
 {
     /**
@@ -49,7 +45,6 @@ class Date
 
     /**
      * Retrieve date value in elasticsearch format (ISO 8601)
-     *
      * Example: 1995-12-31T23:59:59
      *
      * @param int $storeId

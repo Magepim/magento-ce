@@ -252,7 +252,7 @@ class WishlistTest extends TestCase
 
     /**
      * @param int|Item|MockObject $itemId
-     * @param DataObject|\Closure $buyRequest
+     * @param DataObject|MockObject $buyRequest
      * @param null|array|DataObject $param
      * @throws LocalizedException
      *
@@ -260,7 +260,6 @@ class WishlistTest extends TestCase
      */
     public function testUpdateItem($itemId, $buyRequest, $param): void
     {
-        $buyRequest = $buyRequest($this);
         $storeId = 1;
         $productId = 1;
         $stores = [(new DataObject())->setId($storeId)];
@@ -380,7 +379,11 @@ class WishlistTest extends TestCase
         return $newItem;
     }
 
-    protected function getMockForDataObject() {
+    /**
+     * @return array
+     */
+    public function updateItemDataProvider(): array
+    {
         $dataObjectMock = $this->createMock(DataObject::class);
         $dataObjectMock->expects($this->once())
             ->method('setData')
@@ -390,15 +393,7 @@ class WishlistTest extends TestCase
             ->method('getData')
             ->with('action')
             ->willReturn('updateItem');
-        return $dataObjectMock;
-    }
 
-    /**
-     * @return array
-     */
-    public static function updateItemDataProvider(): array
-    {
-        $dataObjectMock = static fn (self $testCase) => $testCase->getMockForDataObject();
         return [
             '0' => [1, $dataObjectMock, null]
         ];
@@ -482,7 +477,7 @@ class WishlistTest extends TestCase
     /**
      * @return array[]
      */
-    public static function addNewItemDataProvider(): array
+    public function addNewItemDataProvider(): array
     {
         return [
             [false, false, 'Cannot add product without stock to wishlist'],

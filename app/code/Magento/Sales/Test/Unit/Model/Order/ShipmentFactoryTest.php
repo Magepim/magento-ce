@@ -264,7 +264,7 @@ class ShipmentFactoryTest extends TestCase
     /**
      * @return array
      */
-    public static function createDataProvider()
+    public function createDataProvider()
     {
         return [
             [null],

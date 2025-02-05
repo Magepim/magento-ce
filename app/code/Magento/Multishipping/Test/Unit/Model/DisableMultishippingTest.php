@@ -84,7 +84,7 @@ class DisableMultishippingTest extends TestCase
      *
      * @return array
      */
-    public static function executeWithMultishippingModeEnabledDataProvider(): array
+    public function executeWithMultishippingModeEnabledDataProvider(): array
     {
         return [
             'check_with_shipping_assignments' => [true],

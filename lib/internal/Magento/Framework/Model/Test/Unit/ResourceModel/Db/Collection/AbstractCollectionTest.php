@@ -215,19 +215,6 @@ class AbstractCollectionTest extends TestCase
      */
     public function testGetSelect($idFieldNameRet, $getPartRet, $expected)
     {
-        if (is_callable($idFieldNameRet['column_alias'])) {
-            $idFieldNameRet['column_alias'] = $idFieldNameRet['column_alias']($this);
-        }
-        if (is_callable($getPartRet[0][1])) {
-            $getPartRet[0][1] = $getPartRet[0][1]($this);
-        }
-        if (is_callable($expected[0][1]['column_alias'])) {
-            $expected[0][1]['column_alias'] = $expected[0][1]['column_alias']($this);
-        }
-        if (is_callable($expected['alias'][1])) {
-            $expected['alias'][1] = $expected['alias'][1]($this);
-        }
-
         $this->resourceMock
             ->expects($this->any())
             ->method('getIdFieldName')
@@ -251,9 +238,9 @@ class AbstractCollectionTest extends TestCase
     /**
      * @return array
      */
-    public static function getSelectDataProvider(): array
+    public function getSelectDataProvider()
     {
-        $columnMock = static fn (self $testCase) => $testCase->getZendDbExprPartialMock();
+        $columnMock = $this->createPartialMock(\Zend_Db_Expr::class, ['__toString']);
 
         return [
             [
@@ -265,11 +252,6 @@ class AbstractCollectionTest extends TestCase
                 ],
             ]
         ];
-    }
-
-    public function getZendDbExprPartialMock()
-    {
-        return $this->createPartialMock(\Zend_Db_Expr::class, ['__toString']);
     }
 
     /**
@@ -285,7 +267,7 @@ class AbstractCollectionTest extends TestCase
     /**
      * @return array
      */
-    public static function addFieldToSelectDataProvider()
+    public function addFieldToSelectDataProvider()
     {
         return [
             ['*', null, null],
@@ -307,7 +289,7 @@ class AbstractCollectionTest extends TestCase
     /**
      * @return array
      */
-    public static function addExpressionFieldToSelectDataProvider()
+    public function addExpressionFieldToSelectDataProvider()
     {
         return [
             ['alias', '', 'some_field', ['alias' => '']],
@@ -334,7 +316,7 @@ class AbstractCollectionTest extends TestCase
     /**
      * @return array
      */
-    public static function removeFieldFromSelectDataProvider()
+    public function removeFieldFromSelectDataProvider()
     {
         return [
             ['some_field', false, [], [], false],
@@ -422,7 +404,7 @@ class AbstractCollectionTest extends TestCase
     /**
      * @return array
      */
-    public static function joinDataProvider()
+    public function joinDataProvider()
     {
         return [
             ['table', '', '*', ['table' => true]],

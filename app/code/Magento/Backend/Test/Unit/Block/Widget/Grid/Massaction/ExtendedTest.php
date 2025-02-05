@@ -182,7 +182,7 @@ class ExtendedTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderGetGridIdsJsonWithUseSelectAll()
+    public function dataProviderGetGridIdsJsonWithUseSelectAll()
     {
         return [
             [

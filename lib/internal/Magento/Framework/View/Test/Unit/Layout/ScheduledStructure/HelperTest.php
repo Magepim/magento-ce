@@ -128,7 +128,7 @@ class HelperTest extends TestCase
     /**
      * @return array
      */
-    public static function scheduleStructureDataProvider()
+    public function scheduleStructureDataProvider()
     {
         return [
             ['current_node', 'current_node', 1, 1],
@@ -201,19 +201,19 @@ class HelperTest extends TestCase
     /**
      * @return array
      */
-    public static function scheduleElementLogDataProvider()
+    public function scheduleElementLogDataProvider()
     {
         return [
             [
-                'loggerExpects' => self::once(),
+                'loggerExpects' => $this->once(),
                 'stateMode' => State::MODE_DEVELOPER
             ],
             [
-                'loggerExpects' => self::never(),
+                'loggerExpects' => $this->never(),
                 'stateMode' => State::MODE_DEFAULT
             ],
             [
-                'loggerExpects' => self::never(),
+                'loggerExpects' => $this->never(),
                 'stateMode' => State::MODE_PRODUCTION
             ]
         ];
@@ -286,7 +286,7 @@ class HelperTest extends TestCase
     /**
      * @return array
      */
-    public static function scheduleElementDataProvider()
+    public function scheduleElementDataProvider()
     {
         return [
             [

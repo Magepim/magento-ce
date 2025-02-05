@@ -12,7 +12,6 @@ use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Model\Quote\Item;
 use Magento\Quote\Model\QuoteFactory;
 use Magento\Quote\Model\ResourceModel\QuoteItemRetriever;
-use Magento\Framework\AuthorizationInterface;
 
 /**
  * Catalog composite product configuration controller
@@ -61,30 +60,21 @@ abstract class Cart extends \Magento\Backend\App\Action
      * @var QuoteItemRetriever
      */
     private $quoteItemRetriever;
-
-    /**
-     * @var AuthorizationInterface
-     */
-    protected $_authorization;
-
     /**
      * @param Action\Context $context
      * @param CartRepositoryInterface $quoteRepository
      * @param QuoteFactory $quoteFactory
      * @param QuoteItemRetriever $quoteItemRetriever
-     * @param AuthorizationInterface $authorization
      */
     public function __construct(
         Action\Context $context,
         CartRepositoryInterface $quoteRepository,
         QuoteFactory $quoteFactory,
-        QuoteItemRetriever $quoteItemRetriever,
-        AuthorizationInterface $authorization
+        QuoteItemRetriever $quoteItemRetriever
     ) {
         $this->quoteRepository = $quoteRepository;
         $this->quoteFactory = $quoteFactory;
         $this->quoteItemRetriever = $quoteItemRetriever;
-        $this->_authorization = $authorization;
         parent::__construct($context);
     }
 
@@ -121,14 +111,5 @@ abstract class Cart extends \Magento\Backend\App\Action
         }
 
         return $this;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    protected function _isAllowed()
-    {
-        return $this->_authorization->isAllowed(self::ADMIN_RESOURCE)
-            && $this->_authorization->isAllowed('Magento_Cart::cart');
     }
 }

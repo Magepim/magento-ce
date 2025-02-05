@@ -106,7 +106,7 @@ class AttributeLoaderTest extends TestCase
     /**
      * @return array
      */
-    public static function getAttributesDataProvider()
+    public function getAttributesDataProvider()
     {
         return [
             ['entity-type', null, 'neq'],

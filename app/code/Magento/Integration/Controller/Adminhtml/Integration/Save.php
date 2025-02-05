@@ -3,9 +3,6 @@
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-
-declare(strict_types=1);
-
 namespace Magento\Integration\Controller\Adminhtml\Integration;
 
 use Magento\Framework\App\Action\HttpPostActionInterface as HttpPostActionInterface;
@@ -33,7 +30,6 @@ class Save extends \Magento\Integration\Controller\Adminhtml\Integration impleme
      *
      * @return SecurityCookie
      * @deprecated 100.1.0
-     * @see we don't recommend this approach anymore
      */
     private function getSecurityCookie()
     {
@@ -80,7 +76,7 @@ class Save extends \Magento\Integration\Controller\Adminhtml\Integration impleme
             $this->messageManager->addErrorMessage($this->escaper->escapeHtml($e->getMessage()));
             $this->_getSession()->setIntegrationData($this->getRequest()->getPostValue());
             $this->_redirectOnSaveError();
-        } catch (LocalizedException $e) {
+        } catch (\Magento\Framework\Exception\LocalizedException $e) {
             $this->messageManager->addErrorMessage($this->escaper->escapeHtml($e->getMessage()));
             $this->_redirectOnSaveError();
         } catch (\Exception $e) {
@@ -152,8 +148,6 @@ class Save extends \Magento\Integration\Controller\Adminhtml\Integration impleme
      *
      * @param array $integrationData
      * @return void
-     * @throws IntegrationException
-     * @throws LocalizedException
      */
     private function processData($integrationData)
     {
@@ -163,15 +157,7 @@ class Save extends \Magento\Integration\Controller\Adminhtml\Integration impleme
             if (!isset($data['resource'])) {
                 $integrationData['resource'] = [];
             }
-
             $integrationData = array_merge($integrationData, $data);
-
-            // Check if the Identity Link URL field is not empty and then validate it
-            $url = $integrationData[Info::DATA_IDENTITY_LINK_URL] ?? null;
-            if (!empty($url) && !$this->urlValidator->isValid($url)) {
-                throw new LocalizedException(__('Invalid Identity Link URL'));
-            }
-
             if (!isset($integrationData[Info::DATA_ID])) {
                 $integration = $this->_integrationService->create($integrationData);
             } else {

@@ -98,7 +98,7 @@ class SendTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderCanSend()
+    public function dataProviderCanSend()
     {
         return [
             [true, false],

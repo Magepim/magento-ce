@@ -116,7 +116,7 @@ class BlockTest extends TestCase
     {
         return [
             [
-                'blockData' => [
+                'data' => [
                     'title'      => 'Test title',
                     'stores'     => [0],
                     'identifier' => 'test-identifier',

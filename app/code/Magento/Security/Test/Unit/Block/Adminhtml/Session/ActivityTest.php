@@ -156,7 +156,7 @@ class ActivityTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderAreMultipleSessionsActive()
+    public function dataProviderAreMultipleSessionsActive()
     {
         return [
             ['expectedResult' => false, 'sessionsNumber' => 0],
@@ -193,7 +193,7 @@ class ActivityTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderTime()
+    public function dataProviderTime()
     {
         return [
             ['timeString' => '2015-12-28 13:00:00'],

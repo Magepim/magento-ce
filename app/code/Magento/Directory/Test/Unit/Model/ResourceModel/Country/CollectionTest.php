@@ -125,7 +125,7 @@ class CollectionTest extends TestCase
     /**
      * @return array
      */
-    public static function toOptionArrayDataProvider()
+    public function toOptionArrayDataProvider()
     {
         $optionsArray = [
             ['iso2_code' => 'AD', 'country_id' => 'AD', 'name' => ''],

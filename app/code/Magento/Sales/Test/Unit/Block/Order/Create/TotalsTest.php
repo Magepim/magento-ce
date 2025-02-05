@@ -106,7 +106,7 @@ class TotalsTest extends TestCase
     /**
      * @return array
      */
-    public static function totalsDataProvider(): array
+    public function totalsDataProvider(): array
     {
         return [
             [true],

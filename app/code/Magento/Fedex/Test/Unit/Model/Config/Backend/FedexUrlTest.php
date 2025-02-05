@@ -76,7 +76,7 @@ class FedexUrlTest extends TestCase
      * @param string|null $data The valid data
      * @throws ValidatorException
      */
-    public function testBeforeSave(?string $data = null): void
+    public function testBeforeSave(string $data = null): void
     {
         $this->url->expects($this->any())->method('isValid')->willReturn(true);
         $this->urlConfig->setValue($data);
@@ -102,7 +102,7 @@ class FedexUrlTest extends TestCase
      *
      * @return array
      */
-    public static function validDataProvider(): array
+    public function validDataProvider(): array
     {
         return [
             [],
@@ -117,7 +117,7 @@ class FedexUrlTest extends TestCase
     /**
      * @return \string[][]
      */
-    public static function invalidDataProvider(): array
+    public function invalidDataProvider(): array
     {
         return [
             ['http://fedexfoo.com'],

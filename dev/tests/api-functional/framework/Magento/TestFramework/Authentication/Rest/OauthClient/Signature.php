@@ -6,9 +6,7 @@
 
 namespace Magento\TestFramework\Authentication\Rest\OauthClient;
 
-use OAuth\Common\Consumer\CredentialsInterface;
 use OAuth\Common\Http\Uri\UriInterface;
-use Magento\Framework\Oauth\Helper\Utility;
 
 /**
  * Signature class for Magento REST API.
@@ -16,19 +14,9 @@ use Magento\Framework\Oauth\Helper\Utility;
 class Signature extends \OAuth\OAuth1\Signature\Signature
 {
     /**
-     * @param Utility $helper
-     * @param CredentialsInterface $credentials
-     */
-    public function __construct(private readonly Utility $helper, CredentialsInterface $credentials)
-    {
-        parent::__construct($credentials);
-    }
-
-    /**
      * @inheritDoc
      *
-     * In addition to the original method, allows array parameters for filters
-     * and matches validation signature algorithm
+     * In addition to the original method, allows array parameters for filters.
      */
     public function getSignature(UriInterface $uri, array $params, $method = 'POST')
     {
@@ -44,16 +32,37 @@ class Signature extends \OAuth\OAuth1\Signature\Signature
 
         $signatureData = [];
         foreach (array_merge($queryStringData, $params) as $key => $value) {
-            $signatureData[rawurldecode($key)] = rawurlencode($value);
+            $signatureData[rawurlencode($key)] = rawurlencode($value);
         }
 
-        return $this->helper->sign(
-            $signatureData,
-            $this->algorithm,
-            $this->credentials->getConsumerSecret(),
-            $this->tokenSecret,
-            $method,
-            (string) $uri
-        );
+        ksort($signatureData);
+
+        // determine base uri
+        $baseUri = $uri->getScheme() . '://' . $uri->getRawAuthority();
+
+        if ('/' == $uri->getPath()) {
+            $baseUri .= $uri->hasExplicitTrailingHostSlash() ? '/' : '';
+        } else {
+            $baseUri .= $uri->getPath();
+        }
+
+        $baseString = strtoupper($method) . '&';
+        $baseString .= rawurlencode($baseUri) . '&';
+        $baseString .= rawurlencode($this->buildSignatureDataString($signatureData));
+
+        return base64_encode($this->hash($baseString));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function hash($data)
+    {
+        switch (strtoupper($this->algorithm)) {
+            case 'HMAC-SHA256':
+                return hash_hmac('sha256', $data, $this->getSigningKey(), true);
+            default:
+                return parent::hash($data);
+        }
     }
 }

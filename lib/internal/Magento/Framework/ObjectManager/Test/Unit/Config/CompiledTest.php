@@ -201,7 +201,7 @@ class CompiledTest extends TestCase
      *
      * @return array
      */
-    public static function constructorFieldsValidation()
+    public function constructorFieldsValidation()
     {
         return [
             [
@@ -261,7 +261,7 @@ class CompiledTest extends TestCase
      *
      * @return array
      */
-    public static function extendFieldsValidation()
+    public function extendFieldsValidation()
     {
         return [
             [

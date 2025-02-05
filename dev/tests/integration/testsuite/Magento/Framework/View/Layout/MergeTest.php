@@ -225,7 +225,7 @@ class MergeTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($expectedResult, $this->_model->pageHandleExists($inputPageHandle));
     }
 
-    public static function pageHandleExistsDataProvider()
+    public function pageHandleExistsDataProvider()
     {
         return [
             'non-existing handle' => ['non_existing_handle', false],

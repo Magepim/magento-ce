@@ -1,18 +1,22 @@
 <?php
 /**
- * Copyright 2013 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
-
-namespace Magento\Customer\Model\ResourceModel\Address\Attribute\Source;
-
-use Magento\Framework\App\Area;
-use Magento\Framework\App\ObjectManager;
-use Magento\Store\Model\Store;
-use Magento\Store\Model\StoreManagerInterface;
 
 /**
  * Customer country attribute source
+ *
+ * @author      Magento Core Team <core@magentocommerce.com>
+ */
+namespace Magento\Customer\Model\ResourceModel\Address\Attribute\Source;
+
+use Magento\Framework\App\ObjectManager;
+use Magento\Store\Model\StoreManagerInterface;
+
+/**
+ * Class Country.
+ * @package Magento\Customer\Model\ResourceModel\Address\Attribute\Source
  */
 class Country extends \Magento\Eav\Model\Entity\Attribute\Source\Table
 {
@@ -27,24 +31,16 @@ class Country extends \Magento\Eav\Model\Entity\Attribute\Source\Table
     private $storeManager;
 
     /**
-     * @var \Magento\Framework\App\State
-     */
-    private $state;
-
-    /**
      * @param \Magento\Eav\Model\ResourceModel\Entity\Attribute\Option\CollectionFactory $attrOptionCollectionFactory
      * @param \Magento\Eav\Model\ResourceModel\Entity\Attribute\OptionFactory $attrOptionFactory
      * @param \Magento\Directory\Model\ResourceModel\Country\CollectionFactory $countriesFactory
-     * @param \Magento\Framework\App\State $state
      */
     public function __construct(
         \Magento\Eav\Model\ResourceModel\Entity\Attribute\Option\CollectionFactory $attrOptionCollectionFactory,
         \Magento\Eav\Model\ResourceModel\Entity\Attribute\OptionFactory $attrOptionFactory,
-        \Magento\Directory\Model\ResourceModel\Country\CollectionFactory $countriesFactory,
-        \Magento\Framework\App\State $state
+        \Magento\Directory\Model\ResourceModel\Country\CollectionFactory $countriesFactory
     ) {
         $this->_countriesFactory = $countriesFactory;
-        $this->state = $state;
         parent::__construct($attrOptionCollectionFactory, $attrOptionFactory);
     }
 
@@ -54,21 +50,14 @@ class Country extends \Magento\Eav\Model\Entity\Attribute\Source\Table
     public function getAllOptions($withEmpty = true, $defaultValues = false)
     {
         if (!$this->_options) {
-            if ($this->state->getAreaCode() === Area::AREA_ADMINHTML) {
-                $storeId = $this->getAttribute()->getWebsite() &&
-                    $this->getAttribute()->getWebsite()->getDefaultStore() ?
-                    $this->getAttribute()->getWebsite()->getDefaultStore()->getId() : Store::DEFAULT_STORE_ID;
-            } else {
-                $storeId = $this->getStoreManager()->getStore()->getId();
-            }
-            $this->_options = $this->_createCountriesCollection()->loadByStore($storeId)->toOptionArray();
+            $this->_options = $this->_createCountriesCollection()->loadByStore(
+                $this->getStoreManager()->getStore()->getId()
+            )->toOptionArray();
         }
         return $this->_options;
     }
 
     /**
-     * Return new countries object
-     *
      * @return \Magento\Directory\Model\ResourceModel\Country\Collection
      */
     protected function _createCountriesCollection()
@@ -78,9 +67,7 @@ class Country extends \Magento\Eav\Model\Entity\Attribute\Source\Table
 
     /**
      * Retrieve Store Manager
-     *
      * @deprecated 101.0.0
-     * @see nothing
      * @return StoreManagerInterface
      */
     private function getStoreManager()

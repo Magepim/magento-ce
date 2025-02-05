@@ -40,7 +40,7 @@ class ScopeTypeNormalizerTest extends TestCase
     /**
      * @return array
      */
-    public static function normalizeDataProvider()
+    public function normalizeDataProvider()
     {
         return [
             [ScopeInterface::SCOPE_WEBSITE, true, ScopeInterface::SCOPE_WEBSITES],
@@ -73,7 +73,7 @@ class ScopeTypeNormalizerTest extends TestCase
     /**
      * @return array
      */
-    public static function normalizeDefaultDataProvider()
+    public function normalizeDefaultDataProvider()
     {
         return [
             [ScopeInterface::SCOPE_WEBSITE, ScopeInterface::SCOPE_WEBSITES],

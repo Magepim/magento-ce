@@ -80,7 +80,7 @@ class MultilineTest extends TestCase
     /**
      * @return array
      */
-    public static function extractValueDataProvider()
+    public function extractValueDataProvider()
     {
         return [
             [
@@ -119,7 +119,7 @@ class MultilineTest extends TestCase
     /**
      * @return array
      */
-    public static function outputValueDataProvider()
+    public function outputValueDataProvider()
     {
         return [
             [
@@ -187,7 +187,7 @@ class MultilineTest extends TestCase
     /**
      * @return array
      */
-    public static function validateValueDataProvider()
+    public function validateValueDataProvider()
     {
         return [
             [

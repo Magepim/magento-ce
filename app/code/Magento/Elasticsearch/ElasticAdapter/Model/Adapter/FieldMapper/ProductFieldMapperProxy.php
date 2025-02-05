@@ -10,8 +10,6 @@ use Magento\Elasticsearch\Model\Adapter\FieldMapperInterface;
 
 /**
  * Proxy for product fields mappers
- * @deprecated Elasticsearch is no longer supported by Adobe
- * @see this class will be responsible for ES only
  */
 class ProductFieldMapperProxy implements FieldMapperInterface
 {

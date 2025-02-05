@@ -118,32 +118,32 @@ class TaxAdjustmentTest extends TestCase
     /**
      * @return array
      */
-    public static function isIncludedInDisplayPriceDataProvider()
+    public function isIncludedInDisplayPriceDataProvider()
     {
         return [
             'display_incl_tax' => [
-                'taxDisplayExclTax' => false,
-                'isWeeeTaxable' => true,
-                'weeeDisplayConfig' => false,
-                'expectedResult' => true,
+                'tax_display_excl_tax' => false,
+                'is_weee_taxable' => true,
+                'weee_display_config' => false,
+                'expected_result' => true,
             ],
             'display_incl_tax_excl_weee' => [
-                'taxDisplayExclTax' => false,
-                'isWeeeTaxable' => true,
-                'weeeDisplayConfig' => true,
-                'expectedResult' => false,
+                'tax_display_excl_tax' => false,
+                'is_weee_taxable' => true,
+                'weee_display_config' => true,
+                'expected_result' => false,
             ],
             'display_excl_tax' => [
-                'taxDisplayExclTax' => true,
-                'isWeeeTaxable' => true,
-                'weeeDisplayConfig' => true,
-                'expectedResult' => false,
+                'tax_display_excl_tax' => true,
+                'is_weee_taxable' => true,
+                'weee_display_config' => true,
+                'expected_result' => false,
             ],
             'display_excl_tax_incl_weee' => [
-                'taxDisplayExclTax' => true,
-                'isWeeeTaxable' => true,
-                'weeeDisplayConfig' => false,
-                'expectedResult' => false,
+                'tax_display_excl_tax' => true,
+                'is_weee_taxable' => true,
+                'weee_display_config' => false,
+                'expected_result' => false,
             ],
         ];
     }
@@ -168,12 +168,12 @@ class TaxAdjustmentTest extends TestCase
     /**
      * @return array
      */
-    public static function applyAdjustmentDataProvider()
+    public function applyAdjustmentDataProvider()
     {
         return [
             [
                 'amount' => 10,
-                'weeeAttributes' => [
+                'weee_attributes' => [
                     new DataObject(
                         [
                             'tax_amount' => 5,
@@ -186,7 +186,7 @@ class TaxAdjustmentTest extends TestCase
                     ),
 
                 ],
-                'expectedResult' => 13.75,
+                'expected_result' => 13.75,
             ],
         ];
     }

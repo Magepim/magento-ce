@@ -135,18 +135,18 @@ class PriceBoxTest extends TestCase
     /**
      * @return array
      */
-    public static function toHtmlDataProvider()
+    public function toHtmlDataProvider()
     {
         return [
             [
                 'data' => [],
-                'priceCode' => 'test_price',
-                'cssClasses' => 'price-test_price',
+                'price_code' => 'test_price',
+                'css_classes' => 'price-test_price',
             ],
             [
                 'data' => ['css_classes' => 'some_css_class'],
-                'priceCode' => 'test_price',
-                'cssClasses' => 'some_css_class price-test_price'
+                'price_code' => 'test_price',
+                'css_classes' => 'some_css_class price-test_price'
             ]];
     }
 
@@ -241,7 +241,7 @@ class PriceBoxTest extends TestCase
     /**
      * @return array
      */
-    public static function getPriceIdProvider()
+    public function getPriceIdProvider()
     {
         return [
             ['prefix', 'suffix', 'default_prefix', 'default_suffix'],

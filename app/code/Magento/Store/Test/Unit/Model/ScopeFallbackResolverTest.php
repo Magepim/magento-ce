@@ -76,7 +76,7 @@ class ScopeFallbackResolverTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderGetFallbackScope()
+    public function dataProviderGetFallbackScope()
     {
         return [
             [ScopeConfigInterface::SCOPE_TYPE_DEFAULT, null, true, null, null, [null, null]],

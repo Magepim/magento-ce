@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2016 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 
 /**
@@ -278,12 +278,10 @@ class ProcessCronQueueObserver implements ObserverInterface
                 && $this->getCronGroupConfigurationValue($groupId, 'use_separate_process') == 1
             ) {
                 $this->_shell->execute(
-                    '%s %s cron:run --group=%s --' . Cli::INPUT_KEY_BOOTSTRAP . '='
+                    $phpPath . ' %s cron:run --group=' . $groupId . ' --' . Cli::INPUT_KEY_BOOTSTRAP . '='
                     . self::STANDALONE_PROCESS_STARTED . '=1',
                     [
-                        $phpPath,
-                        BP . '/bin/magento',
-                        $groupId,
+                        BP . '/bin/magento'
                     ]
                 );
                 continue;
@@ -850,7 +848,7 @@ class ProcessCronQueueObserver implements ObserverInterface
         /** @var Schedule $schedule */
         foreach ($pendingJobs as $schedule) {
             if (isset($processedJobs[$schedule->getJobCode()])) {
-                // process only one of each job per run
+                // process only on job per run
                 continue;
             }
             $jobConfig = isset($jobsRoot[$schedule->getJobCode()]) ? $jobsRoot[$schedule->getJobCode()] : null;

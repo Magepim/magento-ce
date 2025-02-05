@@ -141,9 +141,8 @@ function (
          * Update address action
          */
         updateAddress: function () {
-            var addressData, newBillingAddress, needsToUpdateAddress;
+            var addressData, newBillingAddress;
 
-            needsToUpdateAddress = true;
             addressUpdated = true;
 
             if (this.selectedAddress() && !this.isAddressFormVisible()) {
@@ -157,9 +156,7 @@ function (
                     this.source.trigger(this.dataScopePrefix + '.custom_attributes.data.validate');
                 }
 
-                if (this.source.get('params.invalid')) {
-                    needsToUpdateAddress = false;
-                } else {
+                if (!this.source.get('params.invalid')) {
                     addressData = this.source.get(this.dataScopePrefix);
 
                     if (customer.isLoggedIn() && !this.customerHasAddresses) { //eslint-disable-line max-depth
@@ -173,7 +170,7 @@ function (
                     checkoutData.setNewCustomerBillingAddress(addressData);
                 }
             }
-            this.updateAddresses(needsToUpdateAddress);
+            this.updateAddresses(true);
         },
 
         /**

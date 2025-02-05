@@ -1,7 +1,8 @@
 <?php
 /**
- * Copyright 2014 Adobe
- * All Rights Reserved.
+ *
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 namespace Magento\Catalog\Controller\Product\Compare;
 
@@ -51,7 +52,7 @@ class Add extends \Magento\Catalog\Controller\Product\Compare implements HttpPos
         Validator $formKeyValidator,
         PageFactory $resultPageFactory,
         ProductRepositoryInterface $productRepository,
-        ?AddToCompareAvailability $compareAvailability = null
+        AddToCompareAvailability $compareAvailability = null
     ) {
         parent::__construct(
             $context,

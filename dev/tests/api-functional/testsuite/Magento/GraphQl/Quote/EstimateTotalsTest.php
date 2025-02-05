@@ -228,7 +228,7 @@ QUERY;
         );
     }
 
-    public static function estimationsProvider(): array
+    public function estimationsProvider(): array
     {
         return [
             [

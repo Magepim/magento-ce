@@ -43,7 +43,7 @@ class TabTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProvider()
+    public function dataProvider()
     {
         return [
             'getTabLabel' => ['getTabLabel', 'label', 'test label', 'test label'],

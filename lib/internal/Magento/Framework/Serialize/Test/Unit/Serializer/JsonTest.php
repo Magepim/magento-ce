@@ -41,7 +41,7 @@ class JsonTest extends TestCase
     /**
      * @return array
      */
-    public static function serializeDataProvider()
+    public function serializeDataProvider()
     {
         $dataObject = new DataObject(['something']);
         return [
@@ -72,7 +72,7 @@ class JsonTest extends TestCase
     /**
      * @return array
      */
-    public static function unserializeDataProvider()
+    public function unserializeDataProvider()
     {
         return [
             ['""', ''],
@@ -111,7 +111,7 @@ class JsonTest extends TestCase
     /**
      * @return array
      */
-    public static function unserializeExceptionDataProvider()
+    public function unserializeExceptionDataProvider()
     {
         return [
             ['', 'Unable to unserialize value.'],

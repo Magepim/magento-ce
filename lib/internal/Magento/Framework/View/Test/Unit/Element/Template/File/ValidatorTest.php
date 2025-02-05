@@ -129,7 +129,7 @@ class ValidatorTest extends TestCase
      *
      * @return array
      */
-    public static function isValidDataProvider()
+    public function isValidDataProvider()
     {
         return [
             'empty' => ['', false],

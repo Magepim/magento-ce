@@ -30,7 +30,7 @@ class PathProcessorTest extends TestCase
     private $model;
 
     /** @var string */
-    private static $arbitraryStoreCode = 'myStoreCode';
+    private $arbitraryStoreCode = 'myStoreCode';
 
     /** @var string */
     private $endpointPath = '/V1/path/of/endpoint';
@@ -43,7 +43,7 @@ class PathProcessorTest extends TestCase
         $this->storeManagerMock = $this->createConfiguredMock(
             StoreManagerInterface::class,
             [
-                'getStores' => [self::$arbitraryStoreCode => 'store object', 'default' => 'default store object'],
+                'getStores' => [$this->arbitraryStoreCode => 'store object', 'default' => 'default store object'],
                 'getStore'  => $store,
             ]
         );
@@ -80,12 +80,12 @@ class PathProcessorTest extends TestCase
     /**
      * @return array
      */
-    public static function processPathDataProvider()
+    public function processPathDataProvider()
     {
         return [
             'All store code' => ['all', Store::ADMIN_CODE],
             'Default store code' => ['', 'default', 0],
-            'Arbitrary store code' => [self::$arbitraryStoreCode, self::$arbitraryStoreCode],
+            'Arbitrary store code' => [$this->arbitraryStoreCode, $this->arbitraryStoreCode],
             'Explicit default store code' => ['default', 'default'],
         ];
     }

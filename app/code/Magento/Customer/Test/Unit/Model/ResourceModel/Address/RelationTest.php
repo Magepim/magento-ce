@@ -143,7 +143,7 @@ class RelationTest extends TestCase
      *
      * @return array
      */
-    public static function getRelationDataProvider()
+    public function getRelationDataProvider()
     {
         return [
             [null, true, true],

@@ -113,7 +113,7 @@ class LinkTest extends TestCase
     /**
      * @return array
      */
-    public static function getLabelDataProvider()
+    public function getLabelDataProvider()
     {
         return [[1, 'My Cart (1 item)'], [2, 'My Cart (2 items)'], [0, 'My Cart']];
     }

@@ -354,46 +354,46 @@ class EmailNotificationTest extends TestCase
     {
         return [
             [
-                'testNumber' => 1,
+                'test_number' => 1,
                 'customerStoreId' => 0,
-                'oldEmail' => 'test@example.com',
-                'newEmail' => 'test@example.com',
-                'isPasswordChanged' => true
+                'old_email' => 'test@example.com',
+                'new_email' => 'test@example.com',
+                'is_password_changed' => true
             ],
             [
-                'testNumber' => 1,
+                'test_number' => 1,
                 'customerStoreId' => 2,
-                'oldEmail' => 'test@example.com',
-                'newEmail' => 'test@example.com',
-                'isPasswordChanged' => true
+                'old_email' => 'test@example.com',
+                'new_email' => 'test@example.com',
+                'is_password_changed' => true
             ],
             [
-                'testNumber' => 2,
+                'test_number' => 2,
                 'customerStoreId' => 0,
-                'oldEmail' => 'test1@example.com',
-                'newEmail' => 'test2@example.com',
-                'isPasswordChanged' => false
+                'old_email' => 'test1@example.com',
+                'new_email' => 'test2@example.com',
+                'is_password_changed' => false
             ],
             [
-                'testNumber' => 2,
+                'test_number' => 2,
                 'customerStoreId' => 2,
-                'oldEmail' => 'test1@example.com',
-                'newEmail' => 'test2@example.com',
-                'isPasswordChanged' => false
+                'old_email' => 'test1@example.com',
+                'new_email' => 'test2@example.com',
+                'is_password_changed' => false
             ],
             [
-                'testNumber' => 3,
+                'test_number' => 3,
                 'customerStoreId' => 0,
-                'oldEmail' => 'test1@example.com',
-                'newEmail' => 'test2@example.com',
-                'isPasswordChanged' => true
+                'old_email' => 'test1@example.com',
+                'new_email' => 'test2@example.com',
+                'is_password_changed' => true
             ],
             [
-                'testNumber' => 3,
+                'test_number' => 3,
                 'customerStoreId' => 2,
-                'oldEmail' => 'test1@example.com',
-                'newEmail' => 'test2@example.com',
-                'isPasswordChanged' => true
+                'old_email' => 'test1@example.com',
+                'new_email' => 'test2@example.com',
+                'is_password_changed' => true
             ]
         ];
     }

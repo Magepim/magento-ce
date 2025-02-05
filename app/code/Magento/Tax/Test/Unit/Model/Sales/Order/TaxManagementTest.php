@@ -139,7 +139,7 @@ class TaxManagementTest extends TestCase
      * @return array
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public static function getOrderTaxDetailsDataProvider()
+    public function getOrderTaxDetailsDataProvider()
     {
         $data = [
             'one_item' => [

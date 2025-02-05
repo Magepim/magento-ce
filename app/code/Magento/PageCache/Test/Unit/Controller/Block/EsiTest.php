@@ -189,7 +189,7 @@ class EsiTest extends TestCase
     /**
      * @return array
      */
-    public static function executeDataProvider()
+    public function executeDataProvider()
     {
         return [
             [StubBlock::class, true],

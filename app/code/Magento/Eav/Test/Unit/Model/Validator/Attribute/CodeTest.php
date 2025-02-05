@@ -35,7 +35,7 @@ class CodeTest extends TestCase
      *
      * @return array
      */
-    public static function isValidDataProvider(): array
+    public function isValidDataProvider(): array
     {
         return [
             [

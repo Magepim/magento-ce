@@ -25,7 +25,7 @@ class ProductReader implements ProductReaderInterface
     /**
      * @var ProductInterface[]
      */
-    private array $productsBySku;
+    private $productsBySku;
 
     /**
      * @var Config
@@ -65,7 +65,7 @@ class ProductReader implements ProductReaderInterface
         $this->productCollection->addOptionsToResult();
         $this->productCollection->load();
         foreach ($this->productCollection->getItems() as $productItem) {
-            $this->productsBySku[strtolower($productItem->getData(ProductInterface::SKU))] = $productItem;
+            $this->productsBySku[$productItem->getData(ProductInterface::SKU)] = $productItem;
         }
     }
 
@@ -74,6 +74,6 @@ class ProductReader implements ProductReaderInterface
      */
     public function getProductBySku(string $sku) : ?ProductInterface
     {
-        return $this->productsBySku[strtolower($sku)] ?? null;
+        return $this->productsBySku[$sku] ?? null;
     }
 }

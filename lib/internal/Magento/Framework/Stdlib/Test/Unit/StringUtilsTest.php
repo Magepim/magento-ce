@@ -95,7 +95,7 @@ class StringUtilsTest extends TestCase
     /**
      * @return array
      */
-    public static function upperCaseWordsDataProvider()
+    public function upperCaseWordsDataProvider()
     {
         return [
             ['test test2', 'Test_Test2'],
@@ -121,7 +121,7 @@ class StringUtilsTest extends TestCase
     /**
      * @return array
      */
-    public static function upperCaseWordsWithSeparatorsDataProvider()
+    public function upperCaseWordsWithSeparatorsDataProvider()
     {
         return [['test test2_test3\test4|test5', '|', '\\', 'Test\Test2_test3\test4\Test5']];
     }

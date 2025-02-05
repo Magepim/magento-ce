@@ -148,16 +148,16 @@ class ImageTest extends TestCase
     /**
      * @return array
      */
-    public static function getPrefixesDataProvider(): array
+    public function getPrefixesDataProvider(): array
     {
         return [
             [
-                'actualLabel' => 'testLabel',
-                'expectedLabel' => 'testLabel',
+                'actual_label' => 'testLabel',
+                'expected_label' => 'testLabel',
             ],
             [
-                'actualLabel' => '<media-image-attributelabel',
-                'expectedLabel' => '&lt;media-image-attributelabel',
+                'actual_label' => '<media-image-attributelabel',
+                'expected_label' => '&lt;media-image-attributelabel',
             ],
         ];
     }

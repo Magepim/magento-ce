@@ -41,7 +41,7 @@ class ConstantTest extends TestCase
     /**
      * @return array
      */
-    public static function evaluateBadValueDataProvider()
+    public function evaluateBadValueDataProvider()
     {
         return [
             [['value' => 'KNOWINGLY_UNDEFINED_CONSTANT']],

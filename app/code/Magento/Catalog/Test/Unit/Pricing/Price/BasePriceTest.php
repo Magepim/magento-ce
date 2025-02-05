@@ -119,7 +119,7 @@ class BasePriceTest extends TestCase
     /**
      * @return array
      */
-    public static function getValueDataProvider()
+    public function getValueDataProvider()
     {
         return [[77, 77], [0, 0], [false, 99]];
     }

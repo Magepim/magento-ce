@@ -27,7 +27,7 @@ class DefaultPathTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderGetPart()
+    public function dataProviderGetPart()
     {
         return [
             [

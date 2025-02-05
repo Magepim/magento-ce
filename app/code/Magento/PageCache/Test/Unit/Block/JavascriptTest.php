@@ -152,7 +152,7 @@ class JavascriptTest extends TestCase
     /**
      * @return array
      */
-    public static function getScriptOptionsDataProvider()
+    public function getScriptOptionsDataProvider()
     {
         return [
             'http' => [
@@ -218,7 +218,7 @@ class JavascriptTest extends TestCase
     /**
      * @return array
      */
-    public static function getScriptOptionsPrivateContentDataProvider()
+    public function getScriptOptionsPrivateContentDataProvider()
     {
         // @codingStandardsIgnoreStart
         return [

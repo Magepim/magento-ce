@@ -98,7 +98,7 @@ class MediaTest extends TestCase
     /**
      * @return array
      */
-    public static function pathDataProvider()
+    public function pathDataProvider()
     {
         return [
             'file only' => ['filename', null, 'filename'],

@@ -127,7 +127,7 @@ class ItemProductResolverTest extends TestCase
      * Dataprovider for scope test
      * @return array
      */
-    public static function provideScopeConfig(): array
+    public function provideScopeConfig(): array
     {
         return [
             ['child_product', Thumbnail::OPTION_USE_OWN_IMAGE, 'thumbnail'],

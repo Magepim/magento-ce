@@ -98,7 +98,7 @@ class PaymentTest extends TestCase
     /**
      * @return array
      */
-    public static function isPaymentEnabledDataProvider()
+    public function isPaymentEnabledDataProvider()
     {
         return [
             [[], ' class="section-config with-button">'],

@@ -59,7 +59,7 @@ class ScopeResolverPoolTest extends TestCase
     /**
      * @return array
      */
-    public static function testGetExceptionDataProvider()
+    public function testGetExceptionDataProvider()
     {
         return [
             ['undefined'],

@@ -164,7 +164,7 @@ class SaveTest extends ProductTestCase
     /**
      * @return array
      */
-    public static function exceptionTypeDataProvider()
+    public function exceptionTypeDataProvider()
     {
         return [
             [new LocalizedException(__('Message')), 'addExceptionMessage'],

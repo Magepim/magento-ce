@@ -18,7 +18,7 @@ class ResetterFactory
     private static string $resetterClassName = Resetter::class;
 
     /**
-     * Create resseter instance
+     * Create resseter factory
      *
      * @return ResetterInterface
      * @phpcs:disable Magento2.Functions.StaticFunction

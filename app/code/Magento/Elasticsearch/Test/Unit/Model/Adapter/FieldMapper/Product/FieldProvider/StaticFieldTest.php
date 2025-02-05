@@ -244,7 +244,7 @@ class StaticFieldTest extends TestCase
      * @return array
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public static function attributeProvider(): array
+    public function attributeProvider(): array
     {
         return [
             [

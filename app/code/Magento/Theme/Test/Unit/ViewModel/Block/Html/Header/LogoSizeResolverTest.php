@@ -69,7 +69,7 @@ class LogoSizeResolverTest extends TestCase
     /**
      * @return array
      */
-    public static function configValueDataProvider(): array
+    public function configValueDataProvider(): array
     {
         return [
             [null, null],

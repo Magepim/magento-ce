@@ -93,7 +93,7 @@ class ProductPageViewTest extends TestCase
     {
         return [
             [
-                'expectedConfig' => [
+                'json_config' => [
                     'text_swatch_attribute' => [
                         'label' => 'Text swatch attribute',
                         'options' => [
@@ -103,7 +103,7 @@ class ProductPageViewTest extends TestCase
                         ],
                     ],
                 ],
-                'expectedSwatchConfig' => [
+                'json_swatch_config' => [
                     Swatch::SWATCH_INPUT_TYPE_TEXT => [
                         [
                             'type' => Swatch::SWATCH_TYPE_TEXTUAL,
@@ -149,7 +149,7 @@ class ProductPageViewTest extends TestCase
     {
         return [
             [
-                'expectedConfig' => [
+                'json_config' => [
                     'visual_swatch_attribute' => [
                         'label' => 'Visual swatch attribute',
                         'options' => [
@@ -159,7 +159,7 @@ class ProductPageViewTest extends TestCase
                         ],
                     ],
                 ],
-                'expectedSwatchConfig' => [
+                'json_swatch_config' => [
                     Swatch::SWATCH_INPUT_TYPE_VISUAL => [
                         [
                             'type' => Swatch::SWATCH_TYPE_VISUAL_COLOR,
@@ -205,7 +205,7 @@ class ProductPageViewTest extends TestCase
     {
         return [
             [
-                'expectedConfig' => [
+                'json_config' => [
                     'visual_swatch_attribute' => [
                         'label' => 'Visual swatch attribute',
                         'options' => [
@@ -266,7 +266,7 @@ class ProductPageViewTest extends TestCase
                     ],
 
                 ],
-                'expectedSwatchConfig' => [
+                'json_swatch_config' => [
                     Swatch::SWATCH_INPUT_TYPE_VISUAL => [
                         [
                             'type' => Swatch::SWATCH_TYPE_VISUAL_COLOR,
@@ -319,8 +319,8 @@ class ProductPageViewTest extends TestCase
     {
         $actualConfig = $this->generateBlockJsonConfigData();
         $this->checkResultIsNotEmpty($actualConfig);
-        $this->assertConfig($actualConfig['expectedConfig'], $expectedConfig);
-        $this->assertSwatchConfig($actualConfig['expectedSwatchConfig'], $expectedSwatchConfig);
+        $this->assertConfig($actualConfig['json_config'], $expectedConfig);
+        $this->assertSwatchConfig($actualConfig['json_swatch_config'], $expectedSwatchConfig);
     }
 
     /**
@@ -337,7 +337,7 @@ class ProductPageViewTest extends TestCase
         $jsonConfig = $this->json->unserialize($this->block->getJsonConfig())['attributes'] ?? [];
         $jsonSwatchConfig = $this->json->unserialize($this->block->getJsonSwatchConfig());
 
-        return ['expectedConfig' => $jsonConfig, 'expectedSwatchConfig' => $jsonSwatchConfig];
+        return ['json_config' => $jsonConfig, 'json_swatch_config' => $jsonSwatchConfig];
     }
 
     /**

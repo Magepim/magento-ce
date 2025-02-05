@@ -175,7 +175,7 @@ class RelatedTest extends AbstractModifierTestCase
      * @return array
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public static function sortingDataProvider(): array
+    public function sortingDataProvider(): array
     {
         return [
             [

@@ -3,8 +3,6 @@
  /**
   * Copyright © Magento, Inc. All rights reserved.
   * See COPYING.txt for license details.
-  * Copyright 2024 Adobe
-  * All Rights Reserved.
   */
 -->
 
@@ -19,8 +17,8 @@
             <severity value="MAJOR" />
             <description value="Check login with restrict role."/>
             <group value="login"/>
-            <group value="cloud"/>
             <group value="pr_exclude"/>
+            <group value="cloud"/>
         </annotations>
 
         <before>
@@ -31,7 +29,7 @@
                 <argument name="restrictedRole" value="Global Search"/>
             </actionGroup>
             <actionGroup ref="AdminUserClickRoleResourceTabActionGroup" stepKey="switchToRoleResourceTab"/>
-            <actionGroup ref="AdminAddRestrictedRoleForGlobalSearchActionGroup" stepKey="addRestrictedRoleStores">
+            <actionGroup ref="AdminAddRestrictedRoleActionGroup" stepKey="addRestrictedRoleStores">
                 <argument name="User" value="adminRole"/>
                 <argument name="restrictedRole" value="Global Search"/>
             </actionGroup>

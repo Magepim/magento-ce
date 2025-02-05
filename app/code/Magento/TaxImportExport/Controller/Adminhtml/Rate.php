@@ -3,9 +3,6 @@
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-
-declare(strict_types=1);
-
 namespace Magento\TaxImportExport\Controller\Adminhtml;
 
 /**
@@ -18,7 +15,7 @@ abstract class Rate extends \Magento\Backend\App\Action
      *
      * @see _isAllowed()
      */
-    public const ADMIN_RESOURCE = 'Magento_TaxImportExport::import_export';
+    const ADMIN_RESOURCE = 'Magento_Tax::manage_tax';
 
     /**
      * @var \Magento\Framework\App\Response\Http\FileFactory

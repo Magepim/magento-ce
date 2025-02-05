@@ -81,7 +81,7 @@ class DataTest extends TestCase
      *
      * @return array
      */
-    public static function decodeTrackingHashDataProvider()
+    public function decodeTrackingHashDataProvider()
     {
         return [
             'Test with hash key is allowed' => [

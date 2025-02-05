@@ -9,9 +9,7 @@ namespace Magento\Sales\Api\Data;
  * Shipment interface.
  *
  * A shipment is a delivery package that contains products. A shipment document accompanies the shipment. This
- * document lists the products and their quantities in the delivery package. This interface creates shipment
- * record without items quantity (total_qty) validation. To validate total shipped quantity for each item
- * in the order you must use newer `POST /V1/order/:orderId/ship` endpoint.
+ * document lists the products and their quantities in the delivery package.
  * @api
  * @since 100.0.2
  */
@@ -23,75 +21,75 @@ interface ShipmentInterface extends \Magento\Framework\Api\ExtensibleDataInterfa
     /*
      * Entity ID.
      */
-    public const ENTITY_ID = 'entity_id';
+    const ENTITY_ID = 'entity_id';
     /*
      * Store ID.
      */
-    public const STORE_ID = 'store_id';
+    const STORE_ID = 'store_id';
     /*
      * Total weight.
      */
-    public const TOTAL_WEIGHT = 'total_weight';
+    const TOTAL_WEIGHT = 'total_weight';
     /*
-     * Total quantity. Can be greater than ordered quantity (not validated).
+     * Total quantity.
      */
-    public const TOTAL_QTY = 'total_qty';
+    const TOTAL_QTY = 'total_qty';
     /*
      * Email sent flag.
      */
-    public const EMAIL_SENT = 'email_sent';
+    const EMAIL_SENT = 'email_sent';
     /*
      * Order ID.
      */
-    public const ORDER_ID = 'order_id';
+    const ORDER_ID = 'order_id';
     /*
      * Customer ID.
      */
-    public const CUSTOMER_ID = 'customer_id';
+    const CUSTOMER_ID = 'customer_id';
     /*
      * Shipping address ID.
      */
-    public const SHIPPING_ADDRESS_ID = 'shipping_address_id';
+    const SHIPPING_ADDRESS_ID = 'shipping_address_id';
     /*
      * Billing address ID.
      */
-    public const BILLING_ADDRESS_ID = 'billing_address_id';
+    const BILLING_ADDRESS_ID = 'billing_address_id';
     /*
      * Shipment status.
      */
-    public const SHIPMENT_STATUS = 'shipment_status';
+    const SHIPMENT_STATUS = 'shipment_status';
     /*
      * Increment ID.
      */
-    public const INCREMENT_ID = 'increment_id';
+    const INCREMENT_ID = 'increment_id';
     /*
      * Created-at timestamp.
      */
-    public const CREATED_AT = 'created_at';
+    const CREATED_AT = 'created_at';
     /*
      * Updated-at timestamp.
      */
-    public const UPDATED_AT = 'updated_at';
+    const UPDATED_AT = 'updated_at';
     /*
      * Packages.
      */
-    public const PACKAGES = 'packages';
+    const PACKAGES = 'packages';
     /*
      * Shipping label.
      */
-    public const SHIPPING_LABEL = 'shipping_label';
+    const SHIPPING_LABEL = 'shipping_label';
     /*
      * Items.
      */
-    public const ITEMS = 'items';
+    const ITEMS = 'items';
     /*
      * Tracks.
      */
-    public const TRACKS = 'tracks';
+    const TRACKS = 'tracks';
     /*
      * Comments.
      */
-    public const COMMENTS = 'comments';
+    const COMMENTS = 'comments';
 
     /**
      * Gets the billing address ID for the shipment.
@@ -171,7 +169,7 @@ interface ShipmentInterface extends \Magento\Framework\Api\ExtensibleDataInterfa
      * @param \Magento\Sales\Api\Data\ShipmentPackageInterface[] $packages
      * @return $this
      */
-    public function setPackages(?array $packages = null);
+    public function setPackages(array $packages = null);
 
     /**
      * Gets the shipment status.

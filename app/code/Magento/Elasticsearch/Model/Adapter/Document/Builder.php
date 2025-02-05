@@ -8,8 +8,6 @@ namespace Magento\Elasticsearch\Model\Adapter\Document;
 /**
  * @api
  * @since 100.1.0
- * @deprecated Elasticsearch is no longer supported by Adobe
- * @see this class will be responsible for ES only
  */
 class Builder
 {
@@ -19,10 +17,7 @@ class Builder
     private $fields = [];
 
     /**
-     * Build
-     *
      * @return array
-     *
      * @since 100.1.0
      */
     public function build()
@@ -36,8 +31,6 @@ class Builder
     }
 
     /**
-     * Clear
-     *
      * @return void
      */
     private function clear()
@@ -46,12 +39,9 @@ class Builder
     }
 
     /**
-     * Add Field to document
-     *
      * @param array $document
      * @param string $field
      * @param string|int|float $value
-     *
      * @return array
      */
     private function addFieldToDocument($document, $field, $value)
@@ -74,11 +64,8 @@ class Builder
     }
 
     /**
-     * Add Field
-     *
      * @param string $field
      * @param string|array|int|float $value
-     *
      * @return $this
      * @since 100.1.0
      */
@@ -89,10 +76,7 @@ class Builder
     }
 
     /**
-     * Add Fields
-     *
      * @param array $fields
-     *
      * @return $this
      * @since 100.1.0
      */

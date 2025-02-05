@@ -52,7 +52,7 @@ class RequestQuantityProcessorTest extends TestCase
     /**
      * @return array
      */
-    public static function cartDataProvider()
+    public function cartDataProvider()
     {
         return [
             'empty_array' => [

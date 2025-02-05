@@ -91,11 +91,11 @@ class SchemaPersistorTest extends TestCase
      *
      * @return array
      */
-    public static function schemaListenerTablesDataProvider() : array
+    public function schemaListenerTablesDataProvider() : array
     {
         return [
             [
-                'tables' => [
+                'schemaListenerTables' => [
                     'First_Module' => [
                         'first_table' => [
                             'disabled' => false,
@@ -147,7 +147,7 @@ class SchemaPersistorTest extends TestCase
                     ]
                 ],
                 // @codingStandardsIgnoreStart
-                'expectedXML' => '<?xml version="1.0"?>
+                'XMLResult' => '<?xml version="1.0"?>
                         <schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                             xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
                             <table name="first_table" resource="default" engine="innodb">

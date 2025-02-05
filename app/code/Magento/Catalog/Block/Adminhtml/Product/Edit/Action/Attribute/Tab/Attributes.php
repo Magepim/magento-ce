@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2011 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 
 /**
@@ -75,7 +75,7 @@ class Attributes extends Form implements TabInterface
         ProductFactory $productFactory,
         Attribute $attributeAction,
         array $data = [],
-        ?array $excludeFields = null,
+        array $excludeFields = null,
         ?SecureHtmlRenderer $secureRenderer = null
     ) {
         $this->_attributeAction = $attributeAction;

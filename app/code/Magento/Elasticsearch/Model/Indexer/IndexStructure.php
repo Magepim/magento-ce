@@ -9,10 +9,6 @@ use Magento\Framework\Indexer\IndexStructureInterface;
 use Magento\Elasticsearch\Model\Adapter\Elasticsearch as ElasticsearchAdapter;
 use Magento\Framework\App\ScopeResolverInterface;
 
-/**
- * @deprecated Elasticsearch is no longer supported by Adobe
- * @see this class will be responsible for ES only
- */
 class IndexStructure implements IndexStructureInterface
 {
     /**
@@ -38,7 +34,7 @@ class IndexStructure implements IndexStructureInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function delete(
         $indexerId,
@@ -50,7 +46,8 @@ class IndexStructure implements IndexStructureInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
+     *
      */
     public function create(
         $indexerId,

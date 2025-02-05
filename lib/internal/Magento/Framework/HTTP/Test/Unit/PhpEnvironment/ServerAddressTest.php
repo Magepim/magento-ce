@@ -61,7 +61,7 @@ class ServerAddressTest extends TestCase
     /**
      * @return array
      */
-    public static function getServerAddressProvider()
+    public function getServerAddressProvider()
     {
         return [
             [null, false, false],

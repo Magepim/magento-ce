@@ -75,7 +75,7 @@ class HstsTest extends TestCase
      *
      * @return array
      */
-    public static function canApplyDataProvider()
+    public function canApplyDataProvider()
     {
         return [
             [

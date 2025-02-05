@@ -214,7 +214,7 @@ class SessionTest extends TestCase
      *
      * @return array
      */
-    public static function renewPersistentCookieDataProvider()
+    public function renewPersistentCookieDataProvider()
     {
         return [
             'no duration' => [0, 0, null ],

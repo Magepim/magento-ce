@@ -148,7 +148,7 @@ class ReportProductSavedToNewRelicTest extends TestCase
     /**
      * @return array
      */
-    public static function actionDataProvider()
+    public function actionDataProvider()
     {
         return [[true], [false]];
     }

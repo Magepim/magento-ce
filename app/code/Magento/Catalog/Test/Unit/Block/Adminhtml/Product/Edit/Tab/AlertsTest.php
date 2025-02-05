@@ -67,7 +67,7 @@ class AlertsTest extends TestCase
     /**
      * @return array
      */
-    public static function canShowTabDataProvider()
+    public function canShowTabDataProvider()
     {
         return [
             'alert_price_and_stock_allow' => [true, true, true],

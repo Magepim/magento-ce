@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2024 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 namespace Magento\Customer\Block\Account;
 
@@ -40,7 +40,6 @@ class Customer extends \Magento\Framework\View\Element\Template
     ) {
         parent::__construct($context, $data);
         $this->httpContext = $httpContext;
-        $this->_isScopePrivate = true;
     }
 
     /**

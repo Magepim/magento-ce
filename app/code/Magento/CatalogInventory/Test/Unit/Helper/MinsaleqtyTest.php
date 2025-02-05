@@ -104,7 +104,7 @@ class MinsaleqtyTest extends TestCase
     /**
      * @return array
      */
-    public static function getConfigValueDataProvider()
+    public function getConfigValueDataProvider()
     {
         return [
             'valid numeric' => [1, 2, '20', 20.],
@@ -179,7 +179,7 @@ class MinsaleqtyTest extends TestCase
     /**
      * @return array
      */
-    public static function makeArrayFieldValueDataProvider()
+    public function makeArrayFieldValueDataProvider()
     {
         return [
             'empty string' => ['', []],
@@ -221,7 +221,7 @@ class MinsaleqtyTest extends TestCase
     /**
      * @return array
      */
-    public static function makeStorableArrayFieldValueDataProvider()
+    public function makeStorableArrayFieldValueDataProvider()
     {
         return [
             'invalid bool' => [false, false],

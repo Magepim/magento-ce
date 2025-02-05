@@ -69,7 +69,7 @@ class BackendTest extends TestCase
      *
      * @return array
      */
-    public static function toOptionArrayDataProvider()
+    public function toOptionArrayDataProvider()
     {
         return [
             'Empty captcha backend areas' => [

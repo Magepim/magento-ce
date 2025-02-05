@@ -81,7 +81,7 @@ class LinkTest extends TestCase
     /**
      * @return array
      */
-    public static function isRssAllowedDataProvider()
+    public function isRssAllowedDataProvider()
     {
         return [
             [true],
@@ -110,7 +110,7 @@ class LinkTest extends TestCase
     /**
      * @return array
      */
-    public static function isTopCategoryDataProvider()
+    public function isTopCategoryDataProvider()
     {
         return [
             [true, '2'],

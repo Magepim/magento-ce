@@ -44,7 +44,7 @@ class TranslitTest extends TestCase
     /**
      * @return array
      */
-    public static function filterDataProvider()
+    public function filterDataProvider()
     {
         $isIconv = '"libiconv"' == ICONV_IMPL;
         return [

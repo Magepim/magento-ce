@@ -285,19 +285,19 @@ class MassInvalidateTest extends TestCase
     {
         return [
             'set1' => [
-                'indexerIds' => 1,
+                'indexers' => 1,
                 'exception' => null,
             ],
             'set2' => [
-                'indexerIds' => [1],
+                'indexers' => [1],
                 'exception' => null,
             ],
             'set3' => [
-                'indexerIds' => [2],
+                'indexers' => [2],
                 'exception' => new LocalizedException(__('Test Phrase')),
             ],
             'set4' => [
-                'indexerIds' => [2],
+                'indexers' => [2],
                 'exception' => new \Exception(),
             ]
         ];

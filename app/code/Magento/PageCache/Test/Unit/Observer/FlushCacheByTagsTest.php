@@ -103,7 +103,7 @@ class FlushCacheByTagsTest extends TestCase
     /**
      * @return array
      */
-    public static function flushCacheByTagsDataProvider()
+    public function flushCacheByTagsDataProvider()
     {
         return [
             'full_page cache type is enabled' => [true],

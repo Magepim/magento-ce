@@ -155,7 +155,7 @@ class FinalPriceBoxTest extends TestCase
     /**
      * @return array
      */
-    public static function hasSpecialPriceDataProvider(): array
+    public function hasSpecialPriceDataProvider(): array
     {
         return [
             [10., 20., false],

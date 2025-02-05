@@ -237,7 +237,7 @@ class AbstractActionTest extends TestCase
     /**
      * @return array
      */
-    public static function reindexEntitiesDataProvider() : array
+    public function reindexEntitiesDataProvider() : array
     {
         return [
             [[4], [], [1, 2, 3]],

@@ -325,7 +325,7 @@ class AbstractEntityTest extends TestCase
     /**
      * @return array
      */
-    public static function productAttributesDataProvider()
+    public function productAttributesDataProvider()
     {
         $attributeSetId = 10;
         return [

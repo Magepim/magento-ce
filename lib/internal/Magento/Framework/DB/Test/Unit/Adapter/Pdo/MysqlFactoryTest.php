@@ -19,6 +19,16 @@ use PHPUnit\Framework\TestCase;
 class MysqlFactoryTest extends TestCase
 {
     /**
+     * @var SelectFactory|MockObject
+     */
+    private $selectFactoryMock;
+
+    /**
+     * @var LoggerInterface|MockObject
+     */
+    private $loggerMock;
+
+    /**
      * @var ObjectManagerInterface|MockObject
      */
     private $objectManagerMock;
@@ -43,24 +53,16 @@ class MysqlFactoryTest extends TestCase
     /**
      * @param array $objectManagerArguments
      * @param array $config
-     * @param string|null $loggerMockPlaceholder
-     * @param string|null $selectFactoryMockPlaceholder
+     * @param LoggerInterface|null $logger
+     * @param SelectFactory|null $selectFactory
      * @dataProvider createDataProvider
      */
     public function testCreate(
         array $objectManagerArguments,
         array $config,
-        ?string $loggerMockPlaceholder = null,
-        ?string $selectFactoryMockPlaceholder = null
+        LoggerInterface $logger = null,
+        SelectFactory $selectFactory = null
     ) {
-        $loggerMock = $this->getMockForAbstractClass(LoggerInterface::class);
-        $selectFactoryMock = $this->createMock(SelectFactory::class);
-        if ($loggerMockPlaceholder === 'loggerMock') {
-            $objectManagerArguments['logger'] = $loggerMock;
-        }
-        if ($selectFactoryMockPlaceholder === 'selectFactoryMock') {
-            $objectManagerArguments['selectFactory'] = $selectFactoryMock;
-        }
         $this->objectManagerMock->expects($this->once())
             ->method('create')
             ->with(
@@ -70,44 +72,46 @@ class MysqlFactoryTest extends TestCase
         $this->mysqlFactory->create(
             Mysql::class,
             $config,
-            $loggerMockPlaceholder === 'loggerMock' ? $loggerMock : null,
-            $selectFactoryMockPlaceholder === 'selectFactoryMock' ? $selectFactoryMock : null
+            $logger,
+            $selectFactory
         );
     }
 
     /**
      * @return array
      */
-    public static function createDataProvider()
+    public function createDataProvider()
     {
+        $this->loggerMock = $this->getMockForAbstractClass(LoggerInterface::class);
+        $this->selectFactoryMock = $this->createMock(SelectFactory::class);
         return [
             [
                 [
                     'config' => ['foo' => 'bar'],
-                    'logger' => 'loggerMock',
-                    'selectFactory' => 'selectFactoryMock'
+                    'logger' => $this->loggerMock,
+                    'selectFactory' => $this->selectFactoryMock
                 ],
                 ['foo' => 'bar'],
-                'loggerMock',
-                'selectFactoryMock'
+                $this->loggerMock,
+                $this->selectFactoryMock
             ],
             [
                 [
                     'config' => ['foo' => 'bar'],
-                    'logger' => 'loggerMock'
+                    'logger' => $this->loggerMock
                 ],
                 ['foo' => 'bar'],
-                'loggerMock',
+                $this->loggerMock,
                 null
             ],
             [
                 [
                     'config' => ['foo' => 'bar'],
-                    'selectFactory' => 'selectFactoryMock'
+                    'selectFactory' => $this->selectFactoryMock
                 ],
                 ['foo' => 'bar'],
                 null,
-                'selectFactoryMock'
+                $this->selectFactoryMock
             ],
         ];
     }

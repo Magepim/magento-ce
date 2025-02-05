@@ -128,7 +128,7 @@ class MediaTest extends TestCase
     /**
      * @return array
      */
-    public static function isMediaValidDataProvider()
+    public function isMediaValidDataProvider()
     {
         return [
             'valid' => [
@@ -149,7 +149,7 @@ class MediaTest extends TestCase
     /**
      * @return array
      */
-    public static function isValidAdditionalImagesPathDataProvider()
+    public function isValidAdditionalImagesPathDataProvider()
     {
         return [
             'additional_images' => [
@@ -166,7 +166,7 @@ class MediaTest extends TestCase
     /**
      * @return array
      */
-    public static function isValidAdditionalImagesUrlDataProvider()
+    public function isValidAdditionalImagesUrlDataProvider()
     {
         return [
             'additional_images_wrong_domain' => [

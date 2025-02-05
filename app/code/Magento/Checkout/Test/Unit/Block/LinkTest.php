@@ -97,7 +97,7 @@ class LinkTest extends TestCase
     /**
      * @return array
      */
-    public static function toHtmlDataProvider()
+    public function toHtmlDataProvider()
     {
         return [[false, true], [true, false], [false, false]];
     }

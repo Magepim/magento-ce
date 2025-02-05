@@ -111,7 +111,7 @@ class RegisterTest extends TestCase
     /**
      * @return array
      */
-    public static function getConfigProvider()
+    public function getConfigProvider()
     {
         return [
             ['/path/to/config/value', 'config value'],
@@ -328,7 +328,7 @@ class RegisterTest extends TestCase
     /**
      * @return array
      */
-    public static function isNewsletterEnabledProvider()
+    public function isNewsletterEnabledProvider()
     {
         return [[true, true, true], [true, false, false], [false, true, false], [false, false, false]];
     }

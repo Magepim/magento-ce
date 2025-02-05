@@ -38,7 +38,7 @@ class FieldsTest extends TestCase
      * @return array[]
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public static function setQueryDataProvider()
+    public function setQueryDataProvider()
     {
         return [
             'mutation without variables' => [

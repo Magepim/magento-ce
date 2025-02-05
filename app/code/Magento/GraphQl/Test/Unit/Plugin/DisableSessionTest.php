@@ -77,17 +77,17 @@ class DisableSessionTest extends TestCase
      *
      * @return array[]
      */
-    public static function testAfterCheckDataProvider()
+    public function testAfterCheckDataProvider()
     {
         return [
-            ['area' => 'graphql', 'config' => true, 'methodResult' =>  false, 'expectedResult' => false],
-            ['area' => 'graphql', 'config' => true, 'methodResult' =>  true, 'expectedResult' => false],
-            ['area' => 'graphql', 'config' => false, 'methodResult' =>  true, 'expectedResult' => true],
-            ['area' => 'graphql', 'config' => false, 'methodResult' =>  false, 'expectedResult' => false],
-            ['area' => 'other', 'config' => false, 'methodResult' =>  false, 'expectedResult' => false],
-            ['area' => 'other', 'config' => true, 'methodResult' =>  false, 'expectedResult' => false],
-            ['area' => 'other', 'config' => true, 'methodResult' =>  true, 'expectedResult' => true],
-            ['area' => 'other', 'config' => false, 'methodResult' =>  true, 'expectedResult' => true],
+            ['area' => 'graphql', 'config' => true, 'methodResult' =>  false, 'expected' => false],
+            ['area' => 'graphql', 'config' => true, 'methodResult' =>  true, 'expected' => false],
+            ['area' => 'graphql', 'config' => false, 'methodResult' =>  true, 'expected' => true],
+            ['area' => 'graphql', 'config' => false, 'methodResult' =>  false, 'expected' => false],
+            ['area' => 'other', 'config' => false, 'methodResult' =>  false, 'expected' => false],
+            ['area' => 'other', 'config' => true, 'methodResult' =>  false, 'expected' => false],
+            ['area' => 'other', 'config' => true, 'methodResult' =>  true, 'expected' => true],
+            ['area' => 'other', 'config' => false, 'methodResult' =>  true, 'expected' => true],
         ];
     }
 
@@ -114,13 +114,13 @@ class DisableSessionTest extends TestCase
      *
      * @return array[]
      */
-    public static function testAfterCheckDataProviderNoAreaCode()
+    public function testAfterCheckDataProviderNoAreaCode()
     {
         return [
-            ['config' => true, 'methodResult' =>  true, 'expectedResult' => true],
-            ['config' => true, 'methodResult' =>  false, 'expectedResult' => false],
-            ['config' => false, 'methodResult' =>  true, 'expectedResult' => true],
-            ['config' => false, 'methodResult' =>  false, 'expectedResult' => false],
+            ['config' => true, 'methodResult' =>  true, 'expected' => true],
+            ['config' => true, 'methodResult' =>  false, 'expected' => false],
+            ['config' => false, 'methodResult' =>  true, 'expected' => true],
+            ['config' => false, 'methodResult' =>  false, 'expected' => false],
         ];
     }
 }

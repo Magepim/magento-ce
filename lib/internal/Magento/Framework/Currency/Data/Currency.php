@@ -374,8 +374,7 @@ class Currency
                 $region = substr($this->options['locale'], (strpos($this->options['locale'], '_') + 1));
             }
         }
-        $locale = substr($this->options['locale'], 0, strpos($this->options['locale'], '_')) . '_' . $region;
-
+        $locale = strtolower($region) . '_' . $region;
         $data = NumberFormatter::create($locale, NumberFormatter::CURRENCY)
             ->getTextAttribute(NumberFormatter::CURRENCY_CODE);
 

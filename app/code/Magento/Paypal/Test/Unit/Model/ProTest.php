@@ -98,7 +98,7 @@ class ProTest extends TestCase
     /**
      * @return array
      */
-    public static function canReviewPaymentDataProvider()
+    public function canReviewPaymentDataProvider()
     {
         return [
             [\Magento\Paypal\Model\Info::PAYMENTSTATUS_REVIEW, true, false],

@@ -72,7 +72,7 @@ class LocalizedExceptionTest extends TestCase
     /**
      * @return array
      */
-    public static function constructorParametersDataProvider()
+    public function constructorParametersDataProvider()
     {
         return [
             'withNoNameParameters' => [

@@ -79,7 +79,7 @@ class DateTimeTypeTest extends TestCase
     /**
      * @return array
      */
-    public static function getFieldTypeProvider()
+    public function getFieldTypeProvider()
     {
         return [
             [true, 'something'],

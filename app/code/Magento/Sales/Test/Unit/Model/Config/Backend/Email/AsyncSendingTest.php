@@ -91,7 +91,7 @@ class AsyncSendingTest extends TestCase
     /**
      * @return array
      */
-    public static function afterSaveDataProvider()
+    public function afterSaveDataProvider()
     {
         return [
             [0, 0, null],

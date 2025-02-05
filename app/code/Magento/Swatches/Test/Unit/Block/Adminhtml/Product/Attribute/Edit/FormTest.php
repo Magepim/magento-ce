@@ -27,7 +27,7 @@ class FormTest extends TestCase
     /**
      * @return array
      */
-    public static function dataForAddValues()
+    public function dataForAddValues()
     {
         $additionalData = [
             'swatch_input_type' => 'visual',

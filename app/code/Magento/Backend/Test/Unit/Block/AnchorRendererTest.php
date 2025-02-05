@@ -147,7 +147,7 @@ class AnchorRendererTest extends TestCase
     /**
      * @return array
      */
-    public static function targetDataProvider()
+    public function targetDataProvider()
     {
         return [
             'item has target' => [true],

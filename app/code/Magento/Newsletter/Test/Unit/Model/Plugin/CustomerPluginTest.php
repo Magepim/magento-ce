@@ -176,7 +176,7 @@ class CustomerPluginTest extends TestCase
      *
      * @return array
      */
-    public static function afterSaveDataProvider(): array
+    public function afterSaveDataProvider(): array
     {
         return [
             'missing_previous_and_new_status' => [null, null, null],

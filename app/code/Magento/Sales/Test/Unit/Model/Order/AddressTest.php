@@ -86,7 +86,7 @@ class AddressTest extends TestCase
     /**
      * @return array
      */
-    public static function regionProvider()
+    public function regionProvider()
     {
         return [ [1, null], [null, 1]];
     }

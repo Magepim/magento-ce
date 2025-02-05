@@ -33,16 +33,15 @@ class SalableResolverTest extends TestCase
     }
 
     /**
-     * @param \Closure $salableItem
+     * @param SaleableInterface|MockObject $salableItem
      * @param bool $isSalable
      * @param bool $typeIsSalable
      * @param bool $expectedResult
      * @return void
      * @dataProvider afterIsSalableDataProvider
      */
-    public function testAfterIsSalable(\Closure $salableItem, bool $isSalable, bool $typeIsSalable, bool $expectedResult): void
+    public function testAfterIsSalable($salableItem, bool $isSalable, bool $typeIsSalable, bool $expectedResult): void
     {
-        $salableItem = $salableItem($this);
         $salableResolver = $this->createMock(SalableResolver::class);
 
         $this->typeConfigurable->method('isSalable')
@@ -52,22 +51,20 @@ class SalableResolverTest extends TestCase
         $this->assertEquals($expectedResult, $result);
     }
 
-    protected function getMockForSalableInterface($type)
-    {
-        $salableItem = $this->getMockForAbstractClass(SaleableInterface::class);
-        $salableItem->expects($this->once())
-            ->method('getTypeId')
-            ->willReturn($type);
-        return $salableItem;
-    }
     /**
      * @return array
      */
-    public static function afterIsSalableDataProvider(): array
+    public function afterIsSalableDataProvider(): array
     {
-        $simpleSalableItem = static fn (self $testCase) => $testCase->getMockForSalableInterface('simple');
+        $simpleSalableItem = $this->getMockForAbstractClass(SaleableInterface::class);
+        $simpleSalableItem->expects($this->once())
+            ->method('getTypeId')
+            ->willReturn('simple');
 
-        $configurableSalableItem = static fn (self $testCase) => $testCase->getMockForSalableInterface('configurable');
+        $configurableSalableItem = $this->getMockForAbstractClass(SaleableInterface::class);
+        $configurableSalableItem->expects($this->once())
+            ->method('getTypeId')
+            ->willReturn('configurable');
 
         return [
             [

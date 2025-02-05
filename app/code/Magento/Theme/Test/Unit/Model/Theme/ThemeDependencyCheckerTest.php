@@ -97,7 +97,7 @@ class ThemeDependencyCheckerTest extends TestCase
     /**
      * @return array
      */
-    public static function executeFailedChildThemeCheckDataProvider()
+    public function executeFailedChildThemeCheckDataProvider()
     {
         return [
             [

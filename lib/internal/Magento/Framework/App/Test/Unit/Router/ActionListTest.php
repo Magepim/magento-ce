@@ -108,12 +108,6 @@ class ActionListTest extends TestCase
      */
     public function testGet($module, $area, $namespace, $action, $data, $isInstantiable, $expected)
     {
-        if (is_callable($expected)) {
-            $expected = $expected($this);
-        }
-        if (is_object($expected)) {
-            $expected = get_class($expected);
-        }
         $this->reflectionClass->method('isInstantiable')->willReturn($isInstantiable);
 
         $this->cacheMock->expects($this->once())
@@ -136,59 +130,48 @@ class ActionListTest extends TestCase
     /**
      * @return array
      */
-    public static function getDataProvider()
+    public function getDataProvider()
     {
+        $mockClassName = 'Mock_Action_Class';
+        $actionClassObject = $this->getMockForAbstractClass(
+            ActionInterface::class,
+            [],
+            $mockClassName,
+            true,
+            true,
+            true,
+            ['execute', 'getResponse']
+        );
+
+        $actionClass = get_class($actionClassObject);
+
         return [
             [
                 'Magento_Module',
                 'Area',
                 'Namespace',
                 'Index',
-                ['magento\module\controller\area\namespace\index' => 'Mock_Action_Class_1'],
+                ['magento\module\controller\area\namespace\index' => $mockClassName],
                 true,
-                static fn (self $testCase) => $testCase->getMockForAbstractClass(
-                    ActionInterface::class,
-                    [],
-                    'Mock_Action_Class_1',
-                    true,
-                    true,
-                    true,
-                    ['execute', 'getResponse']
-                )
+                $actionClass
             ],
             [
                 'Magento_Module',
                 '',
                 'Namespace',
                 'Index',
-                ['magento\module\controller\namespace\index' => 'Mock_Action_Class_2'],
+                ['magento\module\controller\namespace\index' => $mockClassName],
                 true,
-                static fn (self $testCase) => $testCase->getMockForAbstractClass(
-                    ActionInterface::class,
-                    [],
-                    'Mock_Action_Class_2',
-                    true,
-                    true,
-                    true,
-                    ['execute', 'getResponse']
-                )
+                $actionClass
             ],
             [
                 'Magento_Module',
                 'Area',
                 'Namespace',
                 'Catch',
-                ['magento\module\controller\area\namespace\catchaction' => 'Mock_Action_Class_3'],
+                ['magento\module\controller\area\namespace\catchaction' => $mockClassName],
                 true,
-                static fn (self $testCase) => $testCase->getMockForAbstractClass(
-                    ActionInterface::class,
-                    [],
-                    'Mock_Action_Class_3',
-                    true,
-                    true,
-                    true,
-                    ['execute', 'getResponse']
-                )
+                $actionClass
             ],
             [
                 'Magento_Module',
@@ -213,7 +196,7 @@ class ActionListTest extends TestCase
                 null,
                 'adminhtml_product',
                 'index',
-                ['magento\module\controller\adminhtml\product\index' => '$mockClassName'],
+                'magento\module\controller\adminhtml\product\index' => '$mockClassName',
                 false,
                 null
             ],

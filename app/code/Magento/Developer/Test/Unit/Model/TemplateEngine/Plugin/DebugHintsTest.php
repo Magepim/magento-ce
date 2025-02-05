@@ -155,7 +155,7 @@ class DebugHintsTest extends TestCase
     /**
      * @return array
      */
-    public static function afterCreateActiveDataProvider()
+    public function afterCreateActiveDataProvider()
     {
         return [
             ['dev/debug/template_hints_storefront', false, false, null],
@@ -214,7 +214,7 @@ class DebugHintsTest extends TestCase
     /**
      * @return array
      */
-    public static function afterCreateInactiveDataProvider()
+    public function afterCreateInactiveDataProvider()
     {
         return [
             ['dev/debug/template_hints_storefront', false, false, false, null],

@@ -64,7 +64,7 @@ class CustomerTest extends TestCase
      * Data provider for testGetStoreId
      * @return array
      */
-    public static function getStoreDataProvider()
+    public function getStoreDataProvider()
     {
         return [[1, 10, 5, 10], [0, 10, 5, 5]];
     }

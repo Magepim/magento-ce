@@ -433,7 +433,7 @@ class PayOperationTest extends TestCase
     /**
      * @return array
      */
-    public static function payDataProvider()
+    public function payDataProvider()
     {
         return [
             'Invoice can capture, online' => [

@@ -166,7 +166,7 @@ class SignUpCommandTest extends TestCase
      *
      * @return array
      */
-    private static function getTestData()
+    private function getTestData()
     {
         return [
             'url' => 'http://www.mystore.com',

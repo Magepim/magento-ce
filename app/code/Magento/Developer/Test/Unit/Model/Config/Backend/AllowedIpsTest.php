@@ -59,7 +59,7 @@ class AllowedIpsTest extends TestCase
     /**
      * @return array
      */
-    public static function beforeSaveDataProvider()
+    public function beforeSaveDataProvider()
     {
         return [
             [ '', '' ],

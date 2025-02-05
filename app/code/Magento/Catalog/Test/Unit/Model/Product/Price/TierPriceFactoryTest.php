@@ -133,7 +133,7 @@ class TierPriceFactoryTest extends TestCase
     /**
      * @return array
      */
-    public static function createDataProvider(): array
+    public function createDataProvider(): array
     {
         return [
             [

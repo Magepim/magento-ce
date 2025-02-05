@@ -227,7 +227,7 @@ class OptionsTest extends TestCase
     /**
      * @return array
      */
-    public static function getFullLocalesDataProvider(): array
+    public function getFullLocalesDataProvider(): array
     {
         $deLocale = [
             'value' => 'de_DE',
@@ -270,7 +270,7 @@ class OptionsTest extends TestCase
     /**
      * @return array
      */
-    public static function getLimitedLocalesDataProvider(): array
+    public function getLimitedLocalesDataProvider(): array
     {
         $deLocale = [
             'value' => 'de_DE',

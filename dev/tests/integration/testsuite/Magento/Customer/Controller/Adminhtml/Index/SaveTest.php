@@ -125,11 +125,11 @@ class SaveTest extends AbstractBackendController
         $expectedCustomerData = self::getExpectedCustomerData($defaultCustomerData);
         return [
             "fill_all_fields" => [
-                'postData' => $defaultCustomerData,
-                'expectedData' => $expectedCustomerData
+                'post_data' => $defaultCustomerData,
+                'expected_data' => $expectedCustomerData
             ],
             'only_require_fields' => [
-                'postData' => array_replace_recursive(
+                'post_data' => array_replace_recursive(
                     $defaultCustomerData,
                     [
                         'customer' => [
@@ -143,7 +143,7 @@ class SaveTest extends AbstractBackendController
                         ],
                     ]
                 ),
-                'expectedData' => array_replace_recursive(
+                'expected_data' => array_replace_recursive(
                     $expectedCustomerData,
                     [
                         'customer' => [
@@ -196,7 +196,7 @@ class SaveTest extends AbstractBackendController
         $defaultCustomerData = self::getDefaultCustomerData();
         return [
             'without_some_require_fields' => [
-                'postData' => array_replace_recursive(
+                'post_data' => array_replace_recursive(
                     $defaultCustomerData,
                     [
                         'customer' => [
@@ -205,7 +205,7 @@ class SaveTest extends AbstractBackendController
                         ],
                     ]
                 ),
-                'expectedData' => array_replace_recursive(
+                'expected_data' => array_replace_recursive(
                     $defaultCustomerData,
                     [
                         'customer' => [
@@ -215,33 +215,33 @@ class SaveTest extends AbstractBackendController
                         ],
                     ]
                 ),
-                'expectedMessage' => [
+                'expected_message' => [
                     (string)__('"%1" is a required value.', 'First Name'),
                     (string)__('"%1" is a required value.', 'Last Name'),
                 ],
             ],
-            'with_empty_postData' => [
-                'postData' => [],
-                'expectedData' => [],
-                'expectedMessage' => [
-                    (string)__('The email address is required to create a customer account.'),
+            'with_empty_post_data' => [
+                'post_data' => [],
+                'expected_data' => [],
+                'expected_message' => [
+                    (string)__('The customer email is missing. Enter and try again.'),
                 ],
             ],
             'with_invalid_form_data' => [
-                'postData' => [
+                'post_data' => [
                     'account' => [
                         'middlename' => 'test middlename',
                         'group_id' => 1,
                     ],
                 ],
-                'expectedData' => [
+                'expected_data' => [
                     'account' => [
                         'middlename' => 'test middlename',
                         'group_id' => 1,
                     ],
                 ],
-                'expectedMessage' => [
-                    (string)__('The email address is required to create a customer account.'),
+                'expected_message' => [
+                    (string)__('The customer email is missing. Enter and try again.'),
                 ],
             ]
         ];

@@ -105,7 +105,7 @@ class ServerTest extends TestCase
     /**
      * @return array
      */
-    public static function getUrisDataProvider()
+    public function getUrisDataProvider()
     {
         return [
             'http host' => [2, '127.0.0.1', 0, ''],

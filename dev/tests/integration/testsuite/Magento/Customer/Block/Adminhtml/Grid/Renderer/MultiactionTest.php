@@ -42,13 +42,13 @@ class MultiactionTest extends AbstractMultiactionTest
     {
         return [
             'empty_actions' => [
-                'columnData' => ['actions' => []],
+                'column_data' => ['actions' => []],
             ],
             'not_array_actions' => [
-                'columnData' => ['actions' => 'actions'],
+                'column_data' => ['actions' => 'actions'],
             ],
             'empty_actions_element' => [
-                'columnData' => [
+                'column_data' => [
                     'actions' => [
                         'action_1' => 'actions',
                     ],

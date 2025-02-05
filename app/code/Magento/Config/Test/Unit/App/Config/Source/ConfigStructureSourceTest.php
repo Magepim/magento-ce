@@ -46,7 +46,7 @@ class ConfigStructureSourceTest extends TestCase
     /**
      * @return array
      */
-    public static function getDataProvider(): array
+    public function getDataProvider(): array
     {
         return [
             [

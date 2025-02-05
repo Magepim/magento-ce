@@ -52,7 +52,7 @@ class TextTest extends TestCase
     /**
      * @return array
      */
-    public static function addTextDataProvider()
+    public function addTextDataProvider()
     {
         return [
             'before_false' => [

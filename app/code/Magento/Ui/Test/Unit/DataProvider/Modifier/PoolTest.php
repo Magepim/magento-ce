@@ -152,7 +152,7 @@ class PoolTest extends TestCase
     /**
      * @return array
      */
-    public static function getModifiersDataProvider()
+    public function getModifiersDataProvider()
     {
         return [
             [

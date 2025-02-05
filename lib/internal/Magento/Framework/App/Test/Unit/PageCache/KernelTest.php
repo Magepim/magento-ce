@@ -193,7 +193,7 @@ class KernelTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderForResultWithCachedData(): array
+    public function dataProviderForResultWithCachedData(): array
     {
         $data = [
             'context' => [
@@ -240,7 +240,7 @@ class KernelTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderForResultWithoutCachedData(): array
+    public function dataProviderForResultWithoutCachedData(): array
     {
         return [
             ['existing key', [], false, false],
@@ -303,7 +303,7 @@ class KernelTest extends TestCase
     /**
      * @return array
      */
-    public static function testProcessSaveCacheDataProvider(): array
+    public function testProcessSaveCacheDataProvider(): array
     {
         return [
             [200],
@@ -344,7 +344,7 @@ class KernelTest extends TestCase
     /**
      * @return array
      */
-    public static function processNotSaveCacheProvider(): array
+    public function processNotSaveCacheProvider(): array
     {
         return [
             ['private, max-age=100', 200, true, false],

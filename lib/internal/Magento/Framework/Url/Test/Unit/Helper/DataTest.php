@@ -92,7 +92,7 @@ class DataTest extends TestCase
     /**
      * @return array
      */
-    public static function getEncodedUrlDataProvider()
+    public function getEncodedUrlDataProvider()
     {
         return [
             'no url' => [null, 1],
@@ -114,7 +114,7 @@ class DataTest extends TestCase
     /**
      * @return array
      */
-    public static function addRequestParamDataProvider()
+    public function addRequestParamDataProvider()
     {
         return [
             'string' => [
@@ -164,7 +164,7 @@ class DataTest extends TestCase
     /**
      * @return array
      */
-    public static function removeRequestParamDataProvider()
+    public function removeRequestParamDataProvider()
     {
         return [
             'no match' => [

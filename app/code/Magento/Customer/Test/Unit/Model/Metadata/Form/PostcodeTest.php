@@ -85,7 +85,7 @@ class PostcodeTest extends AbstractFormTestCase
     /**
      * @return array
      */
-    public static function validateValueDataProvider()
+    public function validateValueDataProvider()
     {
         return [
             ['', ['"Zip/Postal Code" is a required value.'], 'US', false],
@@ -174,7 +174,7 @@ class PostcodeTest extends AbstractFormTestCase
     /**
      * @return array
      */
-    public static function validateValueLengthDataProvider(): array
+    public function validateValueLengthDataProvider(): array
     {
         return [
             'false' => [false, ['"" is a required value.', '"" length must be equal or greater than 5 characters.']],

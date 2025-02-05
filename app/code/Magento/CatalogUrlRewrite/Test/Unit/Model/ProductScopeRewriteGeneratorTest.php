@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2016 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
@@ -161,6 +161,7 @@ class ProductScopeRewriteGeneratorTest extends TestCase
     public function testGenerationForGlobalScope()
     {
         $this->configMock->expects($this->any())->method('getValue')
+            ->with('catalog/seo/generate_category_product_rewrites')
             ->willReturn('1');
         $product = $this->createMock(Product::class);
         $product->expects($this->any())->method('getStoreId')->willReturn(null);
@@ -239,7 +240,6 @@ class ProductScopeRewriteGeneratorTest extends TestCase
             ->willReturn([]);
 
         $this->categoryRepositoryMock->expects($this->once())->method('get')->willReturn($this->categoryMock);
-        $this->configMock->expects($this->any())->method('getValue')->willReturn('1');
 
         $this->assertEquals(
             ['category-1_1' => $canonical],
@@ -286,7 +286,7 @@ class ProductScopeRewriteGeneratorTest extends TestCase
      *
      * @return array
      */
-    public static function isCategoryProperForGeneratingDataProvider()
+    public function isCategoryProperForGeneratingDataProvider()
     {
         return [
             [['0'], false],

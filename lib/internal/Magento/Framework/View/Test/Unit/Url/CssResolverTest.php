@@ -47,7 +47,7 @@ class CssResolverTest extends TestCase
     /**
      * @return array
      */
-    public static function aggregateImportDirectivesDataProvider()
+    public function aggregateImportDirectivesDataProvider()
     {
         $fixturePath = __DIR__ . '/_files/';
         $source = file_get_contents($fixturePath . 'sourceImport.css');

@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2015 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 namespace Magento\Paypal\Model\Payflow\Service\Response\Handler;
 
@@ -27,7 +27,6 @@ class HandlerComposite implements HandlerInterface
                     $message = 'Type mismatch. Expected type: %s. Actual: %s, Code: %s';
 
                     throw new \LogicException(
-                        // phpcs:ignore Magento2.Functions.DiscouragedFunction
                         sprintf($message, 'HandlerInterface', gettype($handler), $code)
                     );
                 }
@@ -38,7 +37,7 @@ class HandlerComposite implements HandlerInterface
     }
 
     /**
-     * @inheritDoc
+     * {inheritdoc}
      */
     public function handle(InfoInterface $payment, DataObject $response)
     {

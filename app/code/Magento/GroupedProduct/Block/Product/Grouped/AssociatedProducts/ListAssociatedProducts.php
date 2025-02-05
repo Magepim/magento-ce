@@ -6,6 +6,8 @@
 
 /**
  * Products in grouped grid
+ *
+ * @author     Magento Core Team <core@magentocommerce.com>
  */
 namespace Magento\GroupedProduct\Block\Product\Grouped\AssociatedProducts;
 
@@ -16,7 +18,7 @@ namespace Magento\GroupedProduct\Block\Product\Grouped\AssociatedProducts;
 class ListAssociatedProducts extends \Magento\Backend\Block\Template
 {
     /**
-     * Registry variable
+     * Registry
      *
      * @var \Magento\Framework\Registry
      */

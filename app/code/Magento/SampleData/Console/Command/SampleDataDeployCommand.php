@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2015 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 
 namespace Magento\SampleData\Console\Command;
@@ -91,7 +91,7 @@ class SampleDataDeployCommand extends Command
             $baseDir = $this->filesystem->getDirectoryRead(DirectoryList::ROOT)->getAbsolutePath();
             $commonArgs = ['--working-dir' => $baseDir, '--no-progress' => 1];
             if ($input->getOption(self::OPTION_NO_UPDATE)) {
-                $commonArgs['--no-update'] = true;
+                $commonArgs['--no-update'] = 1;
             }
             $packages = [];
             foreach ($sampleDataPackages as $name => $version) {

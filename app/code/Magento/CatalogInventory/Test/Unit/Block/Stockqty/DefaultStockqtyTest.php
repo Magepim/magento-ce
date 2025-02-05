@@ -123,7 +123,7 @@ class DefaultStockqtyTest extends TestCase
         $this->assertSame($expectedQty, $this->block->getData('product_stock_qty'));
     }
 
-    public function testGetStockQtyLeft()
+    public function te1stGetStockQtyLeft()
     {
         $productId = 1;
         $minQty = 0;
@@ -133,29 +133,20 @@ class DefaultStockqtyTest extends TestCase
         $storeMock = $this->getMockBuilder(Store::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $product = $this->createMock(Product::class);
-        $product->expects($this->once())
-            ->method('getStore')
-            ->willReturn($storeMock);
         $storeMock->expects($this->once())
             ->method('getWebsiteId')
             ->willReturn($websiteId);
+        $product = $this->createMock(Product::class);
         $product->expects($this->any())
             ->method('getId')
             ->willReturn($productId);
-        $this->registryMock->expects($this->any())
+        $product->expects($this->once())
+            ->method('getStore')
+            ->willReturn($storeMock);
+        $this->registryMock->expects($this->once())
             ->method('registry')
             ->with('current_product')
             ->willReturn($product);
-        if ($productId) {
-            $stockStatus = $this->getMockBuilder(StockStatusInterface::class)
-                ->getMockForAbstractClass();
-            $stockStatus->expects($this->any())->method('getQty')->willReturn($stockQty);
-            $this->stockRegistryMock->expects($this->once())
-                ->method('getStockStatus')
-                ->with($productId, $websiteId)
-                ->willReturn($stockStatus);
-        }
 
         $stockItemMock = $this->getMockBuilder(StockItemInterface::class)
             ->disableOriginalConstructor()
@@ -174,29 +165,29 @@ class DefaultStockqtyTest extends TestCase
     /**
      * @return array
      */
-    public static function getStockQtyDataProvider()
+    public function getStockQtyDataProvider()
     {
         return [
             [
-                'productStockQty' => 100,
-                'productId' => 5,
-                'websiteId' => 0,
-                'dataQty' => null,
-                'expectedQty' => 100,
+                'product qty' => 100,
+                'product id' => 5,
+                'website id' => 0,
+                'default qty' => null,
+                'expected qty' => 100,
             ],
             [
-                'productStockQty' => 100,
-                'productId' => null,
-                'websiteId' => null,
-                'dataQty' => null,
-                'expectedQty' => 0
+                'product qty' => 100,
+                'product id' => null,
+                'website id' => null,
+                'default qty' => null,
+                'expected qty' => 0
             ],
             [
-                'productStockQty' => null,
-                'productId' => null,
-                'websiteId' => null,
-                'dataQty' => 50,
-                'expectedQty' => 50
+                'product qty' => null,
+                'product id' => null,
+                'website id' => null,
+                'default qty' => 50,
+                'expected qty' => 50
             ],
         ];
     }

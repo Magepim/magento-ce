@@ -44,7 +44,7 @@ class DiscountTest extends TestCase
      *
      * @return array
      */
-    public static function priceDataProvider()
+    public function priceDataProvider()
     {
         return [
             [100, 50, 50, 50],

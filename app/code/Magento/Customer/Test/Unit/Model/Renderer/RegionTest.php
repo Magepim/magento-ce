@@ -146,7 +146,7 @@ class RegionTest extends TestCase
     /**
      * @return array
      */
-    public static function renderDataProvider()
+    public function renderDataProvider()
     {
         return [
             'with no defined regions' => [[]],

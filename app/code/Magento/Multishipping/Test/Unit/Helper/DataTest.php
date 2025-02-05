@@ -165,7 +165,7 @@ class DataTest extends TestCase
      *
      * @return array
      */
-    public static function isMultishippingCheckoutAvailableDataProvider()
+    public function isMultishippingCheckoutAvailableDataProvider()
     {
         return [
             [true, false, true, null, null, null, null, null],

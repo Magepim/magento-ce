@@ -69,10 +69,6 @@ class MessageProcessorLoaderTest extends TestCase
      */
     public function testLoad($message)
     {
-        if (is_callable($message)) {
-            $message = $message($this);
-        }
-
         $messageTopic = 'topic';
         $messages = [
             $messageTopic => [$message]
@@ -89,26 +85,18 @@ class MessageProcessorLoaderTest extends TestCase
      *
      * @return array
      */
-    public static function loadDataProvider()
+    public function loadDataProvider()
     {
-        $mergedMessage = static fn (self $testCase) => $testCase->getMergedMessageInterfaceMock();
-        $message = static fn (self $testCase) => $testCase->getEnvelopeInterfaceMock();
+        $mergedMessage = $this->getMockBuilder(MergedMessageInterface::class)
+            ->disableOriginalConstructor()
+            ->getMockForAbstractClass();
+        $message = $this->getMockBuilder(EnvelopeInterface::class)
+            ->disableOriginalConstructor()
+            ->getMockForAbstractClass();
 
         return [
             [$mergedMessage],
             [$message]
         ];
-    }
-
-    public function getMergedMessageInterfaceMock() {
-        return $this->getMockBuilder(MergedMessageInterface::class)
-            ->disableOriginalConstructor()
-            ->getMockForAbstractClass();
-    }
-
-    public function getEnvelopeInterfaceMock() {
-        return $this->getMockBuilder(EnvelopeInterface::class)
-            ->disableOriginalConstructor()
-            ->getMockForAbstractClass();
     }
 }

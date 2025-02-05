@@ -196,7 +196,7 @@ class CollectionTest extends TestCase
     /**
      * @return array
      */
-    public static function addConstraintDataProvider()
+    public function addConstraintDataProvider()
     {
         return [
             'area' => [

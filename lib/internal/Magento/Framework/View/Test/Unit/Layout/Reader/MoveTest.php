@@ -79,11 +79,11 @@ class MoveTest extends TestCase
     /**
      * @return array
      */
-    public static function processDataProvider()
+    public function processDataProvider()
     {
         return [
             'move_before' => [
-                'currentElement' => new Element('
+                'element' => new Element('
                     <move element="product" destination="product.info" before="before.block" as="as.product.info"/>
                 '),
                 'destination' => 'product.info',
@@ -93,7 +93,7 @@ class MoveTest extends TestCase
                 'parentElement' => new Element('<element/>'),
             ],
             'move_after' => [
-                'currentElement' => new Element('
+                'element' => new Element('
                     <move element="product" destination="product.info" after="after.block" as="as.product.info"/>
                 '),
                 'destination' => 'product.info',

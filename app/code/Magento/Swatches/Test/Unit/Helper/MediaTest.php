@@ -149,7 +149,7 @@ class MediaTest extends TestCase
     /**
      * @return array
      */
-    public static function dataForFullPath()
+    public function dataForFullPath()
     {
         return [
             [
@@ -253,7 +253,7 @@ class MediaTest extends TestCase
     /**
      * @return array
      */
-    public static function dataForFolderName()
+    public function dataForFolderName()
     {
         return [
             [
@@ -343,7 +343,7 @@ class MediaTest extends TestCase
     /**
      * @return array
      */
-    public static function getSwatchTypes()
+    public function getSwatchTypes()
     {
         return [
             [

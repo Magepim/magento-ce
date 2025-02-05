@@ -12,7 +12,6 @@ use Magento\Framework\GraphQl\Config\Element\Field;
 use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
 use Magento\Sales\Api\Data\OrderInterface;
-use Magento\SalesGraphQl\Model\Order\Token as OrderToken;
 
 /**
  * Retrieve order token
@@ -23,7 +22,7 @@ class Token implements ResolverInterface
      * @param Token $token
      */
     public function __construct(
-        private readonly OrderToken $token
+        private readonly \Magento\SalesGraphQl\Model\Order\Token $token
     ) {
     }
 
@@ -34,8 +33,8 @@ class Token implements ResolverInterface
         Field $field,
         $context,
         ResolveInfo $info,
-        ?array $value = null,
-        ?array $args = null
+        array $value = null,
+        array $args = null
     ) {
         if (!(($value['model'] ?? null) instanceof OrderInterface)) {
             throw new LocalizedException(__('"model" value should be specified'));
@@ -45,7 +44,7 @@ class Token implements ResolverInterface
         return $this->token->encrypt(
             $order->getIncrementId(),
             $order->getBillingAddress()->getEmail(),
-            $order->getBillingAddress()->getLastname()
+            $order->getBillingAddress()->getPostcode()
         );
     }
 }

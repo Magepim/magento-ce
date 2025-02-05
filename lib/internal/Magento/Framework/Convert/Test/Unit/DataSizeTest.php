@@ -42,7 +42,7 @@ class DataSizeTest extends TestCase
     /**
      * @return array
      */
-    public static function getConvertSizeToIntegerDataProvider()
+    public function getConvertSizeToIntegerDataProvider()
     {
         return [
             ['0K', 0],

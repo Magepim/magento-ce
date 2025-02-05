@@ -70,7 +70,7 @@ class ContentValidatorTest extends TestCase
     /**
      * @return array
      */
-    public static function getInvalidNames()
+    public function getInvalidNames()
     {
         return [
             ['test\test'],

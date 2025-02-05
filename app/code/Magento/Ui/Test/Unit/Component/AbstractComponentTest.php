@@ -183,7 +183,7 @@ class AbstractComponentTest extends TestCase
     /**
      * @return array
      */
-    public static function getConfigurationDataProvider()
+    public function getConfigurationDataProvider()
     {
         return [
             ['config' => null, 'expectedResult' => []],
@@ -222,7 +222,7 @@ class AbstractComponentTest extends TestCase
     /**
      * @return array
      */
-    public static function getJsConfigDataProvider()
+    public function getJsConfigDataProvider()
     {
         return [
             [

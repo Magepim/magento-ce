@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2024 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 
 /**
@@ -392,7 +392,8 @@ class Tree extends AbstractCategory
         $item['id'] = $node->getId();
         $item['store'] = (int)$this->getStore()->getId();
         $item['path'] = $node->getData('path');
-        $item['a_attr'] = ['class' => $node->getIsActive() ? 'active-category' : 'not-active-category'];
+
+        $item['cls'] = 'folder ' . ($node->getIsActive() ? 'active-category' : 'no-active-category');
         //$item['allowDrop'] = ($level<3) ? true : false;
         $allowMove = $this->_isCategoryMoveable($node);
         $item['allowDrop'] = $allowMove;

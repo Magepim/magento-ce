@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2013 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
@@ -38,33 +38,24 @@ class XsdTest extends TestCase
      * @param string $schemaName
      * @param string $xmlString
      * @param array $expectedError
-     * @param bool $isRegex
      */
-    protected function _loadDataForTest($schemaName, $xmlString, $expectedError, $isRegex = false)
+    protected function _loadDataForTest($schemaName, $xmlString, $expectedError)
     {
-        $actualErrors = $this->_xsdValidator->validate($this->_xsdSchemaPath . $schemaName, $xmlString);
-        $this->assertNotEmpty($actualErrors);
-
+        $actualError = $this->_xsdValidator->validate($this->_xsdSchemaPath . $schemaName, $xmlString);
+        $this->assertEquals(false, empty($actualError));
         foreach ($expectedError as $error) {
-            if ($isRegex) {
-                foreach ($actualErrors as $actualError) {
-                    $this->assertMatchesRegularExpression($error, $actualError);
-                }
-            } else {
-                $this->assertContains($error, $actualErrors);
-            }
+            $this->assertContains($error, $actualError);
         }
     }
 
     /**
      * @param string $xmlString
      * @param array $expectedError
-     * @param $isRegex
      * @dataProvider schemaCorrectlyIdentifiesInvalidProductOptionsDataProvider
      */
-    public function testSchemaCorrectlyIdentifiesInvalidProductOptionsXml($xmlString, $expectedError, $isRegex)
+    public function testSchemaCorrectlyIdentifiesInvalidProductOptionsXml($xmlString, $expectedError)
     {
-        $this->_loadDataForTest('product_options.xsd', $xmlString, $expectedError, $isRegex);
+        $this->_loadDataForTest('product_options.xsd', $xmlString, $expectedError);
     }
 
     /**
@@ -93,7 +84,7 @@ class XsdTest extends TestCase
     /**
      * Data provider with valid xml array according to schema
      */
-    public static function schemaCorrectlyIdentifiesValidXmlDataProvider()
+    public function schemaCorrectlyIdentifiesValidXmlDataProvider()
     {
         return [
             'product_options' => ['product_options.xsd', 'product_options_valid.xml'],
@@ -104,7 +95,7 @@ class XsdTest extends TestCase
     /**
      * Data provider with invalid xml array according to schema
      */
-    public static function schemaCorrectlyIdentifiesInvalidProductOptionsDataProvider()
+    public function schemaCorrectlyIdentifiesInvalidProductOptionsDataProvider()
     {
         return include __DIR__ . '/_files/invalidProductOptionsXmlArray.php';
     }
@@ -112,7 +103,7 @@ class XsdTest extends TestCase
     /**
      * Data provider with invalid xml array according to schema
      */
-    public static function schemaCorrectlyIdentifiesInvalidProductOptionsMergedXmlDataProvider()
+    public function schemaCorrectlyIdentifiesInvalidProductOptionsMergedXmlDataProvider()
     {
         return include __DIR__ . '/_files/invalidProductOptionsMergedXmlArray.php';
     }

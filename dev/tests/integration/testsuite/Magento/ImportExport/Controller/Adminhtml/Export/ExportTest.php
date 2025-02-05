@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2020 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
@@ -49,7 +49,7 @@ class ExportTest extends AbstractBackendController
     private $localeResolver;
 
     /**
-     * @inheritDoc
+     * @inheridoc
      */
     protected function setUp(): void
     {

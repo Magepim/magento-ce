@@ -115,7 +115,7 @@ class UseConfigSettingsTest extends TestCase
     /**
      * @return array
      */
-    public static function prepareSourceDataProvider()
+    public function prepareSourceDataProvider()
     {
         return [
             'valid' => [
@@ -132,7 +132,7 @@ class UseConfigSettingsTest extends TestCase
                     'unserialized' => true
                 ],
                 'sourceValue' => '{"32000":3}',
-                'serializedCalledNum' => 1,
+                'serialziedCalledNum' => 1,
                 'isValidCalledNum' => 1
             ]
         ];

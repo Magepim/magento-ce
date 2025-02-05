@@ -61,7 +61,7 @@ class EntityTest extends TestCase
      *
      * @return array
      */
-    public static function toOptionArrayDataProvider()
+    public function toOptionArrayDataProvider()
     {
         return [
             'Empty Entity' => [

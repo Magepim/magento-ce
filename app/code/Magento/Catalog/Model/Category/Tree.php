@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2014 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 namespace Magento\Catalog\Model\Category;
 
@@ -58,7 +58,7 @@ class Tree
         StoreManagerInterface $storeManager,
         Collection $categoryCollection,
         CategoryTreeInterfaceFactory $treeFactory,
-        ?TreeFactory $treeResourceFactory = null
+        TreeFactory $treeResourceFactory = null
     ) {
         $this->categoryTree = $categoryTree;
         $this->storeManager = $storeManager;

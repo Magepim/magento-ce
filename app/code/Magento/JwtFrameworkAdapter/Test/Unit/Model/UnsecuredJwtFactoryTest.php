@@ -32,7 +32,7 @@ class UnsecuredJwtFactoryTest extends TestCase
         $this->model = new UnsecuredJwtFactory();
     }
 
-    public static function getCreateCases(): array
+    public function getCreateCases(): array
     {
         return [
             'compact-arbitrary' => [

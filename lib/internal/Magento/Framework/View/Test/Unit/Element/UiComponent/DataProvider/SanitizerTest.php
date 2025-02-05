@@ -34,7 +34,7 @@ class SanitizerTest extends TestCase
      *
      * @return array
      */
-    public static function getSanitizeDataSets(): array
+    public function getSanitizeDataSets(): array
     {
         return [
             'simpleSet' => [
@@ -118,7 +118,7 @@ class SanitizerTest extends TestCase
      *
      * @return array
      */
-    public static function getSanitizeComponentDataSets(): array
+    public function getSanitizeComponentDataSets(): array
     {
         return [
             'simpleComponent' => [

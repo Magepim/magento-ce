@@ -82,7 +82,7 @@ class WeightTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderValidate()
+    public function dataProviderValidate()
     {
         return [
             'US simple' => ['1234.56'],
@@ -113,7 +113,7 @@ class WeightTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderValidateForFailure()
+    public function dataProviderValidateForFailure()
     {
         return [
             'negative US simple' => ['-1234.56'],

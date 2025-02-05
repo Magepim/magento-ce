@@ -28,7 +28,7 @@ class OrderCommandTest extends TestCase
     /**
      * @var string
      */
-    private static $newOrderStatus = 'custom_status';
+    private $newOrderStatus = 'custom_status';
 
     /**
      * @see OrderCommand::execute
@@ -61,21 +61,21 @@ class OrderCommandTest extends TestCase
     /**
      * @return array
      */
-    public static function commandResultDataProvider()
+    public function commandResultDataProvider()
     {
         return [
             [
                 false,
                 false,
                 Order::STATE_PROCESSING,
-                self::$newOrderStatus,
+                $this->newOrderStatus,
                 'Ordered amount of %1'
             ],
             [
                 true,
                 false,
                 Order::STATE_PAYMENT_REVIEW,
-                self::$newOrderStatus,
+                $this->newOrderStatus,
                 'The order amount of %1 is pending approval on the payment gateway.'
             ],
             [
@@ -104,7 +104,7 @@ class OrderCommandTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
         $statusResolver->method('getOrderStatusByState')
-            ->willReturn(self::$newOrderStatus);
+            ->willReturn($this->newOrderStatus);
 
         return $statusResolver;
     }

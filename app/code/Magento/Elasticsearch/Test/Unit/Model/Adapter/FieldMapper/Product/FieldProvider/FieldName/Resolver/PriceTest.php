@@ -101,7 +101,7 @@ class PriceTest extends TestCase
     /**
      * @return array
      */
-    public static function getFieldNameProvider()
+    public function getFieldNameProvider()
     {
         return [
             ['price', [], 'price_1_2'],

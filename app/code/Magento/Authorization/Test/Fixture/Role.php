@@ -13,7 +13,6 @@ use Magento\Authorization\Model\RoleFactory;
 use Magento\Authorization\Model\RulesFactory;
 use Magento\Authorization\Model\UserContextInterface;
 use Magento\Framework\DataObject;
-use Magento\TestFramework\Fixture\Api\DataMerger;
 use Magento\TestFramework\Fixture\Data\ProcessorInterface;
 use Magento\TestFramework\Fixture\RevertibleDataFixtureInterface;
 
@@ -26,16 +25,13 @@ class Role implements RevertibleDataFixtureInterface
         'role_name' => 'Role Name %uniqid%',
         'role_type' => Group::ROLE_TYPE,
         'user_id' => 0,
-        'user_type' => UserContextInterface::USER_TYPE_ADMIN,
-        'pid' => 0,
-        'gws_is_all' => 1,
-        'gws_websites' => null,
-        'gws_store_groups' => null,
-        'resources' => self::RESOURCES
+        'user_type' => UserContextInterface::USER_TYPE_ADMIN
     ];
 
-    private const RESOURCES = [
-        'Magento_Backend::all'
+    private const DEFAULT_DATA_RULES = [
+        'id' => null,
+        'role_id' => null,
+        'resources' => ['Magento_Backend::all']
     ];
 
     /**
@@ -59,29 +55,21 @@ class Role implements RevertibleDataFixtureInterface
     private $rulesFactory;
 
     /**
-     * @var DataMerger
-     */
-    private $dataMerger;
-
-    /**
      * @param RoleFactory $roleFactory
      * @param RoleResource $roleResourceModel
      * @param RulesFactory $rulesFactory
      * @param ProcessorInterface $dataProcessor
-     * @param DataMerger $dataMerger
      */
     public function __construct(
         RoleFactory        $roleFactory,
         RoleResource       $roleResourceModel,
         RulesFactory       $rulesFactory,
-        ProcessorInterface $dataProcessor,
-        DataMerger         $dataMerger
+        ProcessorInterface $dataProcessor
     ) {
         $this->roleFactory = $roleFactory;
         $this->roleResourceModel = $roleResourceModel;
         $this->rulesFactory = $rulesFactory;
         $this->dataProcessor = $dataProcessor;
-        $this->dataMerger = $dataMerger;
     }
 
     /**
@@ -89,28 +77,16 @@ class Role implements RevertibleDataFixtureInterface
      */
     public function apply(array $data = []): ?DataObject
     {
-        $data = $this->prepareData($data);
-
-        $websites = $this->convertGwsWebsiteStoreGroups($data['gws_websites']);
-        $storeGroups = $this->convertGwsWebsiteStoreGroups($data['gws_store_groups']);
-
         $role = $this->roleFactory->create();
-        $role->setRoleName($data['role_name'])
-            ->setRoleType($data['role_type'])
-            ->setPid($data['pid'])
-            ->setUserType($data['user_type'])
-            ->setGwsIsAll($data['gws_is_all'])
-            ->setGwsWebsites($websites)
-            ->setGwsStoreGroups($storeGroups);
+        $role->setData($this->prepareData(array_diff_key($data, self::DEFAULT_DATA_RULES)));
+        $this->roleResourceModel->save($role);
 
-        $result = $role->save();
+        $rules = $this->rulesFactory->create();
+        $rules->setRoleId($role->getId() ?? null);
+        $rules->setResources($data['resources'] ?? self::DEFAULT_DATA_RULES['resources']);
+        $rules->saveRel();
 
-        $this->rulesFactory->create()
-            ->setRoleId($result['role_id'])
-            ->setResources($data['resources'] ?? self::RESOURCES)
-            ->saveRel();
-
-        return $result;
+        return $role;
     }
 
     /**
@@ -134,26 +110,7 @@ class Role implements RevertibleDataFixtureInterface
      */
     private function prepareData(array $data): array
     {
-        $data = $this->dataMerger->merge(self::DEFAULT_DATA, $data);
+        $data = array_merge(self::DEFAULT_DATA, $data);
         return $this->dataProcessor->process($this, $data);
-    }
-
-    /**
-     * Convert GWS websites and store groups to string
-     *
-     * @param $data
-     * @return string|null
-     */
-    private function convertGwsWebsiteStoreGroups($data): ?string
-    {
-        if (isset($data)) {
-            if (is_array($data)) {
-                return implode(',', $data);
-            }
-            if (is_string($data)) {
-                return $data;
-            }
-        }
-        return null;
     }
 }

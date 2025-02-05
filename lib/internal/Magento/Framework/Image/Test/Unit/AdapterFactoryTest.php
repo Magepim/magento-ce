@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2015 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
@@ -77,7 +77,7 @@ class AdapterFactoryTest extends TestCase
      * @see self::testCreate()
      * @return array
      */
-    public static function createDataProvider()
+    public function createDataProvider()
     {
         return [
             ['GD2', Gd2::class],

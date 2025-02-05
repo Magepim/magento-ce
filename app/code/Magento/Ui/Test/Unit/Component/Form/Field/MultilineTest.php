@@ -105,7 +105,7 @@ class MultilineTest extends TestCase
      *
      * @return array
      */
-    public static function prepareDataProvider()
+    public function prepareDataProvider()
     {
         return [
             [

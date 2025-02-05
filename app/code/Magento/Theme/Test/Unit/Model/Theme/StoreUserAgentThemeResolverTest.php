@@ -64,7 +64,7 @@ class StoreUserAgentThemeResolverTest extends TestCase
     /**
      * @return array
      */
-    public static function getThemesDataProvider(): array
+    public function getThemesDataProvider(): array
     {
         return [
             [

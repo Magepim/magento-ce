@@ -240,7 +240,7 @@ class MassgeneratorTest extends TestCase
      *
      * @return array
      */
-    public static function validateDataProvider()
+    public function validateDataProvider()
     {
         return [
             [
@@ -285,7 +285,7 @@ class MassgeneratorTest extends TestCase
      *
      * @return array
      */
-    public static function delimiterDataProvider()
+    public function delimiterDataProvider()
     {
         return [
             [
@@ -304,7 +304,7 @@ class MassgeneratorTest extends TestCase
      *
      * @return array
      */
-    public static function generatorDataProvider()
+    public function generatorDataProvider()
     {
         return [
             [

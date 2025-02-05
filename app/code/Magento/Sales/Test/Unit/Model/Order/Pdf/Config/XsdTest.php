@@ -85,9 +85,9 @@ class XsdTest extends TestCase
     /**
      * @return array
      */
-    public static function schemaByExemplarDataProvider()
+    public function schemaByExemplarDataProvider()
     {
-        $result = self::_getExemplarTestData();
+        $result = $this->_getExemplarTestData();
 
         $result['non-valid totals missing title'] = [
             '<config><totals><total name="i1"><source_field>foo</source_field></total></totals></config>',
@@ -114,9 +114,9 @@ class XsdTest extends TestCase
     /**
      * @return array
      */
-    public static function fileSchemaByExemplarDataProvider()
+    public function fileSchemaByExemplarDataProvider()
     {
-        $result = self::_getExemplarTestData();
+        $result = $this->_getExemplarTestData();
 
         $result['valid totals missing title'] = [
             '<config><totals><total name="i1"><source_field>foo</source_field></total></totals></config>',
@@ -137,7 +137,7 @@ class XsdTest extends TestCase
      * @return array
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    protected static function _getExemplarTestData()
+    protected function _getExemplarTestData()
     {
         return [
             'valid empty' => ['<config/>', []],

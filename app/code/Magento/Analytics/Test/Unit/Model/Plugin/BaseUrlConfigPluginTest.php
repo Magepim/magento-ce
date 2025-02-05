@@ -93,21 +93,21 @@ class BaseUrlConfigPluginTest extends TestCase
     {
         return [
             'Value has not been changed' => [
-                'configValueData' => [
+                'Config Value Data' => [
                     'isValueChanged' => false,
                     'path' => Store::XML_PATH_SECURE_BASE_URL,
                     'scope' => ScopeConfigInterface::SCOPE_TYPE_DEFAULT
                 ],
             ],
             'Unsecure URL has been changed' => [
-                'configValueData' => [
+                'Config Value Data' => [
                     'isValueChanged' => true,
                     'path' => Store::XML_PATH_UNSECURE_BASE_URL,
                     'scope' => ScopeConfigInterface::SCOPE_TYPE_DEFAULT
                 ],
             ],
             'Secure URL has been changed not in the Default scope' => [
-                'configValueData' => [
+                'Config Value Data' => [
                     'isValueChanged' => true,
                     'path' => Store::XML_PATH_SECURE_BASE_URL,
                     'scope' => ScopeInterface::SCOPE_STORES

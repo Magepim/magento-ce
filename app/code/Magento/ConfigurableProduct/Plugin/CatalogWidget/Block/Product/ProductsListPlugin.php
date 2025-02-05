@@ -1,8 +1,9 @@
 <?php
 /**
- * Copyright 2023 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
+
 declare(strict_types=1);
 
 namespace Magento\ConfigurableProduct\Plugin\CatalogWidget\Block\Product;
@@ -77,22 +78,14 @@ class ProductsListPlugin
             $connection = $this->resource->getConnection();
             $productIds = $connection->fetchCol(
                 $connection
-                    ->select()
-                    ->from(
-                        ['e' => $this->resource->getTableName('catalog_product_entity')],
-                        ['entity_table.entity_id']
-                    )
-                    ->joinInner(
-                        ['link_table' => $this->resource->getTableName('catalog_product_super_link')],
-                        'link_table.product_id = e.entity_id',
-                        []
-                    )
-                    ->joinInner(
-                        ['entity_table' => $this->resource->getTableName('catalog_product_entity')],
-                        'entity_table.' . $linkField . ' = link_table.parent_id',
-                        []
-                    )
-                    ->where('link_table.product_id IN (?)', $searchProducts)
+                ->select()
+                ->from(['e' => $this->resource->getTableName('catalog_product_entity')], ['link_table.parent_id'])
+                ->joinInner(
+                    ['link_table' => $this->resource->getTableName('catalog_product_super_link')],
+                    'link_table.product_id = e.' . $linkField,
+                    []
+                )
+                ->where('link_table.product_id IN (?)', $searchProducts)
             );
 
             $configurableProductCollection = $this->productCollectionFactory->create();

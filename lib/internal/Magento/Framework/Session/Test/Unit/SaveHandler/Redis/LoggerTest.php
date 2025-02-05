@@ -79,7 +79,7 @@ class LoggerTest extends TestCase
     /**
      * @return array
      */
-    public static function logDataProvider()
+    public function logDataProvider()
     {
         return [
             [LoggerInterface::EMERGENCY, 'emergency'],

@@ -30,7 +30,7 @@ class CommandRendererTest extends TestCase
     /**
      * @return array
      */
-    public static function commandsDataProvider()
+    public function commandsDataProvider()
     {
         $testArgument  = 'argument';
         $testArgument2 = 'argument2';

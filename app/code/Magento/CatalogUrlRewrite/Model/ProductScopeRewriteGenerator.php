@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2016 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 namespace Magento\CatalogUrlRewrite\Model;
 
@@ -17,13 +17,10 @@ use Magento\CatalogUrlRewrite\Model\Product\CurrentUrlRewritesRegenerator;
 use Magento\CatalogUrlRewrite\Service\V1\StoreViewService;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\ObjectManager;
-use Magento\Framework\Data\Collection;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Store\Model\Store;
 use Magento\Store\Model\StoreManagerInterface;
-use Magento\UrlRewrite\Model\MergeDataProvider;
 use Magento\UrlRewrite\Model\MergeDataProviderFactory;
-use Magento\UrlRewrite\Service\V1\Data\UrlRewrite;
 
 /**
  * Generates Product/Category URLs for different scopes
@@ -32,66 +29,60 @@ use Magento\UrlRewrite\Service\V1\Data\UrlRewrite;
  */
 class ProductScopeRewriteGenerator
 {
-    public const WEBSITE_URL_REWRITE_SCOPE = 'website';
-
-    public const STORE_VIEW_URL_REWRITE_SCOPE = 'store_view';
-
-    public const URL_REWRITE_SCOPE_CONFIG_PATH = 'catalog/seo/product_rewrite_context';
-
     /**
      * @var StoreViewService
      */
-    private StoreViewService $storeViewService;
+    private $storeViewService;
 
     /**
      * @var StoreManagerInterface
      */
-    private StoreManagerInterface $storeManager;
+    private $storeManager;
 
     /**
      * @var ScopeConfigInterface
      */
-    private ScopeConfigInterface $config;
+    private $config;
 
     /**
      * @var ObjectRegistryFactory
      */
-    private ObjectRegistryFactory $objectRegistryFactory;
+    private $objectRegistryFactory;
 
     /**
      * @var AnchorUrlRewriteGenerator
      */
-    private AnchorUrlRewriteGenerator $anchorUrlRewriteGenerator;
+    private $anchorUrlRewriteGenerator;
 
     /**
-     * @var CurrentUrlRewritesRegenerator
+     * @var \Magento\CatalogUrlRewrite\Model\Product\CurrentUrlRewritesRegenerator
      */
-    private CurrentUrlRewritesRegenerator $currentUrlRewritesRegenerator;
+    private $currentUrlRewritesRegenerator;
 
     /**
-     * @var CategoriesUrlRewriteGenerator
+     * @var \Magento\CatalogUrlRewrite\Model\Product\CategoriesUrlRewriteGenerator
      */
-    private CategoriesUrlRewriteGenerator $categoriesUrlRewriteGenerator;
+    private $categoriesUrlRewriteGenerator;
 
     /**
-     * @var CanonicalUrlRewriteGenerator
+     * @var \Magento\CatalogUrlRewrite\Model\Product\CanonicalUrlRewriteGenerator
      */
-    private CanonicalUrlRewriteGenerator $canonicalUrlRewriteGenerator;
+    private $canonicalUrlRewriteGenerator;
 
     /**
-     * @var MergeDataProvider
+     * @var \Magento\UrlRewrite\Model\MergeDataProvider
      */
-    private MergeDataProvider $mergeDataProviderPrototype;
+    private $mergeDataProviderPrototype;
 
     /**
      * @var CategoryRepositoryInterface
      */
-    private CategoryRepositoryInterface $categoryRepository;
+    private $categoryRepository;
 
     /**
      * @var ProductRepositoryInterface
      */
-    private ProductRepositoryInterface $productRepository;
+    private $productRepository;
 
     /**
      * @var GetVisibleForStores|mixed
@@ -121,11 +112,11 @@ class ProductScopeRewriteGenerator
         CategoriesUrlRewriteGenerator $categoriesUrlRewriteGenerator,
         CurrentUrlRewritesRegenerator $currentUrlRewritesRegenerator,
         AnchorUrlRewriteGenerator $anchorUrlRewriteGenerator,
-        ?MergeDataProviderFactory $mergeDataProviderFactory = null,
-        ?CategoryRepositoryInterface $categoryRepository = null,
-        ?ScopeConfigInterface $config = null,
-        ?ProductRepositoryInterface $productRepository = null,
-        ?GetVisibleForStores $visibleForStores = null
+        MergeDataProviderFactory $mergeDataProviderFactory = null,
+        CategoryRepositoryInterface $categoryRepository = null,
+        ScopeConfigInterface $config = null,
+        ProductRepositoryInterface $productRepository = null,
+        GetVisibleForStores $visibleForStores = null
     ) {
         $this->storeViewService = $storeViewService;
         $this->storeManager = $storeManager;
@@ -161,7 +152,7 @@ class ProductScopeRewriteGenerator
     /**
      * Generate url rewrites for global scope
      *
-     * @param Collection|\Magento\Catalog\Model\Category[] $productCategories
+     * @param \Magento\Framework\Data\Collection|\Magento\Catalog\Model\Category[] $productCategories
      * @param Product $product
      * @param int|null $rootCategoryId
      * @return array
@@ -214,11 +205,11 @@ class ProductScopeRewriteGenerator
      * Generate list of urls for specific store view
      *
      * @param int $storeId
-     * @param Collection|Category[] $productCategories
-     * @param Product $product
+     * @param \Magento\Framework\Data\Collection|Category[] $productCategories
+     * @param \Magento\Catalog\Model\Product $product
      * @param int|null $rootCategoryId
      * @param bool $isGlobalScope
-     * @return UrlRewrite[]
+     * @return \Magento\UrlRewrite\Service\V1\Data\UrlRewrite[]
      * @throws NoSuchEntityException
      */
     public function generateForSpecificStoreView(
@@ -227,20 +218,22 @@ class ProductScopeRewriteGenerator
         Product $product,
         $rootCategoryId = null,
         bool $isGlobalScope = false
-    ): array {
+    ) {
         $mergeDataProvider = clone $this->mergeDataProviderPrototype;
-        $mergeDataProvider->merge(array_merge(...$this->generateCanonicalUrls($product, $storeId)));
-
         $categories = [];
-        if ($this->isCategoryRewritesEnabled()) {
-            foreach ($productCategories as $category) {
-                if (!$this->isCategoryProperForGenerating($category, $storeId)) {
-                    continue;
-                }
 
-                $categories[] = $this->getCategoryWithOverriddenUrlKey($storeId, $category);
+        foreach ($productCategories as $category) {
+            if (!$this->isCategoryProperForGenerating($category, $storeId)) {
+                continue;
             }
+
+            $categories[] = $this->getCategoryWithOverriddenUrlKey($storeId, $category);
         }
+
+        $mergeDataProvider->merge(
+            $this->canonicalUrlRewriteGenerator->generate($storeId, $product)
+        );
+
         $productCategories = $this->objectRegistryFactory->create(['entities' => $categories]);
 
         if ($isGlobalScope) {
@@ -288,37 +281,12 @@ class ProductScopeRewriteGenerator
     }
 
     /**
-     * Generate product canonical URL in website or store view scope
-     *
-     * @param Product $product
-     * @param mixed $storeId
-     * @return array
-     * @throws NoSuchEntityException
-     */
-    private function generateCanonicalUrls(Product $product, mixed $storeId): array
-    {
-        $urls = [];
-        if ($this->config->getValue(self::URL_REWRITE_SCOPE_CONFIG_PATH) === self::WEBSITE_URL_REWRITE_SCOPE) {
-            $currentStore = $this->storeManager->getStore($storeId);
-            $currentGroupId = $currentStore->getStoreGroupId();
-            $storeList = $this->storeManager->getStores();
-            foreach ($storeList as $store) {
-                if ($store->getStoreGroupId() === $currentGroupId) {
-                    $urls[] = $this->canonicalUrlRewriteGenerator->generate($store->getId(), $product);
-                }
-            }
-        } else {
-            $urls[] = $this->canonicalUrlRewriteGenerator->generate($storeId, $product);
-        }
-        return $urls;
-    }
-
-    /**
      * Generate category URLs for the whole store group.
      *
      * @param int $storeId
      * @param Product $product
      * @param ObjectRegistry $productCategories
+     *
      * @return array
      * @throws NoSuchEntityException
      */
@@ -327,24 +295,20 @@ class ProductScopeRewriteGenerator
         Product $product,
         ObjectRegistry $productCategories
     ): array {
+        $currentStore = $this->storeManager->getStore($storeId);
+        $currentGroupId = $currentStore->getStoreGroupId();
+        $storeList = $this->storeManager->getStores();
         $generatedUrls = [];
-        if ($this->config->getValue(self::URL_REWRITE_SCOPE_CONFIG_PATH) === self::WEBSITE_URL_REWRITE_SCOPE) {
-            $currentStore = $this->storeManager->getStore($storeId);
-            $currentGroupId = $currentStore->getStoreGroupId();
-            $storeList = $this->storeManager->getStores();
 
-            foreach ($storeList as $store) {
-                if ($store->getStoreGroupId() === $currentGroupId && $this->isCategoryRewritesEnabled()) {
-                    $groupStoreId = (int)$store->getId();
-                    $generatedUrls[] = $this->generateCategoryUrls(
-                        $groupStoreId,
-                        $product,
-                        $productCategories
-                    );
-                }
+        foreach ($storeList as $store) {
+            if ($store->getStoreGroupId() === $currentGroupId && $this->isCategoryRewritesEnabled()) {
+                $groupStoreId = (int) $store->getId();
+                $generatedUrls[] = $this->generateCategoryUrls(
+                    $groupStoreId,
+                    $product,
+                    $productCategories
+                );
             }
-        } else {
-            $generatedUrls[] = $this->generateCategoryUrls($storeId, $product, $productCategories);
         }
 
         return array_merge(...$generatedUrls);
@@ -411,7 +375,7 @@ class ProductScopeRewriteGenerator
      *
      * @return bool
      */
-    private function isCategoryRewritesEnabled(): bool
+    private function isCategoryRewritesEnabled()
     {
         return (bool)$this->config->getValue('catalog/seo/generate_category_product_rewrites');
     }

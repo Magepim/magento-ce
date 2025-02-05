@@ -96,7 +96,7 @@ class AssignOrderToCustomerObserverTest extends TestCase
      *
      * @return array
      */
-    public static function getCustomerIds()
+    public function getCustomerIds()
     {
         return [
             [null, 1],

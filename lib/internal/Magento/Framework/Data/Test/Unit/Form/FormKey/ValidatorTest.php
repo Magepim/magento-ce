@@ -61,7 +61,7 @@ class ValidatorTest extends TestCase
     /**
      * @return array
      */
-    public static function validateDataProvider()
+    public function validateDataProvider()
     {
         return [
             'formKeyExist' => ['formKey', true],

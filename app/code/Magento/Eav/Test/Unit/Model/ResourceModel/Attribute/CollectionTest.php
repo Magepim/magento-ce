@@ -195,7 +195,7 @@ class CollectionTest extends TestCase
     /**
      * @return array
      */
-    public static function initSelectDataProvider()
+    public function initSelectDataProvider()
     {
         return [
             'main_table_expression' => [

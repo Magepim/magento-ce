@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace Magento\ConfigurableProductGraphQl\Model\Variant;
 
-use Exception;
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Model\Product;
+use Magento\ConfigurableProduct\Model\Product\Type\Configurable;
 use Magento\ConfigurableProduct\Model\ResourceModel\Product\Type\Configurable\Product\Collection as ChildCollection;
 use Magento\ConfigurableProduct\Model\ResourceModel\Product\Type\Configurable\Product\CollectionFactory;
 use Magento\Framework\EntityManager\MetadataPool;
@@ -91,7 +91,6 @@ class Collection implements ResetAfterRequestInterface
      *
      * @param Product $product
      * @return void
-     * @throws Exception
      */
     public function addParentProduct(Product $product) : void
     {
@@ -144,7 +143,6 @@ class Collection implements ResetAfterRequestInterface
      * @param ContextInterface $context
      * @param array $attributeCodes
      * @return array
-     * @throws Exception
      */
     private function fetch(ContextInterface $context, array $attributeCodes) : array
     {
@@ -158,11 +156,6 @@ class Collection implements ResetAfterRequestInterface
             $childCollection->setProductFilter($product);
         }
         $childCollection->addWebsiteFilter($context->getExtensionAttributes()->getStore()->getWebsiteId());
-        $linkField = $this->metadataPool->getMetadata(ProductInterface::class)->getLinkField();
-        $childCollection->getSelect()->group('e.' . $linkField);
-        $childCollection->getSelect()->columns([
-            'parent_ids' => new \Zend_Db_Expr('GROUP_CONCAT(link_table.parent_id)')
-        ]);
 
         $attributeCodes = array_unique(array_merge($this->attributeCodes, $attributeCodes));
 
@@ -180,14 +173,14 @@ class Collection implements ResetAfterRequestInterface
                 continue;
             }
             $formattedChild = ['model' => $childProduct, 'sku' => $childProduct->getSku()];
-            $parentIds = $childProduct->getParentIds() ? explode(',', $childProduct->getParentIds()) : [];
-            foreach ($parentIds as $parentId) {
-                if (!isset($this->childrenMap[$parentId])) {
-                    $this->childrenMap[$parentId] = [];
-                }
-                $this->childrenMap[$parentId][] = $formattedChild;
+            $parentId = (int)$childProduct->getParentId();
+            if (!isset($this->childrenMap[$parentId])) {
+                $this->childrenMap[$parentId] = [];
             }
+
+            $this->childrenMap[$parentId][] = $formattedChild;
         }
+
         return $this->childrenMap;
     }
 

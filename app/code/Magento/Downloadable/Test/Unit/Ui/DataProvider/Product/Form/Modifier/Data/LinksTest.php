@@ -140,32 +140,32 @@ class LinksTest extends TestCase
     /**
      * @return array
      */
-    public static function getLinksTitleDataProvider()
+    public function getLinksTitleDataProvider()
     {
         return [
             [
                 'id' => 1,
                 'typeId' => Type::TYPE_DOWNLOADABLE,
-                'expectedGetTitle' => self::once(),
-                'expectedGetValue' => self::never(),
+                'expectedGetTitle' => $this->once(),
+                'expectedGetValue' => $this->never(),
             ],
             [
                 'id' => null,
                 'typeId' => Type::TYPE_DOWNLOADABLE,
-                'expectedGetTitle' => self::never(),
-                'expectedGetValue' => self::once(),
+                'expectedGetTitle' => $this->never(),
+                'expectedGetValue' => $this->once(),
             ],
             [
                 'id' => 1,
                 'typeId' => 'someType',
-                'expectedGetTitle' => self::never(),
-                'expectedGetValue' => self::once(),
+                'expectedGetTitle' => $this->never(),
+                'expectedGetValue' => $this->once(),
             ],
             [
                 'id' => null,
                 'typeId' => 'someType',
-                'expectedGetTitle' => self::never(),
-                'expectedGetValue' => self::once(),
+                'expectedGetTitle' => $this->never(),
+                'expectedGetValue' => $this->once(),
             ],
         ];
     }
@@ -188,8 +188,6 @@ class LinksTest extends TestCase
         array $links,
         array $expectedLinksData
     ): void {
-        $productTypeMock = $productTypeMock($this);
-        $links[0] = $links[0]($this);
         $this->locatorMock->expects($this->any())
             ->method('getProduct')
             ->willReturn($this->productMock);
@@ -224,7 +222,7 @@ class LinksTest extends TestCase
      *
      * @return array
      */
-    public static function getLinksDataProvider()
+    public function getLinksDataProvider()
     {
         $productData1 = [
             'link_id' => '1',
@@ -267,28 +265,28 @@ class LinksTest extends TestCase
             'use_default_title' => '0',
 
         ];
-        $linkMock1 = static fn (self $testCase) => $testCase->getLinkMockObject($productData1, '1', '1');
-        $linkMock2 = static fn (self $testCase) => $testCase->getLinkMockObject($productData1, '0', '0');
-        $linkMock3 = static fn (self $testCase) => $testCase->getLinkMockObject($productData3, '0', '0');
+        $linkMock1 = $this->getLinkMockObject($productData1, '1', '1');
+        $linkMock2 = $this->getLinkMockObject($productData1, '0', '0');
+        $linkMock3 = $this->getLinkMockObject($productData3, '0', '0');
         return [
             'test case for downloadable product for default store' => [
-                'productTypeMock' => static fn (self $testCase) => $testCase->createMock(Type::class),
-                'typeId' => Type::TYPE_DOWNLOADABLE,
-                'storeId' => 1,
+                'type' => $this->createMock(Type::class),
+                'type_id' => Type::TYPE_DOWNLOADABLE,
+                'store_id' => 1,
                 'links' => [$linkMock1],
                 'expectedLinksData' => $productData1
             ],
             'test case for downloadable product for all store' => [
-                'productTypeMock' => static fn (self $testCase) => $testCase->createMock(Type::class),
-                'typeId' => Type::TYPE_DOWNLOADABLE,
-                'storeId' => 0,
+                'type' => $this->createMock(Type::class),
+                'type_id' => Type::TYPE_DOWNLOADABLE,
+                'store_id' => 0,
                 'links' => [$linkMock2],
                 'expectedLinksData' => $productData2
             ],
             'test case for simple product for default store' => [
-                'productTypeMock' => static fn (self $testCase) => $testCase->createMock(Type::class),
-                'typeId' => ProductType::TYPE_SIMPLE,
-                'storeId' => 1,
+                'type' => $this->createMock(Type::class),
+                'type_id' => ProductType::TYPE_SIMPLE,
+                'store_id' => 1,
                 'links' => [$linkMock3],
                 'expectedLinksData' => []
             ],
@@ -303,7 +301,7 @@ class LinksTest extends TestCase
      * @param string $useDefaultTitle
      * @return MockObject
      */
-    protected function getLinkMockObject(
+    private function getLinkMockObject(
         array $productData,
         string $useDefaultPrice,
         string $useDefaultTitle

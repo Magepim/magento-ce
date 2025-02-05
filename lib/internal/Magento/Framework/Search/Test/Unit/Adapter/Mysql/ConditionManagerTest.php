@@ -83,7 +83,7 @@ class ConditionManagerTest extends TestCase
      *
      * @return array
      */
-    public static function wrapBracketsDataProvider()
+    public function wrapBracketsDataProvider()
     {
         return [
             'validQuery' => [
@@ -133,7 +133,7 @@ class ConditionManagerTest extends TestCase
     /**
      * @return array
      */
-    public static function generateConditionDataProvider()
+    public function generateConditionDataProvider()
     {
         return [
             [

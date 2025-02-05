@@ -480,19 +480,14 @@ class RefundInvoiceTest extends TestCase
         );
     }
 
-    protected function getMockForCreditMemoItem() {
-        $creditmemoItemCreationMock = $this->getMockBuilder(CreditmemoItemCreationInterface::class)
-            ->disableOriginalConstructor()
-            ->getMockForAbstractClass();
-        return $creditmemoItemCreationMock;
-    }
-
     /**
      * @return array
      */
-    public static function dataProvider()
+    public function dataProvider()
     {
-        $creditmemoItemCreationMock = static fn (self $testCase) => $testCase->getMockForCreditMemoItem();
+        $creditmemoItemCreationMock = $this->getMockBuilder(CreditmemoItemCreationInterface::class)
+            ->disableOriginalConstructor()
+            ->getMockForAbstractClass();
 
         return [
             'TestWithNotifyTrue' => [1, true,  [1 => $creditmemoItemCreationMock], true, true],

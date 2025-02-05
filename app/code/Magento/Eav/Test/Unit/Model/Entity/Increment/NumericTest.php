@@ -38,7 +38,7 @@ class NumericTest extends TestCase
     /**
      * @return array
      */
-    public static function getLastIdDataProvider()
+    public function getLastIdDataProvider()
     {
         return [
             [

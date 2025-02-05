@@ -190,7 +190,7 @@ class BlockTest extends TestCase
     /**
      * @return array
      */
-    public static function provider()
+    public function provider()
     {
         return [
             [
@@ -200,10 +200,10 @@ class BlockTest extends TestCase
                 ['argument' => ['name' => 'argument', 'xsi:type' => 'type', 'value' => 'value']],
                 true,
                 true,
-                self::once(),
-                self::never(),
-                self::once(),
-                self::once(),
+                $this->once(),
+                $this->never(),
+                $this->once(),
+                $this->once(),
             ],
             [
                 '',
@@ -212,10 +212,10 @@ class BlockTest extends TestCase
                 ['argument' => 'value'],
                 false,
                 false,
-                self::never(),
-                self::once(),
-                self::never(),
-                self::never(),
+                $this->never(),
+                $this->once(),
+                $this->never(),
+                $this->never(),
             ],
         ];
     }

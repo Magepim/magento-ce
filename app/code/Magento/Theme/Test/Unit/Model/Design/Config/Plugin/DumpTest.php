@@ -91,7 +91,7 @@ class DumpTest extends TestCase
     /**
      * @return array
      */
-    public static function getDumpConfigDataProvider()
+    public function getDumpConfigDataProvider()
     {
         return [
             [

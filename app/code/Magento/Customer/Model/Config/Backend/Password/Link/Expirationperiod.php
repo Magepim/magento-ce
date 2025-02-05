@@ -7,6 +7,8 @@ namespace Magento\Customer\Model\Config\Backend\Password\Link;
 
 /**
  * Customer Reset Password Link Expiration period backend model
+ *
+ * @author     Magento Core Team <core@magentocommerce.com>
  */
 class Expirationperiod extends \Magento\Framework\App\Config\Value
 {

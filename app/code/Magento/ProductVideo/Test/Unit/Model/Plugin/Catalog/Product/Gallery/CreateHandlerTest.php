@@ -109,7 +109,7 @@ class CreateHandlerTest extends TestCase
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      * @return array
      */
-    public static function provideImageForAfterExecute(): array
+    public function provideImageForAfterExecute(): array
     {
         return [
             'new_video' => [

@@ -61,7 +61,7 @@ class RequestTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderForPrepareErrorResponseTest()
+    public function dataProviderForPrepareErrorResponseTest()
     {
         return [
             [
@@ -105,7 +105,7 @@ class RequestTest extends TestCase
     /**
      * @return array
      */
-    public static function hostsDataProvider()
+    public function hostsDataProvider()
     {
         return  [
             'hostWithoutPort' => [
@@ -155,7 +155,7 @@ class RequestTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderForTestPrepareRequestOAuthHeader()
+    public function dataProviderForTestPrepareRequestOAuthHeader()
     {
         return [
             [

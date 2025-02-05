@@ -38,7 +38,7 @@ class NodePathMatcherTest extends TestCase
     /**
      * @return array
      */
-    public static function getNodeInfoDataProvider()
+    public function getNodeInfoDataProvider()
     {
         return [
             'no match' => ['/root/node', '/root', false],

@@ -88,7 +88,7 @@ class DatetimeTest extends TestCase
      *
      * @return array
      */
-    public static function getValueDataProvider(): array
+    public function getValueDataProvider(): array
     {
         return [
             ['frontendInput' => 'date', 'timeType' => \IntlDateFormatter::NONE],
@@ -118,7 +118,7 @@ class DatetimeTest extends TestCase
     /**
      * @return array
      */
-    public static function getLabelDataProvider()
+    public function getLabelDataProvider()
     {
         return [
             [null, 'test code', 'test code'],

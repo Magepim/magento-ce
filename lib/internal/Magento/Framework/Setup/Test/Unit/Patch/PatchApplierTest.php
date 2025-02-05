@@ -243,7 +243,7 @@ class PatchApplierTest extends TestCase
     /**
      * @return array
      */
-    public static function applyDataPatchDataNewModuleProvider()
+    public function applyDataPatchDataNewModuleProvider()
     {
         return [
             'newly installed module' => [
@@ -323,7 +323,7 @@ class PatchApplierTest extends TestCase
     /**
      * @return array
      */
-    public static function applyDataPatchDataInstalledModuleProvider()
+    public function applyDataPatchDataInstalledModuleProvider()
     {
         return [
             'upgrade module iwth only OtherDataPatch' => [
@@ -608,7 +608,7 @@ class PatchApplierTest extends TestCase
     /**
      * @return array
      */
-    public static function schemaPatchDataProvider()
+    public function schemaPatchDataProvider()
     {
         return [
             'upgrade module iwth only OtherSchemaPatch' => [

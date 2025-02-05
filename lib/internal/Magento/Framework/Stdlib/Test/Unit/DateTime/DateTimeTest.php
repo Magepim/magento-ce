@@ -23,7 +23,7 @@ class DateTimeTest extends TestCase
     /**
      * @var string
      */
-    private static $testDate = '2015-04-02 21:03:00';
+    private $testDate = '2015-04-02 21:03:00';
 
     /**
      * @param int|string|DateTimeInterface $input
@@ -36,9 +36,9 @@ class DateTimeTest extends TestCase
         /** @var TimezoneInterface|MockObject $timezone */
         $timezone = $this->getMockBuilder(TimezoneInterface::class)
             ->getMock();
-        $timezone->method('date')->willReturn(new \DateTime(self::$testDate));
+        $timezone->method('date')->willReturn(new \DateTime($this->testDate));
 
-        $expected = gmdate('U', strtotime(self::$testDate));
+        $expected = gmdate('U', strtotime($this->testDate));
         $this->assertEquals($expected, (new DateTime($timezone))->gmtTimestamp($input));
     }
 
@@ -53,9 +53,9 @@ class DateTimeTest extends TestCase
         /** @var TimezoneInterface|MockObject $timezone */
         $timezone = $this->getMockBuilder(TimezoneInterface::class)
             ->getMock();
-        $timezone->method('date')->willReturn(new \DateTime(self::$testDate));
+        $timezone->method('date')->willReturn(new \DateTime($this->testDate));
 
-        $expected = gmdate('U', strtotime(self::$testDate));
+        $expected = gmdate('U', strtotime($this->testDate));
         $this->assertEquals($expected, (new DateTime($timezone))->timestamp($input));
     }
 
@@ -100,12 +100,12 @@ class DateTimeTest extends TestCase
      * @return array
      * @throws Exception
      */
-    public static function dateTimeInputDataProvider()
+    public function dateTimeInputDataProvider()
     {
         return [
-            'string' => [self::$testDate],
-            'int' => [strtotime(self::$testDate)],
-            DateTimeInterface::class => [new DateTimeImmutable(self::$testDate)],
+            'string' => [$this->testDate],
+            'int' => [strtotime($this->testDate)],
+            DateTimeInterface::class => [new DateTimeImmutable($this->testDate)],
         ];
     }
 }

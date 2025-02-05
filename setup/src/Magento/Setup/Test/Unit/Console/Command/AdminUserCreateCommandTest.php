@@ -147,7 +147,7 @@ class AdminUserCreateCommandTest extends TestCase
     /**
      * @return array
      */
-    public static function getOptionListDataProvider(): array
+    public function getOptionListDataProvider(): array
     {
         return [
             [
@@ -185,7 +185,7 @@ class AdminUserCreateCommandTest extends TestCase
     /**
      * @return array
      */
-    public static function validateDataProvider(): array
+    public function validateDataProvider(): array
     {
         return [
             [

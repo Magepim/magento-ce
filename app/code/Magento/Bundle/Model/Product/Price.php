@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2011 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 namespace Magento\Bundle\Model\Product;
 
@@ -23,12 +23,12 @@ class Price extends \Magento\Catalog\Model\Product\Type\Price
     /**
      * Fixed bundle price type
      */
-    public const PRICE_TYPE_FIXED = 1;
+    const PRICE_TYPE_FIXED = 1;
 
     /**
      * Dynamic bundle price type
      */
-    public const PRICE_TYPE_DYNAMIC = 0;
+    const PRICE_TYPE_DYNAMIC = 0;
 
     /**
      * Flag which indicates - is min/max prices have been calculated by index
@@ -38,7 +38,7 @@ class Price extends \Magento\Catalog\Model\Product\Type\Price
     protected $_isPricesCalculatedByIndex;
 
     /**
-     * Catalog data variable
+     * Catalog data
      *
      * @var \Magento\Catalog\Helper\Data
      */
@@ -79,8 +79,8 @@ class Price extends \Magento\Catalog\Model\Product\Type\Price
         \Magento\Catalog\Api\Data\ProductTierPriceInterfaceFactory $tierPriceFactory,
         \Magento\Framework\App\Config\ScopeConfigInterface $config,
         \Magento\Catalog\Helper\Data $catalogData,
-        ?\Magento\Framework\Serialize\Serializer\Json $serializer = null,
-        ?ProductTierPriceExtensionFactory $tierPriceExtensionFactory = null
+        \Magento\Framework\Serialize\Serializer\Json $serializer = null,
+        ProductTierPriceExtensionFactory $tierPriceExtensionFactory = null
     ) {
         $this->_catalogData = $catalogData;
         $this->serializer = $serializer ?: ObjectManager::getInstance()
@@ -342,7 +342,7 @@ class Price extends \Magento\Catalog\Model\Product\Type\Price
 
                             $prices[] = $valuePrice;
                         }
-                        if (count($prices) === 0) {
+                        if (empty($prices)) {
                             continue;
                         }
 

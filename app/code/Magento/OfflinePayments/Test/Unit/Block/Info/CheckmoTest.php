@@ -76,7 +76,7 @@ class CheckmoTest extends TestCase
     public static function getPayableToDataProvider(): array
     {
         return [
-            ['details' => 'payable', 'payable'],
+            ['payable_to' => 'payable', 'payable'],
             ['', null]
         ];
     }
@@ -114,8 +114,8 @@ class CheckmoTest extends TestCase
     public static function getMailingAddressDataProvider(): array
     {
         return [
-            ['details' => 'blah@blah.com', 'blah@blah.com'],
-            ['details' => '', null]
+            ['mailing_address' => 'blah@blah.com', 'blah@blah.com'],
+            ['mailing_address' => '', null]
         ];
     }
 

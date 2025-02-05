@@ -1,9 +1,8 @@
 <?php
 /**
- * Copyright 2011 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
-
 namespace Magento\SalesRule\Model\ResourceModel;
 
 use Magento\Framework\Model\AbstractModel;
@@ -13,6 +12,8 @@ use Magento\Framework\Stdlib\DateTime\DateTime as Date;
 
 /**
  * SalesRule Resource Coupon
+ *
+ * @author      Magento Core Team <core@magentocommerce.com>
  */
 class Coupon extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb implements
     \Magento\SalesRule\Model\Spi\CouponResourceInterface
@@ -142,11 +143,11 @@ class Coupon extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb implem
         }
 
         $updateArray = [];
-        if ($rule->dataHasChangedFor('uses_per_coupon') || $rule->dataHasChangedFor('coupon_type')) {
+        if ($rule->dataHasChangedFor('uses_per_coupon')) {
             $updateArray['usage_limit'] = $rule->getUsesPerCoupon();
         }
 
-        if ($rule->dataHasChangedFor('uses_per_customer') || $rule->dataHasChangedFor('coupon_type')) {
+        if ($rule->dataHasChangedFor('uses_per_customer')) {
             $updateArray['usage_per_customer'] = $rule->getUsesPerCustomer();
         }
 

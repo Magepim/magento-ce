@@ -12,26 +12,26 @@ abstract class AbstractCacheSetCommandTestCase extends AbstractCacheManageComman
     /**
      * @return array
      */
-    public static function executeDataProvider()
+    public function executeDataProvider()
     {
         return [
             'implicit all' => [
                 [],
                 ['A', 'B', 'C'],
                 ['A', 'B', 'C'],
-                static::getExpectedExecutionOutput(['A', 'B', 'C']),
+                $this->getExpectedExecutionOutput(['A', 'B', 'C']),
             ],
             'specified types' => [
                 ['types' => ['A', 'B']],
                 ['A', 'B'],
                 ['A', 'B'],
-                static::getExpectedExecutionOutput(['A', 'B']),
+                $this->getExpectedExecutionOutput(['A', 'B']),
             ],
             'no changes' => [
                 ['types' => ['A', 'B']],
                 ['A', 'B'],
                 [],
-                static::getExpectedExecutionOutput([]),
+                $this->getExpectedExecutionOutput([]),
             ],
         ];
     }
@@ -43,7 +43,7 @@ abstract class AbstractCacheSetCommandTestCase extends AbstractCacheManageComman
      * @param bool $enabled
      * @return string
      */
-    public static function getExpectedChangeOutput(array $changes, $enabled)
+    public function getExpectedChangeOutput(array $changes, $enabled)
     {
         if ($changes) {
             $output = 'Changed cache status:' . PHP_EOL;

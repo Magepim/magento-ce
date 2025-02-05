@@ -34,7 +34,7 @@ class SimpleTest extends TestCase
     /**
      * @return array
      */
-    public static function getPatternDirsDataProvider()
+    public function getPatternDirsDataProvider()
     {
         $patternOptional = '<optional_parameter> <required_parameter> other text';
         $patternNoOptional = '<required_parameter> other text';

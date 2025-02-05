@@ -49,7 +49,7 @@ class SecurityTest extends TestCase
      *
      * @return array
      */
-    public static function dataProviderTestScan()
+    public function dataProviderTestScan()
     {
         return [
             [

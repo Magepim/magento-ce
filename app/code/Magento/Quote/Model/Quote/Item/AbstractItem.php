@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2011 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 namespace Magento\Quote\Model\Quote\Item;
 
@@ -18,7 +18,6 @@ use Magento\Framework\Api\AttributeValueFactory;
  *  - custom_price - new price that can be declared by user and recalculated during calculation process
  *  - original_custom_price - original defined value of custom price without any conversion
  *
- * phpcs:disable Magento2.Classes.AbstractApi
  * @api
  * @method float getDiscountAmount()
  * @method \Magento\Quote\Model\Quote\Item\AbstractItem setDiscountAmount(float $amount)
@@ -101,8 +100,8 @@ abstract class AbstractItem extends \Magento\Framework\Model\AbstractExtensibleM
         AttributeValueFactory $customAttributeFactory,
         \Magento\Catalog\Api\ProductRepositoryInterface $productRepository,
         \Magento\Framework\Pricing\PriceCurrencyInterface $priceCurrency,
-        ?\Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
-        ?\Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
+        \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
+        \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = []
     ) {
         parent::__construct(
@@ -256,7 +255,7 @@ abstract class AbstractItem extends \Magento\Framework\Model\AbstractExtensibleM
     /**
      * Add message of quote item to array of messages
      *
-     * @param mixed $message
+     * @param   string $message
      * @return $this
      */
     public function addMessage($message)
@@ -679,7 +678,9 @@ abstract class AbstractItem extends \Magento\Framework\Model\AbstractExtensibleM
             foreach ($children as $child) {
                 $totalDiscountAmount += $child->getDiscountAmount();
             }
+        } else {
+            $totalDiscountAmount = $this->getDiscountAmount();
         }
-        return $totalDiscountAmount + $this->getDiscountAmount();
+        return $totalDiscountAmount;
     }
 }

@@ -135,12 +135,12 @@ class TaxTest extends TestCase
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      * @return array
      */
-    public static function collectDataProvider()
+    public function collectDataProvider()
     {
         $result = [];
         // 3 item_1, 3 item_2, $99 each, 8.19 tax rate
         $result['partial_invoice'] = [
-            'orderData' => [
+            'order_data' => [
                 'previous_invoices' => [
                 ],
                 'data_fields' => [
@@ -152,7 +152,7 @@ class TaxTest extends TestCase
                     'base_tax_amount' => 53.56,
                 ],
             ],
-            'invoiceData' => [
+            'invoice_data' => [
                 'items' => [
                     'item_1' => [
                         'order_item' => [
@@ -189,7 +189,7 @@ class TaxTest extends TestCase
                     'base_grand_total' => 327,
                 ],
             ],
-            'expectedResults' => [
+            'expected_results' => [
                 'invoice_items' => [
                     'item_1' => [
                         'tax_amount' => 8.11,
@@ -212,7 +212,7 @@ class TaxTest extends TestCase
         // 3 item_1, 3 item_2, $99 each, 8.19 tax rate
         // item_1 has 1 already invoiced, item_2 has 2 already invoiced
         $result['partial_invoice_second_invoice'] = [
-            'orderData' => [
+            'order_data' => [
                 'previous_invoices' => [
                     [
                         'shipping_amount' => 30,
@@ -228,7 +228,7 @@ class TaxTest extends TestCase
                     'base_tax_amount' => 53.56,
                 ],
             ],
-            'invoiceData' => [
+            'invoice_data' => [
                 'items' => [
                     'item_1' => [
                         'order_item' => [
@@ -265,7 +265,7 @@ class TaxTest extends TestCase
                     'base_grand_total' => 99,
                 ],
             ],
-            'expectedResults' => [
+            'expected_results' => [
                 'invoice_items' => [
                     'item_1' => [
                         'tax_amount' => 8.11,
@@ -283,7 +283,7 @@ class TaxTest extends TestCase
         // 3 item_1, 3 item_2, $99 each, 8.19 tax rate
         // item_1 has 1 already invoiced, item_2 has 2 already invoiced
         $result['partial_invoice_last_invoice'] = [
-            'orderData' => [
+            'order_data' => [
                 'previous_invoices' => [
                     [
                         'shipping_amount' => 30,
@@ -299,7 +299,7 @@ class TaxTest extends TestCase
                     'base_tax_amount' => 53.56,
                 ],
             ],
-            'invoiceData' => [
+            'invoice_data' => [
                 'items' => [
                     'item_1' => [
                         'order_item' => [
@@ -336,7 +336,7 @@ class TaxTest extends TestCase
                     'base_grand_total' => 198,
                 ],
             ],
-            'expectedResults' => [
+            'expected_results' => [
                 'invoice_items' => [
                     'item_1' => [
                         'tax_amount' => 8.10,

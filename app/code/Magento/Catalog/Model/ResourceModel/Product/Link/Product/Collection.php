@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2011 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 namespace Magento\Catalog\Model\ResourceModel\Product\Link\Product;
 
@@ -37,6 +37,7 @@ use Psr\Log\LoggerInterface;
  * Catalog product linked products collection
  *
  * @api
+ * @author      Magento Core Team <core@magentocommerce.com>
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  * @since 100.0.2
  */
@@ -138,13 +139,13 @@ class Collection extends \Magento\Catalog\Model\ResourceModel\Product\Collection
         Session $customerSession,
         DateTime $dateTime,
         GroupManagementInterface $groupManagement,
-        ?AdapterInterface $connection = null,
-        ?ProductLimitationFactory $productLimitationFactory = null,
-        ?MetadataPool $metadataPool = null,
-        ?TableMaintainer $tableMaintainer = null,
-        ?PriceTableResolver $priceTableResolver = null,
-        ?DimensionFactory $dimensionFactory = null,
-        ?Category $categoryResourceModel = null,
+        AdapterInterface $connection = null,
+        ProductLimitationFactory $productLimitationFactory = null,
+        MetadataPool $metadataPool = null,
+        TableMaintainer $tableMaintainer = null,
+        PriceTableResolver $priceTableResolver = null,
+        DimensionFactory $dimensionFactory = null,
+        Category $categoryResourceModel = null,
         ?array $productIds = null
     ) {
         parent::__construct(

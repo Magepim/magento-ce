@@ -47,7 +47,7 @@ class PlaceOrderTest extends ExpressTestCase
     /**
      * @return array
      */
-    public static function trueFalseDataProvider()
+    public function trueFalseDataProvider()
     {
         return [[true], [false]];
     }
@@ -92,7 +92,7 @@ class PlaceOrderTest extends ExpressTestCase
     /**
      * @return array
      */
-    public static function executeProcessableExceptionDataProvider()
+    public function executeProcessableExceptionDataProvider()
     {
         return [
             [ProcessableException::API_MAX_PAYMENT_ATTEMPTS_EXCEEDED],

@@ -83,7 +83,7 @@ class CVV2MatchTest extends TestCase
     /**
      * @return array
      */
-    public static function validationDataProvider()
+    public function validationDataProvider()
     {
         return [
             [
@@ -93,7 +93,7 @@ class CVV2MatchTest extends TestCase
                         'cvv2match' => 'Y',
                     ]
                 ),
-                'avsSecurityCodeFlag' => '0',
+                'configValue' => '0',
             ],
             [
                 'expectedResult' => true,
@@ -102,7 +102,7 @@ class CVV2MatchTest extends TestCase
                         'cvv2match' => 'Y',
                     ]
                 ),
-                'avsSecurityCodeFlag' => '1',
+                'configValue' => '1',
             ],
             [
                 'expectedResult' => true,
@@ -111,7 +111,7 @@ class CVV2MatchTest extends TestCase
                         'cvv2match' => 'X',
                     ]
                 ),
-                'avsSecurityCodeFlag' => '1',
+                'configValue' => '1',
             ],
             [
                 'expectedResult' => false,
@@ -120,7 +120,7 @@ class CVV2MatchTest extends TestCase
                         'cvv2match' => 'N',
                     ]
                 ),
-                'avsSecurityCodeFlag' => '1',
+                'configValue' => '1',
             ],
             [
                 'expectedResult' => true,
@@ -129,12 +129,12 @@ class CVV2MatchTest extends TestCase
                         'cvv2match' => null,
                     ]
                 ),
-                'avsSecurityCodeFlag' => '1',
+                'configValue' => '1',
             ],
             [
                 'expectedResult' => true,
                 'response' => new DataObject(),
-                'avsSecurityCodeFlag' => '1',
+                'configValue' => '1',
             ],
             [
                 'expectedResult' => true,
@@ -143,7 +143,7 @@ class CVV2MatchTest extends TestCase
                         'cvv2match' => 'N',
                     ]
                 ),
-                'avsSecurityCodeFlag' => '0',
+                'configValue' => '0',
             ],
         ];
     }

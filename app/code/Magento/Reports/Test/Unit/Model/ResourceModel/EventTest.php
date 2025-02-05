@@ -231,7 +231,7 @@ class EventTest extends TestCase
     /**
      * @return array
      */
-    public static function getApplyLogToCollectionDataProvider(): array
+    public function getApplyLogToCollectionDataProvider(): array
     {
         return [
             ['storeId' => 1, 'storeIdSelect' => [1]],
@@ -253,13 +253,9 @@ class EventTest extends TestCase
             ->addMethods(['select', 'fetchCol'])
             ->getMock();
 
-        $callCount = 0;
         $this->connectionMock
             ->method('fetchCol')
-            ->willReturnCallback(function () use (&$callCount) {
-                return $callCount++ === 0 ? 1 : null;
-            });
-
+            ->willReturnOnConsecutiveCalls(1);
         $this->connectionMock
             ->expects($this->any())
             ->method('delete');

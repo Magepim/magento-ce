@@ -48,7 +48,7 @@ class WeightTest extends TestCase
     /**
      * @return array
      */
-    public static function isValidDataProvider()
+    public function isValidDataProvider()
     {
         return [
             [true, ['weight' => 0]],

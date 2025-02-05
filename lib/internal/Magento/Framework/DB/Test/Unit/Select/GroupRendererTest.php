@@ -64,7 +64,7 @@ class GroupRendererTest extends TestCase
      * Data provider for testRenderNoPart
      * @return array
      */
-    public static function renderNoPartDataProvider()
+    public function renderNoPartDataProvider()
     {
         return [
             [[[Select::FROM, false], [Select::GROUP, false]]],

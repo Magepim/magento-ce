@@ -35,10 +35,10 @@ class DropDown extends AbstractAttributeDataWithOptions
             parent::getUpdateProvider(),
             [
                 "{$frontendInput}_other_attribute_code" => [
-                    'postData' => [
+                    'post_data' => [
                         'attribute_code' => 'text_attribute_update',
                     ],
-                    'expectedData' => [
+                    'expected_data' => [
                         'attribute_code' => 'dropdown_attribute',
                     ],
                 ],

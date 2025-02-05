@@ -54,7 +54,7 @@ class ConfigurableProductTest extends TestCase
     /**
      * @return array
      */
-    public static function afterGetStockItemDataProvider()
+    public function afterGetStockItemDataProvider()
     {
         return [
             [

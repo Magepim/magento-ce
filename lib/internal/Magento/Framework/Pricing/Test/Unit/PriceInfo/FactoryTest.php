@@ -92,7 +92,7 @@ class FactoryTest extends TestCase
     /**
      * @return array
      */
-    public static function createPriceInfoDataProvider()
+    public function createPriceInfoDataProvider()
     {
         return [
             [

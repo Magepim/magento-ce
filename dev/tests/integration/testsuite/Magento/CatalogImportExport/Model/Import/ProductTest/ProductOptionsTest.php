@@ -294,7 +294,7 @@ class ProductOptionsTest extends ProductTestBase
     /**
      * @return array
      */
-    public static function getBehaviorDataProvider(): array
+    public function getBehaviorDataProvider(): array
     {
         return [
             'Append behavior with existing product' => [
@@ -319,7 +319,7 @@ class ProductOptionsTest extends ProductTestBase
      * @return array
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public static function saveCustomOptionsWithMultipleStoreViewsDataProvider(): array
+    public function saveCustomOptionsWithMultipleStoreViewsDataProvider(): array
     {
         return [
             [
@@ -1019,7 +1019,7 @@ class ProductOptionsTest extends ProductTestBase
     /**
      * @return array
      */
-    public static function getCustomOptionDataProvider(): array
+    public function getCustomOptionDataProvider(): array
     {
         return [
             [
@@ -1079,7 +1079,7 @@ class ProductOptionsTest extends ProductTestBase
     /**
      * @return array
      */
-    public static function getProductCustomOptionDataProvider(): array
+    public function getProductCustomOptionDataProvider(): array
     {
         return [
             [

@@ -27,7 +27,7 @@ class PhpFormatterTest extends TestCase
     /**
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public static function formatWithCommentDataProvider()
+    public function formatWithCommentDataProvider()
     {
         $array = [
             'ns1' => [

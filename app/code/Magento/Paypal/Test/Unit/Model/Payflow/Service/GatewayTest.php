@@ -127,7 +127,7 @@ class GatewayTest extends TestCase
     /**
      * @return array[]
      */
-    public static function postRequestOkDataProvider(): array
+    public function postRequestOkDataProvider(): array
     {
         return [
             [
@@ -217,7 +217,7 @@ class GatewayTest extends TestCase
     /**
      * @return array[]
      */
-    public static function requestBodyDataProvider(): array
+    public function requestBodyDataProvider(): array
     {
         return [
             [

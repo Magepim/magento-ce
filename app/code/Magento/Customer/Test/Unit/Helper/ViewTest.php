@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2014 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
@@ -54,7 +54,9 @@ class ViewTest extends TestCase
      */
     public function testGetCustomerName($prefix, $firstName, $middleName, $lastName, $suffix, $result)
     {
-        $customerData = $this->createMock(CustomerInterface::class);
+        $customerData = $this->getMockBuilder(CustomerInterface::class)
+            ->disableOriginalConstructor()
+            ->getMockForAbstractClass();
         $customerData->expects($this->any())
             ->method('getPrefix')->willReturn($prefix);
         $customerData->expects($this->any())
@@ -65,14 +67,14 @@ class ViewTest extends TestCase
             ->method('getLastname')->willReturn($lastName);
         $customerData->expects($this->any())
             ->method('getSuffix')->willReturn($suffix);
-        $this->escaperMock->expects(self::never())->method('escapeHtml');
+        $this->escaperMock->expects($this->once())->method('escapeHtml')->with($result)->willReturn($result);
         $this->assertEquals($result, $this->object->getCustomerName($customerData));
     }
 
     /**
      * @return array
      */
-    public static function getCustomerServiceDataProvider()
+    public function getCustomerServiceDataProvider()
     {
         return [
             [

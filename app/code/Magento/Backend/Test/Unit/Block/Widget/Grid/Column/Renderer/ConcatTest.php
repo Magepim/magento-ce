@@ -32,7 +32,7 @@ class ConcatTest extends TestCase
     /**
      * @return array
      */
-    public static function typeProvider()
+    public function typeProvider()
     {
         return [
             ['getGetter', ['getTest', 'getBest']],

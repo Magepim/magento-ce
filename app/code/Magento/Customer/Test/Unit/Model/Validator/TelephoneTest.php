@@ -61,7 +61,7 @@ class TelephoneTest extends TestCase
     /**
      * @return array
      */
-    public static function expectedPunctuationInNamesDataProvider(): array
+    public function expectedPunctuationInNamesDataProvider(): array
     {
         return [
             [

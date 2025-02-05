@@ -144,7 +144,7 @@ class FieldDataConverterTest extends TestCase
     /**
      * @return array
      */
-    public static function convertDataProvider()
+    public function convertDataProvider()
     {
         return [
             [false, 0],
@@ -201,7 +201,7 @@ class FieldDataConverterTest extends TestCase
     /**
      * @return array
      */
-    public static function convertBatchSizeFromEnvDataProvider()
+    public function convertBatchSizeFromEnvDataProvider()
     {
         return [
             [null, FieldDataConverter::DEFAULT_BATCH_SIZE],
@@ -261,7 +261,7 @@ class FieldDataConverterTest extends TestCase
     /**
      * @return array
      */
-    public static function convertBatchSizeFromEnvInvalidDataProvider()
+    public function convertBatchSizeFromEnvInvalidDataProvider()
     {
         return [
             ['value'],

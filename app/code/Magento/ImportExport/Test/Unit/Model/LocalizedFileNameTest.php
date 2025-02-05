@@ -63,7 +63,7 @@ class LocalizedFileNameTest extends TestCase
     /**
      * @return array
      */
-    public static function getFileDisplayNameDataProvider(): array
+    public function getFileDisplayNameDataProvider(): array
     {
         return [
             [

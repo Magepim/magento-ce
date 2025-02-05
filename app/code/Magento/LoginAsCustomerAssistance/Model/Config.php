@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2020 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
@@ -42,7 +42,7 @@ class Config implements ConfigInterface
     {
         return (string)$this->scopeConfig->getValue(
             self::XML_PATH_SHOPPING_ASSISTANCE_CHECKBOX_TITLE,
-            ScopeInterface::SCOPE_STORE
+            ScopeInterface::SCOPE_WEBSITE
         );
     }
 
@@ -53,7 +53,7 @@ class Config implements ConfigInterface
     {
         return (string)$this->scopeConfig->getValue(
             self::XML_PATH_SHOPPING_ASSISTANCE_CHECKBOX_TOOLTIP,
-            ScopeInterface::SCOPE_STORE
+            ScopeInterface::SCOPE_WEBSITE
         );
     }
 }

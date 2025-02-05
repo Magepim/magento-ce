@@ -66,7 +66,7 @@ class CompositeTest extends TestCase
     /**
      * @return array
      */
-    public static function evaluateWrongDiscriminatorDataProvider()
+    public function evaluateWrongDiscriminatorDataProvider()
     {
         return [
             'no discriminator' => [[], 'Value for key "interpreter" is missing in the argument data'],

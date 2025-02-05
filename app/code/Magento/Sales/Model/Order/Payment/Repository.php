@@ -42,12 +42,12 @@ class Repository implements OrderPaymentRepositoryInterface
     /**
      * @param Metadata $metaData
      * @param SearchResultFactory $searchResultFactory
-     * @param CollectionProcessorInterface|null $collectionProcessor
+     * @param CollectionProcessorInterface $collectionProcessor
      */
     public function __construct(
         Metadata $metaData,
         SearchResultFactory $searchResultFactory,
-        ?CollectionProcessorInterface $collectionProcessor = null
+        CollectionProcessorInterface $collectionProcessor = null
     ) {
         $this->metaData = $metaData;
         $this->searchResultFactory = $searchResultFactory;

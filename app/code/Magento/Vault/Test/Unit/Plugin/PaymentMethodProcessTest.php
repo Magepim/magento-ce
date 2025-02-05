@@ -53,15 +53,12 @@ class PaymentMethodProcessTest extends TestCase
     /**
      * Test retrieve available payment methods
      *
-     * @param \Closure|null $tokenInterface
+     * @param TokenUiComponentInterface|null $tokenInterface
      * @param int $availableMethodsCount
      * @dataProvider afterGetMethodsDataProvider
      */
     public function testAfterGetMethods($tokenInterface, $availableMethodsCount)
     {
-        if ($tokenInterface!=null) {
-            $tokenInterface = $tokenInterface($this);
-        }
         $checkmoPaymentMethod = $this->getMockBuilder(PaymentMethodInterface::class)
             ->disableOriginalConstructor()
             ->onlyMethods(['getCode'])
@@ -88,19 +85,15 @@ class PaymentMethodProcessTest extends TestCase
         $this->assertEquals($availableMethodsCount, count($result));
     }
 
-    protected function getMockForTokenUiComponent() {
-        $tokenUiComponentInterface = $this->getMockBuilder(TokenUiComponentInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        return $tokenUiComponentInterface;
-    }
-
     /**
      * Data Provider
      */
-    public static function afterGetMethodsDataProvider()
+    public function afterGetMethodsDataProvider()
     {
-        $tokenUiComponentInterface = static fn (self $testCase) => $testCase->getMockForTokenUiComponent();
+        $tokenUiComponentInterface = $this->getMockBuilder(TokenUiComponentInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
         return [
             [null, 1],
             [$tokenUiComponentInterface, 2],

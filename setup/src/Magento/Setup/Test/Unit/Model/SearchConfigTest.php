@@ -110,11 +110,11 @@ class SearchConfigTest extends TestCase
         $this->searchConfig->saveConfiguration($installInput);
     }
 
-    public static function installInputDataProvider()
+    public function installInputDataProvider()
     {
         return [
             [
-                'installInput' => [
+                'all' => [
                     'amqp-host' => '',
                     'amqp-port' => '5672',
                     'amqp-user' => '',
@@ -149,7 +149,7 @@ class SearchConfigTest extends TestCase
                     'elasticsearch-timeout' => 15,
                     'no-interaction' => false,
                 ],
-                'searchInput' => [
+                'search' => [
                     'search-engine' => 'elasticsearch7',
                     'elasticsearch-host' => 'localhost',
                     'elasticsearch-port' => '9200',

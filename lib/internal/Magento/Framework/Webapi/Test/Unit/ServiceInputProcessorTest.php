@@ -520,9 +520,6 @@ class ServiceInputProcessorTest extends TestCase
      */
     public function testCustomAttributesProperties($customAttributeType, $inputData, $expectedObject)
     {
-        if (is_callable($expectedObject)) {
-            $expectedObject = $expectedObject($this);
-        }
         $this->customAttributeTypeLocator->expects($this->any())->method('getType')->willReturn($customAttributeType);
         $this->serviceTypeToEntityTypeMap->expects($this->any())->method('getEntityType')->willReturn($expectedObject);
 
@@ -541,7 +538,7 @@ class ServiceInputProcessorTest extends TestCase
      *
      * @return array
      */
-    public static function customAttributesDataProvider()
+    public function customAttributesDataProvider()
     {
         return [
             'customAttributeInteger' => [
@@ -556,10 +553,7 @@ class ServiceInputProcessorTest extends TestCase
                         ]
                     ]
                 ],
-                'expectedObject'=>  static fn (self $testCase) => $testCase->getObjectWithCustomAttributes(
-                    'integer',
-                    TestService::DEFAULT_VALUE
-                ),
+                'expectedObject'=>  $this->getObjectWithCustomAttributes('integer', TestService::DEFAULT_VALUE),
             ],
             'customAttributeIntegerCamelCaseCode' => [
                 'customAttributeType' => 'integer',
@@ -573,10 +567,7 @@ class ServiceInputProcessorTest extends TestCase
                         ]
                     ]
                 ],
-                'expectedObject'=>  static fn (self $testCase) => $testCase->getObjectWithCustomAttributes(
-                    'integer',
-                    TestService::DEFAULT_VALUE
-                ),
+                'expectedObject'=>  $this->getObjectWithCustomAttributes('integer', TestService::DEFAULT_VALUE),
             ],
             'customAttributeObject' => [
                 'customAttributeType' => SimpleArray::class,
@@ -587,10 +578,7 @@ class ServiceInputProcessorTest extends TestCase
                         ]
                     ]
                 ],
-                'expectedObject'=>  static fn (self $testCase) => $testCase->getObjectWithCustomAttributes(
-                    'SimpleArray',
-                    ['ids' => [1, 2, 3, 4]]
-                ),
+                'expectedObject'=>  $this->getObjectWithCustomAttributes('SimpleArray', ['ids' => [1, 2, 3, 4]]),
             ],
             'customAttributeArrayOfObjects' => [
                 'customAttributeType' => 'Magento\Framework\Webapi\Test\Unit\ServiceInputProcessor\Simple[]',
@@ -604,13 +592,10 @@ class ServiceInputProcessorTest extends TestCase
                         ]
                     ]
                 ],
-                'expectedObject'=>  static fn (self $testCase) => $testCase->getObjectWithCustomAttributes(
-                    'Simple[]',
-                    [
-                        ['entityId' => 14, 'name' => 'First'],
-                        ['entityId' => 15, 'name' => 'Second'],
-                    ]
-                ),
+                'expectedObject'=>  $this->getObjectWithCustomAttributes('Simple[]', [
+                    ['entityId' => 14, 'name' => 'First'],
+                    ['entityId' => 15, 'name' => 'Second'],
+                ]),
             ],
         ];
     }
@@ -690,7 +675,7 @@ class ServiceInputProcessorTest extends TestCase
     /**
      * @return array
      */
-    public static function invalidCustomAttributesDataProvider()
+    public function invalidCustomAttributesDataProvider()
     {
         return [
             [
@@ -730,7 +715,7 @@ class ServiceInputProcessorTest extends TestCase
     /**
      * @return array
      */
-    public static function payloadDataProvider(): array
+    public function payloadDataProvider(): array
     {
         return [
             [

@@ -190,7 +190,7 @@ class BuilderTest extends TestCase
     /**
      * @return array
      */
-    public static function buildDataProvider()
+    public function buildDataProvider()
     {
         return [
             ['en_US'],

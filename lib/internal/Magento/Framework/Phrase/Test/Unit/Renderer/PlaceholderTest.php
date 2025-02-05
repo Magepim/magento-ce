@@ -37,7 +37,7 @@ class PlaceholderTest extends TestCase
     /**
      * @return array
      */
-    public static function renderPlaceholderDataProvider()
+    public function renderPlaceholderDataProvider()
     {
         return [
             ['text %1 %2', ['one', 'two'], 'text one two'],

@@ -91,7 +91,7 @@ class WeeeConfigProviderTest extends TestCase
     /**
      * @return array
      */
-    public static function getConfigDataProvider()
+    public function getConfigDataProvider()
     {
         return [
             [

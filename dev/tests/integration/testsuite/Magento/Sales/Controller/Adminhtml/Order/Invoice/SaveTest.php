@@ -34,11 +34,6 @@ class SaveTest extends AbstractInvoiceControllerTest
     private $orderItemResource;
 
     /**
-     * @var string
-     */
-    protected $resource = "Magento_Sales::invoice";
-
-    /**
      * @inheritdoc
      */
     protected function setUp(): void
@@ -146,20 +141,20 @@ class SaveTest extends AbstractInvoiceControllerTest
     /**
      * @return array
      */
-    public static function invoiceDataProvider(): array
+    public function invoiceDataProvider(): array
     {
         return [
             'with_comment_message' => [
-                'invoicedItemsQty' => 2,
-                'commentMessage' => 'test comment message',
+                'invoiced_items_qty' => 2,
+                'comment_message' => 'test comment message',
             ],
             'partial_invoice' => [
-                'invoicedItemsQty' => 1,
+                'invoiced_items_qty' => 1,
             ],
             'with_do_shipment' => [
-                'invoicedItemsQty' => 2,
-                'commentMessage' => '',
-                'doShipment' => true,
+                'invoiced_items_qty' => 2,
+                'comment_message' => '',
+                'do_shipment' => true,
             ],
         ];
     }

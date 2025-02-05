@@ -82,7 +82,7 @@ class InitialConfigSourceTest extends TestCase
     /**
      * @return array
      */
-    public static function getDataProvider()
+    public function getDataProvider()
     {
         return [
             'simple path' => ['path', ['configType' => 'value'], 'value'],

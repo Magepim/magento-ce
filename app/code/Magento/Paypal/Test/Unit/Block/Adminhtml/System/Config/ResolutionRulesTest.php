@@ -77,7 +77,7 @@ class ResolutionRulesTest extends TestCase
     /**
      * @return array
      */
-    public static function getJsonDataProvider()
+    public function getJsonDataProvider()
     {
         return [
             [['test' => 'test-value'], '{"test":"test-value"}'],

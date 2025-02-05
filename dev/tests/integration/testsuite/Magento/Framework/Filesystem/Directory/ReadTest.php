@@ -117,7 +117,7 @@ class ReadTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
-    public static function readProvider()
+    public function readProvider()
     {
         return [
             ['foo', null, ['bar', 'file_three.txt']],

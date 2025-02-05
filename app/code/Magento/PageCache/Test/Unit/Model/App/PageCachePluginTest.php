@@ -64,7 +64,7 @@ class PageCachePluginTest extends TestCase
     /**
      * @return array
      */
-    public static function afterSaveDataProvider()
+    public function afterSaveDataProvider()
     {
         return [
             'Compressed cache' => ['raw-data', PageCachePlugin::COMPRESSION_PREFIX . gzcompress('raw-data')],

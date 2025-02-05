@@ -41,7 +41,7 @@ class DataTest extends TestCase
     /**
      * @return array
      */
-    public static function integrationDataProvider()
+    public function integrationDataProvider()
     {
         return [
             [

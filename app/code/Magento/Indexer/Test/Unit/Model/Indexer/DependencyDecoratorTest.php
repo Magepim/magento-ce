@@ -111,15 +111,12 @@ class DependencyDecoratorTest extends TestCase
     }
 
     /**
-     * @param string|\Closure $methodName
+     * @param string $methodName
      * @param mixed $result
      * @dataProvider transitMethodsDataProvider
      */
-    public function testTransitMethods(string|\Closure $methodName, $result)
+    public function testTransitMethods(string $methodName, $result)
     {
-        if (is_callable($result)) {
-            $result = $result($this);
-        }
         $this->indexerMock
             ->expects($this->once())
             ->method($methodName)
@@ -128,23 +125,10 @@ class DependencyDecoratorTest extends TestCase
         $this->assertSame($result, $this->dependencyDecorator->{$methodName}());
     }
 
-    protected function getMockForViewClass()
-    {
-        return $this->getMockBuilder(View::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-    }
-
-    protected function getMockForStateInterfaceClass()
-    {
-        return $this->getMockBuilder(StateInterface::class)
-            ->getMockForAbstractClass();
-    }
-
     /**
      * @return array
      */
-    public static function transitMethodsDataProvider()
+    public function transitMethodsDataProvider()
     {
         return [
             ['getId', 'indexer_1'],
@@ -154,8 +138,11 @@ class DependencyDecoratorTest extends TestCase
             ['getFields', ['one', 'two']],
             ['getSources', ['one', 'two']],
             ['getHandlers', ['one', 'two']],
-            ['getView', static fn (self $testCase) => $testCase->getMockForViewClass()],
-            ['getState', static fn (self $testCase) => $testCase->getMockForStateInterfaceClass()],
+            ['getView', $this->getMockBuilder(View::class)
+                ->disableOriginalConstructor()
+                ->getMock()],
+            ['getState', $this->getMockBuilder(StateInterface::class)
+                ->getMockForAbstractClass()],
             ['isScheduled', true],
             ['isValid', false],
             ['isInvalid', true],
@@ -196,9 +183,6 @@ class DependencyDecoratorTest extends TestCase
      */
     public function testTransitMethodsWithParamsAndSelfReturn(string $methodName, array $params)
     {
-        if (!empty($params) && is_callable($params[0])) {
-            $params[0] = $params[0]($this);
-        }
         $this->indexerMock
             ->expects($this->once())
             ->method($methodName)
@@ -209,13 +193,14 @@ class DependencyDecoratorTest extends TestCase
     /**
      * @return array
      */
-    public static function transitMethodsWithParamsAndSelfReturnDataProvider()
+    public function transitMethodsWithParamsAndSelfReturnDataProvider()
     {
         return [
             [
                 'setState',
                 [
-                    static fn (self $testCase) => $testCase->getMockForStateInterfaceClass()
+                    $this->getMockBuilder(StateInterface::class)
+                        ->getMockForAbstractClass()
                 ]
             ],
             ['load', ['indexer_1']],

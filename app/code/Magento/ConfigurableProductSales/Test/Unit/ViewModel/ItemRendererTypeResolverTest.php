@@ -50,7 +50,7 @@ class ItemRendererTypeResolverTest extends TestCase
     /**
      * @return array
      */
-    public static function resolveConfigurableOrderItemDataProvider(): array
+    public function resolveConfigurableOrderItemDataProvider(): array
     {
         return [
             ['simple', 'simple'],

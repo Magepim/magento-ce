@@ -258,24 +258,24 @@ class MassOnTheFlyTest extends TestCase
     {
         return [
             'set1' => [
-                'indexerIds' => 1,
+                'idexers' => 1,
                 "exception" => null,
-                "expectsExceptionValues" => [0, 0, 0]
+                "expectsValues" => [0, 0, 0]
             ],
             'set2' => [
-                'indexerIds' => [1],
+                'idexers' => [1],
                 "exception" => null,
-                "expectsExceptionValues" => [1, 0, 0]
+                "expectsException" => [1, 0, 0]
             ],
             'set3' => [
-                'indexerIds' => [1],
+                'idexers' => [1],
                 "exception" => new LocalizedException(__('Test Phrase')),
-                "expectsExceptionValues" => [0, 0, 1]
+                "expectsException" => [0, 0, 1]
             ],
             'set4' => [
-                'indexerIds' => [1],
+                'idexers' => [1],
                 "exception" => new \Exception(),
-                "expectsExceptionValues" => [0, 1, 0]
+                "expectsException" => [0, 1, 0]
             ]
         ];
     }

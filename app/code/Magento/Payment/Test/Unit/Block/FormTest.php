@@ -113,7 +113,7 @@ class FormTest extends TestCase
     /**
      * @return array
      */
-    public static function getInfoDataProvider()
+    public function getInfoDataProvider()
     {
         return [
             ['info', 'blah-blah', 'blah-blah'],

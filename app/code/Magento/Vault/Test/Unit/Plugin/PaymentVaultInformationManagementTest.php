@@ -121,7 +121,7 @@ class PaymentVaultInformationManagementTest extends TestCase
      *
      * @return array
      */
-    public static function vaultPaymentMethodDataProvider(): array
+    public function vaultPaymentMethodDataProvider(): array
     {
         return [
             ['braintree_cc_vault_01', 'braintree_cc_vault'],

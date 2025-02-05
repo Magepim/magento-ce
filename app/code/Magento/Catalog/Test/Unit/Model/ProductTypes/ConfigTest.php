@@ -81,7 +81,7 @@ class ConfigTest extends TestCase
     /**
      * @return array
      */
-    public static function getTypeDataProvider()
+    public function getTypeDataProvider()
     {
         return [
             'global_key_exist' => [['types' => ['global' => 'value']], 'value'],

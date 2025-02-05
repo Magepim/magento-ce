@@ -91,7 +91,7 @@ class TableDataTest extends TestCase
     /**
      * @return array
      */
-    public static function moveDataProvider()
+    public function moveDataProvider()
     {
         return [
             [

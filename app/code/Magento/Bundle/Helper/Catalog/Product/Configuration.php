@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2011 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 namespace Magento\Bundle\Helper\Catalog\Product;
 
@@ -72,8 +72,8 @@ class Configuration extends AbstractHelper implements ConfigurationInterface
         ProductConfiguration $productConfiguration,
         Data                 $pricingHelper,
         Escaper              $escaper,
-        ?Json                 $serializer = null,
-        ?TaxPrice $taxHelper = null
+        Json                 $serializer = null,
+        TaxPrice $taxHelper = null
     ) {
         $this->productConfiguration = $productConfiguration;
         $this->pricingHelper = $pricingHelper;

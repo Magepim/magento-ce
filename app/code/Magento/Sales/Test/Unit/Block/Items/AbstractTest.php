@@ -84,7 +84,7 @@ class AbstractTest extends TestCase
     /**
      * @return array
      */
-    public static function getItemHtmlDataProvider(): array
+    public function getItemHtmlDataProvider(): array
     {
         return [
             [

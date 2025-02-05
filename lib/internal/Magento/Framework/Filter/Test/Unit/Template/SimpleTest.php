@@ -50,7 +50,7 @@ class SimpleTest extends TestCase
     /**
      * @return array
      */
-    public static function setTagsDataProvider()
+    public function setTagsDataProvider()
     {
         return ['(brackets)' => ['(', ')'], '#hash#' => ['#', '#']];
     }

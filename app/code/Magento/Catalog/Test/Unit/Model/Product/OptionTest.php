@@ -98,7 +98,7 @@ class OptionTest extends TestCase
      *
      * @return array
      */
-    public static function cleanFileExtensionsDataProvider()
+    public function cleanFileExtensionsDataProvider()
     {
         return [
             ['JPG, PNG, GIF', 'jpg, png, gif'],

@@ -69,7 +69,7 @@ class MultishippingTest extends TestCase
     /**
      * @return array
      */
-    public static function beforeSetShippingMethodsDataProvider()
+    public function beforeSetShippingMethodsDataProvider()
     {
         return [
             [null],

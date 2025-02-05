@@ -95,7 +95,7 @@ class ScopedTest extends TestCase
     /**
      * @return array
      */
-    public static function getConfigByPathDataProvider()
+    public function getConfigByPathDataProvider()
     {
         return [
             ['key_1/key_1.1/key_1.1.1', 'value_1.1.1', 'error'],

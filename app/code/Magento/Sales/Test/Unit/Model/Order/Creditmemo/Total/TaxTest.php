@@ -84,13 +84,6 @@ class TaxTest extends TestCase
      */
     public function testCollect($orderData, $creditmemoData, $expectedResults)
     {
-        if (
-            !empty($creditmemoData['data_fields'])
-            && !empty($creditmemoData['data_fields']['invoice'])
-            && is_callable($creditmemoData['data_fields']['invoice'])
-        ) {
-            $creditmemoData['data_fields']['invoice'] = $creditmemoData['data_fields']['invoice']($this);
-        }
         $roundingDelta = [];
 
         //Set up order mock
@@ -145,13 +138,13 @@ class TaxTest extends TestCase
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      * @return array
      */
-    public static function collectDataProvider()
+    public function collectDataProvider()
     {
         $result = [];
         // scenario 1: 3 item_1, 3 item_2, $99 each, 8.19 tax rate
         // 1 item_1 and 2 item_2 are invoiced
         $result['partial_invoice_partial_creditmemo'] = [
-            'orderData' => [
+            'order_data' => [
                 'data_fields' => [
                     'shipping_tax_amount' => 2.45,
                     'base_shipping_tax_amount' => 2.45,
@@ -166,7 +159,7 @@ class TaxTest extends TestCase
                     'base_shipping_amount' => 30,
                 ],
             ],
-            'creditmemoData' => [
+            'creditmemo_data' => [
                 'items' => [
                     'item_1' => [
                         'order_item' => [
@@ -204,7 +197,7 @@ class TaxTest extends TestCase
                     'base_shipping_amount' => 30,
                     'tax_amount' => 0.82,
                     'base_tax_amount' => 0.82,
-                    'invoice' => static fn (self $testCase) => $testCase->createInvoiceMock(
+                    'invoice' => $this->createInvoiceMock(
                         [
                             'tax_amount' => 24.33,
                             'base_tax_amount' => 24.33,
@@ -216,7 +209,7 @@ class TaxTest extends TestCase
                     ),
                 ],
             ],
-            'expectedResults' => [
+            'expected_results' => [
                 'creditmemo_items' => [
                     'item_1' => [
                         'tax_amount' => 8.11,
@@ -242,7 +235,7 @@ class TaxTest extends TestCase
         // scenario 1: 3 item_1, 3 item_2, $99 each, 8.19 tax rate
         // 1 item_1 and 2 item_2 are invoiced and base currency <> display currency
         $result['partial_invoice_partial_creditmemo_different_currencies'] = [
-            'orderData' => [
+            'order_data' => [
                 'data_fields' => [
                     'shipping_tax_amount' => 2.45 * $currencyRatio,
                     'base_shipping_tax_amount' => 2.45,
@@ -257,7 +250,7 @@ class TaxTest extends TestCase
                     'base_shipping_amount' => 30.00,
                 ],
             ],
-            'creditmemoData' => [
+            'creditmemo_data' => [
                 'items' => [
                     'item_1' => [
                         'order_item' => [
@@ -295,7 +288,7 @@ class TaxTest extends TestCase
                     'base_shipping_amount' => 30,
                     'tax_amount' => 0.82 * $currencyRatio,
                     'base_tax_amount' => 0.82,
-                    'invoice' => static fn (self $testCase) => $testCase->createInvoiceMock(
+                    'invoice' => $this->createInvoiceMock(
                         [
                             'tax_amount' => 24.33 * $currencyRatio,
                             'base_tax_amount' => 24.33,
@@ -307,7 +300,7 @@ class TaxTest extends TestCase
                     ),
                 ],
             ],
-            'expectedResults' => [
+            'expected_results' => [
                 'creditmemo_items' => [
                     'item_1' => [
                         'tax_amount' => 8.11 * $currencyRatio,
@@ -333,7 +326,7 @@ class TaxTest extends TestCase
         // extra tax amount exist (weee tax), make sure that tax amount
         // is not over the amount invoiced
         $result['tax_amount_not_over_invoiced_tax_amount'] = [
-            'orderData' => [
+            'order_data' => [
                 'data_fields' => [
                     'shipping_tax_amount' => 1.24,
                     'base_shipping_tax_amount' => 1.24,
@@ -348,7 +341,7 @@ class TaxTest extends TestCase
                     'base_shipping_amount' => 30,
                 ],
             ],
-            'creditmemoData' => [
+            'creditmemo_data' => [
                 'items' => [
                     'item_1' => [
                         'order_item' => [
@@ -372,7 +365,7 @@ class TaxTest extends TestCase
                     'base_shipping_amount' => 30,
                     'tax_amount' => 1.65,
                     'base_tax_amount' => 1.65,
-                    'invoice' => static fn (self $testCase) => $testCase->createInvoiceMock(
+                    'invoice' => $this->createInvoiceMock(
                         [
                             'tax_amount' => 11.14,
                             'base_tax_amount' => 11.14,
@@ -384,7 +377,7 @@ class TaxTest extends TestCase
                     ),
                 ],
             ],
-            'expectedResults' => [
+            'expected_results' => [
                 'creditmemo_items' => [
                     'item_1' => [
                         'tax_amount' => 8.26,
@@ -406,7 +399,7 @@ class TaxTest extends TestCase
         // extra tax amount exist (weee tax), make sure that tax amount
         // equals to tax amount invoiced
         $result['last_partial_creditmemo'] = [
-            'orderData' => [
+            'order_data' => [
                 'data_fields' => [
                     'shipping_tax_amount' => 1.24,
                     'base_shipping_tax_amount' => 1.24,
@@ -426,7 +419,7 @@ class TaxTest extends TestCase
                     'base_shipping_amount_refunded' => 15,
                 ],
             ],
-            'creditmemoData' => [
+            'creditmemo_data' => [
                 'items' => [
                     'item_1' => [
                         'order_item' => [
@@ -450,7 +443,7 @@ class TaxTest extends TestCase
                     'base_shipping_amount' => 0,
                     'tax_amount' => 0.82,
                     'base_tax_amount' => 0.82,
-                    'invoice' => static fn (self $testCase) => $testCase->createInvoiceMock(
+                    'invoice' => $this->createInvoiceMock(
                         [
                             'tax_amount' => 16.09,
                             'base_tax_amount' => 16.09,
@@ -462,7 +455,7 @@ class TaxTest extends TestCase
                     ),
                 ],
             ],
-            'expectedResults' => [
+            'expected_results' => [
                 'creditmemo_items' => [
                     'item_1' => [
                         'tax_amount' => 4.12,
@@ -481,7 +474,7 @@ class TaxTest extends TestCase
         // scenario 4: 3 items, 2 invoiced, price includes tax
         // partial credit memo, make sure that discount tax compensation is calculated correctly
         $result['partial_invoice_partial_creditmemo_price_incl_tax'] = [
-            'orderData' => [
+            'order_data' => [
                 'data_fields' => [
                     'shipping_tax_amount' => 0,
                     'base_shipping_tax_amount' => 0,
@@ -507,7 +500,7 @@ class TaxTest extends TestCase
                     'base_shipping_amount_refunded' => 0,
                 ],
             ],
-            'creditmemoData' => [
+            'creditmemo_data' => [
                 'items' => [
                     'item_1' => [
                         'order_item' => [
@@ -535,7 +528,7 @@ class TaxTest extends TestCase
                     'base_tax_amount' => 0.76,
                 ],
             ],
-            'expectedResults' => [
+            'expected_results' => [
                 'creditmemo_items' => [
                     'item_1' => [
                         'tax_amount' => 3.81,
@@ -554,7 +547,7 @@ class TaxTest extends TestCase
         // scenario 5: 3 items, 3 invoiced, rowtotal of 150 with 8.25 tax rate
         // shipping is partially returned
         $result['last_partial_creditmemo_with_partial_shipping_refund'] = [
-            'orderData' => [
+            'order_data' => [
                 'data_fields' => [
                     'shipping_tax_amount' => 1.24,
                     'base_shipping_tax_amount' => 1.24,
@@ -574,7 +567,7 @@ class TaxTest extends TestCase
                     'base_shipping_amount_refunded' => 0,
                 ],
             ],
-            'creditmemoData' => [
+            'creditmemo_data' => [
                 'items' => [
                     'item_1' => [
                         'order_item' => [
@@ -599,7 +592,7 @@ class TaxTest extends TestCase
                     'base_grand_total' => 60.82,
                     'tax_amount' => 0.82,
                     'base_tax_amount' => 0.82,
-                    'invoice' => static fn (self $testCase) => $testCase->createInvoiceMock(
+                    'invoice' => $this->createInvoiceMock(
                         [
                             'tax_amount' => 16.09,
                             'base_tax_amount' => 16.09,
@@ -611,7 +604,7 @@ class TaxTest extends TestCase
                     ),
                 ],
             ],
-            'expectedResults' => [
+            'expected_results' => [
                 'creditmemo_items' => [
                     'item_1' => [
                         'tax_amount' => 4.12,
@@ -630,7 +623,7 @@ class TaxTest extends TestCase
         // scenario 6: 2 items, 2 invoiced, price includes tax, full discount, free shipping
         // partial credit memo, make sure that discount tax compensation (with 100 % discount) is calculated correctly
         $result['collect_with_full_discount_product_price'] = [
-            'orderData' => [
+            'order_data' => [
                 'data_fields' => [
                     'discount_amount' => -200.00,
                     'discount_invoiced' => -200.00,
@@ -658,7 +651,7 @@ class TaxTest extends TestCase
                     'base_shipping_amount' => 0,
                 ],
             ],
-            'creditmemoData' => [
+            'creditmemo_data' => [
                 'items' => [
                     'item_1' => [
                         'order_item' => [
@@ -734,7 +727,7 @@ class TaxTest extends TestCase
                     'base_tax_amount' => 0,
                 ],
             ],
-            'expectedResults' => [
+            'expected_results' => [
                 'creditmemo_items' => [
                     'item_1' => [
                         'tax_amount' => 0,
@@ -759,7 +752,7 @@ class TaxTest extends TestCase
         // scenario 7: 1 items, 1 invoiced, shipping covered by cart rule
         // shipping is partially returned
         $result['last_creditmemo_with_discount_for_entire_shipping_all_prices_including_tax'] = [
-            'orderData' => [
+            'order_data' => [
                 'data_fields' => [
                     'shipping_tax_amount' => 0,
                     'base_shipping_tax_amount' => 0,
@@ -776,7 +769,7 @@ class TaxTest extends TestCase
                     'base_discount_tax_compensation_invoiced' => 1.73
                 ],
             ],
-            'creditmemoData' => [
+            'creditmemo_data' => [
                 'items' => [
                     'item_1' => [
                         'order_item' => [
@@ -802,7 +795,7 @@ class TaxTest extends TestCase
                     'base_tax_amount' => 0
                 ],
             ],
-            'expectedResults' => [
+            'expected_results' => [
                 'creditmemo_items' => [
                     'item_1' => [
                         'tax_amount' => 1.22,
@@ -821,7 +814,7 @@ class TaxTest extends TestCase
         // scenario 8: 1 items, 1 invoiced, shipping covered by cart rule
         // shipping amount is 0 i.e., free shipping
         $result['creditmemo_with_discount_for_entire_shipping_all_prices_including_tax_free_shipping'] = [
-            'orderData' => [
+            'order_data' => [
                 'data_fields' => [
                     'shipping_tax_amount' => 0,
                     'base_shipping_tax_amount' => 0,
@@ -838,7 +831,7 @@ class TaxTest extends TestCase
                     'base_discount_tax_compensation_invoiced' => 1.73
                 ],
             ],
-            'creditmemoData' => [
+            'creditmemo_data' => [
                 'items' => [
                     'item_1' => [
                         'order_item' => [
@@ -864,7 +857,7 @@ class TaxTest extends TestCase
                     'base_tax_amount' => 0
                 ],
             ],
-            'expectedResults' => [
+            'expected_results' => [
                 'creditmemo_items' => [
                     'item_1' => [
                         'tax_amount' => 1.22,

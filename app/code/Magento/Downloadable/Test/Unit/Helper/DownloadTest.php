@@ -177,7 +177,7 @@ class DownloadTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderForTestGetContentTypeThroughHelper()
+    public function dataProviderForTestGetContentTypeThroughHelper()
     {
         return [[false, ''], [true, false]];
     }

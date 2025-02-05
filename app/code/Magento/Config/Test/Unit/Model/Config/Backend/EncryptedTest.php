@@ -103,7 +103,7 @@ class EncryptedTest extends TestCase
     /**
      * @return array
      */
-    public static function beforeSaveDataProvider()
+    public function beforeSaveDataProvider()
     {
         return [['someValue', 'encrypted', 1], ['****', '****', 0]];
     }

@@ -44,7 +44,7 @@ class ConfigurationPoolTest extends TestCase
     /**
      * @return array
      */
-    public static function getByProductTypeDataProvider()
+    public function getByProductTypeDataProvider()
     {
         return [
             [

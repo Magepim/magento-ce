@@ -49,7 +49,6 @@ class ValidatorInfo extends Validator
      * @var IoFile
      */
     private $ioFile;
-
     /**
      * @var NotProtectedExtension
      */
@@ -148,14 +147,12 @@ class ValidatorInfo extends Validator
     {
         foreach ([$optionValuePath['quote_path'], $optionValuePath['order_path']] as $path) {
             $pathInfo = $this->ioFile->getPathInfo($path);
-
-            if (isset($pathInfo['extension'])
-                && (empty($pathInfo['extension']) || !$this->fileValidator->isValid($pathInfo['extension']))
-            ) {
-                return false;
+            if (isset($pathInfo['extension'])) {
+                if (!$this->fileValidator->isValid($pathInfo['extension'])) {
+                    return false;
+                }
             }
         }
-
         return true;
     }
 

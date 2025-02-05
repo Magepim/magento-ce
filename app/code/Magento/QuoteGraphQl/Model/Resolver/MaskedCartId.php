@@ -57,7 +57,7 @@ class MaskedCartId implements ResolverInterface
     /**
      * @inheritdoc
      */
-    public function resolve(Field $field, $context, ResolveInfo $info, ?array $value = null, ?array $args = null)
+    public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {
         if (!isset($value['model'])) {
             throw new LocalizedException(__('"model" value should be specified'));
@@ -95,7 +95,11 @@ class MaskedCartId implements ResolverInterface
      */
     private function ensureQuoteMaskExist(int $quoteId): string
     {
-        $maskedId = $this->quoteIdToMaskedQuoteId->execute($quoteId);
+        try {
+            $maskedId = $this->quoteIdToMaskedQuoteId->execute($quoteId);
+        } catch (NoSuchEntityException $e) {
+            $maskedId = '';
+        }
         if ($maskedId === '') {
             $quoteIdMask = $this->quoteIdMaskFactory->create();
             $quoteIdMask->setQuoteId($quoteId);

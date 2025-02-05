@@ -80,14 +80,6 @@ class CollectionTest extends TestCase
      */
     public function testLoadData(array $indexersData, array $states)
     {
-        $finalStates = [];
-
-        foreach ($states as $key => $state) {
-            if (is_callable($state)) {
-                $finalStates[$key] = $state($this);
-            }
-        }
-
         $statesCollection = $this->getMockBuilder(StateCollection::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -96,12 +88,12 @@ class CollectionTest extends TestCase
             ->method('create')
             ->willReturn($statesCollection);
         $statesCollection->method('getItems')
-            ->willReturn($finalStates);
+            ->willReturn($states);
 
         $calls = [];
         foreach ($indexersData as $indexerId => $indexerData) {
             $indexer = $this->getIndexerMock($indexerData);
-            $state = $finalStates[$indexerId] ?? '';
+            $state = $states[$indexerId] ?? '';
             $indexer
                 ->expects($this->once())
                 ->method('load')
@@ -132,11 +124,11 @@ class CollectionTest extends TestCase
     /**
      * @return array
      */
-    public static function loadDataDataProvider()
+    public function loadDataDataProvider()
     {
         return [
             [
-                'indexersData' => [
+                'indexers' => [
                     'indexer_2' => [
                         'indexer_id' => 'indexer_2',
                     ],
@@ -148,8 +140,8 @@ class CollectionTest extends TestCase
                     ],
                 ],
                 'states' => [
-                    'indexer_2' => static fn (self $testCase) => $testCase->getStateMock(['indexer_id' => 'indexer_2']),
-                    'indexer_3' => static fn (self $testCase) => $testCase->getStateMock(['indexer_id' => 'indexer_3']),
+                    'indexer_2' => $this->getStateMock(['indexer_id' => 'indexer_2']),
+                    'indexer_3' => $this->getStateMock(['indexer_id' => 'indexer_3']),
                 ],
             ]
         ];
@@ -192,7 +184,7 @@ class CollectionTest extends TestCase
     {
         return [
             [
-                'indexersData' => [
+                'indexers' => [
                     'indexer_2' => [
                         'indexer_id' => 'indexer_2',
                     ],

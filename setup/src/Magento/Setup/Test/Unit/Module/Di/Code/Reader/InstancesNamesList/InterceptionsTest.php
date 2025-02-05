@@ -166,7 +166,7 @@ class InterceptionsTest extends TestCase
      *
      * @return array
      */
-    public static function getListExceptionDataProvider()
+    public function getListExceptionDataProvider()
     {
         return [
             [new ValidatorException(new Phrase('Not Valid!'))],

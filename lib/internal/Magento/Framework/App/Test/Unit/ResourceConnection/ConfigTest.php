@@ -129,7 +129,7 @@ class ConfigTest extends TestCase
     /**
      * @return array
      */
-    public static function getConnectionNameDataProvider()
+    public function getConnectionNameDataProvider()
     {
         return [
             ['resourceName' => 'otherResourceName', 'connectionName' => 'otherConnectionName'],

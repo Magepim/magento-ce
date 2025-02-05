@@ -50,17 +50,17 @@ class ConvertImageMiscParamsToReadableFormatTest extends TestCase
     /**
      * @return array
      */
-    public static function createDataProvider(): array
+    public function createDataProvider(): array
     {
         return [
-            self::getTestDataWithAttributes()
+            $this->getTestDataWithAttributes()
         ];
     }
 
     /**
      * @return array
      */
-    private static function getTestDataWithAttributes(): array
+    private function getTestDataWithAttributes(): array
     {
         return [
             'data' => [

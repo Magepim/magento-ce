@@ -48,7 +48,7 @@ class XsdTest extends TestCase
      *
      * @return array
      */
-    public static function schemaCorrectlyIdentifiesInvalidTypesXmlDataProvider()
+    public function schemaCorrectlyIdentifiesInvalidTypesXmlDataProvider()
     {
         return include __DIR__ . '/_files/typesInvalidArray.php';
     }

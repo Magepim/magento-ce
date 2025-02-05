@@ -107,7 +107,7 @@ class AddMetadataTest extends TestCase
      *
      * @return array[]
      */
-    public static function filesProvider(): array
+    public function filesProvider(): array
     {
         return [
             [

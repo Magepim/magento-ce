@@ -73,7 +73,7 @@ class AbstractFactoryTest extends TestCase
     /**
      * @return array
      */
-    public static function canCreateFilterDataProvider()
+    public function canCreateFilterDataProvider()
     {
         return [['arrayFilter', true], ['notExist', false]];
     }
@@ -91,7 +91,7 @@ class AbstractFactoryTest extends TestCase
     /**
      * @return array
      */
-    public static function isSharedDataProvider()
+    public function isSharedDataProvider()
     {
         return [
             'shared' => [Template::class, true],
@@ -137,7 +137,7 @@ class AbstractFactoryTest extends TestCase
     /**
      * @return array
      */
-    public static function createFilterDataProvider()
+    public function createFilterDataProvider()
     {
         return [
             'not shared with args' => ['arrayFilter', ['123', '231'], false],

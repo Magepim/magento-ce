@@ -51,7 +51,7 @@ class RtlTextHandlerTest extends TestCase
         $this->assertEquals($expectedStr, $this->rtlTextHandler->reverseRtlText($str));
     }
 
-    public static function provideRtlTexts(): array
+    public function provideRtlTexts(): array
     {
         return [
             ['Adeline Jacobson', false],//English

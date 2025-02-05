@@ -20,8 +20,6 @@ use Magento\Framework\Search\Request\IndexScopeResolverInterface as TableResolve
  * Elasticsearch index resource model
  * @api
  * @since 100.1.0
- * @deprecated Elasticsearch is no longer supported by Adobe
- * @see this class will be responsible for ES only
  */
 class Index extends \Magento\AdvancedSearch\Model\ResourceModel\Index
 {
@@ -51,7 +49,7 @@ class Index extends \Magento\AdvancedSearch\Model\ResourceModel\Index
      * @param ProductRepositoryInterface $productRepository
      * @param CategoryRepositoryInterface $categoryRepository
      * @param Config $eavConfig
-     * @param string|null $connectionName
+     * @param null $connectionName
      * @param TableResolver|null $tableResolver
      * @param DimensionCollectionFactory|null $dimensionCollectionFactory
      * @SuppressWarnings(Magento.TypeDuplication)
@@ -64,8 +62,8 @@ class Index extends \Magento\AdvancedSearch\Model\ResourceModel\Index
         CategoryRepositoryInterface $categoryRepository,
         Config $eavConfig,
         $connectionName = null,
-        ?TableResolver $tableResolver = null,
-        ?DimensionCollectionFactory $dimensionCollectionFactory = null
+        TableResolver $tableResolver = null,
+        DimensionCollectionFactory $dimensionCollectionFactory = null
     ) {
         $this->productRepository = $productRepository;
         $this->categoryRepository = $categoryRepository;

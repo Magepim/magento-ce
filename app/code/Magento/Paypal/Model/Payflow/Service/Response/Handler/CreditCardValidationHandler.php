@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2015 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 namespace Magento\Paypal\Model\Payflow\Service\Response\Handler;
 
@@ -35,7 +35,7 @@ class CreditCardValidationHandler implements HandlerInterface
     }
 
     /**
-     * @inheritDoc
+     * {inheritdoc}
      */
     public function handle(InfoInterface $payment, DataObject $response)
     {

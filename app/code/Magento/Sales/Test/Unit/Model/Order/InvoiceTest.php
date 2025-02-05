@@ -152,7 +152,7 @@ class InvoiceTest extends TestCase
     /**
      * @return array
      */
-    public static function canVoidDataProvider()
+    public function canVoidDataProvider()
     {
         return [[true], [false]];
     }
@@ -249,7 +249,7 @@ class InvoiceTest extends TestCase
      *
      * @return array
      */
-    public static function canCaptureDataProvider()
+    public function canCaptureDataProvider()
     {
         return [
             [Invoice::STATE_OPEN, true, true],
@@ -277,7 +277,7 @@ class InvoiceTest extends TestCase
      *
      * @return array
      */
-    public static function canCancelDataProvider()
+    public function canCancelDataProvider()
     {
         return [
             [Invoice::STATE_OPEN, true],
@@ -306,7 +306,7 @@ class InvoiceTest extends TestCase
      *
      * @return array
      */
-    public static function canRefundDataProvider()
+    public function canRefundDataProvider()
     {
         return [
             [Invoice::STATE_OPEN, 0.00, 0.00, false],
@@ -396,7 +396,7 @@ class InvoiceTest extends TestCase
     /**
      * @return array
      */
-    public static function payDataProvider()
+    public function payDataProvider()
     {
         return [
             [10.99, 1.00, 10.99, 1.00, Invoice::STATE_PAID, ['item1']],
@@ -480,7 +480,7 @@ class InvoiceTest extends TestCase
     /**
      * @return array
      */
-    public static function getNotOpenedInvoiceStatuses()
+    public function getNotOpenedInvoiceStatuses()
     {
         return [
             [Invoice::STATE_PAID, Invoice::STATE_PAID],

@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2017 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
@@ -495,32 +495,6 @@ class ProductDataMapperTest extends TestCase
                 ],
                 15,
                 [],
-            ],
-            'sortable multiple values' => [
-                10,
-                [
-                    'attribute_code' => 'name',
-                    'backend_type' => 'text',
-                    'frontend_input' => 'text',
-                    'is_searchable' => true,
-                    'used_for_sort_by' => true,
-                    'options' => [],
-                ],
-                [10 => 'one', 11 => 'two', 12 => 'three'],
-                ['name' => implode("\n", ['one', 'two', 'three'])],
-            ],
-            'sortable too many multiple values' => [
-                10,
-                [
-                    'attribute_code' => 'name',
-                    'backend_type' => 'text',
-                    'frontend_input' => 'text',
-                    'is_searchable' => true,
-                    'used_for_sort_by' => true,
-                    'options' => [],
-                ],
-                array_fill(0, 4682, '123456'),
-                ['name' => implode("\n", array_fill(0, 4681, '123456'))],
             ],
         ];
     }

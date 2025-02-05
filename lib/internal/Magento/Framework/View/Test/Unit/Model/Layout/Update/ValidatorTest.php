@@ -118,7 +118,7 @@ class ValidatorTest extends TestCase
     /**
      * @return array
      */
-    public static function testIsValidNotSecurityCheckDataProvider()
+    public function testIsValidNotSecurityCheckDataProvider()
     {
         return [
             ['test', true, []],
@@ -148,7 +148,7 @@ class ValidatorTest extends TestCase
     /**
      * @return array
      */
-    public static function testIsValidSecurityCheckDataProvider()
+    public function testIsValidSecurityCheckDataProvider()
     {
         $insecureHelper = <<<XML
 <layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">

@@ -144,7 +144,7 @@ class IndexerShowDimensionsModeCommandTest extends AbstractIndexerCommandCommonS
         return [
             'get_all'                => [
                 'command' => [],
-                'consoleOutput'  => sprintf(
+                'output'  => sprintf(
                     '%-50s ',
                     'indexer_title1' . ':'
                 ) . 'none' . PHP_EOL .
@@ -158,7 +158,7 @@ class IndexerShowDimensionsModeCommandTest extends AbstractIndexerCommandCommonS
                 'command' => [
                     'indexer' => ['indexer_1'],
                 ],
-                'consoleOutput'  => sprintf(
+                'output'  => sprintf(
                     '%-50s ',
                     'indexer_title1' . ':'
                 ) . 'none' . PHP_EOL
@@ -168,7 +168,7 @@ class IndexerShowDimensionsModeCommandTest extends AbstractIndexerCommandCommonS
                 'command' => [
                     'indexer' => ['indexer_1', 'indexer_2'],
                 ],
-                'consoleOutput'  => sprintf(
+                'output'  => sprintf(
                     '%-50s ',
                     'indexer_title1' . ':'
                 ) . 'none' . PHP_EOL .

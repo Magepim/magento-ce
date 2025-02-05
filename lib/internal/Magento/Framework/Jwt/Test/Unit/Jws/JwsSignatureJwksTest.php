@@ -16,17 +16,27 @@ use PHPUnit\Framework\TestCase;
 
 class JwsSignatureJwksTest extends TestCase
 {
-    public static function getConstructorCases(): array
+    public function getConstructorCases(): array
     {
         return [
-            'valid-jwk' => [Jwk::PUBLIC_KEY_USE_SIGNATURE, true],
+            'valid-jwk' => [$this->createJwk(Jwk::PUBLIC_KEY_USE_SIGNATURE), true],
             'valid-jwks' => [
-                [Jwk::PUBLIC_KEY_USE_SIGNATURE, Jwk::PUBLIC_KEY_USE_SIGNATURE],
+                $this->createJwkSet(
+                    [
+                        $this->createJwk(Jwk::PUBLIC_KEY_USE_SIGNATURE),
+                        $this->createJwk(Jwk::PUBLIC_KEY_USE_SIGNATURE)
+                    ]
+                ),
                 true
             ],
-            'invalid-jwk' => [Jwk::PUBLIC_KEY_USE_ENCRYPTION, false],
+            'invalid-jwk' => [$this->createJwk(Jwk::PUBLIC_KEY_USE_ENCRYPTION), false],
             'invalid-jwks' => [
-                [Jwk::PUBLIC_KEY_USE_SIGNATURE, Jwk::PUBLIC_KEY_USE_ENCRYPTION],
+                $this->createJwkSet(
+                    [
+                        $this->createJwk(Jwk::PUBLIC_KEY_USE_SIGNATURE),
+                        $this->createJwk(Jwk::PUBLIC_KEY_USE_ENCRYPTION)
+                    ]
+                ),
                 false
             ]
         ];
@@ -42,15 +52,6 @@ class JwsSignatureJwksTest extends TestCase
      */
     public function testConstruct($jwks, $valid): void
     {
-        if (is_array($jwks)) {
-            $jwks = array_map(function ($keyUse) {
-                return $this->createJwk($keyUse);
-            }, $jwks);
-            $jwks = $this->createJwkSet($jwks);
-        } else {
-            $jwks = $this->createJwk($jwks);
-        }
-
         if (!$valid) {
             $this->expectException(EncryptionException::class);
         }
@@ -58,42 +59,35 @@ class JwsSignatureJwksTest extends TestCase
         new JwsSignatureJwks($jwks);
     }
 
-    public static function getAlgorithmCases(): array
+    public function getAlgorithmCases(): array
     {
         return [
             'one-algo' => [
-                [Jwk::PUBLIC_KEY_USE_SIGNATURE, Jwk::ALGORITHM_HS384],
+                $this->createJwk(Jwk::PUBLIC_KEY_USE_SIGNATURE, Jwk::ALGORITHM_HS384),
                 Jwk::ALGORITHM_HS384
             ],
             'json' => [
-                [
-                    [Jwk::PUBLIC_KEY_USE_SIGNATURE, Jwk::ALGORITHM_HS256],
-                    [Jwk::PUBLIC_KEY_USE_SIGNATURE, Jwk::ALGORITHM_HS256]
-                ],
+                $this->createJwkSet(
+                    [
+                        $this->createJwk(Jwk::PUBLIC_KEY_USE_SIGNATURE),
+                        $this->createJwk(Jwk::PUBLIC_KEY_USE_SIGNATURE)
+                    ]
+                ),
                 'jws-json-serialization'
-            ]
+            ],
         ];
     }
 
     /**
      * Test algorithm logic.
      *
-     * @param array $jwksData
+     * @param Jwk|JwkSet $jwk
      * @param string $expectedName
      * @return void
      * @dataProvider getAlgorithmCases
      */
-    public function testGetAlgorithmName(array $jwkData, string $expectedName): void
+    public function testGetAlgorithmName($jwk, string $expectedName): void
     {
-        if (is_array($jwkData[0])) {
-            $jwks = array_map(function ($data) {
-                return $this->createJwk($data[0], $data[1]);
-            }, $jwkData);
-            $jwk = $this->createJwkSet($jwks);
-        } else {
-            $jwk = $this->createJwk($jwkData[0], $jwkData[1]);
-        }
-
         $model = new JwsSignatureJwks($jwk);
 
         $this->assertEquals($expectedName, $model->getAlgorithmName());

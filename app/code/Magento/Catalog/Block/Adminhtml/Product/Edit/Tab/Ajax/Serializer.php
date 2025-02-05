@@ -1,12 +1,17 @@
 <?php
 /**
- * Copyright 2011 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 namespace Magento\Catalog\Block\Adminhtml\Product\Edit\Tab\Ajax;
 
 use Magento\Framework\View\Element\Template;
 
+/**
+ * Class Serializer
+ * @package Magento\Catalog\Block\Adminhtml\Product\Edit\Tab\Ajax
+ * @deprecated 102.0.0
+ */
 class Serializer extends \Magento\Framework\View\Element\Template
 {
     /**
@@ -22,7 +27,7 @@ class Serializer extends \Magento\Framework\View\Element\Template
      */
     public function __construct(
         Template\Context $context,
-        ?\Magento\Framework\Serialize\Serializer\Json $serializer = null,
+        \Magento\Framework\Serialize\Serializer\Json $serializer = null,
         array $data = []
     ) {
         parent::__construct($context, $data);
@@ -31,8 +36,6 @@ class Serializer extends \Magento\Framework\View\Element\Template
     }
 
     /**
-     * Serializer Constructor
-     *
      * @return $this
      */
     public function _construct()
@@ -43,11 +46,8 @@ class Serializer extends \Magento\Framework\View\Element\Template
     }
 
     /**
-     * Method to get Products JSON data
-     *
      * @return string
      * @deprecated 102.0.0
-     * @see Updated deprecation doc annotations
      */
     public function getProductsJSON()
     {

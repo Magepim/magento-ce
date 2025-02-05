@@ -70,7 +70,7 @@ class CustomerTest extends TestCase
      *
      * @return array
      */
-    public static function getCreatedInDataProvider()
+    public function getCreatedInDataProvider()
     {
         return [
             'array' => [

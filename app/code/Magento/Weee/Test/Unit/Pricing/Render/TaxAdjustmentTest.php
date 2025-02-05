@@ -82,7 +82,7 @@ class TaxAdjustmentTest extends TestCase
      * Data provider for testGetDefaultExclusions()
      * @return array
      */
-    public static function getDefaultExclusionsDataProvider()
+    public function getDefaultExclusionsDataProvider()
     {
         return [
             'weee part of exclusions' => [true],

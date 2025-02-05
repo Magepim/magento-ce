@@ -99,7 +99,7 @@ class CheckUserLoginBackendObserverTest extends TestCase
     /**
      * @return array
      */
-    public static function requiredCaptchaDataProvider(): array
+    public function requiredCaptchaDataProvider(): array
     {
         return [
             [true],

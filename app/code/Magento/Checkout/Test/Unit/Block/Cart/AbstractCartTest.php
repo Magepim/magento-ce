@@ -81,7 +81,7 @@ class AbstractCartTest extends TestCase
     /**
      * @return array
      */
-    public static function getItemRendererDataProvider()
+    public function getItemRendererDataProvider()
     {
         return [[null, AbstractCart::DEFAULT_TYPE], ['some-type', 'some-type']];
     }
@@ -136,7 +136,7 @@ class AbstractCartTest extends TestCase
     /**
      * @return array
      */
-    public static function getTotalsCacheDataProvider()
+    public function getTotalsCacheDataProvider()
     {
         return [
             [['billing_totals'], true],

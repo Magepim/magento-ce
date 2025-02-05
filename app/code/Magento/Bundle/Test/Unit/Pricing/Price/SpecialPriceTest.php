@@ -126,7 +126,7 @@ class SpecialPriceTest extends TestCase
     /**
      * @return array
      */
-    public static function getValueDataProvider()
+    public function getValueDataProvider()
     {
         return [
             ['regularPrice' => 100, 'specialPrice' => 40, 'isScopeDateInInterval' => true,  'value' => 40,

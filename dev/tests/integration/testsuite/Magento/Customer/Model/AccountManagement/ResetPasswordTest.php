@@ -140,12 +140,12 @@ class ResetPasswordTest extends TestCase
     public static function passwordResetErrorsProvider(): array
     {
         return [
-            'email' => [
+            'wrong_email' => [
                 'email' => 'foo@example.com',
             ],
-            'websiteId' => [
+            'wrong_website_id' => [
                 'email' => 'customer@example.com',
-                'websiteId' => 0,
+                'website_id' => 0,
             ],
         ];
     }

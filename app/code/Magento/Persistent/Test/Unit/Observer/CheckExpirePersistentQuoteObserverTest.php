@@ -213,36 +213,36 @@ class CheckExpirePersistentQuoteObserverTest extends TestCase
      *
      * @return array
      */
-    public static function requestDataProvider()
+    public function requestDataProvider()
     {
         return [
             [
                 'refererUri'           => 'checkout',
                 'requestUri'           => 'index',
-                'expireCounter'        => self::never(),
-                'dispatchCounter'      => self::never(),
-                'setCustomerIdCounter' => self::never(),
+                'expireCounter'        => $this->never(),
+                'dispatchCounter'      => $this->never(),
+                'setCustomerIdCounter' => $this->never(),
             ],
             [
                 'refererUri'           => 'checkout',
                 'requestUri'           => 'checkout',
-                'expireCounter'        => self::never(),
-                'dispatchCounter'      => self::never(),
-                'setCustomerIdCounter' => self::never(),
+                'expireCounter'        => $this->never(),
+                'dispatchCounter'      => $this->never(),
+                'setCustomerIdCounter' => $this->never(),
             ],
             [
                 'refererUri'           => 'index',
                 'requestUri'           => 'checkout',
-                'expireCounter'        => self::never(),
-                'dispatchCounter'      => self::never(),
-                'setCustomerIdCounter' => self::never(),
+                'expireCounter'        => $this->never(),
+                'dispatchCounter'      => $this->never(),
+                'setCustomerIdCounter' => $this->never(),
             ],
             [
                 'refererUri'           => 'index',
                 'requestUri'           => 'index',
-                'expireCounter'        => self::once(),
-                'dispatchCounter'      => self::once(),
-                'setCustomerIdCounter' => self::once(),
+                'expireCounter'        => $this->once(),
+                'dispatchCounter'      => $this->once(),
+                'setCustomerIdCounter' => $this->once(),
             ],
         ];
     }

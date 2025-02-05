@@ -63,7 +63,7 @@ class ConfigStatusCommandTest extends TestCase
     /**
      * @return array
      */
-    public static function executeDataProvider()
+    public function executeDataProvider()
     {
         return [
             'Config is up to date' => [

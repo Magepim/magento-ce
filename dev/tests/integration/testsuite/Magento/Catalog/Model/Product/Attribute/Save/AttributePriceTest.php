@@ -58,7 +58,7 @@ class AttributePriceTest extends AbstractAttributeTest
     {
         return [
             [
-                'productSku' => 'simple2',
+                'product_sku' => 'simple2',
             ],
         ];
     }
@@ -70,8 +70,8 @@ class AttributePriceTest extends AbstractAttributeTest
     {
         return [
             [
-                'firstSku' => 'simple2',
-                'secondSku' => 'simple-out-of-stock',
+                'first_product_sku' => 'simple2',
+                'second_product_sku' => 'simple-out-of-stock',
             ],
         ];
     }

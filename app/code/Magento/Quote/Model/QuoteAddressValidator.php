@@ -122,6 +122,27 @@ class QuoteAddressValidator
     }
 
     /**
+     * Validate Quest Address for guest user
+     *
+     * @param AddressInterface $address
+     * @param CartInterface $cart
+     * @return void
+     * @throws NoSuchEntityException
+     */
+    private function doValidateForGuestQuoteAddress(AddressInterface $address, CartInterface $cart): void
+    {
+        //validate guest cart address
+        if ($address->getId() !== null) {
+            $old = $cart->getAddressById($address->getId());
+            if ($old === false) {
+                throw new NoSuchEntityException(
+                    __('Invalid quote address id %1', $address->getId())
+                );
+            }
+        }
+    }
+
+    /**
      * Validate address to be used for cart.
      *
      * @param CartInterface $cart
@@ -132,7 +153,10 @@ class QuoteAddressValidator
      */
     public function validateForCart(CartInterface $cart, AddressInterface $address): void
     {
-        $this->doValidate($address, $cart->getCustomerIsGuest() ? null : (int) $cart->getCustomer()->getId());
+        if ($cart->getCustomerIsGuest()) {
+            $this->doValidateForGuestQuoteAddress($address, $cart);
+        }
+        $this->doValidate($address, !$cart->getCustomer()->getId() ? null : (int) $cart->getCustomer()->getId());
     }
 
     /**
@@ -147,8 +171,8 @@ class QuoteAddressValidator
     {
         // check if address belongs to quote.
         if ($address->getId() !== null) {
-            $old = $cart->getAddressById($address->getId());
-            if (empty($old)) {
+            $old = $cart->getAddressesCollection()->getItemById($address->getId());
+            if ($old === null) {
                 throw new NoSuchEntityException(
                     __('Invalid quote address id %1', $address->getId())
                 );

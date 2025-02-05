@@ -49,7 +49,7 @@ class FactoryTest extends TestCase
     /**
      * @return array
      */
-    public static function allowedTypesDataProvider()
+    public function allowedTypesDataProvider()
     {
         return [['db'], ['snapshot'], ['filesystem'], ['media'], ['nomedia']];
     }

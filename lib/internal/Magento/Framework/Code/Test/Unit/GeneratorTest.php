@@ -331,7 +331,7 @@ class GeneratorTest extends TestCase
     /**
      * @return array
      */
-    public static function trueFalseDataProvider(): array
+    public function trueFalseDataProvider(): array
     {
         return [[true], [false]];
     }
@@ -341,19 +341,14 @@ class GeneratorTest extends TestCase
      *
      * @return array
      */
-    public static function generateValidClassDataProvider(): array
+    public function generateValidClassDataProvider(): array
     {
-        $expectedEntities = [
-            'factory' => Factory::ENTITY_TYPE,
-            'proxy' => Proxy::ENTITY_TYPE,
-            'interceptor' => Interceptor::ENTITY_TYPE,
-        ];
         $data = [];
-        foreach ($expectedEntities as $generatedEntity) {
+        foreach ($this->expectedEntities as $generatedEntity) {
             $generatedEntity = ucfirst($generatedEntity);
             $data['test class for ' . $generatedEntity] = [
-                'className' => self::SOURCE_CLASS,
-                'entityType' => $generatedEntity,
+                'class name' => self::SOURCE_CLASS,
+                'entity type' => $generatedEntity,
             ];
         }
         return $data;

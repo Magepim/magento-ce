@@ -194,7 +194,7 @@ class FileSystemTest extends TestCase
     /**
      * @return array
      */
-    public static function normalizePathDataProvider()
+    public function normalizePathDataProvider()
     {
         return [
             'standard path' => ['/dir/somedir/somefile.ext', '/dir/somedir/somefile.ext'],
@@ -219,7 +219,7 @@ class FileSystemTest extends TestCase
     /**
      * @return array
      */
-    public static function offsetPathDataProvider()
+    public function offsetPathDataProvider()
     {
         return [
             'local path' => [

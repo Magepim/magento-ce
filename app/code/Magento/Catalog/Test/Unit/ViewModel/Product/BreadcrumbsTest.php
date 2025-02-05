@@ -110,16 +110,13 @@ class BreadcrumbsTest extends TestCase
     /**
      * @dataProvider productDataProvider
      *
-     * @param $product
+     * @param Product|null $product
      * @param string $expectedName
      *
      * @return void
      */
     public function testGetProductName($product, string $expectedName) : void
     {
-        if ($product!=null) {
-            $product = $product($this);
-        }
         $this->catalogHelperMock->expects($this->atLeastOnce())
             ->method('getProduct')
             ->willReturn($product);
@@ -130,16 +127,10 @@ class BreadcrumbsTest extends TestCase
     /**
      * @return array
      */
-    public static function productDataProvider() : array
+    public function productDataProvider() : array
     {
         return [
-            [
-                static fn (self $testCase) => $testCase->getObjectManager()->getObject(
-                    Product::class,
-                    ['data' => ['name' => 'Test']]
-                ),
-                'Test'
-            ],
+            [$this->getObjectManager()->getObject(Product::class, ['data' => ['name' => 'Test']]), 'Test'],
             [null, ''],
         ];
     }
@@ -147,16 +138,13 @@ class BreadcrumbsTest extends TestCase
     /**
      * @dataProvider productJsonEncodeDataProvider
      *
-     * @param \Closure $product
+     * @param Product|null $product
      * @param string $expectedJson
      *
      * @return void
      */
     public function testGetJsonConfigurationHtmlEscaped($product, string $expectedJson) : void
     {
-        if ($product!=null) {
-            $product = $product($this);
-        }
         $this->catalogHelperMock->expects($this->atLeastOnce())
             ->method('getProduct')
             ->willReturn($product);
@@ -177,36 +165,24 @@ class BreadcrumbsTest extends TestCase
     /**
      * @return array
      */
-    public static function productJsonEncodeDataProvider() : array
+    public function productJsonEncodeDataProvider() : array
     {
         return [
             [
-                static fn (self $testCase) => $testCase->getObjectManager()->getObject(
-                    Product::class,
-                    ['data' => ['name' => 'Test ™']]
-                ),
+                $this->getObjectManager()->getObject(Product::class, ['data' => ['name' => 'Test ™']]),
                 '{"breadcrumbs":{"categoryUrlSuffix":".&quot;html","useCategoryPathInUrl":0,"product":"Test \u2122"}}',
             ],
             [
-                static fn (self $testCase) => $testCase->getObjectManager()->getObject(
-                    Product::class,
-                    ['data' => ['name' => 'Test "']]
-                ),
+                $this->getObjectManager()->getObject(Product::class, ['data' => ['name' => 'Test "']]),
                 '{"breadcrumbs":{"categoryUrlSuffix":".&quot;html","useCategoryPathInUrl":0,"product":"Test &quot;"}}',
             ],
             [
-                static fn (self $testCase) => $testCase->getObjectManager()->getObject(
-                    Product::class,
-                    ['data' => ['name' => 'Test <b>x</b>']]
-                ),
+                $this->getObjectManager()->getObject(Product::class, ['data' => ['name' => 'Test <b>x</b>']]),
                 '{"breadcrumbs":{"categoryUrlSuffix":".&quot;html","useCategoryPathInUrl":0,"product":'
                 . '"Test &lt;b&gt;x&lt;\/b&gt;"}}',
             ],
             [
-                static fn (self $testCase) => $testCase->getObjectManager()->getObject(
-                    Product::class,
-                    ['data' => ['name' => 'Test \'abc\'']]
-                ),
+                $this->getObjectManager()->getObject(Product::class, ['data' => ['name' => 'Test \'abc\'']]),
                 '{"breadcrumbs":'
                 . '{"categoryUrlSuffix":".&quot;html","useCategoryPathInUrl":0,"product":"Test &#039;abc&#039;"}}'
             ],
@@ -216,7 +192,7 @@ class BreadcrumbsTest extends TestCase
     /**
      * @return ObjectManager
      */
-    protected function getObjectManager() : ObjectManager
+    private function getObjectManager() : ObjectManager
     {
         if (null === $this->objectManager) {
             $this->objectManager = new ObjectManager($this);

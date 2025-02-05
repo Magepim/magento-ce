@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2011 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 
 namespace Magento\Backend\Block\Widget;
@@ -14,7 +14,6 @@ use Magento\Framework\App\ObjectManager;
  * @api
  * @deprecated 100.2.0 in favour of UI component implementation
  * @SuppressWarnings(PHPMD.NumberOfChildren)
- * @see MAGETWO-69846
  * @since 100.0.2
  */
 class Form extends \Magento\Backend\Block\Widget
@@ -44,7 +43,7 @@ class Form extends \Magento\Backend\Block\Widget
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
         array $data = [],
-        ?Form\Element\ElementCreator $creator = null
+        Form\Element\ElementCreator $creator = null
     ) {
         parent::__construct($context, $data);
         $this->creator = $creator ?: ObjectManager::getInstance()->get(Form\Element\ElementCreator::class);

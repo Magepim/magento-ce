@@ -3,8 +3,10 @@
  * Copyright 2024 Adobe
  * All Rights Reserved.
  */
-declare(strict_types=1);
 
+/**
+ * Test Prepared Subscriber
+ */
 namespace Magento\TestFramework\Event;
 
 use PHPUnit\Event\Test\Prepared;
@@ -14,13 +16,6 @@ use Magento\TestFramework\Workaround\Override\Config;
 
 class TestPreparedSubscriber implements PreparedSubscriber
 {
-    /**
-     * @param ExecutionState $executionState
-     */
-    public function __construct(private readonly ExecutionState $executionState)
-    {
-    }
-
     /**
      * Test prepared Subscriber
      *
@@ -32,24 +27,17 @@ class TestPreparedSubscriber implements PreparedSubscriber
         $methodName = $event->test()->methodName();
 
         $objectManager = Bootstrap::getObjectManager();
-        $testObj = $objectManager->create($className, ['name' => $methodName]);
-
-        // An exception can occur in PreparationStarted subscriber during applying fixtures.
-        // In order to prevent test execution it should be thrown here, from Prepared subscriber.
-        $exception = $this->executionState->popPreparationFailure($testObj->toString());
-        if ($exception) {
-            throw $exception;
-        }
+        $assetRepo = $objectManager->create($className, ['name' => $methodName]);
 
         $testData = $event->test()->testData();
         if ($testData->hasDataFromDataProvider()) {
             $dataSetName = $testData->dataFromDataProvider()->dataSetName();
-            $testObj->setData($dataSetName, ['']);
+            $assetRepo->setData($dataSetName, ['']);
         }
 
-        $skipConfig = Config::getInstance()->getSkipConfiguration($testObj);
+        $skipConfig = Config::getInstance()->getSkipConfiguration($assetRepo);
         if ($skipConfig['skip']) {
-            $testObj->markTestSkipped($skipConfig['skipMessage']);
+            $assetRepo->markTestSkipped($skipConfig['skipMessage']);
         }
         Magento::setTestPrepared(true);
     }

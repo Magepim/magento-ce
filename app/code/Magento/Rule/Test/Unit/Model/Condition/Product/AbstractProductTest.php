@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2011 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
@@ -360,7 +360,7 @@ class AbstractProductTest extends TestCase
         $attrObjectSourceMock
             ->expects((null === $expectedAttrObjSourceAllOptionsParam) ? $this->never() : $this->once())
             ->method('getAllOptions')
-            ->with($expectedAttrObjSourceAllOptionsParam, true)
+            ->with($expectedAttrObjSourceAllOptionsParam)
             ->willReturn($attrObjectSourceAllOptionsValue);
 
         $attributeObjectMock = $this->getMockBuilder(Attribute::class)
@@ -432,7 +432,7 @@ class AbstractProductTest extends TestCase
      * @return array
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public static function prepareValueOptionsDataProvider()
+    public function prepareValueOptionsDataProvider()
     {
         return [
             [

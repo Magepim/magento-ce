@@ -98,7 +98,7 @@ class AddVatRequestParamsOrderCommentTest extends TestCase
     /**
      * @return array
      */
-    public static function addVatRequestParamsOrderCommentDataProvider()
+    public function addVatRequestParamsOrderCommentDataProvider()
     {
         return [
             [

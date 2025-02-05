@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2021 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
@@ -13,7 +13,7 @@ namespace Magento\AwsS3\Test\Mftf\Helper;
 class DummyMetadataCache implements \Magento\RemoteStorage\Driver\Adapter\Cache\CacheInterface
 {
     /**
-     * @inheritDoc
+     * @inheirtDoc
      */
     public function exists(string $path): ?bool
     {
@@ -21,7 +21,7 @@ class DummyMetadataCache implements \Magento\RemoteStorage\Driver\Adapter\Cache\
     }
 
     /**
-     * @inheritDoc
+     * @inheirtDoc
      */
     public function getMetadata(string $path): ?array
     {
@@ -29,56 +29,56 @@ class DummyMetadataCache implements \Magento\RemoteStorage\Driver\Adapter\Cache\
     }
 
     /**
-     * @inheritDoc
+     * @inheirtDoc
      */
     public function flushCache(): void
     {
     }
 
     /**
-     * @inheritDoc
+     * @inheirtDoc
      */
     public function purgeQueue(): void
     {
     }
 
     /**
-     * @inheritDoc
+     * @inheirtDoc
      */
     public function moveFile(string $path, string $newpath): void
     {
     }
 
     /**
-     * @inheritDoc
+     * @inheirtDoc
      */
     public function copyFile(string $path, string $newpath): void
     {
     }
 
     /**
-     * @inheritDoc
+     * @inheirtDoc
      */
     public function deleteFile(string $path): void
     {
     }
 
     /**
-     * @inheritDoc
+     * @inheirtDoc
      */
     public function deleteDir(string $dirname): void
     {
     }
 
     /**
-     * @inheritDoc
+     * @inheirtDoc
      */
     public function updateMetadata(string $path, array $objectMetadata, bool $persist = false): void
     {
     }
 
     /**
-     * @inheritDoc
+     * @inheirtDoc
      */
     public function storeFileNotExists(string $path): void
     {

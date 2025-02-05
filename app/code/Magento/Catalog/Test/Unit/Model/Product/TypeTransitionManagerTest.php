@@ -80,7 +80,7 @@ class TypeTransitionManagerTest extends TestCase
     /**
      * @return array
      */
-    public static function processProductDataProvider()
+    public function processProductDataProvider()
     {
         return [
             [

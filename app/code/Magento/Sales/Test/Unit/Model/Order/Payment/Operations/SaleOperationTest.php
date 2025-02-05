@@ -46,9 +46,8 @@ class SaleOperationTest extends TestCase
      * @throws LocalizedException
      * @dataProvider saleDataProvider
      */
-    public function testExecute(\Closure $invoice)
+    public function testExecute(Invoice $invoice)
     {
-        $invoice = $invoice($this);
         $order = $this->getMockBuilder(Order::class)
             ->onlyMethods(['prepareInvoice', 'addRelatedObject', 'setStatus'])
             ->disableOriginalConstructor()
@@ -90,11 +89,11 @@ class SaleOperationTest extends TestCase
     /**
      * @return array
      */
-    public static function saleDataProvider()
+    public function saleDataProvider()
     {
         return [
-            ['invoice' => static fn (self $testCase) => $testCase->getPaidInvoice()],
-            ['invoice' => static fn (self $testCase) => $testCase->getUnpaidInvoice()]
+            ['paid invoice' => $this->getPaidInvoice()],
+            ['unpaid invoice' => $this->getUnpaidInvoice()]
         ];
     }
 

@@ -66,7 +66,7 @@ class UrlGeneratorTest extends TestCase
      *
      * @return array
      */
-    public static function permissionProvider()
+    public function permissionProvider()
     {
         return [
             [true, null],

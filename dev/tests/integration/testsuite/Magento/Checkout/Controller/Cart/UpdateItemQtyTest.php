@@ -116,24 +116,24 @@ class UpdateItemQtyTest extends \Magento\TestFramework\TestCase\AbstractControll
     {
         return [
             [
-                'requestQuantity' => [],
-                'expectedResponse' => [
+                'request' => [],
+                'response' => [
                     'success' => false,
                     'error_message' => 'Something went wrong while saving the page.'.
                         ' Please refresh the page and try again.'
                 ]
             ],
             [
-                'requestQuantity' => ['qty' => 2],
-                'expectedResponse' => [
+                'request' => ['qty' => 2],
+                'response' => [
                     'success' => true,
                 ]
             ],
             [
-                'requestQuantity' => ['qty' => 230],
-                'expectedResponse' => [
+                'request' => ['qty' => 230],
+                'response' => [
                     'success' => false,
-                    'error_message' => '[{"error":"Not enough items for sale","itemId":3}]']
+                    'error_message' => '[{"error":"The requested qty is not available","itemId":3}]']
             ],
         ];
     }

@@ -115,7 +115,7 @@ class DataObjectProcessorTest extends TestCase
     /**
      * @return array
      */
-    public static function buildOutputDataArrayDataProvider()
+    public function buildOutputDataArrayDataProvider()
     {
         $expectedOutput = [
             'id' => '1',

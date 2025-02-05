@@ -50,7 +50,7 @@ class MessageConfigurationsPoolTest extends TestCase
     /**
      * @return array
      */
-    public static function wrongRenderersDataProvider()
+    public function wrongRenderersDataProvider()
     {
         return [
             [['message_identifier' => []]],
@@ -74,7 +74,7 @@ class MessageConfigurationsPoolTest extends TestCase
     /**
      * @return array
      */
-    public static function wrongDataDataProvider()
+    public function wrongDataDataProvider()
     {
         return [
             [

@@ -106,7 +106,7 @@ class LoggerTest extends TestCase
     /**
      * @return array
      */
-    public static function logDataProvider()
+    public function logDataProvider()
     {
         return [
             [235, ['last_login_at' => '2015-03-04 12:00:00']],
@@ -164,7 +164,7 @@ class LoggerTest extends TestCase
     /**
      * @return array
      */
-    public static function getDataProvider()
+    public function getDataProvider()
     {
         return [
             [

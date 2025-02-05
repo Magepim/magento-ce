@@ -1,13 +1,16 @@
 <?php
 /**
- * Copyright 2011 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 namespace Magento\Catalog\Controller\Adminhtml\Category;
 
 use Magento\Framework\App\Action\HttpPostActionInterface as HttpPostActionInterface;
 use Magento\Framework\App\ObjectManager;
 
+/**
+ * Class CategoriesJson
+ */
 class CategoriesJson extends \Magento\Catalog\Controller\Adminhtml\Category implements HttpPostActionInterface
 {
     /**
@@ -35,7 +38,7 @@ class CategoriesJson extends \Magento\Catalog\Controller\Adminhtml\Category impl
         \Magento\Backend\App\Action\Context $context,
         \Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory,
         \Magento\Framework\View\LayoutFactory $layoutFactory,
-        ?\Magento\Backend\Model\Auth\Session $authSession = null
+        \Magento\Backend\Model\Auth\Session $authSession = null
     ) {
         parent::__construct($context);
         $this->resultJsonFactory = $resultJsonFactory;
@@ -57,13 +60,6 @@ class CategoriesJson extends \Magento\Catalog\Controller\Adminhtml\Category impl
             $this->authSession->setIsTreeWasExpanded(false);
         }
         $categoryId = (int)$this->getRequest()->getPost('id');
-
-        // If categoryId is not provided, return an empty JSON response or an error
-        if (!$categoryId) {
-            $resultJson = $this->resultJsonFactory->create();
-            return $resultJson->setJsonData(json_encode(['error' => 'Category ID is required']));
-        }
-
         if ($categoryId) {
             $this->getRequest()->setParam('id', $categoryId);
 

@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2014 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 
 namespace Magento\Bundle\Pricing\Price;
@@ -25,7 +25,7 @@ class ConfiguredPrice extends CatalogPrice\FinalPrice implements ConfiguredPrice
     /**
      * Price type configured
      */
-    public const PRICE_CODE = self::CONFIGURED_PRICE_CODE;
+    const PRICE_CODE = self::CONFIGURED_PRICE_CODE;
 
     /**
      * @var BundleCalculatorInterface
@@ -69,10 +69,10 @@ class ConfiguredPrice extends CatalogPrice\FinalPrice implements ConfiguredPrice
         $quantity,
         BundleCalculatorInterface $calculator,
         PriceCurrencyInterface $priceCurrency,
-        ?ItemInterface $item = null,
-        ?JsonSerializer $serializer = null,
-        ?ConfiguredPriceSelection $configuredPriceSelection = null,
-        ?DiscountCalculator $discountCalculator = null
+        ItemInterface $item = null,
+        JsonSerializer $serializer = null,
+        ConfiguredPriceSelection $configuredPriceSelection = null,
+        DiscountCalculator $discountCalculator = null
     ) {
         $this->item = $item;
         $this->serializer = $serializer ?: \Magento\Framework\App\ObjectManager::getInstance()

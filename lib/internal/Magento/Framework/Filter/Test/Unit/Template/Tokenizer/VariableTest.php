@@ -36,7 +36,7 @@ class VariableTest extends TestCase
     /**
      * @return array
      */
-    public static function sampleTokenizeStringProvider()
+    public function sampleTokenizeStringProvider()
     {
         return [
             ["firstname", [['type' => 'variable', 'name' => 'firstname']]],

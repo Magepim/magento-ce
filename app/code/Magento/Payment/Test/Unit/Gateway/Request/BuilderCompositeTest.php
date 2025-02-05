@@ -123,7 +123,7 @@ class BuilderCompositeTest extends TestCase
     /**
      * Get list of variations
      */
-    public static function buildDataProvider()
+    public function buildDataProvider()
     {
         return [
             [[

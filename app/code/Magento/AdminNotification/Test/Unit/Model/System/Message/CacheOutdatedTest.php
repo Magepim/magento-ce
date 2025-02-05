@@ -60,37 +60,30 @@ class CacheOutdatedTest extends TestCase
      * @param array $cacheTypes
      * @dataProvider getIdentityDataProvider
      */
-    public function testGetIdentity($expectedSum, $types)
+    public function testGetIdentity($expectedSum, $cacheTypes)
     {
-        $cacheType = [];
-        foreach ($types as $type) {
-            $cacheType[] = $type($this);
-        }
-
         $this->_cacheTypeListMock->method(
             'getInvalidated'
         )->willReturn(
-            $cacheType
+            $cacheTypes
         );
         $this->assertEquals($expectedSum, $this->_messageModel->getIdentity());
-    }
-
-    protected function getMockForStdClass($mockReturn)
-    {
-        $cacheTypeMock = $this->getMockBuilder(\stdClass::class)->addMethods(['getCacheType'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $cacheTypeMock->method('getCacheType')->willReturn($mockReturn);
-        return $cacheTypeMock;
     }
 
     /**
      * @return array
      */
-    public static function getIdentityDataProvider()
+    public function getIdentityDataProvider()
     {
-        $cacheTypeMock1 = static fn (self $testCase) => $testCase->getMockForStdClass('Simple');
-        $cacheTypeMock2 = static fn (self $testCase) => $testCase->getMockForStdClass('Advanced');
+        $cacheTypeMock1 = $this->getMockBuilder(\stdClass::class)->addMethods(['getCacheType'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $cacheTypeMock1->method('getCacheType')->willReturn('Simple');
+
+        $cacheTypeMock2 = $this->getMockBuilder(\stdClass::class)->addMethods(['getCacheType'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $cacheTypeMock2->method('getCacheType')->willReturn('Advanced');
 
         return [
             ['c13cfaddc2c53e8d32f59bfe89719beb', [$cacheTypeMock1]],
@@ -106,15 +99,11 @@ class CacheOutdatedTest extends TestCase
      */
     public function testIsDisplayed($expected, $allowed, $cacheTypes)
     {
-        $cacheType1 = [];
-        foreach ($cacheTypes as $cacheType) {
-            $cacheType1[] = $cacheType($this);
-        }
         $this->_authorizationMock->expects($this->once())->method('isAllowed')->willReturn($allowed);
         $this->_cacheTypeListMock->method(
             'getInvalidated'
         )->willReturn(
-            $cacheType1
+            $cacheTypes
         );
         $this->assertEquals($expected, $this->_messageModel->isDisplayed());
     }
@@ -122,9 +111,12 @@ class CacheOutdatedTest extends TestCase
     /**
      * @return array
      */
-    public static function isDisplayedDataProvider()
+    public function isDisplayedDataProvider()
     {
-        $cacheTypesMock = static fn (self $testCase) => $testCase->getMockForStdClass('someVal');
+        $cacheTypesMock = $this->getMockBuilder(\stdClass::class)->addMethods(['getCacheType'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $cacheTypesMock->method('getCacheType')->willReturn('someVal');
         $cacheTypes = [$cacheTypesMock, $cacheTypesMock];
         return [
             [false, false, []],

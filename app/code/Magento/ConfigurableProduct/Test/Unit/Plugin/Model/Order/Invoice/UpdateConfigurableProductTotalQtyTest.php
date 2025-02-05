@@ -65,17 +65,16 @@ class UpdateConfigurableProductTotalQtyTest extends TestCase
     /**
      * Test Set total quantity for configurable product invoice
      *
-     * @param \Closure $orderItems
+     * @param array $orderItems
      * @param float $totalQty
      * @param float $productTotalQty
      * @dataProvider getOrdersForConfigurableProducts
      */
     public function testBeforeSetTotalQty(
-        \Closure $orderItems,
+        array $orderItems,
         float $totalQty,
         float $productTotalQty
     ): void {
-        $orderItems = $orderItems($this);
         $this->invoiceMock->expects($this->any())
             ->method('getOrder')
             ->willReturn($this->orderMock);
@@ -92,12 +91,12 @@ class UpdateConfigurableProductTotalQtyTest extends TestCase
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      * @return array
      */
-    public static function getOrdersForConfigurableProducts(): array
+    public function getOrdersForConfigurableProducts(): array
     {
 
         return [
             'verify productQty for simple products' => [
-                'orderItems' => static fn (self $testCase) => $testCase->getOrderItems(
+                'orderItems' => $this->getOrderItems(
                     [
                         [
                             'parent_item_id' => null,
@@ -110,7 +109,7 @@ class UpdateConfigurableProductTotalQtyTest extends TestCase
                 'productTotalQty' => 10.00
             ],
             'verify productQty for configurable products' => [
-                'orderItems' => static fn (self $testCase) => $testCase->getOrderItems(
+                'orderItems' => $this->getOrderItems(
                     [
                         [
                             'parent_item_id' => '2',
@@ -123,7 +122,7 @@ class UpdateConfigurableProductTotalQtyTest extends TestCase
                 'productTotalQty' => 10.00
             ],
             'verify productQty for simple configurable products' => [
-                'orderItems' => static fn (self $testCase) => $testCase->getOrderItems(
+                'orderItems' => $this->getOrderItems(
                     [
                         [
                             'parent_item_id' => null,
@@ -154,7 +153,7 @@ class UpdateConfigurableProductTotalQtyTest extends TestCase
      * @param array $orderItems
      * @return array
      */
-    protected function getOrderItems(array $orderItems): array
+    public function getOrderItems(array $orderItems): array
     {
         $orderItemsMock = [];
         foreach ($orderItems as $key => $orderItem) {

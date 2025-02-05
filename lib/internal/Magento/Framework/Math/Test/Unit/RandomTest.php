@@ -32,7 +32,7 @@ class RandomTest extends TestCase
     /**
      * @return array
      */
-    public static function getRandomStringDataProvider()
+    public function getRandomStringDataProvider()
     {
         return [
             [0],
@@ -86,7 +86,7 @@ class RandomTest extends TestCase
     /**
      * @return array
      */
-    public static function testGetRandomNumberProvider()
+    public function testGetRandomNumberProvider()
     {
         return [
             [0, 100],

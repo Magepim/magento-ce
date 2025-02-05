@@ -123,7 +123,7 @@ class BeforeOrderPaymentSaveObserverTest extends TestCase
      *
      * @return array
      */
-    public static function dataProviderBeforeOrderPaymentSaveWithInstructions()
+    public function dataProviderBeforeOrderPaymentSaveWithInstructions()
     {
         return [
             [Banktransfer::PAYMENT_METHOD_BANKTRANSFER_CODE],

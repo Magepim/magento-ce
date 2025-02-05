@@ -346,7 +346,7 @@ class RepositoryTest extends TestCase
     /**
      * @return array
      */
-    public static function validateTaxClassDataProvider()
+    public function validateTaxClassDataProvider()
     {
         return [
             [''],

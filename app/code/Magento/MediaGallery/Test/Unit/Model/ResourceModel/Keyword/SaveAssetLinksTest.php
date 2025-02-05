@@ -125,7 +125,7 @@ class SaveAssetLinksTest extends TestCase
      *
      * @return array
      */
-    public static function assetLinksDataProvider(): array
+    public function assetLinksDataProvider(): array
     {
         return [
             [

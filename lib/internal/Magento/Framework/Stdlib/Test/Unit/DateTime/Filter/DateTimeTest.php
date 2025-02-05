@@ -43,7 +43,7 @@ class DateTimeTest extends TestCase
     /**
      * @return array
      */
-    public static function dateTimeFilterDataProvider()
+    public function dateTimeFilterDataProvider()
     {
         return [
             ['2000-01-01 02:30:00', '2000-01-01 02:30:00'],
@@ -79,7 +79,7 @@ class DateTimeTest extends TestCase
     /**
      * @return array
      */
-    public static function dateTimeFilterWithExceptionDataProvider()
+    public function dateTimeFilterWithExceptionDataProvider()
     {
         return [
             ['12-31-2000 22:22:22'],

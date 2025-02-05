@@ -36,7 +36,7 @@ class RateRegistryTest extends TestCase
      */
     private $rateModelMock;
 
-    private const TAX_RATE_ID = 1;
+    const TAX_RATE_ID = 1;
 
     protected function setUp(): void
     {
@@ -107,12 +107,9 @@ class RateRegistryTest extends TestCase
             ->willReturn($this->rateModelMock);
 
         // The second time this is called, want it to return null indicating a new object
-        $callCount = 0;
         $this->rateModelMock->expects($this->any())
             ->method('getId')
-            ->willReturnCallback(function () use (&$callCount) {
-                return $callCount++ === 0 ? self::TAX_RATE_ID : '';
-            });
+            ->will($this->onConsecutiveCalls(self::TAX_RATE_ID, null));
 
         $this->rateModelFactoryMock->expects($this->any())
             ->method('create')

@@ -84,7 +84,7 @@ class FileTest extends TestCase
     /**
      * @return array
      */
-    public static function logStatsDataProvider()
+    public function logStatsDataProvider()
     {
         return [
             [LoggerInterface::TYPE_CONNECT, '', [], null, '%aCONNECT%a'],

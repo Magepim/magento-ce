@@ -19,11 +19,10 @@
             <useCaseId value="ACP2E-789"/>
             <group value="catalog"/>
             <group value="indexer"/>
-            <group value="indexers_by_schedule_mode_only"/>
         </annotations>
         <before>
             <!-- Change indexers to "Update by Schedule" mode -->
-            <comment userInput="Adding the comment to replace 'indexer:set-mode schedule' command for preserving Backward Compatibility" stepKey="setScheduleIndexer"/>
+            <magentoCLI command="indexer:set-mode schedule" stepKey="setScheduleIndexer"/>
 
             <!-- Login as Admin -->
             <actionGroup ref="AdminLoginActionGroup" stepKey="loginAsAdmin"/>
@@ -57,7 +56,7 @@
         </before>
         <after>
             <!-- Change indexers to "Update on Save" mode -->
-            <comment userInput="Adding the comment to replace 'indexer:set-mode realtime' command for preserving Backward Compatibility" stepKey="setRealtimeMode"/>
+            <magentoCLI command="indexer:set-mode realtime" stepKey="setRealtimeMode"/>
 
             <!-- Delete data -->
             <deleteData createDataKey="createCategory" stepKey="deleteCategory"/>
@@ -70,7 +69,9 @@
             <actionGroup ref="ResetProductGridToDefaultViewActionGroup" stepKey="resetProductGridColumnsInitial"/>
             <actionGroup ref="ResetWebUrlOptionsActionGroup" stepKey="resetUrlOption"/>
             <actionGroup ref="AdminLogoutActionGroup" stepKey="logout"/>
-            <comment userInput="Adding the comment to replace CliIndexerReindexActionGroup action group ('indexer:reindex' commands) for preserving Backward Compatibility" stepKey="reindex"/>
+            <actionGroup ref="CliIndexerReindexActionGroup" stepKey="reindex">
+                <argument name="indices" value=""/>
+            </actionGroup>
             <actionGroup ref="CliCacheCleanActionGroup" stepKey="cacheCleanAfter">
                 <argument name="tags" value="config"/>
             </actionGroup>

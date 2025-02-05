@@ -79,7 +79,7 @@ class AbstractResourceTest extends TestCase
      *
      * @return array
      */
-    public static function serializeFieldsDataProvider(): array
+    public function serializeFieldsDataProvider(): array
     {
         $array = ['a', 'b', 'c'];
         $string = 'i am string';
@@ -150,7 +150,7 @@ class AbstractResourceTest extends TestCase
      *
      * @return array
      */
-    public static function unserializeFieldsDataProvider(): array
+    public function unserializeFieldsDataProvider(): array
     {
         $dataObject = new DataObject(
             [

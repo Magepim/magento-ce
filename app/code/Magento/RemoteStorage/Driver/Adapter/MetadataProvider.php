@@ -50,7 +50,7 @@ class MetadataProvider implements MetadataProviderInterface
     private function isDirectory($path): bool
     {
         try {
-            return $this->adapter->directoryExists($path);
+            return iterator_count($this->adapter->listContents($path, false)) > 0;
         } catch (\Throwable $e) {
             // catch closed iterator
             return false;

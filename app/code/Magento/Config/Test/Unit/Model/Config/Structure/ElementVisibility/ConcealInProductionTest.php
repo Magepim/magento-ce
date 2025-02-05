@@ -71,7 +71,7 @@ class ConcealInProductionTest extends TestCase
     /**
      * @return array
      */
-    public static function disabledDataProvider(): array
+    public function disabledDataProvider(): array
     {
         return [
             //visibility of field 'section1/group1/field1' should be applied

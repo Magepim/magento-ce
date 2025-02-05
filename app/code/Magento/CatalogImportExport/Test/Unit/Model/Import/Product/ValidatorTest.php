@@ -125,7 +125,7 @@ class ValidatorTest extends TestCase
      * @return array
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public static function attributeValidationProvider()
+    public function attributeValidationProvider()
     {
         return [
             [

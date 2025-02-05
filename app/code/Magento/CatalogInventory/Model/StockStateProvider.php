@@ -9,7 +9,6 @@ namespace Magento\CatalogInventory\Model;
 use Magento\Catalog\Model\ProductFactory;
 use Magento\CatalogInventory\Api\Data\StockItemInterface;
 use Magento\CatalogInventory\Model\Spi\StockStateProviderInterface;
-use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\DataObject\Factory as ObjectFactory;
 use Magento\Framework\Locale\FormatInterface;
 use Magento\Framework\Math\Division as MathDivision;
@@ -49,7 +48,6 @@ class StockStateProvider implements StockStateProviderInterface
      * @param FormatInterface $localeFormat
      * @param ObjectFactory $objectFactory
      * @param ProductFactory $productFactory
-     * @param ScopeConfigInterface $scopeConfig
      * @param bool $qtyCheckApplicable
      */
     public function __construct(
@@ -57,7 +55,6 @@ class StockStateProvider implements StockStateProviderInterface
         FormatInterface $localeFormat,
         ObjectFactory $objectFactory,
         ProductFactory $productFactory,
-        private readonly ScopeConfigInterface $scopeConfig,
         $qtyCheckApplicable = true
     ) {
         $this->mathDivision = $mathDivision;
@@ -167,19 +164,10 @@ class StockStateProvider implements StockStateProviderInterface
         }
 
         if (!$this->checkQty($stockItem, $summaryQty) || !$this->checkQty($stockItem, $qty)) {
-            $message = __('The requested qty. is not available');
-            if ((int) $this->scopeConfig->getValue('cataloginventory/options/not_available_message') === 1) {
-                $itemMessage = (__(sprintf(
-                    'Only %s of %s available',
-                    $stockItem->getQty() - $stockItem->getMinQty(),
-                    $this->localeFormat->getNumber($qty)
-                )));
-            } else {
-                $itemMessage = (__('Not enough items for sale'));
-            }
+            $message = __('The requested qty is not available');
             $result->setHasError(true)
                 ->setErrorCode('qty_available')
-                ->setMessage($itemMessage)
+                ->setMessage($message)
                 ->setQuoteMessage($message)
                 ->setQuoteMessageIndex('qty');
             return $result;
@@ -232,7 +220,7 @@ class StockStateProvider implements StockStateProviderInterface
                         }
                     } elseif ($stockItem->getShowDefaultNotificationMessage()) {
                         $result->setMessage(
-                            __('The requested qty. is not available')
+                            __('The requested qty is not available')
                         );
                     }
                 }

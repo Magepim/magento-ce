@@ -111,7 +111,7 @@ class MimeTest extends TestCase
     /**
      * @return array
      */
-    public static function getMimeTypeDataProvider(): array
+    public function getMimeTypeDataProvider(): array
     {
         return [
             'javascript' => [__DIR__ . '/_files/javascript.js', 'application/javascript'],

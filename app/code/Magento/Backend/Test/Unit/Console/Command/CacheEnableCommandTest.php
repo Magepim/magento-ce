@@ -46,9 +46,9 @@ class CacheEnableCommandTest extends AbstractCacheSetCommandTestCase
     /**
      * {@inheritdoc}
      */
-    public static function getExpectedExecutionOutput(array $enabled)
+    public function getExpectedExecutionOutput(array $enabled)
     {
-        $output = static::getExpectedChangeOutput($enabled, true);
+        $output = $this->getExpectedChangeOutput($enabled, true);
         if ($enabled) {
             $output .= 'Cleaned cache types:' . PHP_EOL;
             $output .= implode(PHP_EOL, $enabled) . PHP_EOL;

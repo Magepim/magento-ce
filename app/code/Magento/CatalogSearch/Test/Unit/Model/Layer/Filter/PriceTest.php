@@ -203,20 +203,20 @@ class PriceTest extends TestCase
     /**
      * @return array
      */
-    public static function applyWithEmptyRequestDataProvider(): array
+    public function applyWithEmptyRequestDataProvider(): array
     {
         return [
             [
                 'requestValue' => null,
-                'idValue' => 0
+                'id' => 0
             ],
             [
                 'requestValue' => 0,
-                'idValue' => false
+                'id' => false
             ],
             [
                 'requestValue' => 0,
-                'idValue' => null
+                'id' => null
             ]
         ];
     }
@@ -249,7 +249,7 @@ class PriceTest extends TestCase
     /**
      * @return array
      */
-    public static function applyDataProvider(): array
+    public function applyDataProvider(): array
     {
         return [
             [

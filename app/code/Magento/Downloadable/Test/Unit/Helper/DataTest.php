@@ -75,7 +75,7 @@ class DataTest extends TestCase
      *
      * @return array
      */
-    public static function getIsShareableDataProvider()
+    public function getIsShareableDataProvider()
     {
         return [
             'link shareable yes' => [Link::LINK_SHAREABLE_YES, true, true],

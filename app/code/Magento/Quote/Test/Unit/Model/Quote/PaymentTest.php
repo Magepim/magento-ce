@@ -96,7 +96,7 @@ class PaymentTest extends TestCase
     /**
      * @return array
      */
-    public static function yearValueDataProvider()
+    public function yearValueDataProvider()
     {
         return [
             [null, null],
@@ -195,7 +195,7 @@ class PaymentTest extends TestCase
     /**
      * @return array
      */
-    public static function getAdditionalDataDataProvider()
+    public function getAdditionalDataDataProvider()
     {
         return [
             [
@@ -226,7 +226,7 @@ class PaymentTest extends TestCase
     /**
      * @return array
      */
-    public static function importDataPositiveCheckDataProvider()
+    public function importDataPositiveCheckDataProvider()
     {
         return [
             [

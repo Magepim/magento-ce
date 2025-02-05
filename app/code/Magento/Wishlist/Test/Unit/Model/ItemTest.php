@@ -153,9 +153,6 @@ class ItemTest extends TestCase
      */
     public function testAddGetOptions($code, $option)
     {
-        if (is_callable($option)) {
-            $option = $option($this);
-        }
         $this->assertEmpty($this->model->getOptions());
         $optionMock = $this->getMockBuilder(Option::class)
             ->disableOriginalConstructor()
@@ -181,9 +178,6 @@ class ItemTest extends TestCase
      */
     public function testRemoveOptionByCode($code, $option)
     {
-        if (is_callable($option)) {
-            $option = $option($this);
-        }
         $this->assertEmpty($this->model->getOptions());
         $optionMock = $this->getMockBuilder(Option::class)
             ->disableOriginalConstructor()
@@ -208,7 +202,11 @@ class ItemTest extends TestCase
         $this->assertTrue($actualOption->isDeleted());
     }
 
-    protected function getMockForOptionClass() {
+    /**
+     * @return array
+     */
+    public function getOptionsDataProvider()
+    {
         $optionMock = $this->getMockBuilder(Option::class)
             ->disableOriginalConstructor()
             ->addMethods(['getCode'])
@@ -217,28 +215,14 @@ class ItemTest extends TestCase
         $optionMock->expects($this->any())
             ->method('getCode')
             ->willReturn('second_key');
-        return $optionMock;
-    }
 
-    protected function getMockForProductClass() {
         $productMock = $this->getMockBuilder(Product::class)
             ->disableOriginalConstructor()
             ->getMock();
-        return new DataObject(['code' => 'third_key', 'product' => $productMock]);
-    }
-
-    /**
-     * @return array
-     */
-    public static function getOptionsDataProvider()
-    {
-        $optionMock = static fn (self $testCase) => $testCase->getMockForOptionClass();
-
-        $productMock = static fn (self $testCase) => $testCase->getMockForProductClass();
         return [
             ['first_key', ['code' => 'first_key', 'value' => 'first_data']],
             ['second_key', $optionMock],
-            ['third_key', $productMock],
+            ['third_key', new DataObject(['code' => 'third_key', 'product' => $productMock])],
         ];
     }
 

@@ -147,7 +147,7 @@ class AttributeTest extends TestCase
      *
      * @return array
      */
-    public static function afterSaveDataProvider(): array
+    public function afterSaveDataProvider(): array
     {
         $dimensions = [['scope' => 1], ['scope' => 2]];
 

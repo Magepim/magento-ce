@@ -62,7 +62,7 @@ class UrlRewriteTest extends TestCase
     /**
      * @return array
      */
-    public static function requestPathDataProvider()
+    public function requestPathDataProvider()
     {
         return [
             'no leading slash' => ['correct/request/path'],
@@ -73,7 +73,7 @@ class UrlRewriteTest extends TestCase
     /**
      * @return array
      */
-    public static function requestPathExceptionDataProvider()
+    public function requestPathExceptionDataProvider()
     {
         return [
             'two slashes' => ['request/path/with/two//slashes'],

@@ -36,7 +36,7 @@ class NumberTest extends TestCase
     /**
      * @return array
      */
-    public static function evaluateExceptionDataProvider()
+    public function evaluateExceptionDataProvider()
     {
         return ['no value' => [[]], 'non-numeric value' => [['value' => 'non-numeric']]];
     }
@@ -56,7 +56,7 @@ class NumberTest extends TestCase
     /**
      * @return array
      */
-    public static function evaluateDataProvider()
+    public function evaluateDataProvider()
     {
         return [
             'integer' => [10, 10],

@@ -91,18 +91,9 @@ class RowCustomizerTest extends TestCase
         $collection = $this->getMockBuilder(Collection::class)
             ->disableOriginalConstructor()
             ->getMock();
-
-        $callCount = 0;
         $collection->expects($this->atLeastOnce())
             ->method('fetchItem')
-            ->willReturnCallback(function () use (&$callCount, $product1, $product2) {
-                $callCount++;
-                if ($callCount === 1) {
-                    return $product1;
-                } elseif ($callCount === 2) {
-                    return $product2;
-                }
-            });
+            ->willReturn($product1, $product2);
 
         $collection->expects($this->exactly(2))
             ->method('addAttributeToFilter')

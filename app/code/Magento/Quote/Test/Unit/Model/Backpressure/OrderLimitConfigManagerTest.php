@@ -44,7 +44,7 @@ class OrderLimitConfigManagerTest extends TestCase
      *
      * @return array
      */
-    public static function getConfigCases(): array
+    public function getConfigCases(): array
     {
         return [
             'guest' => [ContextInterface::IDENTITY_TYPE_IP, 100, 50, 60, 100, 60],
@@ -114,7 +114,7 @@ class OrderLimitConfigManagerTest extends TestCase
      *
      * @return array
      */
-    public static function getEnabledCases(): array
+    public function getEnabledCases(): array
     {
         return [
             'disabled' => [false, false],

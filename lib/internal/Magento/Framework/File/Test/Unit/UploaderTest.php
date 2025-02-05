@@ -81,7 +81,7 @@ class UploaderTest extends TestCase
     /**
      * @return array
      */
-    public static function getCorrectFileNameProvider()
+    public function getCorrectFileNameProvider()
     {
         return [
             [
@@ -128,7 +128,7 @@ class UploaderTest extends TestCase
     /**
      * @return array
      */
-    public static function checkAllowedExtensionProvider(): array
+    public function checkAllowedExtensionProvider(): array
     {
         return [
             [

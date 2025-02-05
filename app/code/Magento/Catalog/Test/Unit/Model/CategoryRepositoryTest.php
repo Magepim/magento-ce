@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2014 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
@@ -70,7 +70,7 @@ class CategoryRepositoryTest extends TestCase
     private $populateWithValuesMock;
 
     /**
-     * @inheritDoc
+     * @inheridoc
      */
     protected function setUp(): void
     {
@@ -108,15 +108,6 @@ class CategoryRepositoryTest extends TestCase
             ->onlyMethods(['execute'])
             ->disableOriginalConstructor()
             ->getMock();
-
-        $objectHelper = new ObjectManager($this);
-        $objects = [
-            [
-                PopulateWithValues::class,
-                $this->createMock(PopulateWithValues::class)
-            ]
-        ];
-        $objectHelper->prepareObjectManager($objects);
 
         $this->model = (new ObjectManager($this))->getObject(
             CategoryRepository::class,
@@ -180,7 +171,7 @@ class CategoryRepositoryTest extends TestCase
     /**
      * @return array
      */
-    public static function filterExtraFieldsOnUpdateCategoryDataProvider()
+    public function filterExtraFieldsOnUpdateCategoryDataProvider()
     {
         return [
             [
@@ -248,11 +239,8 @@ class CategoryRepositoryTest extends TestCase
             ->willReturn($categoryData);
         $categoryMock = $this->createMock(CategoryModel::class);
         $parentCategoryMock = $this->createMock(CategoryModel::class);
-        $callCount = 0;
         $categoryMock->expects($this->any())->method('getId')
-            ->willReturnCallback(function () use (&$callCount, $categoryId, $newCategoryId) {
-                return $callCount++ === 0 ? $categoryId : $newCategoryId;
-            });
+            ->will($this->onConsecutiveCalls($categoryId, $newCategoryId));
         $this->categoryFactoryMock->expects($this->exactly(2))->method('create')->willReturn($parentCategoryMock);
         $parentCategoryMock->expects($this->atLeastOnce())->method('getId')->willReturn($parentCategoryId);
 
@@ -324,7 +312,7 @@ class CategoryRepositoryTest extends TestCase
     /**
      * @return array
      */
-    public static function saveWithValidateCategoryExceptionDataProvider()
+    public function saveWithValidateCategoryExceptionDataProvider()
     {
         return [
             [

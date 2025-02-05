@@ -203,14 +203,12 @@ QUERY;
 		itemsV2 {
 			items {
 				uid
-                ... on ConfigurableCartItem {
-                      configured_variant {
-                        name
-                        sku
-                        stock_status
-                        only_x_left_in_stock
-                    }
-                }
+				product {
+					name
+					sku
+					stock_status
+					only_x_left_in_stock
+				}
 			}
 		}
 	}
@@ -221,11 +219,11 @@ QUERY;
         $responseDataObject = new DataObject($response);
         self::assertEquals(
             $expected,
-            $responseDataObject->getData('cart/itemsV2/items/0/configured_variant/only_x_left_in_stock'),
+            $responseDataObject->getData('cart/itemsV2/items/0/product/only_x_left_in_stock'),
         );
     }
 
-    public static function stockThresholdQtyProvider(): array
+    public function stockThresholdQtyProvider(): array
     {
         return [
             ['0', null],
@@ -253,7 +251,12 @@ mutation {
     }]
   ) {
     cart {
-        id
+      items {
+        is_available
+        product {
+          sku
+        }
+      }
     }
     user_errors {
       code

@@ -26,6 +26,7 @@ class DebugHintsTest extends TestCase
     {
         $subject = $this->getMockForAbstractClass(TemplateEngineInterface::class);
         $block = $this->getMockBuilder(BlockInterface::class)
+            ->setMockClassName('TestBlock')
             ->getMockForAbstractClass();
         $subject->expects(
             $this->once()
@@ -69,7 +70,7 @@ class DebugHintsTest extends TestCase
     /**
      * @return array
      */
-    public static function renderDataProvider()
+    public function renderDataProvider()
     {
         return ['block hints disabled' => [false], 'block hints enabled' => [true]];
     }

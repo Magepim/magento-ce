@@ -80,7 +80,7 @@ class ShippingTest extends TestCase
     /**
      * @var array
      */
-    protected static $layout;
+    protected $layout;
 
     /**
      * @var Json|MockObject
@@ -105,7 +105,7 @@ class ShippingTest extends TestCase
         $this->serializerMock = $this->createMock(JsonHexTag::class);
         $this->jsonHexTagSerializerMock = $this->createMock(JsonHexTag::class);
         $this->storeManagerInterfaceMock = $this->getMockForAbstractClass(StoreManagerInterface::class);
-        self::$layout = self::STUB_PREINITIALIZED_COMPONENTS;
+        $this->layout = self::STUB_PREINITIALIZED_COMPONENTS;
 
         $objectManager = new ObjectManager($this);
         $this->block = $objectManager->getObject(
@@ -113,7 +113,7 @@ class ShippingTest extends TestCase
             [
                 'configProvider' => $this->configProviderMock,
                 'layoutProcessors' => [$this->layoutProcessorMock],
-                'jsLayout' => self::$layout,
+                'jsLayout' => $this->layout,
                 'serializer' => $this->serializerMock,
                 'jsonHexTagSerializer' => $this->jsonHexTagSerializerMock,
                 'storeManager' => $this->storeManagerInterfaceMock
@@ -146,7 +146,7 @@ class ShippingTest extends TestCase
     {
         $this->layoutProcessorMock->expects($this->once())
             ->method('process')
-            ->with(self::$layout)
+            ->with($this->layout)
             ->willReturn($layoutProcessed);
 
         $this->jsonHexTagSerializerMock->expects($this->once())
@@ -161,9 +161,9 @@ class ShippingTest extends TestCase
      *
      * @return array
      */
-    public static function getJsLayoutDataProvider(): array
+    public function getJsLayoutDataProvider(): array
     {
-        $layoutProcessed = self::$layout;
+        $layoutProcessed = $this->layout;
         $layoutProcessed['components']['secondComponent'] = ['param' => 'value'];
         return [
             [
@@ -217,7 +217,7 @@ class ShippingTest extends TestCase
      *
      * @return array
      */
-    public static function jsonEncodeDataProvider(): array
+    public function jsonEncodeDataProvider(): array
     {
         return [
             [

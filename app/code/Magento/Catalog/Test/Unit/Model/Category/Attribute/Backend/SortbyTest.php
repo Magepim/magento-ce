@@ -87,7 +87,7 @@ class SortbyTest extends TestCase
     /**
      * @return array
      */
-    public static function beforeSaveDataProvider(): array
+    public function beforeSaveDataProvider(): array
     {
         return [
             'attribute with specified value' => [
@@ -138,7 +138,7 @@ class SortbyTest extends TestCase
     /**
      * @return array
      */
-    public static function afterLoadDataProvider(): array
+    public function afterLoadDataProvider(): array
     {
         return [
             'attribute with specified value' => [
@@ -183,7 +183,7 @@ class SortbyTest extends TestCase
     /**
      * @return array
      */
-    public static function validateDataProvider(): array
+    public function validateDataProvider(): array
     {
         return [
             'is not required' => [
@@ -286,7 +286,7 @@ class SortbyTest extends TestCase
     /**
      * @return array
      */
-    public static function validateDefaultSortDataProvider(): array
+    public function validateDefaultSortDataProvider(): array
     {
         return [
             [
@@ -334,7 +334,7 @@ class SortbyTest extends TestCase
     /**
      * @return array
      */
-    public static function validateDefaultSortException(): array
+    public function validateDefaultSortException(): array
     {
         return [
             [

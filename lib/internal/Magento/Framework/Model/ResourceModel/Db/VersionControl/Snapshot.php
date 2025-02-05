@@ -1,25 +1,18 @@
 <?php
 /**
- * Copyright 2015 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 namespace Magento\Framework\Model\ResourceModel\Db\VersionControl;
 
 use Magento\Framework\DataObject;
-use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\ObjectManager\ResetAfterRequestInterface;
-use Magento\Framework\Serialize\SerializerInterface;
 
 /**
  * Class Snapshot register snapshot of entity data, for tracking changes
  */
 class Snapshot implements ResetAfterRequestInterface
 {
-    /**
-     * @var SerializerInterface
-     */
-    private SerializerInterface $serializer;
-
     /**
      * Array of snapshots of entities data
      *
@@ -36,24 +29,21 @@ class Snapshot implements ResetAfterRequestInterface
      * Initialization
      *
      * @param Metadata $metadata
-     * @param SerializerInterface $serializer
      */
     public function __construct(
-        Metadata $metadata,
-        SerializerInterface $serializer
+        Metadata $metadata
     ) {
         $this->metadata = $metadata;
-        $this->serializer = $serializer;
     }
 
     /**
      * Register snapshot of entity data, for tracking changes
      *
-     * @param DataObject $entity
+     * @param \Magento\Framework\DataObject $entity
      * @return void
-     * @throws LocalizedException
+     * @SuppressWarnings(PHPMD.UnusedLocalVariable)
      */
-    public function registerSnapshot(DataObject $entity)
+    public function registerSnapshot(\Magento\Framework\DataObject $entity)
     {
         $metaData = $this->metadata->getFields($entity);
         $filteredData = array_intersect_key($entity->getData(), $metaData);
@@ -82,10 +72,10 @@ class Snapshot implements ResetAfterRequestInterface
     /**
      * Check is current entity has changes, by comparing current object state with stored snapshot
      *
-     * @param DataObject $entity
+     * @param \Magento\Framework\DataObject $entity
      * @return bool
      */
-    public function isModified(DataObject $entity)
+    public function isModified(\Magento\Framework\DataObject $entity)
     {
         if (!$entity->getId()) {
             return true;
@@ -96,15 +86,7 @@ class Snapshot implements ResetAfterRequestInterface
             return true;
         }
         foreach ($this->snapshotData[$entityClass][$entity->getId()] as $field => $value) {
-            $entityValue = $entity->getDataByKey($field);
-            if (is_array($entityValue) && is_string($value)) {
-                try {
-                    $value = $this->serializer->unserialize($value);
-                } catch (\InvalidArgumentException) {
-                    return true;
-                }
-            }
-            if ($entityValue != $value) {
+            if ($entity->getDataByKey($field) != $value) {
                 return true;
             }
         }
@@ -115,9 +97,9 @@ class Snapshot implements ResetAfterRequestInterface
     /**
      * Clear snapshot data
      *
-     * @param DataObject|null $entity
+     * @param \Magento\Framework\DataObject|null $entity
      */
-    public function clear(?DataObject $entity = null)
+    public function clear(\Magento\Framework\DataObject $entity = null)
     {
         if ($entity !== null) {
             $this->snapshotData[get_class($entity)] = [];

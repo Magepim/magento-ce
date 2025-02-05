@@ -7,6 +7,8 @@ namespace Magento\Email\Controller\Adminhtml\Email;
 
 /**
  * System Template admin controller
+ *
+ * @author      Magento Core Team <core@magentocommerce.com>
  */
 abstract class Template extends \Magento\Backend\App\Action
 {
@@ -15,14 +17,13 @@ abstract class Template extends \Magento\Backend\App\Action
      *
      * @see _isAllowed()
      */
-    public const ADMIN_RESOURCE = 'Magento_Email::template';
+    const ADMIN_RESOURCE = 'Magento_Email::template';
 
     /**
-     * Core registry variable
+     * Core registry
      *
      * @var \Magento\Framework\Registry
      * @deprecated 101.0.0 since 2.3.0 in favor of stateful global objects elimination.
-     * @see Nothing
      */
     protected $_coreRegistry = null;
 

@@ -294,7 +294,7 @@ class AbstractMapperTest extends TestCase
      *
      * @return array
      */
-    public static function dataProviderMap()
+    public function dataProviderMap()
     {
         return [
             [
@@ -315,7 +315,7 @@ class AbstractMapperTest extends TestCase
      *
      * @return array
      */
-    public static function dataProviderAddFieldToFilter()
+    public function dataProviderAddFieldToFilter()
     {
         return [
             [

@@ -54,7 +54,7 @@ class MinimumShouldMatchTest extends TestCase
     /**
      * @return array
      */
-    public static function validateValueDataProvider(): array
+    public function validateValueDataProvider(): array
     {
         return  [
             ['3', true],

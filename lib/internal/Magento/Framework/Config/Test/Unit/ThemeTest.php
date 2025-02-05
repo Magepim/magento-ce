@@ -61,7 +61,7 @@ class ThemeTest extends TestCase
     /**
      * @return array
      */
-    public static function dataGetterDataProvider()
+    public function dataGetterDataProvider()
     {
         return [
             [

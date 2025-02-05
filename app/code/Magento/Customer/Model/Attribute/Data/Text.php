@@ -6,6 +6,8 @@
 
 /**
  * Customer Attribute Text Data Model
+ *
+ * @author      Magento Core Team <core@magentocommerce.com>
  */
 namespace Magento\Customer\Model\Attribute\Data;
 

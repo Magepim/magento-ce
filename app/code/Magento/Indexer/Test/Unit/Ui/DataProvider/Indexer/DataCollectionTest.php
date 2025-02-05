@@ -125,7 +125,7 @@ class DataCollectionTest extends TestCase
     {
         return [
             [
-                'indexersData' => [
+                'indexers' => [
                     'indexer_2' => [
                         'getId' => 'indexer_2',
                         'getTitle' => 'Title_2',

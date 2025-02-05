@@ -91,7 +91,7 @@ class ExceptionTest extends TestCase
      *
      * @return array
      */
-    public static function providerForTestConstructInvalidHttpCode()
+    public function providerForTestConstructInvalidHttpCode()
     {
         //Each array contains invalid \Exception code.
         return [[300], [600]];

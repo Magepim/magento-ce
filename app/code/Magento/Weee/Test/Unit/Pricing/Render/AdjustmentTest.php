@@ -189,7 +189,7 @@ class AdjustmentTest extends TestCase
      *
      * @return array
      */
-    public static function showInclDescrDataProvider()
+    public function showInclDescrDataProvider()
     {
         return [
             [Tax::DISPLAY_INCL, 1.23, false],
@@ -260,7 +260,7 @@ class AdjustmentTest extends TestCase
      *
      * @return array
      */
-    public static function showExclDescrInclDataProvider()
+    public function showExclDescrInclDataProvider()
     {
         return [
             [Tax::DISPLAY_INCL, 1.23, false],
@@ -327,7 +327,7 @@ class AdjustmentTest extends TestCase
      *
      * @return array
      */
-    public static function getWeeeTaxAttributesDataProvider()
+    public function getWeeeTaxAttributesDataProvider()
     {
         return [
             [Tax::DISPLAY_INCL, [1, 2, 3], []],
@@ -358,7 +358,7 @@ class AdjustmentTest extends TestCase
      *
      * @return array
      */
-    public static function renderWeeeTaxAttributeAmountDataProvider()
+    public function renderWeeeTaxAttributeAmountDataProvider()
     {
         return [
             [new DataObject(['amount' => 51]), 51],
@@ -386,7 +386,7 @@ class AdjustmentTest extends TestCase
      *
      * @return array
      */
-    public static function renderWeeeTaxAttributeNameDataProvider()
+    public function renderWeeeTaxAttributeNameDataProvider()
     {
         return [
             [new DataObject(['name' => 51]), 51],
@@ -414,7 +414,7 @@ class AdjustmentTest extends TestCase
      *
      * @return array
      */
-    public static function renderWeeeTaxAttributeAmountWithTaxDataProvider()
+    public function renderWeeeTaxAttributeAmountWithTaxDataProvider()
     {
         return [
             [new DataObject(['amount_excl_tax' => 50, 'tax_amount' => 5]), 55],

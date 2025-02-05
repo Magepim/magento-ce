@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2014 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 
 namespace Magento\Framework\App\ObjectManager\Environment;
@@ -16,11 +16,10 @@ class Developer extends AbstractEnvironment implements EnvironmentInterface
     /**#@+
      * Mode name
      */
-    public const MODE = 'developer';
+    const MODE = 'developer';
+    /**#@- */
 
-    /**
-     * @var string
-     */
+    /**#@- */
     protected $mode = self::MODE;
 
     /**
@@ -61,7 +60,7 @@ class Developer extends AbstractEnvironment implements EnvironmentInterface
     }
 
     /**
-     * @inheritDoc
+     * {inheritdoc}
      */
     public function configureObjectManager(ConfigInterface $diConfig, &$sharedInstances)
     {

@@ -115,20 +115,20 @@ class CustomerGroupTest extends TestCase
      *
      * @return array
      */
-    public static function aroundSaveDataProvider()
+    public function aroundSaveDataProvider()
     {
         return [
             'customer_group_id = 0' => [
-                'customerGroupId' => '0',
-                'callTimes' => 0
+                'customer_group_id' => '0',
+                'create_tables_call_times' => 0
             ],
             'customer_group_id = 1' => [
-                'customerGroupId' => '1',
-                'callTimes' => 0
+                'customer_group_id' => '1',
+                'create_tables_call_times' => 0
             ],
             'customer_group_id = null' => [
-                'customerGroupId' => null,
-                'callTimes' => 1
+                'customer_group_id' => null,
+                'create_tables_call_times' => 1
             ],
         ];
     }

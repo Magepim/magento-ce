@@ -19,7 +19,7 @@ class MviewStateTest extends TestCase
     /**
      * @return array
      */
-    public static function afterSetStatusSuspendDataProvider()
+    public function afterSetStatusSuspendDataProvider()
     {
         return [['suspended', 'idle'], ['suspended', 'working']];
     }
@@ -108,7 +108,7 @@ class MviewStateTest extends TestCase
     /**
      * @return array
      */
-    public static function afterSetStatusResumeDataProvider()
+    public function afterSetStatusResumeDataProvider()
     {
         return [['idle', 'suspended'], ['working', 'suspended']];
     }
@@ -178,7 +178,7 @@ class MviewStateTest extends TestCase
     /**
      * @return array
      */
-    public static function afterSetStatusSkipDataProvider()
+    public function afterSetStatusSkipDataProvider()
     {
         return [
             ['idle', 'idle'],
@@ -247,7 +247,7 @@ class MviewStateTest extends TestCase
     /**
      * @return array
      */
-    public static function afterSetStatusDisabledDataProvider()
+    public function afterSetStatusDisabledDataProvider()
     {
         return [['idle'], ['working'], ['suspended']];
     }

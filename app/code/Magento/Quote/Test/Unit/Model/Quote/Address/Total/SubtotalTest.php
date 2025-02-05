@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2014 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
@@ -53,7 +53,7 @@ class SubtotalTest extends TestCase
     protected $stockRegistry;
 
     /**
-     * @inheritDoc
+     * @inheriDoc
      */
     protected function setUp(): void
     {
@@ -76,7 +76,7 @@ class SubtotalTest extends TestCase
     /**
      * @return array
      */
-    public static function collectDataProvider(): array
+    public function collectDataProvider(): array
     {
         return [
             [12, 10, false, 12, 10],

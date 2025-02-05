@@ -51,21 +51,21 @@ class ExtendsTest extends TestCase
     /**
      * @return array
      */
-    public static function mapDataProvider()
+    public function mapDataProvider()
     {
         return [
             [[], []],
-            self::_emptySectionsNodeData(),
-            self::_extendFromASiblingData(),
-            self::_extendFromNodeOnHigherLevelData(),
-            self::_extendWithMerge()
+            $this->_emptySectionsNodeData(),
+            $this->_extendFromASiblingData(),
+            $this->_extendFromNodeOnHigherLevelData(),
+            $this->_extendWithMerge()
         ];
     }
 
     /**
      * @return array
      */
-    protected static function _emptySectionsNodeData()
+    protected function _emptySectionsNodeData()
     {
         $data = ['config' => ['system' => ['sections' => 'some_non_array']]];
 
@@ -75,7 +75,7 @@ class ExtendsTest extends TestCase
     /**
      * @return array
      */
-    protected static function _extendFromASiblingData()
+    protected function _extendFromASiblingData()
     {
         $source = $result = [
             'config' => [
@@ -97,7 +97,7 @@ class ExtendsTest extends TestCase
     /**
      * @return array
      */
-    protected static function _extendFromNodeOnHigherLevelData()
+    protected function _extendFromNodeOnHigherLevelData()
     {
         $source = $result = [
             'config' => [
@@ -133,7 +133,7 @@ class ExtendsTest extends TestCase
     /**
      * @return array
      */
-    protected static function _extendWithMerge()
+    protected function _extendWithMerge()
     {
         $source = $result = [
             'config' => [

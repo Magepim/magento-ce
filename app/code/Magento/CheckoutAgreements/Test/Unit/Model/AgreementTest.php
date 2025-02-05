@@ -40,7 +40,7 @@ class AgreementTest extends TestCase
     /**
      * @return array
      */
-    public static function validateDataDataProvider()
+    public function validateDataDataProvider()
     {
         return [
             [

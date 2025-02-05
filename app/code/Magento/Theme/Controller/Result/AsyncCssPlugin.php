@@ -7,10 +7,9 @@ declare(strict_types=1);
 
 namespace Magento\Theme\Controller\Result;
 
-use Magento\Csp\Api\InlineUtilInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;
-use Magento\Framework\App\ObjectManager;
+use Magento\Framework\App\Response\Http;
 use Magento\Framework\App\Response\HttpInterface as HttpResponseInterface;
 use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\View\Result\Layout;
@@ -28,22 +27,11 @@ class AsyncCssPlugin
     private $scopeConfig;
 
     /**
-     * @var InlineUtilInterface
-     */
-    private $cspInlineUtil;
-
-    /**
      * @param ScopeConfigInterface $scopeConfig
-     * @param InlineUtilInterface|null $cspInlineUtil
      */
-    public function __construct(
-        ScopeConfigInterface $scopeConfig,
-        ?InlineUtilInterface $cspInlineUtil = null
-    ) {
+    public function __construct(ScopeConfigInterface $scopeConfig)
+    {
         $this->scopeConfig = $scopeConfig;
-        $this->cspInlineUtil = $cspInlineUtil ?: ObjectManager::getInstance()->get(
-            InlineUtilInterface::class
-        );
     }
 
     /**
@@ -111,13 +99,10 @@ class AsyncCssPlugin
                 $media = $mediaAttribute[2];
             }
             $media = $media ?? 'all';
-            $onload = $this->cspInlineUtil->renderEventListener(
-                'onload',
-                sprintf('this.onload=null;this.media=\'%s\'', $media)
-            );
+
             $style = sprintf(
-                '<link rel="stylesheet" media="print" %s href="%s">',
-                $onload,
+                '<link rel="stylesheet" media="print" onload="this.onload=null;this.media=\'%s\'" href="%s">',
+                $media,
                 $href
             );
             $styles .= "\n" . $style;

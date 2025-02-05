@@ -12,6 +12,7 @@ use Magento\Email\Model\BackendTemplate;
 /**
  * Adminhtml system template edit block
  *
+ * @author      Magento Core Team <core@magentocommerce.com>
  * @method array getTemplateOptions()
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
@@ -20,7 +21,6 @@ class Edit extends Widget implements ContainerInterface
     /**
      * @var \Magento\Framework\Registry
      * @deprecated 101.0.0 since 2.3.0 in favor of stateful global objects elimination.
-     * @see Nothing
      */
     protected $_registryManager;
 

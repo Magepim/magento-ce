@@ -108,7 +108,7 @@ class PurchasedTest extends TestCase
     /**
      * @return array[]
      */
-    public static function getLinkDataProvider(): array
+    public function getLinkDataProvider(): array
     {
         return [
             [

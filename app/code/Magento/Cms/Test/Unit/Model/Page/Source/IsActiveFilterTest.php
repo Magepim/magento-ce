@@ -22,7 +22,7 @@ class IsActiveFilterTest extends IsActiveTest
     /**
      * {@inheritdoc}
      */
-    public static function getAvailableStatusesDataProvider()
+    public function getAvailableStatusesDataProvider()
     {
         return [
             [

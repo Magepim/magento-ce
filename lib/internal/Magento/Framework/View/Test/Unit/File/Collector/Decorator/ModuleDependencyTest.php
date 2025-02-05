@@ -65,7 +65,7 @@ class ModuleDependencyTest extends TestCase
     /**
      * @return array
      */
-    public static function getFilesDataProvider()
+    public function getFilesDataProvider()
     {
         $fileOne = new File('b.xml', 'Fixture_ModuleB');
         $fileTwo = new File('a.xml', 'Fixture_ModuleA');

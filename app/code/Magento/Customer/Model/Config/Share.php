@@ -7,6 +7,8 @@ namespace Magento\Customer\Model\Config;
 
 /**
  * Customer sharing config model
+ *
+ * @author      Magento Core Team <core@magentocommerce.com>
  */
 class Share extends \Magento\Framework\App\Config\Value implements \Magento\Framework\Option\ArrayInterface
 {
@@ -14,14 +16,15 @@ class Share extends \Magento\Framework\App\Config\Value implements \Magento\Fram
      * Xml config path to customers sharing scope value
      *
      */
-    public const XML_PATH_CUSTOMER_ACCOUNT_SHARE = 'customer/account_share/scope';
+    const XML_PATH_CUSTOMER_ACCOUNT_SHARE = 'customer/account_share/scope';
 
     /**
      * Possible customer sharing scopes
      *
      */
-    public const SHARE_GLOBAL = 0;
-    public const SHARE_WEBSITE = 1;
+    const SHARE_GLOBAL = 0;
+
+    const SHARE_WEBSITE = 1;
 
     /**
      * @var \Magento\Customer\Model\ResourceModel\Customer
@@ -34,6 +37,8 @@ class Share extends \Magento\Framework\App\Config\Value implements \Magento\Fram
     protected $_storeManager;
 
     /**
+     * Constructor
+     *
      * @param \Magento\Framework\Model\Context $context
      * @param \Magento\Framework\Registry $registry
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $config
@@ -51,8 +56,8 @@ class Share extends \Magento\Framework\App\Config\Value implements \Magento\Fram
         \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Customer\Model\ResourceModel\Customer $customerResource,
-        ?\Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
-        ?\Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
+        \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
+        \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = []
     ) {
         $this->_storeManager = $storeManager;

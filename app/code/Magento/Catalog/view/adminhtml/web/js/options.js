@@ -94,11 +94,6 @@ define([
                         element.remove();
                     }
                 },
-                reset: function () {
-                    jQuery('input[name="default[]"]').prop('checked', false);
-                    jQuery('input[name="reset_is-default_option"]').val(1);
-                },
-
                 updateItemsCountField: function () {
                     $('option-count-check').value = this.totalItems > 0 ? '1' : '';
                 },
@@ -110,9 +105,6 @@ define([
                 },
                 bindRemoveButtons: function () {
                     jQuery('#swatch-visual-options-panel').on('click', '.delete-option', this.remove.bind(this));
-                },
-                bindDefaultOptionChanges: function () {
-                    jQuery('#swatch-visual-options-panel').on('change', '.delete-option', this.remove.bind(this));
                 },
                 render: function () {
                     Element.insert($$('[data-role=options-container]')[0], this.elements);
@@ -159,15 +151,6 @@ define([
         if ($('add_new_option_button')) {
             Event.observe('add_new_option_button', 'click', attributeOption.add.bind(attributeOption, {}, true));
         }
-
-        if ($('reset_default_options_option_button')) {
-            Event.observe(
-                'reset_default_options_option_button',
-                'click',
-                attributeOption.reset.bind(attributeOption, true)
-            );
-        }
-
         $('manage-options-panel').on('click', '.delete-option', function (event) {
             attributeOption.remove(event);
         });
@@ -181,7 +164,6 @@ define([
             jQuery('body').trigger('processStart');
             attributeOption.renderWithDelay(config.attributesData, 0, 100, 300);
             attributeOption.bindRemoveButtons();
-            attributeOption.bindDefaultOptionChanges();
         });
 
         if (config.isSortable) {

@@ -86,7 +86,7 @@ class HelperMethodTest extends TestCase
     /**
      * @return array
      */
-    public static function evaluateExceptionDataProvider()
+    public function evaluateExceptionDataProvider()
     {
         $nonExistingHelper = __CLASS__ . '::non_existing';
         return [

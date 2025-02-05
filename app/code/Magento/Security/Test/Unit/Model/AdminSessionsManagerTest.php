@@ -419,7 +419,7 @@ class AdminSessionsManagerTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderLogoutReasonMessage()
+    public function dataProviderLogoutReasonMessage()
     {
         return [
             [

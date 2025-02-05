@@ -1,15 +1,12 @@
 <?php
 /**
- * Copyright 2017 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 
 declare(strict_types=1);
 
 namespace Magento\Cms\Model\Wysiwyg;
-
-use Magento\Framework\DataObject;
-use Magento\Framework\View\Asset\Repository;
 
 /**
  * Class DefaultConfigProvider returns data required to render tinymce editor
@@ -17,14 +14,14 @@ use Magento\Framework\View\Asset\Repository;
 class DefaultConfigProvider implements \Magento\Framework\Data\Wysiwyg\ConfigProviderInterface
 {
     /**
-     * @var Repository
+     * @var \Magento\Framework\View\Asset\Repository
      */
-    private Repository $assetRepo;
+    private $assetRepo;
 
     /**
-     * @param Repository $assetRepo
+     * @param \Magento\Framework\View\Asset\Repository $assetRepo
      */
-    public function __construct(Repository $assetRepo)
+    public function __construct(\Magento\Framework\View\Asset\Repository $assetRepo)
     {
         $this->assetRepo = $assetRepo;
     }
@@ -32,12 +29,12 @@ class DefaultConfigProvider implements \Magento\Framework\Data\Wysiwyg\ConfigPro
     /**
      * @inheritdoc
      */
-    public function getConfig(DataObject $config) : DataObject
+    public function getConfig(\Magento\Framework\DataObject $config) : \Magento\Framework\DataObject
     {
         $config->addData([
             'tinymce' => [
-                'toolbar' => ' blocks fontfamily fontsizeinput| formatselect | bold italic underline ' .
-                    '| alignleft aligncenter alignright | bullist numlist | link table charmap',
+                'toolbar' => 'formatselect | bold italic underline | alignleft aligncenter alignright | '
+                    . 'bullist numlist | link table charmap',
                 'plugins' => implode(
                     ' ',
                     [
@@ -47,7 +44,9 @@ class DefaultConfigProvider implements \Magento\Framework\Data\Wysiwyg\ConfigPro
                         'link',
                         'charmap',
                         'media',
+                        'noneditable',
                         'table',
+                        'paste',
                         'code',
                         'help',
                         'table'

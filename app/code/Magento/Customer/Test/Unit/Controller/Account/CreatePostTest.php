@@ -419,7 +419,7 @@ class CreatePostTest extends TestCase
     /**
      * @return array
      */
-    public static function getSuccessMessageDataProvider()
+    public function getSuccessMessageDataProvider()
     {
         return [
             [
@@ -571,7 +571,7 @@ class CreatePostTest extends TestCase
     /**
      * @return array
      */
-    public static function getSuccessRedirectDataProvider()
+    public function getSuccessRedirectDataProvider()
     {
         return [
             [

@@ -88,7 +88,7 @@ class ValidatorTest extends TestCase
     /**
      * @return array
      */
-    public static function requiredParamsProvider()
+    public function requiredParamsProvider()
     {
         return [['id'], ['title'], ['resource']];
     }
@@ -114,7 +114,7 @@ class ValidatorTest extends TestCase
     /**
      * @return array
      */
-    public static function invalidParamsProvider()
+    public function invalidParamsProvider()
     {
         return [
             ['id', 'ab'],
@@ -161,7 +161,7 @@ class ValidatorTest extends TestCase
      *
      * @return array
      */
-    public static function duplicateIdsProvider()
+    public function duplicateIdsProvider()
     {
         return [
             [

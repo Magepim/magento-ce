@@ -472,7 +472,7 @@ class SaveTest extends TestCase
      *
      * @return array
      */
-    public static function dataProviderExecute(): array
+    public function dataProviderExecute(): array
     {
         return [
             [
@@ -491,7 +491,7 @@ class SaveTest extends TestCase
     /**
      * @return array
      */
-    public static function imagePreprocessingDataProvider(): array
+    public function imagePreprocessingDataProvider(): array
     {
         $dataWithImage = [
             'image' => 'path.jpg',

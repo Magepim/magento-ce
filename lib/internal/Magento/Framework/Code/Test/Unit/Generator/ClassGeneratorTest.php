@@ -334,7 +334,7 @@ class ClassGeneratorTest extends TestCase
      * DataProvider for testNamespaceName
      * @return array
      */
-    public static function providerNamespaces()
+    public function providerNamespaces()
     {
         return [
             ['Laminas', 'Laminas'],

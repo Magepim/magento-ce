@@ -81,7 +81,7 @@ class ProductValidationTest extends ProductTestBase
     /**
      * @return array
      */
-    public static function validateRowDataProvider()
+    public function validateRowDataProvider()
     {
         return [
             [
@@ -260,7 +260,7 @@ class ProductValidationTest extends ProductTestBase
      *
      * @return array[]
      */
-    public static function getEmptyLinkedData(): array
+    public function getEmptyLinkedData(): array
     {
         return [
             [

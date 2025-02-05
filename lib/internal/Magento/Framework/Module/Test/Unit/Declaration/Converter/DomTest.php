@@ -50,7 +50,7 @@ class DomTest extends TestCase
     /**
      * @return array
      */
-    public static function convertWithInvalidDomDataProvider()
+    public function convertWithInvalidDomDataProvider()
     {
         return [
             'Module node without "name" attribute' => ['<?xml version="1.0"?><config><module /></config>'],

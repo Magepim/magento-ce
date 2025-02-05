@@ -119,7 +119,7 @@ class OptionTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderForIsMultiSelection()
+    public function dataProviderForIsMultiSelection()
     {
         return [
             ['checkbox', true],

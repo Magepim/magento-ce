@@ -92,19 +92,19 @@ class ImageFactoryTest extends TestCase
     /**
      * @return array
      */
-    public static function createDataProvider(): array
+    public function createDataProvider(): array
     {
         return [
-            self::getTestDataWithoutAttributes(),
-            self::getTestDataWithAttributes(),
-            self::getTestDataWithoutDimensions()
+            $this->getTestDataWithoutAttributes(),
+            $this->getTestDataWithAttributes(),
+            $this->getTestDataWithoutDimensions()
         ];
     }
 
     /**
      * @return array
      */
-    private static function getTestDataWithoutAttributes(): array
+    private function getTestDataWithoutAttributes(): array
     {
         return [
             'data' => [
@@ -158,7 +158,7 @@ class ImageFactoryTest extends TestCase
     /**
      * @return array
      */
-    private static function getTestDataWithAttributes(): array
+    private function getTestDataWithAttributes(): array
     {
         return [
             'data' => [
@@ -219,9 +219,9 @@ class ImageFactoryTest extends TestCase
     /**
      * @return array
      */
-    private static function getTestDataWithoutDimensions(): array
+    private function getTestDataWithoutDimensions(): array
     {
-        $data = self::getTestDataWithoutAttributes();
+        $data = $this->getTestDataWithoutAttributes();
 
         $data['data']['imageParamsBuilder']['image_width'] = null;
         $data['data']['imageParamsBuilder']['image_height'] = null;

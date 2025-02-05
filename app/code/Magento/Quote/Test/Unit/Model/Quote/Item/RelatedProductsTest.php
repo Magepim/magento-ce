@@ -72,7 +72,7 @@ class RelatedProductsTest extends TestCase
     /**
      * @return array
      */
-    public static function getRelatedProductIdsDataProvider()
+    public function getRelatedProductIdsDataProvider()
     {
         return [
             ['optionValue' => 'type1', 'productId' => 123, 'expectedResult' => [123]],

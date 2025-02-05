@@ -129,7 +129,7 @@ class OptionsTest extends TestCase
     /**
      * @return array
      */
-    public static function getConfiguredOptionsDataProvider()
+    public function getConfiguredOptionsDataProvider()
     {
         return [
             [

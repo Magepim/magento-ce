@@ -155,7 +155,7 @@ class ConfigurableObjectTest extends TestCase
         self::assertSame('an object yay!', $actualResult);
     }
 
-    public static function validDataProvider()
+    public function validDataProvider()
     {
         return [
             // Test most basic syntax with no arguments
@@ -230,7 +230,7 @@ class ConfigurableObjectTest extends TestCase
         ];
     }
 
-    public static function invalidDataProvider()
+    public function invalidDataProvider()
     {
         return [
             [

@@ -59,7 +59,7 @@ class CatalogEavValidationRulesTest extends TestCase
     /**
      * @return array
      */
-    public static function buildDataProvider()
+    public function buildDataProvider()
     {
         $data['required'] = true;
 

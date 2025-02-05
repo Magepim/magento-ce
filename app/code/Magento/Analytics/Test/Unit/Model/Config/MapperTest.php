@@ -51,7 +51,7 @@ class MapperTest extends TestCase
     /**
      * @return array
      */
-    public static function executingDataProvider()
+    public function executingDataProvider()
     {
         return [
             'wrongConfig' => [

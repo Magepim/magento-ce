@@ -37,7 +37,7 @@ class SortItemsTest extends TestCase
     /**
      * @return array
      */
-    public static function evaluateDataProvider(): array
+    public function evaluateDataProvider(): array
     {
         return [
             'empty array items' => [

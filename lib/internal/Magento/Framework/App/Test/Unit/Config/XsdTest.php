@@ -59,7 +59,7 @@ class XsdTest extends TestCase
     /**
      * Data provider with invalid xml array according to routes.xsd
      */
-    public static function schemaCorrectlyIdentifiesInvalidXmlDataProvider()
+    public function schemaCorrectlyIdentifiesInvalidXmlDataProvider()
     {
         return include __DIR__ . '/_files/invalidRoutesXmlArray.php';
     }

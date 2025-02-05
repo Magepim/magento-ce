@@ -7,6 +7,8 @@ namespace Magento\Customer\Model\ResourceModel\Form\Attribute;
 
 /**
  * Customer Form Attribute Resource Collection
+ *
+ * @author      Magento Core Team <core@magentocommerce.com>
  */
 class Collection extends \Magento\Eav\Model\ResourceModel\Form\Attribute\Collection
 {

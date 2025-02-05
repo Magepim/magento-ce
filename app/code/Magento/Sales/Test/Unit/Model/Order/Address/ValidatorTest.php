@@ -105,7 +105,7 @@ class ValidatorTest extends TestCase
      *
      * @return array
      */
-    public static function providerAddressData()
+    public function providerAddressData()
     {
         return [
             [

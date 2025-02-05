@@ -44,7 +44,7 @@ class XsdTest extends TestCase
     /**
      * @return array
      */
-    public static function validXmlFileDataProvider()
+    public function validXmlFileDataProvider()
     {
         return [['crontab_valid.xml'], ['crontab_valid_without_schedule.xml']];
     }
@@ -69,7 +69,7 @@ class XsdTest extends TestCase
     /**
      * @return array
      */
-    public static function invalidXmlFileDataProvider()
+    public function invalidXmlFileDataProvider()
     {
         return [
             [

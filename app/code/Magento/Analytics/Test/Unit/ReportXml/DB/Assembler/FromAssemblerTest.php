@@ -126,7 +126,7 @@ class FromAssemblerTest extends TestCase
     /**
      * @return array
      */
-    public static function assembleDataProvider()
+    public function assembleDataProvider()
     {
         return [
             'Tables without prefixes' => [

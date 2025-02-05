@@ -1,7 +1,8 @@
 <?php
+
 /**
- * Copyright 2011 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
@@ -33,7 +34,7 @@ class DesignTest extends TestCase
     private $productRepository;
 
     /**
-     * @inheritDoc
+     * @inheriDoc
      */
     protected function setUp(): void
     {
@@ -91,25 +92,25 @@ class DesignTest extends TestCase
 
         return [
             'schedule_design_applied' => [
-                'designSettings' => [
+                'design_settings' => [
                     'custom_layout' => '2columns-left',
                     'custom_design' => '2',
                     'custom_design_from' => $fromApplied,
                     'custom_design_to' => $to,
                 ],
-                'expectedSetting' => [
+                'expected_settings' => [
                     'page_layout' => '2columns-left',
                     'custom_design' => '2',
                 ]
             ],
             'schedule_design_not_applied' => [
-                'designSettings' => [
+                'design_settings' => [
                     'custom_layout' => '2columns-left',
                     'custom_design' => '2',
                     'custom_design_from' => $fromNotApplied,
                     'custom_design_to' => $to,
                 ],
-                'expectedSetting' => [
+                'expected_settings' => [
                     'page_layout' => '3columns',
                     'custom_design' => null,
                 ]

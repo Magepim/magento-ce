@@ -1,26 +1,23 @@
 <?php
 /**
- * Copyright 2011 Adobe
- * All Rights Reserved.
+ *
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
-declare(strict_types=1);
-
 namespace Magento\Reports\Controller\Adminhtml\Report\Product;
 
 use Magento\Backend\Block\Widget\Grid\ExportInterface;
-use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\App\Filesystem\DirectoryList;
-use Magento\Reports\Controller\Adminhtml\Report\Product;
 
-class ExportSoldExcel extends Product implements HttpGetActionInterface
+class ExportSoldExcel extends \Magento\Reports\Controller\Adminhtml\Report\Product
 {
     /**
      * Authorization level of a basic admin session
      *
      * @see _isAllowed()
      */
-    public const ADMIN_RESOURCE = 'Magento_Reports::sold';
+    const ADMIN_RESOURCE = 'Magento_Reports::report_products';
 
     /**
      * Export Sold Products report to XML format action

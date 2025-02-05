@@ -64,16 +64,16 @@ class DeltaPriceRoundTest extends TestCase
     /**
      * @return array
      */
-    public static function roundDataProvider(): array
+    public function roundDataProvider(): array
     {
         return [
             [
                 'prices' => [1.004, 1.004],
-                'roundedPrices' => [1.00, 1.01],
+                'rounded prices' => [1.00, 1.01],
             ],
             [
                 'prices' => [1.005, 1.005],
-                'roundedPrices' => [1.01, 1.0],
+                'rounded prices' => [1.01, 1.0],
             ],
         ];
     }

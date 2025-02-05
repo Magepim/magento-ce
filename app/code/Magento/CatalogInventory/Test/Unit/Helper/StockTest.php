@@ -171,10 +171,6 @@ class StockTest extends TestCase
      */
     public function testAddInStockFilterToCollection($configMock)
     {
-        if ($configMock!=null) {
-            $configMock = $configMock($this);
-        }
-
         $collectionMock = $this->getMockBuilder(
             Collection::class
         )->disableOriginalConstructor()
@@ -187,20 +183,14 @@ class StockTest extends TestCase
         $this->assertNull($this->stock->addInStockFilterToCollection($collectionMock));
     }
 
-    public function getMockForConfigClass()
+    /**
+     * @return array
+     */
+    public function filterProvider()
     {
         $configMock = $this->getMockBuilder(Config::class)
             ->disableOriginalConstructor()
             ->getMock();
-        return $configMock;
-    }
-
-    /**
-     * @return array
-     */
-    public static function filterProvider()
-    {
-        $configMock = static fn (self $testCase) => $testCase->getMockForConfigClass();
         return [
             [$configMock],
             [null],

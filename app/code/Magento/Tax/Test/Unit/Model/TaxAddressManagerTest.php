@@ -121,7 +121,7 @@ class TaxAddressManagerTest extends TestCase
     /**
      * @return array
      */
-    public static function setAddressCustomerSessionAddressSaveDataProvider()
+    public function setAddressCustomerSessionAddressSaveDataProvider()
     {
         return [
             [1, [1, false, false], [1, false, false], true, true],
@@ -166,7 +166,7 @@ class TaxAddressManagerTest extends TestCase
     /**
      * @return array
      */
-    public static function setAddressCustomerSessionLogInDataProvider()
+    public function setAddressCustomerSessionLogInDataProvider()
     {
         return [
             [false, false],

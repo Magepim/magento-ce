@@ -237,7 +237,7 @@ class AbstractAttributeTest extends TestCase
     /**
      * @return array
      */
-    public static function attributeValueDataProvider()
+    public function attributeValueDataProvider()
     {
         return [
             [true, '', 'int'],

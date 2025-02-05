@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2011 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 namespace Magento\Catalog\Model\ResourceModel\Category;
 
@@ -58,7 +58,6 @@ class Flat extends \Magento\Indexer\Model\ResourceModel\AbstractResource
     /**
      * @var \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory
      * @deprecated 100.0.2
-     * @see Updated deprecation doc annotations
      */
     protected $_categoryCollectionFactory;
 
@@ -94,7 +93,7 @@ class Flat extends \Magento\Indexer\Model\ResourceModel\AbstractResource
         \Magento\Catalog\Model\Config $catalogConfig,
         \Magento\Framework\Event\ManagerInterface $eventManager,
         $connectionName = null,
-        ?\Magento\Catalog\Model\ResourceModel\Category\Flat\CollectionFactory $categoryFlatCollectionFactory = null
+        \Magento\Catalog\Model\ResourceModel\Category\Flat\CollectionFactory $categoryFlatCollectionFactory = null
     ) {
         $this->_categoryFactory = $categoryFactory;
         $this->_categoryCollectionFactory = $categoryCollectionFactory;

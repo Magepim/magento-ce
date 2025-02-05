@@ -65,7 +65,7 @@ class DailyCatalogUpdateTest extends TestCase
     /**
      * @return array
      */
-    public static function executeDataProvider(): array
+    public function executeDataProvider(): array
     {
         return [
             [2, true],

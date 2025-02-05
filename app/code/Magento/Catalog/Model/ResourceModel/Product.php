@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2011 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 namespace Magento\Catalog\Model\ResourceModel;
 
@@ -139,9 +139,9 @@ class Product extends AbstractResource implements ResetAfterRequestInterface
         \Magento\Eav\Model\Entity\TypeFactory $typeFactory,
         \Magento\Catalog\Model\Product\Attribute\DefaultAttributes $defaultAttributes,
         $data = [],
-        ?TableMaintainer $tableMaintainer = null,
-        ?UniqueValidationInterface $uniqueValidator = null,
-        ?AttributeManagementInterface $eavAttributeManagement = null,
+        TableMaintainer $tableMaintainer = null,
+        UniqueValidationInterface $uniqueValidator = null,
+        AttributeManagementInterface $eavAttributeManagement = null,
         ?MediaImageDeleteProcessor $mediaImageDeleteProcessor = null,
         ?ScopeOverriddenValue $scopeOverriddenValue = null
     ) {

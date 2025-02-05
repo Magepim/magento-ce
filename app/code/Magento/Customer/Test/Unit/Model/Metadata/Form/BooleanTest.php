@@ -33,7 +33,7 @@ class BooleanTest extends AbstractFormTestCase
     /**
      * @return array
      */
-    public static function getOptionTextDataProvider()
+    public function getOptionTextDataProvider()
     {
         return [
             '0' => ['0', 'No'],

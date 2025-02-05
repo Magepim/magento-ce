@@ -1,8 +1,9 @@
 <?php
 /**
- * Copyright 2011 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
+
 namespace Magento\ConfigurableProduct\Model\Product\Type;
 
 use Magento\Catalog\Api\Data\ProductAttributeInterface;
@@ -247,14 +248,14 @@ class Configurable extends \Magento\Catalog\Model\Product\Type\AbstractType impl
         \Magento\ConfigurableProduct\Model\ResourceModel\Product\Type\Configurable $catalogProductTypeConfigurable,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
         \Magento\Framework\Api\ExtensionAttribute\JoinProcessorInterface $extensionAttributesJoinProcessor,
-        ?\Magento\Framework\Cache\FrontendInterface $cache = null,
-        ?\Magento\Customer\Model\Session $customerSession = null,
-        ?\Magento\Framework\Serialize\Serializer\Json $serializer = null,
-        ?ProductInterfaceFactory $productFactory = null,
-        ?SalableProcessor $salableProcessor = null,
-        ?ProductAttributeRepositoryInterface $productAttributeRepository = null,
-        ?SearchCriteriaBuilder $searchCriteriaBuilder = null,
-        ?UploaderFactory $uploaderFactory = null
+        \Magento\Framework\Cache\FrontendInterface $cache = null,
+        \Magento\Customer\Model\Session $customerSession = null,
+        \Magento\Framework\Serialize\Serializer\Json $serializer = null,
+        ProductInterfaceFactory $productFactory = null,
+        SalableProcessor $salableProcessor = null,
+        ProductAttributeRepositoryInterface $productAttributeRepository = null,
+        SearchCriteriaBuilder $searchCriteriaBuilder = null,
+        UploaderFactory $uploaderFactory = null
     ) {
         $this->typeConfigurableFactory = $typeConfigurableFactory;
         $this->_eavAttributeFactory = $eavAttributeFactory;
@@ -1482,8 +1483,7 @@ class Configurable extends \Magento\Catalog\Model\Product\Type\AbstractType impl
             'thumbnail',
             'status',
             'visibility',
-            'media_gallery',
-            'special_price',
+            'media_gallery'
         ];
 
         $usedAttributes = array_map(

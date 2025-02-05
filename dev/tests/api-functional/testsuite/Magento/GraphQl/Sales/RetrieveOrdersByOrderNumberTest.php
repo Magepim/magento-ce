@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2020 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
@@ -11,8 +11,6 @@ use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Exception\AuthenticationException;
 use Magento\Framework\Registry;
-use Magento\Framework\Stdlib\DateTime;
-use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Magento\GraphQl\GetCustomerAuthenticationHeader;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Sales\Model\ResourceModel\Order\Collection;
@@ -35,8 +33,6 @@ use Magento\TestFramework\Fixture\Config;
 
 /**
  * Class RetrieveOrdersTest
- *
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class RetrieveOrdersByOrderNumberTest extends GraphQlAbstract
 {
@@ -52,9 +48,6 @@ class RetrieveOrdersByOrderNumberTest extends GraphQlAbstract
     /** @var ProductRepositoryInterface */
     private $productRepository;
 
-    /** @var TimezoneInterface */
-    private $timezone;
-
     /**
      * @var DataFixtureStorage
      */
@@ -68,7 +61,6 @@ class RetrieveOrdersByOrderNumberTest extends GraphQlAbstract
         $this->orderRepository = $objectManager->get(OrderRepositoryInterface::class);
         $this->searchCriteriaBuilder = $objectManager->get(SearchCriteriaBuilder::class);
         $this->productRepository = $objectManager->get(ProductRepositoryInterface::class);
-        $this->timezone = $objectManager->get(TimezoneInterface::class);
         $this->fixtures = $objectManager->get(DataFixtureStorageManager::class)->getStorage();
     }
 
@@ -508,8 +500,7 @@ QUERY;
         $orderNumberCreatedAtExpected = [];
         for ($i = 1; $i <= 3; $i++) {
             $orderNumber = $this->fixtures->get('or' . $i)->getIncrementId();
-            $orderCreatedAt = $this->timezone->date($this->fixtures->get('or' . $i)->getCreatedAt())
-                ->format(DateTime::DATETIME_PHP_FORMAT);
+            $orderCreatedAt = $this->fixtures->get('or' . $i)->getCreatedAt();
             $orderNumberCreatedAtExpected[$orderNumber] = $orderCreatedAt;
         }
 
@@ -805,7 +796,7 @@ QUERY;
     /**
      * @return array
      */
-    public static function dataProviderIncorrectOrder(): array
+    public function dataProviderIncorrectOrder(): array
     {
         return [
             'correctFormatNonExistingOrder' => [
@@ -895,7 +886,7 @@ QUERY;
     /**
      * @return array
      */
-    public static function dataProviderMultiStores(): array
+    public function dataProviderMultiStores(): array
     {
         return [
             'firstStoreFirstOrder' => [

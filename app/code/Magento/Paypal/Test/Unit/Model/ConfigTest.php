@@ -7,10 +7,8 @@ declare(strict_types=1);
 
 namespace Magento\Paypal\Test\Unit\Model;
 
-use Magento\Csp\Helper\CspNonceProvider;
 use Magento\Directory\Helper\Data;
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
 use Magento\Payment\Model\Source\CctypeFactory;
 use Magento\Paypal\Model\CertFactory;
 use Magento\Paypal\Model\Config;
@@ -68,15 +66,6 @@ class ConfigTest extends TestCase
         $this->certFactory = $this->getMockBuilder(CertFactory::class)
             ->disableOriginalConstructor()
             ->getMock();
-
-        $objectManager = new ObjectManager($this);
-        $objects = [
-            [
-                CspNonceProvider::class,
-                $this->createMock(CspNonceProvider::class)
-            ]
-        ];
-        $objectManager->prepareObjectManager($objects);
 
         $this->model = new Config(
             $this->scopeConfig,
@@ -204,7 +193,7 @@ class ConfigTest extends TestCase
     /**
      * @return array
      */
-    public static function isMethodAvailableDataProvider()
+    public function isMethodAvailableDataProvider()
     {
         return [
             [Config::METHOD_WPP_EXPRESS, true],
@@ -276,7 +265,7 @@ class ConfigTest extends TestCase
     /**
      * @return array
      */
-    public static function payPalStylesDataProvider(): array
+    public function payPalStylesDataProvider(): array
     {
         return [
             ['checkout_page_button_customize', 'value', 'value'],
@@ -299,7 +288,7 @@ class ConfigTest extends TestCase
     /**
      * @return array
      */
-    public static function skipOrderReviewStepDataProvider()
+    public function skipOrderReviewStepDataProvider()
     {
         return [
             [true, 'https://www.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=token&useraction=commit'],
@@ -337,7 +326,7 @@ class ConfigTest extends TestCase
     /**
      * @return array
      */
-    public static function getBmlPositionDataProvider()
+    public function getBmlPositionDataProvider()
     {
         return [
             ['head', 'left'],
@@ -360,7 +349,7 @@ class ConfigTest extends TestCase
     /**
      * @return array
      */
-    public static function getBmlSizeDataProvider()
+    public function getBmlSizeDataProvider()
     {
         return [
             ['head', '125x75'],
@@ -396,7 +385,7 @@ class ConfigTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderGetBmlDisplay()
+    public function dataProviderGetBmlDisplay()
     {
         return [
             ['head', true, true, true],
@@ -447,7 +436,7 @@ class ConfigTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderGetExpressCheckoutShortcutImageUrl()
+    public function dataProviderGetExpressCheckoutShortcutImageUrl()
     {
         return [
             [
@@ -516,7 +505,7 @@ class ConfigTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderGetPaymentMarkImageUrl()
+    public function dataProviderGetPaymentMarkImageUrl()
     {
         return [
             [

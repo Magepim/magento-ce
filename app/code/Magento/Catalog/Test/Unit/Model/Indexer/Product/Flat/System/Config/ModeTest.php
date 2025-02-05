@@ -64,7 +64,7 @@ class ModeTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderProcessValueEqual()
+    public function dataProviderProcessValueEqual()
     {
         return [['0', '0'], ['', '0'], ['0', ''], ['1', '1']];
     }
@@ -101,7 +101,7 @@ class ModeTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderProcessValueOn()
+    public function dataProviderProcessValueOn()
     {
         return [['0', '1'], ['', '1']];
     }
@@ -150,7 +150,7 @@ class ModeTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderProcessValueOff()
+    public function dataProviderProcessValueOff()
     {
         return [['1', '0'], ['1', '']];
     }

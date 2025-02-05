@@ -74,14 +74,10 @@ class AbstractFileTest extends TestCase
         );
         $abstractLoaderMock
             ->method('_readFile')
-            ->willReturnCallback(function () use (&$callCount) {
-                $callCount++;
-                if ($callCount === 1) {
-                    return ['phrase1', 'translation1'];
-                } elseif ($callCount === 2) {
-                    return ['phrase2', 'translation2', 'context_type2', 'context_value2'];
-                }
-            });
+            ->willReturnOnConsecutiveCalls(
+                ['phrase1', 'translation1'],
+                ['phrase2', 'translation2', 'context_type2', 'context_value2']
+            );
 
         $phraseFirstMock = $this->createMock(Phrase::class);
         $phraseSecondMock = $this->createMock(Phrase::class);

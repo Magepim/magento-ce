@@ -241,7 +241,7 @@ class ProcessDataTest extends TestCase
     /**
      * @return array
      */
-    public static function isApplyDiscountDataProvider()
+    public function isApplyDiscountDataProvider()
     {
         return [
             [true, '123'],

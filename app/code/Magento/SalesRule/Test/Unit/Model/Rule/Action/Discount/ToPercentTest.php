@@ -205,7 +205,7 @@ class ToPercentTest extends TestCase
     /**
      * @return array
      */
-    public static function calculateDataProvider()
+    public function calculateDataProvider()
     {
         return [
             [

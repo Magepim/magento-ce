@@ -12,7 +12,6 @@ use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\Controller\Result\Redirect;
 use Magento\Framework\Data\Form\FormKey\Validator;
-use Magento\Framework\DataObject;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NotFoundException;
 use Magento\Framework\Exception\NoSuchEntityException;
@@ -102,9 +101,7 @@ class Add extends \Magento\Wishlist\Controller\AbstractIndex implements HttpPost
         /** @var Redirect $resultRedirect */
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
         $session = $this->_customerSession;
-        $data = empty($session->getBeforeWishlistUrl())
-            ? $this->getRequest()->getParams()
-            : $session->getBeforeRequestParams();
+        $requestParams = $this->getRequest()->getParams();
         if (!$this->formKeyValidator->validate($this->getRequest())) {
             return $resultRedirect->setPath('*/');
         }
@@ -114,7 +111,7 @@ class Add extends \Magento\Wishlist\Controller\AbstractIndex implements HttpPost
             throw new NotFoundException(__('Page not found.'));
         }
 
-        $productId = isset($data['product']) ? (int)$data['product'] : null;
+        $productId = isset($requestParams['product']) ? (int)$requestParams['product'] : null;
         if (!$productId) {
             $resultRedirect->setPath('*/');
             return $resultRedirect;
@@ -133,7 +130,7 @@ class Add extends \Magento\Wishlist\Controller\AbstractIndex implements HttpPost
         }
 
         try {
-            $buyRequest = new DataObject($data);
+            $buyRequest = new \Magento\Framework\DataObject($requestParams);
 
             $result = $wishlist->addNewItem($product, $buyRequest, true);
             if (is_string($result)) {

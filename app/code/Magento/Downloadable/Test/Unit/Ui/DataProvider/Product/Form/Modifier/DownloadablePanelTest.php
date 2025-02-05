@@ -95,7 +95,7 @@ class DownloadablePanelTest extends TestCase
     /**
      * @return array
      */
-    public static function modifyDataDataProvider()
+    public function modifyDataDataProvider()
     {
         return [
             ['typeId' => Type::TYPE_DOWNLOADABLE, 'isDownloadable' => '1'],

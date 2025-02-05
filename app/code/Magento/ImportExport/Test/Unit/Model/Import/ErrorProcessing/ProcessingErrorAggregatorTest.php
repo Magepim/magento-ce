@@ -134,7 +134,7 @@ class ProcessingErrorAggregatorTest extends TestCase
     /**
      * @return array
      */
-    public static function isRowInvalidDataProvider()
+    public function isRowInvalidDataProvider()
     {
         return [
             [ProcessingError::ERROR_LEVEL_CRITICAL, 7, true],
@@ -369,7 +369,7 @@ class ProcessingErrorAggregatorTest extends TestCase
     /**
      * @return array
      */
-    public static function getRowsGroupedByErrorCodeWithErrorsDataProvider()
+    public function getRowsGroupedByErrorCodeWithErrorsDataProvider()
     {
         $errorCode1 = 'systemException';
         $errorCode2 = 'columnNotFound';

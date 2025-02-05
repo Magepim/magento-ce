@@ -161,7 +161,7 @@ class NavigationTest extends TestCase
     /**
      * @return array
      */
-    public static function canShowBlockDataProvider(): array
+    public function canShowBlockDataProvider(): array
     {
         return [
             [

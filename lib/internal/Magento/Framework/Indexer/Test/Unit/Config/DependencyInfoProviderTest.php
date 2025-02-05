@@ -95,12 +95,12 @@ class DependencyInfoProviderTest extends TestCase
     /**
      * @return array
      */
-    public static function getDependentIndexerIdsDataProvider()
+    public function getDependentIndexerIdsDataProvider()
     {
         return [
             [
-                'indexerId' => 'indexer_2',
-                'indexersData' => [
+                'indexer' => 'indexer_2',
+                'indexers' => [
                     'indexer_2' => [
                         'indexer_id' => 'indexer_2',
                         'dependencies' => [],
@@ -129,7 +129,7 @@ class DependencyInfoProviderTest extends TestCase
                         'dependencies' => [],
                     ],
                 ],
-                'dependentIndexerIds' => ['indexer_4', 'indexer_1'],
+                'dependent_indexers' => ['indexer_4', 'indexer_1'],
             ]
         ];
     }

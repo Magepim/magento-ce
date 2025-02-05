@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2011 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 namespace Magento\Backend\Model;
 
@@ -24,7 +24,7 @@ class Url extends \Magento\Framework\Url implements \Magento\Backend\Model\UrlIn
      *
      * @bug Currently, this constant is slightly misleading: it says "form key", but in fact it is used by URLs, too
      */
-    public const XML_PATH_USE_SECURE_KEY = 'admin/security/use_form_key';
+    const XML_PATH_USE_SECURE_KEY = 'admin/security/use_form_key';
 
     /**
      * Authentication session
@@ -51,6 +51,8 @@ class Url extends \Magento\Framework\Url implements \Magento\Backend\Model\UrlIn
     protected $_backendHelper;
 
     /**
+     * Menu config
+     *
      * @var \Magento\Backend\Model\Menu\Config
      */
     protected $_menuConfig;
@@ -126,8 +128,8 @@ class Url extends \Magento\Framework\Url implements \Magento\Backend\Model\UrlIn
         \Magento\Store\Model\StoreFactory $storeFactory,
         \Magento\Framework\Data\Form\FormKey $formKey,
         array $data = [],
-        ?HostChecker $hostChecker = null,
-        ?Json $serializer = null
+        HostChecker $hostChecker = null,
+        Json $serializer = null
     ) {
         $this->_encryptor = $encryptor;
         $hostChecker = $hostChecker ?: ObjectManager::getInstance()->get(HostChecker::class);

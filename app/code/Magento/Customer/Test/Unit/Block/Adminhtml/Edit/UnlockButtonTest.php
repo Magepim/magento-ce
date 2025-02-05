@@ -97,7 +97,7 @@ class UnlockButtonTest extends TestCase
     /**
      * @return array
      */
-    public static function getButtonDataProvider()
+    public function getButtonDataProvider()
     {
         return [
             [

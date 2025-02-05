@@ -41,7 +41,6 @@ class GetItemsData
             $productData = $product->getData();
             $productData['model'] = $product;
             $productData['uid'] = $this->uidEncoder->encode((string) $product->getId());
-            $productData['cart_item'] = $cartItem;
 
             $itemsData[] = [
                 'id' => $cartItem->getItemId(),

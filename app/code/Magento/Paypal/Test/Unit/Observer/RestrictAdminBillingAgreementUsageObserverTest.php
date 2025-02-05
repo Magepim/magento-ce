@@ -53,12 +53,12 @@ class RestrictAdminBillingAgreementUsageObserverTest extends TestCase
     /**
      * @return array
      */
-    public static function restrictAdminBillingAgreementUsageDataProvider()
+    public function restrictAdminBillingAgreementUsageDataProvider()
     {
         return [
             [new \stdClass(), false, true],
             [
-                static fn (self $testCase) => $testCase->getMockForAbstractClass(
+                $this->getMockForAbstractClass(
                     AbstractAgreement::class,
                     [],
                     '',
@@ -68,7 +68,7 @@ class RestrictAdminBillingAgreementUsageObserverTest extends TestCase
                 true
             ],
             [
-                static fn (self $testCase) => $testCase->getMockForAbstractClass(
+                $this->getMockForAbstractClass(
                     AbstractAgreement::class,
                     [],
                     '',
@@ -88,9 +88,6 @@ class RestrictAdminBillingAgreementUsageObserverTest extends TestCase
      */
     public function testExecute($methodInstance, $isAllowed, $isAvailable)
     {
-        if (is_callable($methodInstance)) {
-            $methodInstance = $methodInstance($this);
-        }
         $this->_event->setMethodInstance($methodInstance);
         $this->_authorization->expects(
             $this->any()

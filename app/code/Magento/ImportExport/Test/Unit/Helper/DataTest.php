@@ -86,7 +86,7 @@ class DataTest extends TestCase
      *
      * @return array
      */
-    public static function getMaxUploadSizeMessageDataProvider()
+    public function getMaxUploadSizeMessageDataProvider()
     {
         return [
             'Test with max image size = 10Mb' => [

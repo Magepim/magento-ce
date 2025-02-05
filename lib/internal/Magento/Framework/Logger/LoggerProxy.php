@@ -23,7 +23,7 @@ class LoggerProxy implements LoggerInterface, NoninterceptableInterface, ResetAf
      * @var ObjectManagerInterface
      * phpcs:disable Magento2.Commenting.ClassPropertyPHPDocFormatting
      */
-    private ObjectManagerInterface $objectManager;
+    private readonly ObjectManagerInterface $objectManager;
 
     /**
      * @var LoggerInterface|null

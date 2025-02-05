@@ -182,7 +182,7 @@ class ProductTest extends TestCase
      *
      * @return array
      */
-    public static function dataProviderGetAllOptionsNameIntegrity()
+    public function dataProviderGetAllOptionsNameIntegrity()
     {
         return [
             [

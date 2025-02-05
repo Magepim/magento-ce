@@ -126,7 +126,7 @@ class DocumentTest extends TestCase
      * Data provider for testGetGenderAttribute
      * @return array
      */
-    public static function getGenderAttributeDataProvider()
+    public function getGenderAttributeDataProvider()
     {
         return [
             'with valid gender label and value' => [

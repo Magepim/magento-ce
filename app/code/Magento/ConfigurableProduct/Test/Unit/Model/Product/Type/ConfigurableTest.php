@@ -460,7 +460,7 @@ class ConfigurableTest extends TestCase
     /**
      * @return array
      */
-    public static function getConfigurableAttributesAsArrayDataProvider(): array
+    public function getConfigurableAttributesAsArrayDataProvider(): array
     {
         return [
             [5],

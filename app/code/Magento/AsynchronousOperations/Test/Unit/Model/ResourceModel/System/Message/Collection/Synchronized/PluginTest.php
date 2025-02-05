@@ -221,7 +221,7 @@ class PluginTest extends TestCase
     /**
      * @return array
      */
-    public static function afterToDataProvider()
+    public function afterToDataProvider()
     {
         return [
             [

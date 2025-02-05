@@ -280,7 +280,7 @@ class TaxTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderCollectArray()
+    public function dataProviderCollectArray()
     {
         $data = [
             'default' => [
@@ -288,7 +288,7 @@ class TaxTest extends TestCase
                     "qty" => 1, "price" => 100, "tax_percent" => 20, "product_type" => "simple",
                     "code" => "sequence-1", "tax_calculation_item_id" => "sequence-1", "converted_price" => 100,
                 ],
-                'appliedRatesData' => [
+                '$appliedRates' => [
                     [
                         "rates" => [
                             [
@@ -417,7 +417,7 @@ class TaxTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderProcessConfigArray()
+    public function dataProviderProcessConfigArray()
     {
         return [
             [Calculation::CALC_TAX_BEFORE_DISCOUNT_ON_INCL, 'before', 'after'],
@@ -541,7 +541,7 @@ class TaxTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderMapQuoteExtraTaxablesArray()
+    public function dataProviderMapQuoteExtraTaxablesArray()
     {
         $data = [
             'default' => [
@@ -669,7 +669,7 @@ class TaxTest extends TestCase
     /*
      * @return array
      */
-    public static function dataProviderFetchArray()
+    public function dataProviderFetchArray()
     {
         $appliedDataString = [
             'amount' => 80.0,

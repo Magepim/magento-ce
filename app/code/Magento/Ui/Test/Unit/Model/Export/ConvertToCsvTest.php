@@ -102,9 +102,6 @@ class ConvertToCsvTest extends TestCase
         );
     }
 
-    /**
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
-     */
     public function testGetCsvFile()
     {
         $componentName = 'component_name';
@@ -145,7 +142,7 @@ class ConvertToCsvTest extends TestCase
             ->method('getFields')
             ->with($this->component)
             ->willReturn([]);
-        $this->metadataProvider->expects($this->any())
+        $this->metadataProvider->expects($this->exactly(2))
             ->method('getRowData')
             ->willReturnCallback(
                 function ($arg1, $arg2, $arg3) use ($document1, $document2, $data) {
@@ -156,7 +153,7 @@ class ConvertToCsvTest extends TestCase
                     }
                 }
             );
-        $this->metadataProvider->expects($this->any())
+        $this->metadataProvider->expects($this->exactly(2))
             ->method('convertDate')
             ->willReturnCallback(
                 function ($arg1, $arg2) use ($document1, $document2, $componentName) {
@@ -248,7 +245,7 @@ class ConvertToCsvTest extends TestCase
             ->method('getDataProvider')
             ->willReturn($dataProvider);
 
-        $dataProvider->expects($this->exactly(2))
+        $dataProvider->expects($this->exactly(3))
             ->method('getSearchResult')
             ->willReturnOnConsecutiveCalls($searchResult0, $searchResult1, $searchResult2);
 
@@ -256,17 +253,17 @@ class ConvertToCsvTest extends TestCase
             ->method('getSearchCriteria')
             ->willReturn($searchCriteria);
 
-        $searchResult1->expects($this->any())
+        $searchResult1->expects($this->once())
             ->method('setTotalCount');
 
-        $searchResult2->expects($this->any())
+        $searchResult2->expects($this->once())
             ->method('setTotalCount');
 
-        $searchResult1->expects($this->any())
+        $searchResult1->expects($this->once())
             ->method('getItems')
             ->willReturn($page1Items);
 
-        $searchResult2->expects($this->any())
+        $searchResult2->expects($this->once())
             ->method('getItems')
             ->willReturn($page2Items);
 

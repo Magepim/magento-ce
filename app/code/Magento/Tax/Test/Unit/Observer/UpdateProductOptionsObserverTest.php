@@ -92,7 +92,7 @@ class UpdateProductOptionsObserverTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderUpdateProductOptions()
+    public function dataProviderUpdateProductOptions()
     {
         return [
             [

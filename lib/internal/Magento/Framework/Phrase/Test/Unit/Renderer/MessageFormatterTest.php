@@ -36,7 +36,7 @@ class MessageFormatterTest extends TestCase
      * @return array [Raw Phrase, Locale, Arguments, Expected Result]
      * @throws \Exception
      */
-    public static function renderMessageFormatterDataProvider(): array
+    public function renderMessageFormatterDataProvider(): array
     {
         $twentynineteenJuneTwentyseven = new \DateTime('2019-06-27');
 

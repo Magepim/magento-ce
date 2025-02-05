@@ -125,7 +125,7 @@ class BlobTest extends TestCase
     /**
      * @return array
      */
-    public static function definitionDataProvider()
+    public function definitionDataProvider()
     {
         return [
             ['blob'],

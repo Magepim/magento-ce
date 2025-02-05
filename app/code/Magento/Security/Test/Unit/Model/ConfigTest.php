@@ -121,7 +121,7 @@ class ConfigTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderBoolValues()
+    public function dataProviderBoolValues()
     {
         return [[true], [false]];
     }
@@ -143,15 +143,18 @@ class ConfigTest extends TestCase
         $this->scopeMock->expects($this->once())
             ->method('getCurrentScope')
             ->willReturn($scope);
-        $this->assertEquals($resetMethod, $this->model->getPasswordResetProtectionType());
+        $this->assertEquals($resetMethod, $this->model->getPasswordResetProtectionType($scope));
     }
 
     /**
      * @return array
      */
-    public static function dataProviderResetMethodValues()
+    public function dataProviderResetMethodValues()
     {
-        $resetMethodSource = new ResetMethod();
+        $objectManager = new ObjectManager($this);
+        $resetMethodSource = $objectManager->getObject(
+            ResetMethod::class
+        );
 
         $optionKeys = array_keys($resetMethodSource->toArray());
         $data = [];
@@ -220,7 +223,7 @@ class ConfigTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderNumberValueWithScope()
+    public function dataProviderNumberValueWithScope()
     {
         return [
             [5, Area::AREA_ADMINHTML],

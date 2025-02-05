@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2018 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
@@ -60,7 +60,7 @@ class UpdateHandler extends AbstractHandler
         GroupManagementInterface $groupManagement,
         MetadataPool $metadataPool,
         Tierprice $tierPriceResource,
-        ?FormatInterface $localeFormat = null
+        FormatInterface $localeFormat = null
     ) {
         parent::__construct($groupManagement);
 

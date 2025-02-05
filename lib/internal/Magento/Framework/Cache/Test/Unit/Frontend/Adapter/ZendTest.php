@@ -22,9 +22,6 @@ class ZendTest extends TestCase
      */
     public function testProxyMethod($method, $params, $expectedParams, $expectedResult)
     {
-        if (is_callable($expectedResult)) {
-            $expectedResult = $expectedResult($this);
-        }
         $frontendMock = $this->createMock(\Zend_Cache_Core::class);
         $frontendFactory = function () use ($frontendMock) {
             return $frontendMock;
@@ -46,7 +43,7 @@ class ZendTest extends TestCase
     /**
      * @return array
      */
-    public static function proxyMethodDataProvider()
+    public function proxyMethodDataProvider()
     {
         return [
             'test' => ['test', ['record_id'], ['RECORD_ID'], 111],
@@ -80,14 +77,9 @@ class ZendTest extends TestCase
                 'getBackend',
                 [],
                 [],
-                static fn (self $testCase) => $testCase->createZendCacheBackendMock(),
+                $this->createMock(\Zend_Cache_Backend::class),
             ]
         ];
-    }
-
-    public function createZendCacheBackendMock()
-    {
-        return $this->createMock(\Zend_Cache_Backend::class);
     }
 
     /**
@@ -110,7 +102,7 @@ class ZendTest extends TestCase
     /**
      * @return array
      */
-    public static function cleanExceptionDataProvider()
+    public function cleanExceptionDataProvider()
     {
         return [
             'cleaning mode "expired"' => [

@@ -102,7 +102,7 @@ class FraudHandlerTest extends TestCase
     /**
      * @return array
      */
-    public static function handleMessagesDataProvider()
+    public function handleMessagesDataProvider()
     {
         return [
             ['Fraud message', null, null, ['RESPMSG' => 'Fraud message']],
@@ -114,13 +114,13 @@ class FraudHandlerTest extends TestCase
             ],
             [
                 'New fraud message',
-                self::getRulesXmlString(),
+                $this->getRulesXmlString(),
                 [
                     'Total Purchase Price Ceiling' => 'Existing fraud message',
                     'RESPMSG' => 'Existing fraud message'
                 ],
                 array_merge(
-                    self::getRulesExpectedDictionary(),
+                    $this->getRulesExpectedDictionary(),
                     [
                         'Total Purchase Price Ceiling' => 'Existing fraud message',
                         'RESPMSG' => 'Existing fraud message'
@@ -136,7 +136,7 @@ class FraudHandlerTest extends TestCase
      * @param string $fileName
      * @return string
      */
-    private static function getRulesXmlString($fileName = 'fps_prexmldata.xml')
+    private function getRulesXmlString($fileName = 'fps_prexmldata.xml')
     {
         return file_get_contents(__DIR__ . '/_files/' . $fileName);
     }
@@ -146,7 +146,7 @@ class FraudHandlerTest extends TestCase
      *
      * @return array
      */
-    private static function getRulesExpectedDictionary()
+    private function getRulesExpectedDictionary()
     {
         return [
             'Total Purchase Price Ceiling' => 'The purchase amount of 7501 is greater than the ceiling value set of 750'

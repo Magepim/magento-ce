@@ -68,7 +68,7 @@ class FontTest extends TestCase
      *
      * @return array
      */
-    public static function toOptionArrayDataProvider()
+    public function toOptionArrayDataProvider()
     {
         return [
             'Empty get font' => [

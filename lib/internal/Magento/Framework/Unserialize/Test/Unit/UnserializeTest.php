@@ -70,7 +70,7 @@ class UnserializeTest extends TestCase
     /**
      * @return array
      */
-    public static function unserializeObjectDataProvider()
+    public function unserializeObjectDataProvider()
     {
         return [
             // Upper and lower case serialized object indicators, nested in array

@@ -15,7 +15,6 @@ use Magento\TestModuleCatalogSearch\Model\SearchEngineVersionReader;
 /**
  * Class AdapterTest
  *
- * @magentoAppIsolation enabled
  * @magentoDbIsolation disabled
  * @magentoDataFixture Magento/Framework/Search/_files/products.php
  *

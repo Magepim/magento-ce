@@ -166,6 +166,7 @@ class GroupRepositoryTest extends TestCase
                     'getData',
                 ]
             )
+            ->setMockClassName('groupModel')
             ->disableOriginalConstructor()
             ->getMock();
         $this->groupDataFactory = $this->createPartialMock(
@@ -175,13 +176,13 @@ class GroupRepositoryTest extends TestCase
         $this->group = $this->getMockForAbstractClass(
             GroupInterface::class,
             [],
-            '',
+            'group',
             false
         );
         $this->factoryCreatedGroup = $this->getMockForAbstractClass(
             GroupInterface::class,
             [],
-            '',
+            'group',
             false
         );
 

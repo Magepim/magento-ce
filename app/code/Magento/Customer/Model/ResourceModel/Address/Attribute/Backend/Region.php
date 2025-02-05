@@ -7,6 +7,8 @@ namespace Magento\Customer\Model\ResourceModel\Address\Attribute\Backend;
 
 /**
  * Address region attribute backend
+ *
+ * @author      Magento Core Team <core@magentocommerce.com>
  */
 class Region extends \Magento\Eav\Model\Entity\Attribute\Backend\AbstractBackend
 {
@@ -43,8 +45,6 @@ class Region extends \Magento\Eav\Model\Entity\Attribute\Backend\AbstractBackend
     }
 
     /**
-     * Return new region object
-     *
      * @return \Magento\Directory\Model\Region
      */
     protected function _createRegionInstance()

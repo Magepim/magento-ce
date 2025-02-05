@@ -162,12 +162,12 @@ class BeforeAddressSaveObserverTest extends TestCase
     {
         return [
             [
-                'configAddressType' => AbstractAddress::TYPE_BILLING,
+                'TaxCalculationAddressType' => AbstractAddress::TYPE_BILLING,
                 'isDefaultBilling' => true,
                 'isDefaultShipping' => false,
             ],
             [
-                'configAddressType' => AbstractAddress::TYPE_SHIPPING,
+                'TaxCalculationAddressType' => AbstractAddress::TYPE_SHIPPING,
                 'isDefaultBilling' => false,
                 'isDefaultShipping' => true,
             ],

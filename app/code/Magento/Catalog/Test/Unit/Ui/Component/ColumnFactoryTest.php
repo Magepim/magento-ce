@@ -132,15 +132,15 @@ class ColumnFactoryTest extends TestCase
      *
      * @return array
      */
-    public static function filterModifiersProvider(): array
+    public function filterModifiersProvider(): array
     {
         return [
             'without' => [
-                'filterModifiers' => [],
+                'filter_modifiers' => [],
                 'filter' => null,
             ],
             'with' => [
-                'filterModifiers' => [
+                'filter_modifiers' => [
                     'color' => [
                         'condition_type' => 'notnull',
                     ],
@@ -229,13 +229,13 @@ class ColumnFactoryTest extends TestCase
      *
      * @return array
      */
-    public static function createDateColumnDataProvider(): array
+    public function createDateColumnDataProvider(): array
     {
         return [
             [
                 'frontendInput' => 'date',
                 'showsTime' => false,
-                'expectedDateFormat' => 'date_format',
+                'dateFormat' => 'date_format',
                 'expectedTimezone' => 'default_timezone',
             ],
             [

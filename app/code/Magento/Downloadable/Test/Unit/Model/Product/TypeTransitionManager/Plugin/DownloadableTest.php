@@ -87,7 +87,7 @@ class DownloadableTest extends TestCase
     /**
      * @return array
      */
-    public static function compatibleTypeDataProvider()
+    public function compatibleTypeDataProvider()
     {
         return [
             [\Magento\Catalog\Model\Product\Type::TYPE_SIMPLE],
@@ -121,7 +121,7 @@ class DownloadableTest extends TestCase
     /**
      * @return array
      */
-    public static function productThatCannotBeTransformedToDownloadableDataProvider()
+    public function productThatCannotBeTransformedToDownloadableDataProvider()
     {
         return [
             [false, 'custom_product_type', ['link' => [['is_delete' => '']]]],

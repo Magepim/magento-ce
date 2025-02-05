@@ -119,7 +119,7 @@ class RecurringDataTest extends TestCase
     /**
      * @return array
      */
-    public static function installDataProvider() : array
+    public function installDataProvider() : array
     {
         return [
             [true, StateInterface::STATUS_INVALID, 1],

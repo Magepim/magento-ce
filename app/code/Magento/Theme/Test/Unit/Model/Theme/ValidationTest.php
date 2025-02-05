@@ -39,7 +39,7 @@ class ValidationTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderValidate()
+    public function dataProviderValidate()
     {
         return [
             [

@@ -19,7 +19,6 @@ use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory as ProductColl
 use Magento\Eav\Model\Config;
 use Magento\Eav\Model\Entity\Attribute\AbstractAttribute;
 use Magento\Eav\Model\Entity\Attribute\UniqueValidationInterface;
-use Magento\Eav\Model\Entity\AttributeLoaderInterface;
 use Magento\Eav\Model\Entity\Context;
 use Magento\Eav\Model\Entity\Type as EntityType;
 use Magento\Framework\App\ResourceConnection;
@@ -108,18 +107,6 @@ class ActionTest extends TestCase
      */
     protected function setUp(): void
     {
-        $object = new ObjectManager($this);
-        $objects = [
-            [
-                UniqueValidationInterface::class,
-                $this->createMock(UniqueValidationInterface::class)
-            ],
-            [
-                AttributeLoaderInterface::class,
-                $this->createMock(AttributeLoaderInterface::class)
-            ]
-        ];
-        $object->prepareObjectManager($objects);
         $this->contextMock = $this->getMockBuilder(Context::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -226,7 +213,6 @@ class ActionTest extends TestCase
      */
     public function testUpdateProductHasWeightAttributes($hasWeight, $typeId, $items, $entityIds): void
     {
-        $items = $items($this);
         $this->prepareAdapter();
         $this->prepareProductCollection($items);
         $attrData = [
@@ -260,25 +246,25 @@ class ActionTest extends TestCase
      *
      * @return array
      */
-    public static function updateProductHasWeightAttributesDataProvider(): array
+    public function updateProductHasWeightAttributesDataProvider(): array
     {
         return [
             [
                 WeightResolver::HAS_WEIGHT,
                 Type::TYPE_SIMPLE,
-                static fn (self $testCase) => $testCase->getProductsVirtualToSimple(),
+                $this->getProductsVirtualToSimple(),
                 static::ENTITY_IDS
             ],
             [
                 WeightResolver::HAS_NO_WEIGHT,
                 Type::TYPE_VIRTUAL,
-                static fn (self $testCase) => $testCase->getProductsSimpleToVirtual(),
+                $this->getProductsSimpleToVirtual(),
                 static::ENTITY_IDS
             ],
             [
                 WeightResolver::HAS_NO_WEIGHT,
                 Type::TYPE_VIRTUAL,
-                static fn (self $testCase) => $testCase->getProductsMixedTypes(),
+                $this->getProductsMixedTypes(),
                 array_slice(static::ENTITY_IDS, 2, 2)
             ]
         ];
@@ -287,7 +273,7 @@ class ActionTest extends TestCase
     /**
      * @return array
      */
-    protected function getProductsSimpleToVirtual(): array
+    private function getProductsSimpleToVirtual(): array
     {
         $result = [];
 
@@ -312,7 +298,7 @@ class ActionTest extends TestCase
     /**
      * @return array
      */
-    protected function getProductsVirtualToSimple(): array
+    private function getProductsVirtualToSimple(): array
     {
         $result = [];
 
@@ -337,7 +323,7 @@ class ActionTest extends TestCase
     /**
      * @return array
      */
-    protected function getProductsMixedTypes(): array
+    private function getProductsMixedTypes(): array
     {
         $result = [];
 

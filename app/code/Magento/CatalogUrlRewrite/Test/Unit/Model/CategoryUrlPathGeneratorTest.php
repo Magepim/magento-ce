@@ -108,7 +108,7 @@ class CategoryUrlPathGeneratorTest extends TestCase
     /**
      * @return array
      */
-    public static function getUrlPathDataProvider()
+    public function getUrlPathDataProvider()
     {
         $noGenerationLevel = CategoryUrlPathGenerator::MINIMAL_CATEGORY_LEVEL_FOR_PROCESSING - 1;
         return [
@@ -122,7 +122,7 @@ class CategoryUrlPathGeneratorTest extends TestCase
     /**
      * @return array
      */
-    public static function getUrlPathWithParentDataProvider()
+    public function getUrlPathWithParentDataProvider()
     {
         $requireGenerationLevel = CategoryUrlPathGenerator::MINIMAL_CATEGORY_LEVEL_FOR_PROCESSING;
         $noGenerationLevel = CategoryUrlPathGenerator::MINIMAL_CATEGORY_LEVEL_FOR_PROCESSING - 1;
@@ -198,7 +198,7 @@ class CategoryUrlPathGeneratorTest extends TestCase
     /**
      * @return array
      */
-    public static function getUrlPathWithSuffixDataProvider()
+    public function getUrlPathWithSuffixDataProvider()
     {
         return [
             ['url-path', 1, null, '.html', 'url-path.html'],
@@ -272,7 +272,7 @@ class CategoryUrlPathGeneratorTest extends TestCase
     /**
      * @return array
      */
-    public static function getUrlKeyDataProvider()
+    public function getUrlKeyDataProvider()
     {
         return [
             ['url-key', null, 'url-key'],

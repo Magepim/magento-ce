@@ -153,7 +153,7 @@ class CurrentTest extends TestCase
             'url with MCA' => [
                 'pathStub' => 'test/path',
                 'urlStub' => 'http://example.com/asdasd',
-                'request' => [
+                'requestStub' => [
                     'pathInfoStub' => '/test/index/',
                     'moduleStub' => 'test',
                     'controllerStub' => 'index',
@@ -161,12 +161,12 @@ class CurrentTest extends TestCase
                     'mcaStub' => 'test/index',
                     'getUrl' => 'http://example.com/asdasd/'
                 ],
-                'expected' => true
+                'excepted' => true
             ],
             'url with CMS' => [
                 'pathStub' => 'test',
                 'urlStub' => 'http://example.com/test',
-                'request' => [
+                'requestStub' => [
                     'pathInfoStub' => '//test//',
                     'moduleStub' => 'cms',
                     'controllerStub' => 'page',
@@ -174,12 +174,12 @@ class CurrentTest extends TestCase
                     'mcaStub' => '',
                     'getUrl' => 'http://example.com/'
                 ],
-                'expected' => true
+                'excepted' => true
             ],
             'Test if is current false' => [
                 'pathStub' => 'test/path',
                 'urlStub' => 'http://example.com/tests',
-                'request' => [
+                'requestStub' => [
                     'pathInfoStub' => '/test/index/',
                     'moduleStub' => 'test',
                     'controllerStub' => 'index',
@@ -187,7 +187,7 @@ class CurrentTest extends TestCase
                     'mcaStub' => 'test/index',
                     'getUrl' => 'http://example.com/asdasd/'
                 ],
-                'expected' => false
+                'excepted' => false
             ]
         ];
     }

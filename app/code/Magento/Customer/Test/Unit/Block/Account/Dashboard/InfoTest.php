@@ -180,7 +180,7 @@ class InfoTest extends TestCase
     /**
      * @return array
      */
-    public static function getIsSubscribedProvider()
+    public function getIsSubscribedProvider()
     {
         return [[true, true], [false, false]];
     }
@@ -202,7 +202,7 @@ class InfoTest extends TestCase
     /**
      * @return array
      */
-    public static function isNewsletterEnabledProvider()
+    public function isNewsletterEnabledProvider()
     {
         return [[true, true], [false, false]];
     }

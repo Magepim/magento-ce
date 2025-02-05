@@ -95,7 +95,7 @@ class ButtonTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProviderGetOnClick()
+    public function dataProviderGetOnClick()
     {
         return [
             [null, null, '', null],

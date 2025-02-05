@@ -88,7 +88,7 @@ class IndexTest extends TestCase
     /**
      * @return array
      */
-    public static function toDefinitionDataProvider()
+    public function toDefinitionDataProvider()
     {
         return [
             [
@@ -134,7 +134,7 @@ class IndexTest extends TestCase
     /**
      * @return array
      */
-    public static function definitionDataProvider()
+    public function definitionDataProvider()
     {
         return [
             [
@@ -143,7 +143,7 @@ class IndexTest extends TestCase
                     'Key_name' => 'ft_index',
                     'Column_name' => 'text',
                 ],
-                'expectedDefinition' => [
+                'excpectedDefiniton' => [
                     'indexType' => 'fulltext',
                     'name' => 'ft_index',
                     'column' => ['text' => 'text'],
@@ -156,7 +156,7 @@ class IndexTest extends TestCase
                     'Key_name' => 'bt_index',
                     'Column_name' => 'text',
                 ],
-                'expectedDefinition' => [
+                'excpectedDefiniton' => [
                     'indexType' => 'btree',
                     'name' => 'bt_index',
                     'column' => ['text' => 'text'],
@@ -169,7 +169,7 @@ class IndexTest extends TestCase
                     'Key_name' => 'ht_index',
                     'Column_name' => 'text',
                 ],
-                'expectedDefinition' => [
+                'excpectedDefiniton' => [
                     'indexType' => 'hash',
                     'name' => 'ht_index',
                     'column' => ['text' => 'text'],

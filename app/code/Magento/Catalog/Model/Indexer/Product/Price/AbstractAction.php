@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2014 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 
 namespace Magento\Catalog\Model\Indexer\Product\Price;
@@ -132,9 +132,9 @@ abstract class AbstractAction
         Type $catalogProductType,
         Factory $indexerPriceFactory,
         DefaultPrice $defaultIndexerResource,
-        ?TierPrice $tierPriceIndexResource = null,
-        ?DimensionCollectionFactory $dimensionCollectionFactory = null,
-        ?TableMaintainer $tableMaintainer = null
+        TierPrice $tierPriceIndexResource = null,
+        DimensionCollectionFactory $dimensionCollectionFactory = null,
+        TableMaintainer $tableMaintainer = null
     ) {
         $this->_config = $config;
         $this->_storeManager = $storeManager;

@@ -50,13 +50,10 @@ class ProductOutputProcessorTest extends TestCase
      */
     public function testGetByProductType(
         array $request,
-        $product,
+        ProductInterface $product,
         array $result,
         array $expectedResult
     ) {
-        if (is_callable($product)) {
-            $product = $product($this);
-        }
         $this->requestMock
             ->method('getContent')
             ->willReturn($request);
@@ -72,7 +69,7 @@ class ProductOutputProcessorTest extends TestCase
      * @return array
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public static function getProductProcessorDataProvider()
+    public function getProductProcessorDataProvider()
     {
         return [
             'request object contains `product_links` and `tier_prices`' => [
@@ -86,7 +83,7 @@ class ProductOutputProcessorTest extends TestCase
                         ]
                     ]
                 ],
-                'product' => static fn (self $testCase) => $testCase->setProductInformation(
+                'product' => $this->setProductInformation(
                     [
                         'sku' => 'MH01',
                         'status' => 1,
@@ -117,7 +114,7 @@ class ProductOutputProcessorTest extends TestCase
                         ]
                     ]
                 ],
-                'product' => static fn (self $testCase) => $testCase->setProductInformation(
+                'product' => $this->setProductInformation(
                     [
                         'sku' => 'MH01',
                         'status' => 1,
@@ -146,7 +143,7 @@ class ProductOutputProcessorTest extends TestCase
                         ]
                     ]
                 ],
-                'product' => static fn (self $testCase) => $testCase->setProductInformation(
+                'product' => $this->setProductInformation(
                     [
                         'sku' => 'MH03',
                         'status' => 1,
@@ -177,7 +174,7 @@ class ProductOutputProcessorTest extends TestCase
                         ]
                     ]
                 ],
-                'product' => static fn (self $testCase) => $testCase->setProductInformation(
+                'product' => $this->setProductInformation(
                     [
                         'sku' => 'MH01',
                         'status' => 1,
@@ -204,7 +201,7 @@ class ProductOutputProcessorTest extends TestCase
                         'product' => []
                     ]
                 ],
-                'product' => static fn (self $testCase) => $testCase->setProductInformation(
+                'product' => $this->setProductInformation(
                     [
                         'sku' => 'MH01',
                         'status' => 1,
@@ -234,7 +231,7 @@ class ProductOutputProcessorTest extends TestCase
                         ]
                     ]
                 ],
-                'product' => static fn (self $testCase) => $testCase->setProductInformation(
+                'product' => $this->setProductInformation(
                     [
                         'sku' => 'MH01',
                         'status' => 1,
@@ -266,7 +263,7 @@ class ProductOutputProcessorTest extends TestCase
                         ]
                     ]
                 ],
-                'product' => static fn (self $testCase) => $testCase->setProductInformation(
+                'product' => $this->setProductInformation(
                     [
                         'sku' => 'MH01',
                         'status' => 1,
@@ -289,7 +286,7 @@ class ProductOutputProcessorTest extends TestCase
             ],
             'request object has empty array' => [
                 'request' => [],
-                'product' => static fn (self $testCase) => $testCase->setProductInformation(
+                'product' => $this->setProductInformation(
                     [
                         'sku' => 'MH01',
                         'status' => 1,
@@ -309,7 +306,7 @@ class ProductOutputProcessorTest extends TestCase
         ];
     }
 
-    protected function setProductInformation($productArr)
+    private function setProductInformation($productArr)
     {
         $productMock = $this->getMockBuilder(ProductInterface::class)
             ->disableOriginalConstructor()

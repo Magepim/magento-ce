@@ -42,7 +42,7 @@ class FactoryGeneratorTest extends TestCase
     /**
      * @return array
      */
-    public static function generateNonFactoryDataProvider()
+    public function generateNonFactoryDataProvider()
     {
         return [
             'non-factory class' => ['\My\SimpleClass'],

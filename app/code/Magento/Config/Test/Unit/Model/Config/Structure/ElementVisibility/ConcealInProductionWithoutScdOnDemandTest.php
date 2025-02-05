@@ -140,7 +140,7 @@ class ConcealInProductionWithoutScdOnDemandTest extends TestCase
     /**
      * @return array
      */
-    public static function visibilityDataProvider(): array
+    public function visibilityDataProvider(): array
     {
         return [
             [true],

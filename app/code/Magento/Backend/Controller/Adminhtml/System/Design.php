@@ -14,10 +14,10 @@ abstract class Design extends Action
      *
      * @see _isAllowed()
      */
-    public const ADMIN_RESOURCE = 'Magento_Backend::schedule';
+    const ADMIN_RESOURCE = 'Magento_Backend::design';
 
     /**
-     * Core registry instance
+     * Core registry
      *
      * @var \Magento\Framework\Registry
      */

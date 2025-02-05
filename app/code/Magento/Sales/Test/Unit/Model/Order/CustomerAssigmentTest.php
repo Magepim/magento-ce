@@ -73,7 +73,7 @@ class CustomerAssigmentTest extends TestCase
      * Data provider for testExecute.
      * @return array
      */
-    public static function executeDataProvider(): array
+    public function executeDataProvider(): array
     {
         return [
             [

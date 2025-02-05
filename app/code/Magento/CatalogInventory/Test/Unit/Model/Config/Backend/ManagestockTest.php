@@ -50,7 +50,7 @@ class ManagestockTest extends TestCase
      * Data provider for testSaveAndRebuildIndex
      * @return array
      */
-    public static function saveAndRebuildIndexDataProvider()
+    public function saveAndRebuildIndexDataProvider()
     {
         return [
             [1, 1],

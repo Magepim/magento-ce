@@ -182,7 +182,7 @@ class ValidateTest extends TestCase
     /**
      * @return array
      */
-    public static function executeDataProvider()
+    public function executeDataProvider()
     {
         return [
             [ false, ['error' => false]],

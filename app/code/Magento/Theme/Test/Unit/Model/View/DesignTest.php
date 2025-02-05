@@ -103,7 +103,7 @@ class DesignTest extends TestCase
     /**
      * @return array
      */
-    public static function getThemePathDataProvider()
+    public function getThemePathDataProvider()
     {
         return [
             ['some_path', '', 'some_path'],
@@ -115,7 +115,7 @@ class DesignTest extends TestCase
     /**
      * @return array
      */
-    public static function designThemeDataProvider()
+    public function designThemeDataProvider()
     {
         return [
             'single' => [true, ScopeInterface::SCOPE_WEBSITES],

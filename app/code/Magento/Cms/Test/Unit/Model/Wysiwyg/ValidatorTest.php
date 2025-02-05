@@ -25,7 +25,7 @@ class ValidatorTest extends TestCase
      *
      * @return array
      */
-    public static function getValidationCases(): array
+    public function getValidationCases(): array
     {
         return [
             'invalid-exception' => [true, new ValidationException(__('Invalid html')), true, false],

@@ -270,7 +270,7 @@ class DownloadableTest extends AbstractImportTestCase
      * @return array
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public static function dataForSave(): array
+    public function dataForSave(): array
     {
         return [
             [
@@ -587,11 +587,11 @@ class DownloadableTest extends AbstractImportTestCase
      * @return array
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public static function isRowValidData(): array
+    public function isRowValidData(): array
     {
         return [
             [
-                'rowData' => [
+                'row_data' => [
                     'sku' => 'downloadablesku1',
                     'product_type' => 'downloadable',
                     'name' => 'Downloadable Product 1',
@@ -601,13 +601,13 @@ class DownloadableTest extends AbstractImportTestCase
                         . 'downloads=unlimited, file=media/file_link.mp4,sortorder=1|group_title=Group Title, '
                         . 'title=Title 2, price=10, downloads=unlimited, url=media/file2.mp4,sortorder=0'
                 ],
-                'rowNum' => 0,
-                'isNewProduct' => true,
-                'isDomainValid' => true,
-                'expectedResult' => true
+                'row_num' => 0,
+                'is_new_product' => true,
+                'is_domain_valid' => true,
+                'expected_result' => true
             ],
             [
-                'rowData' => [
+                'row_data' => [
                     'sku' => 'downloadablesku12',
                     'product_type' => 'downloadable',
                     'name' => 'Downloadable Product 2',
@@ -617,13 +617,13 @@ class DownloadableTest extends AbstractImportTestCase
                         . ' downloads=unlimited, file=media/file.mp4,sortorder=1|group_title=Group Title,'
                         . ' title=Title 2, price=10, downloads=unlimited, url=media/file2.mp4,sortorder=0'
                 ],
-                'rowNum' => 1,
-                'isNewProduct' => true,
-                'isDomainValid' => true,
-                'expectedResult' => true
+                'row_num' => 1,
+                'is_new_product' => true,
+                'is_domain_valid' => true,
+                'expected_result' => true
             ],
             [
-                'rowData' => [
+                'row_data' => [
                     'sku' => 'downloadablesku12',
                     'product_type' => 'downloadable',
                     'name' => 'Downloadable Product 2',
@@ -633,13 +633,13 @@ class DownloadableTest extends AbstractImportTestCase
                         . ' downloads=unlimited, file=media/file.mp4,sortorder=1|group_title=Group Title,'
                         . ' title=Title 2, price=10, downloads=unlimited, url=media/file2.mp4,sortorder=0'
                 ],
-                'rowNum' => 3,
-                'isNewProduct' => true,
-                'isDomainValid' => true,
-                'expectedResult' => true
+                'row_num' => 3,
+                'is_new_product' => true,
+                'is_domain_valid' => true,
+                'expected_result' => true
             ],
             [
-                'rowData' => [
+                'row_data' => [
                     'sku' => 'downloadablesku12',
                     'product_type' => 'downloadable',
                     'name' => 'Downloadable Product 2',
@@ -649,13 +649,13 @@ class DownloadableTest extends AbstractImportTestCase
                         . 'sortorder=1|group_title=Group Title, title=Title 2, price=10, downloads=unlimited,'
                         . ' url=media/file2.mp4,sortorder=0'
                 ],
-                'rowNum' => 4,
-                'isNewProduct' => true,
-                'isDomainValid' => true,
-                'expectedResult' => true
+                'row_num' => 4,
+                'is_new_product' => true,
+                'is_domain_valid' => true,
+                'expected_result' => true
             ],
             [ //empty group title samples
-                'rowData' => [
+                'row_data' => [
                     'sku' => 'downloadablesku12',
                     'product_type' => 'downloadable',
                     'name' => 'Downloadable Product 2',
@@ -665,13 +665,13 @@ class DownloadableTest extends AbstractImportTestCase
                         . ' downloads=unlimited, file=media/file.mp4,sortorder=1|group_title=Group Title,'
                         . ' title=Title 2, price=10, downloads=unlimited, url=media/file2.mp4,sortorder=0'
                 ],
-                'rowNum' => 5,
-                'isNewProduct' => true,
-                'isDomainValid' => true,
-                'expectedResult' => true
+                'row_num' => 5,
+                'is_new_product' => true,
+                'is_domain_valid' => true,
+                'expected_result' => true
             ],
             [ //empty group title links
-                'rowData' => [
+                'row_data' => [
                     'sku' => 'downloadablesku12',
                     'product_type' => 'downloadable',
                     'name' => 'Downloadable Product 2',
@@ -681,34 +681,34 @@ class DownloadableTest extends AbstractImportTestCase
                         . ' downloads=unlimited, file=media/file.mp4,sortorder=1|group_title=Group Title,'
                         . ' title=Title 2, price=10, downloads=unlimited, url=media/file2.mp4,sortorder=0'
                 ],
-                'rowNum' => 6,
-                'isNewProduct' => true,
-                'isDomainValid' => true,
-                'expectedResult' => true
+                'row_num' => 6,
+                'is_new_product' => true,
+                'is_domain_valid' => true,
+                'expected_result' => true
             ],
             [
-                'rowData' => [
+                'row_data' => [
                     'sku' => 'downloadablesku12',
                     'product_type' => 'downloadable',
                     'name' => 'Downloadable Product 2'
                 ],
-                'rowNum' => 2,
-                'isNewProduct' => false,
-                'isDomainValid' => true,
-                'expectedResult' => true
+                'row_num' => 2,
+                'is_new_product' => false,
+                'is_domain_valid' => true,
+                'expected_result' => true
             ],
             [
-                'rowData' => [
+                'row_data' => [
                     'sku' => 'downloadablesku12',
                     'product_type' => 'downloadable',
                     'name' => 'Downloadable Product 2',
                     'downloadable_samples' => '',
                     'downloadable_links' => ''
                 ],
-                'rowNum' => 7,
-                'isNewProduct' => true,
-                'isDomainValid' => true,
-                'expectedResult' => false
+                'row_num' => 7,
+                'is_new_product' => true,
+                'is_domain_valid' => true,
+                'expected_result' => false
             ]
         ];
     }
@@ -763,7 +763,7 @@ class DownloadableTest extends AbstractImportTestCase
      *
      * @return array
      */
-    public static function dataForUploaderDir(): array
+    public function dataForUploaderDir(): array
     {
         return [
             [

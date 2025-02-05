@@ -180,11 +180,11 @@ class ActionTest extends TestCase
     /**
      * @return array
      */
-    public static function updateWebsitesDataProvider()
+    public function updateWebsitesDataProvider()
     {
         return [
-            ['type' => 'add', 'methodName' => 'addProducts'],
-            ['type' => 'remove', 'methodName' => 'removeProducts']
+            ['$type' => 'add', '$methodName' => 'addProducts'],
+            ['$type' => 'remove', '$methodName' => 'removeProducts']
         ];
     }
 

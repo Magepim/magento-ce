@@ -1,22 +1,17 @@
 <?php
 /**
- * Copyright 2014 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
 namespace Magento\Framework\Image\Adapter;
 
 use Magento\Framework\App\Filesystem\DirectoryList;
-use Magento\Framework\Exception\FileSystemException;
-use Magento\Framework\Filesystem;
-use Magento\Framework\Filesystem\Directory\Write;
-use Psr\Log\LoggerInterface;
 
 /**
  * Image abstract adapter
  *
- * phpcs:disable Magento2.Classes.AbstractApi
  * @api
  * @SuppressWarnings(PHPMD.TooManyFields)
  */
@@ -32,25 +27,25 @@ abstract class AbstractAdapter implements AdapterInterface
      * Position constants.
      * Used mainly for watermarks
      */
-    public const POSITION_TOP_LEFT = 'top-left';
+    const POSITION_TOP_LEFT = 'top-left';
 
-    public const POSITION_TOP_RIGHT = 'top-right';
+    const POSITION_TOP_RIGHT = 'top-right';
 
-    public const POSITION_BOTTOM_LEFT = 'bottom-left';
+    const POSITION_BOTTOM_LEFT = 'bottom-left';
 
-    public const POSITION_BOTTOM_RIGHT = 'bottom-right';
+    const POSITION_BOTTOM_RIGHT = 'bottom-right';
 
-    public const POSITION_STRETCH = 'stretch';
+    const POSITION_STRETCH = 'stretch';
 
-    public const POSITION_TILE = 'tile';
+    const POSITION_TILE = 'tile';
 
-    public const POSITION_CENTER = 'center';
+    const POSITION_CENTER = 'center';
     /**#@-*/
 
     /**
      * The size of the font to use as default
      */
-    public const DEFAULT_FONT_SIZE = 15;
+    const DEFAULT_FONT_SIZE = 15;
 
     /**
      * @var  int
@@ -155,17 +150,17 @@ abstract class AbstractAdapter implements AdapterInterface
     /**
      * Filesystem instance
      *
-     * @var Filesystem
+     * @var \Magento\Framework\Filesystem
      */
     protected $_filesystem;
 
     /**
-     * @var Write
+     * @var \Magento\Framework\Filesystem\Directory\Write
      */
     protected $directoryWrite;
 
     /**
-     * @var LoggerInterface
+     * @var \Psr\Log\LoggerInterface
      */
     protected $logger;
 
@@ -272,14 +267,14 @@ abstract class AbstractAdapter implements AdapterInterface
     /**
      * Initialize default values
      *
-     * @param Filesystem $filesystem
-     * @param LoggerInterface $logger
+     * @param \Magento\Framework\Filesystem $filesystem
+     * @param \Psr\Log\LoggerInterface $logger
      * @param array $data
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function __construct(
-        Filesystem $filesystem,
-        LoggerInterface $logger,
+        \Magento\Framework\Filesystem $filesystem,
+        \Psr\Log\LoggerInterface $logger,
         array $data = []
     ) {
         $this->_filesystem = $filesystem;
@@ -562,9 +557,6 @@ abstract class AbstractAdapter implements AdapterInterface
             }
         }
 
-        $frameWidth = (float)$frameWidth;
-        $frameHeight = (float)$frameHeight;
-
         // define coordinates of image inside new frame
         $srcX = 0;
         $srcY = 0;
@@ -585,17 +577,17 @@ abstract class AbstractAdapter implements AdapterInterface
 
         return [
             'src' => ['x' => $srcX, 'y' => $srcY],
-            'dst' => ['x' => $dstX, 'y' => $dstY, 'width' => round($dstWidth), 'height' => round($dstHeight)],
+            'dst' => ['x' => $dstX, 'y' => $dstY, 'width' => $dstWidth, 'height' => $dstHeight],
             // size for new image
-            'frame' => ['width' => round($frameWidth), 'height' => round($frameHeight)]
+            'frame' => ['width' => $frameWidth, 'height' => $frameHeight]
         ];
     }
 
     /**
      * Check aspect ratio
      *
-     * @param int|float $frameWidth
-     * @param int|float $frameHeight
+     * @param int $frameWidth
+     * @param int $frameHeight
      * @return int[]
      */
     protected function _checkAspectRatio($frameWidth, $frameHeight)
@@ -612,7 +604,7 @@ abstract class AbstractAdapter implements AdapterInterface
             }
             // keep aspect ratio
             if ($this->_imageSrcWidth / $this->_imageSrcHeight >= $frameWidth / $frameHeight) {
-                $dstHeight = max(1, round($dstWidth / $this->_imageSrcWidth * $this->_imageSrcHeight));
+                $dstHeight = round($dstWidth / $this->_imageSrcWidth * $this->_imageSrcHeight);
             } else {
                 $dstWidth = round($dstHeight / $this->_imageSrcHeight * $this->_imageSrcWidth);
             }
@@ -632,7 +624,7 @@ abstract class AbstractAdapter implements AdapterInterface
     {
         if ($frameWidth !== null && $frameWidth <= 0 ||
             $frameHeight !== null && $frameHeight <= 0 ||
-            ($frameWidth === null && $frameHeight === null)
+            empty($frameWidth) && empty($frameHeight)
         ) {
             //phpcs:ignore Magento2.Exceptions.DirectThrow
             throw new \InvalidArgumentException('Invalid image dimensions.');
@@ -698,7 +690,7 @@ abstract class AbstractAdapter implements AdapterInterface
         if (!is_writable($destination)) {
             try {
                 $this->directoryWrite->create($this->directoryWrite->getRelativePath($destination));
-            } catch (FileSystemException $e) {
+            } catch (\Magento\Framework\Exception\FileSystemException $e) {
                 $this->logger->critical($e);
                 //phpcs:ignore Magento2.Exceptions.DirectThrow
                 throw new \DomainException(

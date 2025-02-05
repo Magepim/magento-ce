@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2011 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 namespace Magento\Catalog\Model\Product;
 
@@ -19,16 +19,17 @@ use Magento\Catalog\Model\ResourceModel\Product\Link\Product\Collection as Produ
  * @method int getLinkTypeId()
  * @method \Magento\Catalog\Model\Product\Link setLinkTypeId(int $value)
  *
+ * @author      Magento Core Team <core@magentocommerce.com>
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  * @since 100.0.2
  */
 class Link extends \Magento\Framework\Model\AbstractModel
 {
-    public const LINK_TYPE_RELATED = 1;
+    const LINK_TYPE_RELATED = 1;
 
-    public const LINK_TYPE_UPSELL = 4;
+    const LINK_TYPE_UPSELL = 4;
 
-    public const LINK_TYPE_CROSSSELL = 5;
+    const LINK_TYPE_CROSSSELL = 5;
 
     /**
      * @var mixed
@@ -36,14 +37,14 @@ class Link extends \Magento\Framework\Model\AbstractModel
     protected $_attributes = null;
 
     /**
-     * Factory for creating product collection
+     * Product collection factory
      *
      * @var \Magento\Catalog\Model\ResourceModel\Product\Link\Product\CollectionFactory
      */
     protected $_productCollectionFactory;
 
     /**
-     * Factory for product link collection
+     * Link collection factory
      *
      * @var \Magento\Catalog\Model\ResourceModel\Product\Link\CollectionFactory
      */
@@ -58,7 +59,6 @@ class Link extends \Magento\Framework\Model\AbstractModel
     /**
      * @var \Magento\CatalogInventory\Helper\Stock
      * @deprecated 101.0.0
-     * @see Updated deprecation doc annotations
      */
     protected $stockHelper;
 
@@ -78,8 +78,8 @@ class Link extends \Magento\Framework\Model\AbstractModel
         \Magento\Catalog\Model\ResourceModel\Product\Link\CollectionFactory $linkCollectionFactory,
         \Magento\Catalog\Model\ResourceModel\Product\Link\Product\CollectionFactory $productCollectionFactory,
         \Magento\CatalogInventory\Helper\Stock $stockHelper,
-        ?\Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
-        ?\Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
+        \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
+        \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = []
     ) {
         $this->_linkCollectionFactory = $linkCollectionFactory;
@@ -99,8 +99,6 @@ class Link extends \Magento\Framework\Model\AbstractModel
     }
 
     /**
-     * Method to set link type for the related product
-     *
      * @return $this
      */
     public function useRelatedLinks()
@@ -110,8 +108,6 @@ class Link extends \Magento\Framework\Model\AbstractModel
     }
 
     /**
-     * Method to set link type for upsell product
-     *
      * @return $this
      */
     public function useUpSellLinks()
@@ -121,8 +117,6 @@ class Link extends \Magento\Framework\Model\AbstractModel
     }
 
     /**
-     * Method to set link type for cross-sell products
-     *
      * @return $this
      */
     public function useCrossSellLinks()
@@ -165,8 +159,6 @@ class Link extends \Magento\Framework\Model\AbstractModel
     }
 
     /**
-     * Method to get Product attributes
-     *
      * @param int $type
      * @return array
      */
@@ -195,8 +187,6 @@ class Link extends \Magento\Framework\Model\AbstractModel
     }
 
     /**
-     * Method to get Save Handler instance
-     *
      * @return Link\SaveHandler
      */
     private function getProductLinkSaveHandler()

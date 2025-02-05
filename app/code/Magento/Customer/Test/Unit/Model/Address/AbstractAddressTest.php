@@ -355,7 +355,7 @@ class AbstractAddressTest extends TestCase
     /**
      * @return array
      */
-    public static function validateDataProvider()
+    public function validateDataProvider()
     {
         $countryId = 1;
         $data = [
@@ -428,7 +428,7 @@ class AbstractAddressTest extends TestCase
     /**
      * @return array
      */
-    public static function getStreetFullDataProvider()
+    public function getStreetFullDataProvider()
     {
         return [
             [null, null],

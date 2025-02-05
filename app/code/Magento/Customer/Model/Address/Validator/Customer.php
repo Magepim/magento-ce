@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2024 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
@@ -44,7 +44,10 @@ class Customer implements ValidatorInterface
                 ->getCustomerId();
 
             if ($originalAddressCustomerId !== 0 && $originalAddressCustomerId !== $addressCustomerId) {
-                $errors[] = __('A customer with the same email address already exists in an associated website.');
+                $errors[] = __(
+                    'Provided customer ID "%customer_id" isn\'t related to current customer address.',
+                    ['customer_id' => $addressCustomerId]
+                );
             }
         }
 

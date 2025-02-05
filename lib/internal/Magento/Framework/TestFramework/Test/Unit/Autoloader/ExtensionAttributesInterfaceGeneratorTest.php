@@ -43,7 +43,7 @@ class ExtensionAttributesInterfaceGeneratorTest extends TestCase
     /**
      * @return array
      */
-    public static function generateNonExtensionAttributesInterfaceDataProvider()
+    public function generateNonExtensionAttributesInterfaceDataProvider()
     {
         return [
             'non-extension attribute interface' => ['\My\SimpleInterface'],

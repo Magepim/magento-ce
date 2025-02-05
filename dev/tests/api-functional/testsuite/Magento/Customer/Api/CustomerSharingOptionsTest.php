@@ -162,12 +162,12 @@ class CustomerSharingOptionsTest extends WebapiAbstract
     {
         return [
             'Default Store View' => [
-                'storeCode' => 'default',
-                'expectingException' => false
+                'store_code' => 'default',
+                'exception' => false
             ],
             'Custom Store View' => [
-                'storeCode' => 'fixture_second_store',
-                'expectingException' => true
+                'store_code' => 'fixture_second_store',
+                'exception' => true
             ]
         ];
     }
@@ -181,12 +181,12 @@ class CustomerSharingOptionsTest extends WebapiAbstract
     {
         return [
             'Default Store View' => [
-                'storeCode' => 'default',
-                'expectingException' => false
+                'store_code' => 'default',
+                'exception' => false
             ],
             'Custom Store View' => [
-                'storeCode' => 'fixture_second_store',
-                'expectingException' => false
+                'store_code' => 'fixture_second_store',
+                'exception' => false
             ]
         ];
     }

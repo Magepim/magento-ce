@@ -87,10 +87,8 @@ class TriggerCleaner
         $remainingTriggers = array_diff_key($this->DbTriggers, $this->processedTriggers);
         foreach ($remainingTriggers as $trigger) {
             $view = $this->createViewByTableName($trigger['EVENT_OBJECT_TABLE']);
-            if ($view->getActionClass()) {
-                $view->unsubscribe();
-                $view->getState()->delete();
-            }
+            $view->unsubscribe();
+            $view->getState()->delete();
         }
 
         return true;

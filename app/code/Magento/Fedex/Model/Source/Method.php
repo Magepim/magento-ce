@@ -6,6 +6,8 @@
 
 /**
  * Fedex method source implementation
+ *
+ * @author     Magento Core Team <core@magentocommerce.com>
  */
 namespace Magento\Fedex\Model\Source;
 

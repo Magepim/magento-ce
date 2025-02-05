@@ -180,7 +180,7 @@ class CatalogProductCompareAddProductObserverTest extends TestCase
     /**
      * @return array
      */
-    public static function catalogProductCompareAddProductDataProvider()
+    public function catalogProductCompareAddProductDataProvider()
     {
         return [
             'logged in' => [

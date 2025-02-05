@@ -165,7 +165,7 @@ class ParamsBuilderTest extends TestCase
      *
      * @return array
      */
-    public static function buildDataProvider()
+    public function buildDataProvider()
     {
         return [
             'watermark config' => [

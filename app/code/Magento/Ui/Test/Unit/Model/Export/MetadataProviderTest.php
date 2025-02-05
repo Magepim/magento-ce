@@ -106,7 +106,7 @@ class MetadataProviderTest extends TestCase
     /**
      * @return array
      */
-    public static function getColumnsDataProvider(): array
+    public function getColumnsDataProvider(): array
     {
         return [
             [['ID'], ['ID']],
@@ -239,7 +239,7 @@ class MetadataProviderTest extends TestCase
     /**
      * @return array
      */
-    public static function getRowDataProvider()
+    public function getRowDataProvider()
     {
         return [
             [
@@ -409,7 +409,7 @@ class MetadataProviderTest extends TestCase
     /**
      * @return array
      */
-    public static function getOptionsDataProvider()
+    public function getOptionsDataProvider()
     {
         return [
             [
@@ -536,7 +536,7 @@ class MetadataProviderTest extends TestCase
      *
      * @return array
      */
-    public static function convertDateProvider()
+    public function convertDateProvider()
     {
         return [
             [

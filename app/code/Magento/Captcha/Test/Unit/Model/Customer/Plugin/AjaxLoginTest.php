@@ -63,7 +63,7 @@ class AjaxLoginTest extends TestCase
     /**
      * @var array
      */
-    protected static $formIds = ['user_login'];
+    protected $formIds = ['user_login'];
 
     /**
      * @var AjaxLogin
@@ -103,7 +103,7 @@ class AjaxLoginTest extends TestCase
             $this->captchaHelperMock,
             $this->sessionManagerMock,
             $this->jsonFactoryMock,
-            self::$formIds,
+            $this->formIds,
             $this->serializerMock
         );
     }
@@ -118,7 +118,7 @@ class AjaxLoginTest extends TestCase
         $requestData = [
             'username' => $username,
             'captcha_string' => $captchaString,
-            'captcha_form_id' => self::$formIds[0]
+            'captcha_form_id' => $this->formIds[0]
         ];
         $requestContent = json_encode($requestData);
 
@@ -153,7 +153,7 @@ class AjaxLoginTest extends TestCase
         $requestData = [
             'username' => $username,
             'captcha_string' => $captchaString,
-            'captcha_form_id' => self::$formIds[0]
+            'captcha_form_id' => $this->formIds[0]
         ];
         $requestContent = json_encode($requestData);
 
@@ -208,32 +208,32 @@ class AjaxLoginTest extends TestCase
     /**
      * @return array
      */
-    public static function aroundExecuteCaptchaIsNotRequired(): array
+    public function aroundExecuteCaptchaIsNotRequired(): array
     {
         return [
             [
                 'username' => 'name',
-                'requestContent' => ['username' => 'name', 'captcha_string' => 'string'],
+                'requestData' => ['username' => 'name', 'captcha_string' => 'string'],
             ],
             [
                 'username' => 'name',
-                'requestContent' => [
+                'requestData' => [
                     'username' => 'name',
                     'captcha_string' => 'string',
-                    'captcha_form_id' => self::$formIds[0]
+                    'captcha_form_id' => $this->formIds[0]
                 ],
             ],
             [
                 'username' => null,
-                'requestContent' => [
+                'requestData' => [
                     'username' => null,
                     'captcha_string' => 'string',
-                    'captcha_form_id' => self::$formIds[0]
+                    'captcha_form_id' => $this->formIds[0]
                 ],
             ],
             [
                 'username' => 'name',
-                'requestContent' => [
+                'requestData' => [
                     'username' => 'name',
                     'captcha_string' => 'string',
                     'captcha_form_id' => null

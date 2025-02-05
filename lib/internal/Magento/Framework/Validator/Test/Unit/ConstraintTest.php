@@ -96,7 +96,7 @@ class ConstraintTest extends TestCase
      *
      * @return array
      */
-    public static function isValidDataProvider()
+    public function isValidDataProvider()
     {
         return [['test', true], ['test', false, ['foo']]];
     }

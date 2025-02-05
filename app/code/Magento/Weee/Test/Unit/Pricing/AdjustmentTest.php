@@ -36,7 +36,7 @@ class AdjustmentTest extends TestCase
     /**
      * @var int
      */
-    protected static $sortOrder = 5;
+    protected $sortOrder = 5;
 
     protected function setUp(): void
     {
@@ -57,7 +57,7 @@ class AdjustmentTest extends TestCase
                 }
             );
 
-        $this->adjustment = new Adjustment($this->weeeHelper, $this->priceCurrencyMock, self::$sortOrder);
+        $this->adjustment = new Adjustment($this->weeeHelper, $this->priceCurrencyMock, $this->sortOrder);
     }
 
     public function testGetAdjustmentCode()
@@ -91,7 +91,7 @@ class AdjustmentTest extends TestCase
     /**
      * @return array
      */
-    public static function isIncludedInDisplayPriceDataProvider()
+    public function isIncludedInDisplayPriceDataProvider()
     {
         return [[false], [true]];
     }
@@ -116,7 +116,7 @@ class AdjustmentTest extends TestCase
     /**
      * @return array
      */
-    public static function applyAdjustmentDataProvider()
+    public function applyAdjustmentDataProvider()
     {
         return [
             [1.1, 2.4, 2.3],
@@ -138,7 +138,7 @@ class AdjustmentTest extends TestCase
     /**
      * @return array
      */
-    public static function isExcludedWithDataProvider()
+    public function isExcludedWithDataProvider()
     {
         return [
             ['weee', true],
@@ -164,11 +164,11 @@ class AdjustmentTest extends TestCase
     /**
      * @return array
      */
-    public static function getSortOrderProvider()
+    public function getSortOrderProvider()
     {
         return [
-            [true, self::$sortOrder],
-            [false, self::$sortOrder]
+            [true, $this->sortOrder],
+            [false, $this->sortOrder]
         ];
     }
 }

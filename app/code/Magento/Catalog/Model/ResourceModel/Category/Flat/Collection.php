@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2011 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 namespace Magento\Catalog\Model\ResourceModel\Category\Flat;
 
@@ -17,12 +17,13 @@ use Magento\Store\Model\ScopeInterface;
 /**
  * Catalog category flat collection
  *
+ * @author      Magento Core Team <core@magentocommerce.com>
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
     /**
-     * Event prefix used for catalog category collection events
+     * Event prefix
      *
      * @var string
      */
@@ -36,7 +37,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     protected $_eventObject = 'category_collection';
 
     /**
-     * Store manager for managing store-related operations
+     * Store manager
      *
      * @var \Magento\Store\Model\StoreManagerInterface
      */
@@ -73,8 +74,8 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         ManagerInterface $eventManager,
         StoreManagerInterface $storeManager,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
-        ?\Magento\Framework\DB\Adapter\AdapterInterface $connection = null,
-        ?AbstractDb $resource = null
+        \Magento\Framework\DB\Adapter\AdapterInterface $connection = null,
+        AbstractDb $resource = null
     ) {
         $this->_storeManager = $storeManager;
         $this->scopeConfig = $scopeConfig;
@@ -95,8 +96,6 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     }
 
     /**
-     * Db query
-     *
      * @return $this
      */
     protected function _initSelect()
@@ -126,7 +125,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
             $condition = $categoryIds;
         } elseif (is_string($categoryIds)) {
             $ids = explode(',', $categoryIds);
-            if (count($ids) === 0) {
+            if (empty($ids)) {
                 $condition = $categoryIds;
             } else {
                 $condition = ['in' => $ids];
@@ -172,7 +171,6 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
     /**
      * Return store id.
-     *
      * If store id is not set yet, return store of application
      *
      * @return integer
@@ -225,8 +223,6 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     }
 
     /**
-     * If filter active
-     *
      * @return $this
      */
     public function addIsActiveFilter()
@@ -294,8 +290,6 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      * Retrieve resource instance
      *
      * @return \Magento\Catalog\Model\ResourceModel\Category\Flat
-     *
-     * phpcs:disable Generic.CodeAnalysis.UselessOverridingMethod
      */
     public function getResource()
     {
@@ -335,8 +329,6 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     }
 
     /**
-     * Adds URL rewrite data to the result set
-     *
      * @return $this
      */
     public function addUrlRewriteToResult()
@@ -354,8 +346,6 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     }
 
     /**
-     * Adding paths filter
-     *
      * @param string|array $paths
      * @return $this
      */
@@ -378,8 +368,6 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     }
 
     /**
-     * Adding level filter
-     *
      * @param string $level
      * @return $this
      */
@@ -390,8 +378,6 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     }
 
     /**
-     * Adding order field
-     *
      * @param string $field
      * @return $this
      */

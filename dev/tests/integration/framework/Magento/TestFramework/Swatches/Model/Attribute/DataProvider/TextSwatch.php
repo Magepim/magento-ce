@@ -102,20 +102,20 @@ class TextSwatch extends AbstractSwatchAttributeData
             parent::getUpdateProvider(),
             [
                 "{$frontendInput}_other_attribute_code" => [
-                    'postData' => [
+                    'post_data' => [
                         'attribute_code' => 'text_attribute_update',
                     ],
-                    'expectedData' => [
+                    'expected_data' => [
                         'attribute_code' => 'text_swatch_attribute',
                     ],
                 ],
                 "{$frontendInput}_change_frontend_input_swatch_visual" => [
-                    'postData' => [
+                    'post_data' => [
                         'frontend_input' => Swatch::SWATCH_TYPE_VISUAL_ATTRIBUTE_FRONTEND_INPUT,
                         'update_product_preview_image' => '1',
                         'use_product_image_for_swatch' => '1',
                     ],
-                    'expectedData' => [
+                    'expected_data' => [
                         'frontend_input' => 'select',
                         'swatch_input_type' => Swatch::SWATCH_INPUT_TYPE_VISUAL,
                         'update_product_preview_image' => '1',
@@ -123,10 +123,10 @@ class TextSwatch extends AbstractSwatchAttributeData
                     ],
                 ],
                 "{$frontendInput}_change_frontend_input_dropdown" => [
-                    'postData' => [
+                    'post_data' => [
                         'frontend_input' => 'select',
                     ],
-                    'expectedData' => [
+                    'expected_data' => [
                         'frontend_input' => 'select',
                         'swatch_input_type' => null,
                         'update_product_preview_image' => null,
@@ -147,7 +147,7 @@ class TextSwatch extends AbstractSwatchAttributeData
             parent::getUpdateOptionsProvider(),
             [
                 "{$frontendInput}_update_options" => [
-                    'postData' => [
+                    'post_data' => [
                         'options_array' => [
                             'option_1' => [
                                 'order' => '4',

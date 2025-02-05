@@ -32,7 +32,7 @@ class TruncateTest extends TestCase
     /**
      * @return array
      */
-    public static function truncateDataProvider()
+    public function truncateDataProvider()
     {
         $remainder = '';
         return [

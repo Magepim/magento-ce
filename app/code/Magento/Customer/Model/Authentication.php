@@ -1,20 +1,20 @@
 <?php
 /**
- * Copyright 2016 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 namespace Magento\Customer\Model;
 
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Model\ResourceModel\CustomerRepository;
+use Magento\Customer\Model\CustomerAuthUpdate;
 use Magento\Backend\App\ConfigInterface;
-use Magento\Framework\App\ObjectManager;
 use Magento\Framework\Encryption\EncryptorInterface as Encryptor;
 use Magento\Framework\Exception\InvalidEmailOrPasswordException;
 use Magento\Framework\Exception\State\UserLockedException;
 
 /**
- * Class Authentication model
+ * Class Authentication
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class Authentication implements AuthenticationInterface
@@ -22,12 +22,12 @@ class Authentication implements AuthenticationInterface
     /**
      * Configuration path to customer lockout threshold
      */
-    public const LOCKOUT_THRESHOLD_PATH = 'customer/password/lockout_threshold';
+    const LOCKOUT_THRESHOLD_PATH = 'customer/password/lockout_threshold';
 
     /**
      * Configuration path to customer max login failures number
      */
-    public const MAX_FAILURES_PATH = 'customer/password/lockout_failures';
+    const MAX_FAILURES_PATH = 'customer/password/lockout_failures';
 
     /**
      * @var CustomerRegistry
@@ -67,22 +67,19 @@ class Authentication implements AuthenticationInterface
      * @param ConfigInterface $backendConfig
      * @param \Magento\Framework\Stdlib\DateTime $dateTime
      * @param Encryptor $encryptor
-     * @param CustomerAuthUpdate|null $customerAuthUpdate
      */
     public function __construct(
         CustomerRepositoryInterface $customerRepository,
         CustomerRegistry $customerRegistry,
         ConfigInterface $backendConfig,
         \Magento\Framework\Stdlib\DateTime $dateTime,
-        Encryptor $encryptor,
-        ?CustomerAuthUpdate $customerAuthUpdate = null
+        Encryptor $encryptor
     ) {
         $this->customerRepository = $customerRepository;
         $this->customerRegistry = $customerRegistry;
         $this->backendConfig = $backendConfig;
         $this->dateTime = $dateTime;
         $this->encryptor = $encryptor;
-        $this->customerAuthUpdate = $customerAuthUpdate ?: ObjectManager::getInstance()->get(CustomerAuthUpdate::class);
     }
 
     /**
@@ -119,7 +116,7 @@ class Authentication implements AuthenticationInterface
         }
 
         $customerSecure->setFailuresNum($failuresNum);
-        $this->customerAuthUpdate->saveAuth($customerId);
+        $this->getCustomerAuthUpdate()->saveAuth($customerId);
     }
 
     /**
@@ -131,7 +128,7 @@ class Authentication implements AuthenticationInterface
         $customerSecure->setFailuresNum(0);
         $customerSecure->setFirstFailure(null);
         $customerSecure->setLockExpires(null);
-        $this->customerAuthUpdate->saveAuth($customerId);
+        $this->getCustomerAuthUpdate()->saveAuth($customerId);
     }
 
     /**
@@ -178,5 +175,20 @@ class Authentication implements AuthenticationInterface
             throw new InvalidEmailOrPasswordException(__('Invalid login or password.'));
         }
         return true;
+    }
+
+    /**
+     * Get customer authentication update model
+     *
+     * @return \Magento\Customer\Model\CustomerAuthUpdate
+     * @deprecated 100.1.1
+     */
+    private function getCustomerAuthUpdate()
+    {
+        if ($this->customerAuthUpdate === null) {
+            $this->customerAuthUpdate =
+                \Magento\Framework\App\ObjectManager::getInstance()->get(CustomerAuthUpdate::class);
+        }
+        return $this->customerAuthUpdate;
     }
 }

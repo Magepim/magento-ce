@@ -48,7 +48,7 @@ class PresentationTest extends TestCase
     /**
      * @return array
      */
-    public static function getPresentationInputTypeDataProvider()
+    public function getPresentationInputTypeDataProvider()
     {
         return [
             'attribute_is_textarea_and_wysiwyg_enabled' => ['textarea', true, 'texteditor'],
@@ -70,7 +70,7 @@ class PresentationTest extends TestCase
     /**
      * @return array
      */
-    public static function convertPresentationDataToInputTypeDataProvider()
+    public function convertPresentationDataToInputTypeDataProvider()
     {
         return [
             [['key' => 'value'], ['key' => 'value']],

@@ -137,7 +137,7 @@ class GetDirectoryTreeTest extends TestCase
      * @return array
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public static function executeDataProvider(): array
+    public function executeDataProvider(): array
     {
         return [
             [

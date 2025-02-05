@@ -116,15 +116,7 @@ class ExchangeTest extends TestCase
         $exchange2->expects($this->never())
             ->method('getBindings');
 
-        $this->connnectionTypeResolver->method('getConnectionType')
-            ->willReturnCallback(function () use (&$callCount) {
-                $callCount++;
-                if ($callCount === 1) {
-                    return ['db'];
-                } elseif ($callCount === 2) {
-                    return null;
-                }
-            });
+        $this->connnectionTypeResolver->method('getConnectionType')->willReturnOnConsecutiveCalls(['db', null]);
         $envelopeBody = 'serializedMessage';
         $this->messageQueueConfig->expects($this->once())
             ->method('getExchanges')->willReturn([$exchange1, $exchange2]);

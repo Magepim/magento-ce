@@ -409,7 +409,7 @@ class TokensConfigProviderTest extends TestCase
      * Set of catching exception types
      * @return array
      */
-    public static function getTokensComponentsGuestCustomerExceptionsProvider()
+    public function getTokensComponentsGuestCustomerExceptionsProvider()
     {
         return [
             [new InputException()],

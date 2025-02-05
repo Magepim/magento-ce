@@ -60,7 +60,7 @@ class MaintenanceDisableCommandTest extends TestCase
     /**
      * return array
      */
-    public static function executeDataProvider()
+    public function executeDataProvider()
     {
         return [
             [
@@ -106,7 +106,7 @@ class MaintenanceDisableCommandTest extends TestCase
     /**
      * return array
      */
-    public static function isSetAddressInfoDataProvider()
+    public function isSetAddressInfoDataProvider()
     {
         return [
             [

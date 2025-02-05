@@ -88,7 +88,7 @@ class MinificationTest extends TestCase
     /**
      * @return array
      */
-    public static function isEnabledDataProvider()
+    public function isEnabledDataProvider()
     {
         return [
             [false, State::MODE_DEFAULT, false],
@@ -126,7 +126,7 @@ class MinificationTest extends TestCase
     /**
      * @return array
      */
-    public static function addMinifiedSignDataProvider()
+    public function addMinifiedSignDataProvider()
     {
         return [
             ['test.css', true, 'test.min.css'],
@@ -161,7 +161,7 @@ class MinificationTest extends TestCase
     /**
      * @return array
      */
-    public static function removeMinifiedSignDataProvider()
+    public function removeMinifiedSignDataProvider()
     {
         return [
             ['test.css', true, 'test.css'],
@@ -187,7 +187,7 @@ class MinificationTest extends TestCase
     /**
      * @return array
      */
-    public static function isMinifiedFilenameDataProvider()
+    public function isMinifiedFilenameDataProvider()
     {
         return [
             ['test.min.css', true],
@@ -245,7 +245,7 @@ class MinificationTest extends TestCase
     /**
      * @return array
      */
-    public static function getExcludesTinyMceAsStringDataProvider()
+    public function getExcludesTinyMceAsStringDataProvider()
     {
         return [
             ["/tiny_mce/  \n  /tiny_mce2/", ['/tiny_mce/', '/tiny_mce2/']],

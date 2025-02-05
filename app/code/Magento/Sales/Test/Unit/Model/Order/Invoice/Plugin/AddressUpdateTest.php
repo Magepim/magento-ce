@@ -111,7 +111,7 @@ class AddressUpdateTest extends TestCase
         );
     }
 
-    public static function dataProvider()
+    public function dataProvider()
     {
         return [
             'Do not reindex when async is enabled' => [

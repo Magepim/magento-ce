@@ -1191,7 +1191,7 @@ class MultishippingTest extends TestCase
      *
      * @return array
      */
-    public static function getConfigCreateOrders(): array
+    public function getConfigCreateOrders(): array
     {
         return [
             [

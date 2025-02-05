@@ -73,7 +73,7 @@ class TaxvatTest extends TestCase
     /**
      * @return array
      */
-    public static function isEnabledDataProvider()
+    public function isEnabledDataProvider()
     {
         return [[true, true], [false, false]];
     }
@@ -111,7 +111,7 @@ class TaxvatTest extends TestCase
     /**
      * @return array
      */
-    public static function isRequiredDataProvider()
+    public function isRequiredDataProvider()
     {
         return [[true, true], [false, false]];
     }

@@ -52,7 +52,7 @@ class CollectionTest extends \Magento\Bundle\Model\Product\BundlePriceAbstract
     {
         return [
             'Dynamic bundle product with three Simple products' => [
-                'strategy' => self::getBundleConfiguration(),
+                'variation' => self::getBundleConfiguration(),
                 'expectedCount' => 1
             ]
         ];

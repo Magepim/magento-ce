@@ -37,7 +37,7 @@ class SerializeTest extends TestCase
     /**
      * @return array
      */
-    public static function serializeDataProvider()
+    public function serializeDataProvider()
     {
         return [
             ['string', 's:6:"string";'],
@@ -63,7 +63,7 @@ class SerializeTest extends TestCase
     /**
      * @return array
      */
-    public static function unserializeDataProvider()
+    public function unserializeDataProvider()
     {
         return [
             ['s:6:"string";', 'string'],
@@ -96,7 +96,7 @@ class SerializeTest extends TestCase
     /**
      * @return array
      */
-    public static function unserializeExceptionDataProvider()
+    public function unserializeExceptionDataProvider()
     {
         return [
             [''],

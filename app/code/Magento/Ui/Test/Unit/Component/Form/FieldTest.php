@@ -104,7 +104,7 @@ class FieldTest extends TestCase
      *
      * @return array
      */
-    public static function prepareSuccessDataProvider()
+    public function prepareSuccessDataProvider()
     {
         return [
             [

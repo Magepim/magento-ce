@@ -15,8 +15,6 @@ use Magento\Store\Model\StoreManagerInterface as StoreManager;
 /**
  * Resolver field name for price attribute.
  * @SuppressWarnings(PHPMD.CookieAndSessionMisuse)
- * @deprecated Elasticsearch is no longer supported by Adobe
- * @see this class will be responsible for ES only
  */
 class Price implements ResolverInterface
 {

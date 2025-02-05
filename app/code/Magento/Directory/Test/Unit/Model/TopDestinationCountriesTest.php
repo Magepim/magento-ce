@@ -48,7 +48,7 @@ class TopDestinationCountriesTest extends TestCase
     /**
      * @return array
      */
-    public static function toTestGetTopDestinationsDataProvider()
+    public function toTestGetTopDestinationsDataProvider()
     {
         return [
             ['UA,AF', ['UA', 'AF']],

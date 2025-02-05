@@ -60,7 +60,7 @@ class MultiselectTest extends TestCase
     /**
      * @return array
      */
-    public static function extractValueDataProvider()
+    public function extractValueDataProvider()
     {
         return [
             [
@@ -104,7 +104,7 @@ class MultiselectTest extends TestCase
     /**
      * @return array
      */
-    public static function outputValueDataProvider()
+    public function outputValueDataProvider()
     {
         return [
             [

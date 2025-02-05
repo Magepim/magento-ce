@@ -244,7 +244,7 @@ class ConfigurableTest extends TestCase
         return [
             [
                 'label' => 'Test Configurable',
-                'expectedConfig' => [
+                'config_data' => [
                     'label' => 'Test Configurable',
                     'options' => [
                         [

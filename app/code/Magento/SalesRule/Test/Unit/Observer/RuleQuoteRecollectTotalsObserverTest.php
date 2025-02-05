@@ -69,7 +69,7 @@ class RuleQuoteRecollectTotalsObserverTest extends TestCase
     /**
      * @return array[]
      */
-    public static function executeDataProvider(): array
+    public function executeDataProvider(): array
     {
         return [
             [[], ['id' => null], false, false],

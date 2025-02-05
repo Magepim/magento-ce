@@ -27,7 +27,7 @@ class ValidationStateTest extends TestCase
     /**
      * @return array
      */
-    public static function isValidationRequiredDataProvider()
+    public function isValidationRequiredDataProvider()
     {
         return [
             [State::MODE_DEVELOPER, true],

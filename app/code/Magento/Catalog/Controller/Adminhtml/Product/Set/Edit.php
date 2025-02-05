@@ -1,7 +1,8 @@
 <?php
 /**
- * Copyright 2011 Adobe
- * All Rights Reserved.
+ *
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 namespace Magento\Catalog\Controller\Adminhtml\Product\Set;
 
@@ -41,7 +42,7 @@ class Edit extends Set implements HttpGetActionInterface
         Context $context,
         Registry $coreRegistry,
         PageFactory $resultPageFactory,
-        ?AttributeSetRepositoryInterface $attributeSetRepository = null
+        AttributeSetRepositoryInterface $attributeSetRepository = null
     ) {
         parent::__construct($context, $coreRegistry);
         $this->resultPageFactory = $resultPageFactory;

@@ -3,16 +3,14 @@
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-declare(strict_types=1);
 
 namespace Magento\Customer\Api;
 
-use Magento\Authorization\Test\Fixture\Role as RoleFixture;
 use Magento\Customer\Api\Data\AddressInterface as Address;
-use Magento\Customer\Api\Data\CustomerInterface as Customer;
 use Magento\Customer\Api\Data\CustomerInterfaceFactory;
 use Magento\Customer\Model\CustomerRegistry;
 use Magento\Framework\Api\DataObjectHelper;
+use Magento\Customer\Api\Data\CustomerInterface as Customer;
 use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\Search\FilterGroupBuilder;
 use Magento\Framework\Api\SearchCriteriaBuilder;
@@ -25,20 +23,13 @@ use Magento\Framework\Reflection\DataObjectProcessor;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Webapi\Exception as HTTPExceptionCodes;
 use Magento\Framework\Webapi\Rest\Request;
-use Magento\Integration\Api\AdminTokenServiceInterface;
 use Magento\Integration\Api\CustomerTokenServiceInterface;
 use Magento\Integration\Api\IntegrationServiceInterface;
 use Magento\Integration\Api\OauthServiceInterface;
 use Magento\Integration\Model\Integration;
-use Magento\TestFramework\Fixture\AppArea;
-use Magento\TestFramework\Fixture\AppIsolation;
-use Magento\TestFramework\Fixture\DataFixture;
-use Magento\TestFramework\Fixture\DataFixtureStorageManager;
-use Magento\TestFramework\Fixture\DbIsolation;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\Helper\Customer as CustomerHelper;
 use Magento\TestFramework\TestCase\WebapiAbstract;
-use Magento\User\Test\Fixture\User as UserFixture;
 
 /**
  * Test for \Magento\Customer\Api\CustomerRepositoryInterface.
@@ -151,7 +142,7 @@ class CustomerRepositoryTest extends WebapiAbstract
     }
 
     /**
-     * Validate update operation by invalid customer
+     * Validate update by invalid customer.
      *
      */
     public function testInvalidCustomerUpdate()
@@ -161,8 +152,9 @@ class CustomerRepositoryTest extends WebapiAbstract
         //Create first customer and retrieve customer token.
         $firstCustomerData = $this->_createCustomer();
 
-        //Get customer ID token
+        // get customer ID token
         /** @var \Magento\Integration\Api\CustomerTokenServiceInterface $customerTokenService */
+        //$customerTokenService = $this->objectManager->create(CustomerTokenServiceInterface::class);
         $customerTokenService = Bootstrap::getObjectManager()->create(
             \Magento\Integration\Api\CustomerTokenServiceInterface::class
         );
@@ -246,9 +238,11 @@ class CustomerRepositoryTest extends WebapiAbstract
                 'operation' => self::SERVICE_NAME . 'DeleteById',
             ],
         ];
-        $response = (TESTS_WEB_API_ADAPTER === self::ADAPTER_SOAP)
-            ? $this->_webApiCall($serviceInfo, ['customerId' => $customerData['id']])
-            : $this->_webApiCall($serviceInfo);
+        if (TESTS_WEB_API_ADAPTER == self::ADAPTER_SOAP) {
+            $response = $this->_webApiCall($serviceInfo, ['customerId' => $customerData['id']]);
+        } else {
+            $response = $this->_webApiCall($serviceInfo);
+        }
 
         $this->assertTrue($response);
 
@@ -259,7 +253,7 @@ class CustomerRepositoryTest extends WebapiAbstract
     }
 
     /**
-     * Check that non-authorized consumer can`t delete customer.
+     * Check that non authorized consumer can`t delete customer.
      *
      * @return void
      */
@@ -353,10 +347,10 @@ class CustomerRepositoryTest extends WebapiAbstract
     public function testUpdateCustomer(): void
     {
         $customerId = 1;
-        $updatedLastName = 'Updated lastname';
+        $updatedLastname = 'Updated lastname';
         $customer = $this->getCustomerData($customerId);
         $customerData = $this->dataObjectProcessor->buildOutputDataArray($customer, Customer::class);
-        $customerData[Customer::LASTNAME] = $updatedLastName;
+        $customerData[Customer::LASTNAME] = $updatedLastname;
 
         $serviceInfo = [
             'rest' => [
@@ -370,20 +364,16 @@ class CustomerRepositoryTest extends WebapiAbstract
             ],
         ];
 
-        $requestData['customer'] = (TESTS_WEB_API_ADAPTER === self::ADAPTER_SOAP)
+        $requestData['customer'] = TESTS_WEB_API_ADAPTER === self::ADAPTER_SOAP
             ? $customerData
-            : [
-                Customer::FIRSTNAME => $customer->getFirstname(),
-                Customer::LASTNAME => $updatedLastName,
-                Customer::EMAIL => $customer->getEmail(),
-                Customer::ID => $customerId,
-            ];
+            : [Customer::LASTNAME => $updatedLastname];
+
         $response = $this->_webApiCall($serviceInfo, $requestData);
         $this->assertNotNull($response);
 
         //Verify if the customer is updated
         $existingCustomerDataObject = $this->getCustomerData($customerId);
-        $this->assertEquals($updatedLastName, $existingCustomerDataObject->getLastname());
+        $this->assertEquals($updatedLastname, $existingCustomerDataObject->getLastname());
         $this->assertEquals($customerData[Customer::FIRSTNAME], $existingCustomerDataObject->getFirstname());
     }
 
@@ -1306,101 +1296,5 @@ class CustomerRepositoryTest extends WebapiAbstract
                 'X Æ A-12 Musk',
             ],
         ];
-    }
-
-    /**
-     * Verify with an admin access token that customers' default addresses are successfully altered
-     * without requiring an address ID key.
-     *
-     * @throws InputException
-     * @throws LocalizedException
-     * @throws \Magento\Framework\Exception\AuthenticationException
-     */
-    #[
-        DbIsolation(false),
-        AppIsolation(true),
-        AppArea('webapi_rest'),
-        DataFixture(RoleFixture::class, as: 'restrictedRole'),
-        DataFixture(UserFixture::class, ['role_id' => '$restrictedRole.id$'], 'restrictedUser'),
-        DataFixture(
-            \Magento\Customer\Test\Fixture\Customer::class,
-            [
-                'email' => 'john@doe.com',
-                'password' => 'test@123',
-                'addresses' => [
-                    [
-                        'country_id' => 'US',
-                        'region_id' => 32,
-                        'city' => 'Boston',
-                        'street' => ['10 Milk Street'],
-                        'postcode' => '02108',
-                        'telephone' => '1234567890',
-                        'default_billing' => true,
-                        'default_shipping' => true,
-                    ],
-                ],
-            ],
-            'customer'
-        ),
-    ]
-    public function testCustomerAddressUpdateOperation(): void
-    {
-        $fixtures = DataFixtureStorageManager::getStorage();
-        $customer = $fixtures->get('customer');
-        $restrictedUser = $fixtures->get('restrictedUser');
-
-        // get admin user token
-        $adminTokens = Bootstrap::getObjectManager()->get(AdminTokenServiceInterface::class);
-        $accessToken = $adminTokens->createAdminAccessToken(
-            $restrictedUser->getData('username'),
-            \Magento\TestFramework\Bootstrap::ADMIN_PASSWORD
-        );
-
-        $serviceInfo = [
-            'rest' => [
-                'resourcePath' => self::RESOURCE_PATH . "/{$customer->getId()}",
-                'httpMethod' => Request::HTTP_METHOD_PUT,
-                'token' => $accessToken,
-            ],
-            'soap' => [
-                'service' => self::SERVICE_NAME,
-                'serviceVersion' => self::SERVICE_VERSION,
-                'operation' => self::SERVICE_NAME . 'Save',
-                'token' => $accessToken
-            ]
-        ];
-
-        $address =  current($customer->getAddresses())->getData();
-        $newCustomerDataObject = [
-            'email' => $customer->getEmail(),
-            'firstname' => $customer->getFirstname(),
-            'lastname' => $customer->getLastname(),
-            'addresses' => [
-                [
-                    'region' => [
-                        'region_code' => $address['region_code'],
-                        'region' => $address['region'],
-                        'region_id' => $address['region_id'],
-                    ],
-                    'country_id' => $address['country_id'],
-                    'street' => [$address['street']],
-                    'telephone' => $address['telephone'],
-                    'postcode' => $address['postcode'],
-                    'city' => $address['city'],
-                    'firstname' => $address['firstname'],
-                    'lastname' => $address['lastname'],
-                    'default_shipping' => true,
-                    'default_billing' => true
-                ]
-            ]
-        ];
-
-        $requestData['customer'] = TESTS_WEB_API_ADAPTER === self::ADAPTER_REST
-            ? $newCustomerDataObject
-            : array_merge([Customer::ID => $customer->getId()], $newCustomerDataObject);
-
-        $response = $this->_webApiCall($serviceInfo, $requestData);
-        $this->assertIsArray($response);
-        $this->assertArrayHasKey('addresses', $response);
     }
 }

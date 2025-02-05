@@ -109,7 +109,7 @@ class ContentValidatorTest extends TestCase
     /**
      * @return array
      */
-    public static function getInvalidSortOrder()
+    public function getInvalidSortOrder()
     {
         return [
             [-1],

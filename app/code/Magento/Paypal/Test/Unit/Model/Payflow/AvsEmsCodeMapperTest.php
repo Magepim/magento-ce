@@ -85,7 +85,7 @@ class AvsEmsCodeMapperTest extends TestCase
      *
      * @return array
      */
-    public static function getCodeDataProvider()
+    public function getCodeDataProvider()
     {
         return [
             ['avsZip' => null, 'avsStreet' => null, 'expected' => ''],

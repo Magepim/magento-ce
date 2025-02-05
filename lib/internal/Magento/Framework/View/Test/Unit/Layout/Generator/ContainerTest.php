@@ -104,7 +104,7 @@ class ContainerTest extends TestCase
     /**
      * @return array
      */
-    public static function processDataProvider()
+    public function processDataProvider()
     {
         return [
             'sample_data' => [
@@ -194,7 +194,7 @@ class ContainerTest extends TestCase
     /**
      * @return array
      */
-    public static function processWithExceptionDataProvider()
+    public function processWithExceptionDataProvider()
     {
         return [
             'wrong_html_tag' => [

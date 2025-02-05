@@ -23,9 +23,9 @@ class Dob extends AbstractWidget
     /**
      * Constants for borders of date-type customer attributes
      */
-    public const MIN_DATE_RANGE_KEY = 'date_range_min';
+    const MIN_DATE_RANGE_KEY = 'date_range_min';
 
-    public const MAX_DATE_RANGE_KEY = 'date_range_max';
+    const MAX_DATE_RANGE_KEY = 'date_range_max';
 
     /**
      * @var array
@@ -303,7 +303,6 @@ class Dob extends AbstractWidget
     public function getDateFormat()
     {
         $dateFormat = $this->setTwoDayPlaces($this->_localeDate->getDateFormatWithLongYear());
-        $dateFormat = $this->setTwoMonthPlaces($dateFormat);
         /** Escape RTL characters which are present in some locales and corrupt formatting */
         $escapedDateFormat = preg_replace('/[^MmDdYy\/\.\-]/', '', $dateFormat);
 
@@ -438,21 +437,6 @@ class Dob extends AbstractWidget
         return preg_replace(
             '/(?<!d)d(?!d)/',
             'dd',
-            $format
-        );
-    }
-
-    /**
-     * Set 2 places for month value in format string
-     *
-     * @param string $format
-     * @return string
-     */
-    private function setTwoMonthPlaces(string $format): string
-    {
-        return preg_replace(
-            '/(?<!M)M(?!M)/',
-            'MM',
             $format
         );
     }

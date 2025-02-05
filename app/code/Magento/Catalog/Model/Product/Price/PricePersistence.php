@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2016 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 
 namespace Magento\Catalog\Model\Product\Price;
@@ -10,7 +10,6 @@ use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Api\ProductAttributeRepositoryInterface;
 use Magento\Catalog\Model\ProductIdLocatorInterface;
 use Magento\Catalog\Model\ResourceModel\Attribute;
-use Magento\Catalog\Model\ResourceModel\Product\Price\BasePriceFactory;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\EntityManager\MetadataPool;
 use Magento\Framework\Exception\CouldNotDeleteException;
@@ -89,7 +88,6 @@ class PricePersistence
      * @param MetadataPool $metadataPool
      * @param string $attributeCode
      * @param DateTime|null $dateTime
-     * @param BasePriceFactory|null $basePriceFactory
      */
     public function __construct(
         Attribute $attributeResource,
@@ -97,8 +95,7 @@ class PricePersistence
         ProductIdLocatorInterface $productIdLocator,
         MetadataPool $metadataPool,
         $attributeCode = '',
-        ?DateTime $dateTime = null,
-        private ?BasePriceFactory $basePriceFactory = null
+        ?DateTime $dateTime = null
     ) {
         $this->attributeResource = $attributeResource;
         $this->attributeRepository = $attributeRepository;
@@ -107,8 +104,6 @@ class PricePersistence
         $this->metadataPool = $metadataPool;
         $this->dateTime = $dateTime ?: ObjectManager::getInstance()
             ->get(DateTime::class);
-        $this->basePriceFactory = $this->basePriceFactory ?: ObjectManager::getInstance()
-            ->get(BasePriceFactory::class);
     }
 
     /**
@@ -139,13 +134,21 @@ class PricePersistence
     public function update(array $prices)
     {
         array_walk($prices, function (&$price) {
-            return $price['attribute_id'] = (int)$this->getAttributeId();
+            return $price['attribute_id'] = $this->getAttributeId();
         });
-
-        $basePrice = $this->basePriceFactory->create(['attributeId' => (int)$this->getAttributeId()]);
+        $connection = $this->attributeResource->getConnection();
+        $connection->beginTransaction();
         try {
-            $basePrice->update($prices);
+            foreach (array_chunk($prices, $this->itemsPerOperation) as $pricesBunch) {
+                $this->attributeResource->getConnection()->insertOnDuplicate(
+                    $this->attributeResource->getTable($this->table),
+                    $pricesBunch,
+                    ['value']
+                );
+            }
+            $connection->commit();
         } catch (\Exception $e) {
+            $connection->rollBack();
             throw new CouldNotSaveException(
                 __('Could not save Prices.'),
                 $e

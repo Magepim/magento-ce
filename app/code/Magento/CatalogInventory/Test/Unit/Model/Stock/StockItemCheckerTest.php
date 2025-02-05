@@ -104,11 +104,11 @@ class StockItemCheckerTest extends TestCase
      *
      * @return array
      */
-    public static function stockItemModelDataProvider(): array
+    public function stockItemModelDataProvider(): array
     {
         return [
             'Model is modified' => [
-                'itemFromRepository' => [
+                'stockItemFromRepository' => [
                     'id' => 1,
                     'low_stock_date' => '01.01.2020',
                     'qty' => 100,
@@ -121,7 +121,7 @@ class StockItemCheckerTest extends TestCase
                 'expectedResult' => true,
             ],
             'Model is not modified' => [
-                'itemFromRepository' => [
+                'stockItemFromRepository' => [
                     'id' => 1,
                     'low_stock_date' => '01.01.2020',
                     'qty' => 100,

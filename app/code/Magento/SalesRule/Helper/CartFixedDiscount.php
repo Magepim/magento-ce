@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2020 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
@@ -137,9 +137,9 @@ class CartFixedDiscount
     ): float {
         $baseItemPriceTotal = $baseItemPrice * $qty - $baseItemDiscountAmount;
         $ratio = $baseRuleTotalsDiscount != 0 ? $baseItemPriceTotal / $baseRuleTotalsDiscount : 0;
-        $ratio = min($ratio, 1);
+        $discountAmount = $this->deltaPriceRound->round($ruleDiscount * $ratio, $discountType);
 
-        return $this->deltaPriceRound->round($ruleDiscount * $ratio, $discountType);
+        return $discountAmount;
     }
 
     /**

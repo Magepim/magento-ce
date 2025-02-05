@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2014 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
@@ -103,7 +103,7 @@ class StaticResourceTest extends TestCase
     private $object;
 
     /**
-     * @inheritDoc
+     * @inheridoc
      */
     protected function setUp(): void
     {
@@ -242,7 +242,7 @@ class StaticResourceTest extends TestCase
     /**
      * @return array
      */
-    public static function launchDataProvider()
+    public function launchDataProvider()
     {
         return [
             'developer mode with non-modular resource' => [
@@ -440,7 +440,7 @@ class StaticResourceTest extends TestCase
     /**
      * @return array
      */
-    public static function themesDataProvider(): array
+    public function themesDataProvider(): array
     {
         return  [
             [

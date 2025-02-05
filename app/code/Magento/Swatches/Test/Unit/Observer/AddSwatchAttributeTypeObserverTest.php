@@ -87,7 +87,7 @@ class AddSwatchAttributeTypeObserverTest extends TestCase
     /**
      * @return array
      */
-    public static function dataAddSwatch()
+    public function dataAddSwatch()
     {
         return [
             [

@@ -46,7 +46,7 @@ class ReturnActionTest extends ExpressTestCase
     /**
      * @return array
      */
-    public static function trueFalseDataProvider(): array
+    public function trueFalseDataProvider(): array
     {
         return [[true], [false]];
     }

@@ -102,7 +102,7 @@ class KeywordTypeTest extends TestCase
     /**
      * @return array
      */
-    public static function getFieldTypeProvider()
+    public function getFieldTypeProvider()
     {
         return [
             [true, true, true, true, false, 'something'],

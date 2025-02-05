@@ -184,7 +184,7 @@ class DataTest extends TestCase
                 'isSecure' => false,
             ],
             'secure' => [
-                'isSecure' => true,
+                'secure' => true,
             ],
         ];
     }

@@ -120,7 +120,7 @@ class CronInstallCommandTest extends TestCase
     /**
      * @return array
      */
-    public static function executeDataProvider()
+    public function executeDataProvider()
     {
         return [
             ['existingTasks' => [], 'options' => []],

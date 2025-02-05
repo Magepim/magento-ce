@@ -61,7 +61,7 @@ class FlyweightFactoryTest extends TestCase
     /**
      * @return array
      */
-    public static function createByIdDataProvider()
+    public function createByIdDataProvider()
     {
         return [
             [5, 5],

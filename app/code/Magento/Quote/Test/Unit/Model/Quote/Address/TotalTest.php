@@ -58,18 +58,18 @@ class TotalTest extends TestCase
     /**
      * @return array
      */
-    public static function setTotalAmountDataProvider()
+    public function setTotalAmountDataProvider()
     {
         return [
             'Subtotal' => [
                 'code' => 'subtotal',
                 'amount' => 42.42,
-                'storedCode' => 'subtotal'
+                'stored_code' => 'subtotal'
             ],
             'Other total' => [
                 'code' => 'other',
                 'amount' => 42.17,
-                'storedCode' => 'other_amount'
+                'stored_code' => 'other_amount'
             ]
         ];
     }
@@ -92,18 +92,18 @@ class TotalTest extends TestCase
     /**
      * @return array
      */
-    public static function setBaseTotalAmountDataProvider()
+    public function setBaseTotalAmountDataProvider()
     {
         return [
             'Subtotal' => [
                 'code' => 'subtotal',
                 'amount' => 17.42,
-                'storedCode' => 'base_subtotal'
+                'stored_code' => 'base_subtotal'
             ],
             'Other total' => [
                 'code' => 'other',
                 'amount' => 42.17,
-                'storedCode' => 'base_other_amount'
+                'stored_code' => 'base_other_amount'
             ]
         ];
     }
@@ -126,7 +126,7 @@ class TotalTest extends TestCase
     /**
      * @return array
      */
-    public static function addTotalAmountDataProvider()
+    public function addTotalAmountDataProvider()
     {
         return [
             'Zero' => [
@@ -160,7 +160,7 @@ class TotalTest extends TestCase
     /**
      * @return array
      */
-    public static function addBaseTotalAmountDataProvider()
+    public function addBaseTotalAmountDataProvider()
     {
         return [
             'Zero' => [
@@ -219,7 +219,7 @@ class TotalTest extends TestCase
     /**
      * @return array
      */
-    public static function getFullInfoDataProvider()
+    public function getFullInfoDataProvider()
     {
         $myArray = ['team' => 'kiwis'];
         $serializedInput = json_encode($myArray);

@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2013 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 
 namespace Magento\Backend\Model;
@@ -29,7 +29,7 @@ class Auth
     protected $_credentialStorage;
 
     /**
-     * Helper data
+     * Backend data
      *
      * @var \Magento\Backend\Helper\Data
      */
@@ -94,7 +94,6 @@ class Auth
 
     /**
      * Return auth storage.
-     *
      * If auth storage was not defined outside - returns default object of auth storage
      *
      * @return \Magento\Backend\Model\Auth\StorageInterface
@@ -107,8 +106,7 @@ class Auth
 
     /**
      * Return current (successfully authenticated) user,
-     *
-     * An instance of \Magento\Backend\Model\Auth\Credential\StorageInterface
+     * an instance of \Magento\Backend\Model\Auth\Credential\StorageInterface
      *
      * @return \Magento\Backend\Model\Auth\Credential\StorageInterface
      */
@@ -226,8 +224,9 @@ class Auth
      * @param \Magento\Framework\Phrase $msg
      * @return void
      * @throws \Magento\Framework\Exception\AuthenticationException
+     * @static
      */
-    public function throwException(?Phrase $msg = null)
+    public static function throwException(Phrase $msg = null)
     {
         if ($msg === null) {
             $msg = __('An authentication error occurred. Verify and try again.');

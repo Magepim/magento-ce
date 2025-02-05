@@ -10,11 +10,6 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\View\Asset\GroupedCollection;
 use Magento\Framework\View\Page\Config;
 use Magento\Framework\View\Page\Config\Metadata\MsApplicationTileImage;
-use Psr\Log\LoggerInterface;
-use Magento\Framework\UrlInterface;
-use Magento\Framework\Escaper;
-use Magento\Framework\Stdlib\StringUtils;
-use Magento\Framework\View\Asset\MergeService;
 
 /**
  * Page config Renderer model
@@ -56,29 +51,29 @@ class Renderer implements RendererInterface
     protected $pageConfig;
 
     /**
-     * @var MergeService
+     * @var \Magento\Framework\View\Asset\MergeService
      */
     protected $assetMergeService;
 
     /**
-     * @var UrlInterface
-     */
-    protected $urlBuilder;
-
-    /**
-     * @var Escaper
+     * @var \Magento\Framework\Escaper
      */
     protected $escaper;
 
     /**
-     * @var StringUtils
+     * @var \Magento\Framework\Stdlib\StringUtils
      */
     protected $string;
 
     /**
-     * @var LoggerInterface
+     * @var \Psr\Log\LoggerInterface
      */
     protected $logger;
+
+    /**
+     * @var \Magento\Framework\UrlInterface
+     */
+    protected $urlBuilder;
 
     /**
      * @var MsApplicationTileImage
@@ -87,21 +82,21 @@ class Renderer implements RendererInterface
 
     /**
      * @param Config $pageConfig
-     * @param MergeService $assetMergeService
-     * @param UrlInterface $urlBuilder
-     * @param Escaper $escaper
-     * @param StringUtils $string
-     * @param LoggerInterface $logger
+     * @param \Magento\Framework\View\Asset\MergeService $assetMergeService
+     * @param \Magento\Framework\UrlInterface $urlBuilder
+     * @param \Magento\Framework\Escaper $escaper
+     * @param \Magento\Framework\Stdlib\StringUtils $string
+     * @param \Psr\Log\LoggerInterface $logger
      * @param MsApplicationTileImage|null $msApplicationTileImage
      */
     public function __construct(
         Config $pageConfig,
-        MergeService $assetMergeService,
-        UrlInterface $urlBuilder,
-        Escaper $escaper,
-        StringUtils $string,
-        LoggerInterface $logger,
-        ?MsApplicationTileImage $msApplicationTileImage = null
+        \Magento\Framework\View\Asset\MergeService $assetMergeService,
+        \Magento\Framework\UrlInterface $urlBuilder,
+        \Magento\Framework\Escaper $escaper,
+        \Magento\Framework\Stdlib\StringUtils $string,
+        \Psr\Log\LoggerInterface $logger,
+        MsApplicationTileImage $msApplicationTileImage = null
     ) {
         $this->pageConfig = $pageConfig;
         $this->assetMergeService = $assetMergeService;
@@ -139,17 +134,6 @@ class Renderer implements RendererInterface
         $result .= $this->renderMetadata();
         $result .= $this->renderTitle();
         $this->prepareFavicon();
-        return $result;
-    }
-
-    /**
-     * Render head assets
-     *
-     * @return string
-     */
-    public function renderHeadAssets()
-    {
-        $result = '';
         $result .= $this->renderAssets($this->getAvailableResultGroups());
         $result .= $this->pageConfig->getIncludes();
         return $result;
@@ -226,20 +210,26 @@ class Renderer implements RendererInterface
 
         switch ($name) {
             case Config::META_CHARSET:
-                return '<meta charset="%content"/>' . "\n";
+                $metadataTemplate = '<meta charset="%content"/>' . "\n";
+                break;
 
             case Config::META_CONTENT_TYPE:
-                return '<meta http-equiv="Content-Type" content="%content"/>' . "\n";
+                $metadataTemplate = '<meta http-equiv="Content-Type" content="%content"/>' . "\n";
+                break;
 
             case Config::META_X_UI_COMPATIBLE:
-                return '<meta http-equiv="X-UA-Compatible" content="%content"/>' . "\n";
+                $metadataTemplate = '<meta http-equiv="X-UA-Compatible" content="%content"/>' . "\n";
+                break;
 
             case Config::META_MEDIA_TYPE:
-                return false;
+                $metadataTemplate = false;
+                break;
 
             default:
-                return '<meta name="%name" content="%content"/>' . "\n";
+                $metadataTemplate = '<meta name="%name" content="%content"/>' . "\n";
+                break;
         }
+        return $metadataTemplate;
     }
 
     /**

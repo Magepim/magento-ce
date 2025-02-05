@@ -120,7 +120,7 @@ class RequestTest extends TestCase
     /**
      * @return array
      */
-    public static function getServerProvider()
+    public function getServerProvider()
     {
         return [
             ['HTTPS', '', 'off'],

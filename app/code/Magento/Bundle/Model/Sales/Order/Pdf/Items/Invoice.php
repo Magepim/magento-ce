@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2011 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
@@ -51,8 +51,8 @@ class Invoice extends AbstractItems
         FilterManager $filterManager,
         StringUtils $coreString,
         Json $serializer,
-        ?AbstractResource $resource = null,
-        ?AbstractDb $resourceCollection = null,
+        AbstractResource $resource = null,
+        AbstractDb $resourceCollection = null,
         array $data = []
     ) {
         $this->string = $coreString;

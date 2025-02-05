@@ -12,9 +12,7 @@ use Exception;
 use Magento\Framework\Filesystem\DriverInterface;
 use Magento\Framework\Logger\Handler\Exception as ExceptionHandler;
 use Magento\Framework\Logger\Handler\System;
-use Monolog\Level;
 use Monolog\Logger;
-use Monolog\LogRecord;
 use PHPUnit\Framework\MockObject\MockObject as Mock;
 use PHPUnit\Framework\TestCase;
 
@@ -56,44 +54,51 @@ class SystemTest extends TestCase
 
     public function testWrite()
     {
-        $record = $this->getRecord(Level::Warning, 'Test message', []);
         $this->filesystemMock->expects($this->once())
             ->method('getParentDirectory');
         $this->filesystemMock->expects($this->once())
             ->method('isDirectory')
             ->willReturn('true');
-        $this->exceptionHandlerMock->expects($this->never())->method('handle');
-        $this->model->write($record);
+
+        $this->model->write($this->getRecord());
     }
 
     public function testWriteException()
     {
-        $exception = new \Exception('Test exception');
-        $record = $this->getRecord(Level::Error, 'Error message', ['exception' => $exception]);
-        // Expect the exception handler to be called once with the record
-        $this->exceptionHandlerMock->expects($this->once())->method('handle')->with($this->equalTo($record));
+        $record = $this->getRecord();
+        $record['context']['exception'] = new Exception('Some exception');
+
+        $this->exceptionHandlerMock->expects($this->once())
+            ->method('handle')
+            ->with($record);
         $this->filesystemMock->expects($this->never())
             ->method('getParentDirectory');
+
         $this->model->write($record);
     }
 
     /**
-     * @param Level $level
+     * @param int $level
      * @param string $message
-     * @param array $exception
-     * @return LogRecord
+     * @param array $context
+     * @return array
      */
     private function getRecord(
-        Level $level,
-        string $message,
-        $exception
-    ): LogRecord {
-        return new LogRecord(
-            new \DateTimeImmutable(),
-            'test',
-            $level,
-            $message,
-            $exception
-        );
+        int $level = Logger::WARNING,
+        string $message = 'test',
+        array $context = []
+    ): array {
+        return [
+            'message' => $message,
+            'context' => $context,
+            'level' => $level,
+            'level_name' => Logger::getLevelName($level),
+            'channel' => 'test',
+            'datetime' => DateTime::createFromFormat(
+                'U.u',
+                sprintf('%.6F', microtime(true))
+            ),
+            'extra' => [],
+        ];
     }
 }

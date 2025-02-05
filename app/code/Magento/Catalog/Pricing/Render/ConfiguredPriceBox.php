@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2014 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 
 namespace Magento\Catalog\Pricing\Render;
@@ -45,9 +45,9 @@ class ConfiguredPriceBox extends FinalPriceBox
         PriceInterface $price,
         RendererPool $rendererPool,
         array $data = [],
-        ?SalableResolverInterface $salableResolver = null,
-        ?MinimalPriceCalculatorInterface $minimalPriceCalculator = null,
-        ?ConfiguredPriceSelection $configuredPriceSelection = null
+        SalableResolverInterface $salableResolver = null,
+        MinimalPriceCalculatorInterface $minimalPriceCalculator = null,
+        ConfiguredPriceSelection $configuredPriceSelection = null
     ) {
         $this->configuredPriceSelection = $configuredPriceSelection
             ?: ObjectManager::getInstance()
@@ -86,7 +86,7 @@ class ConfiguredPriceBox extends FinalPriceBox
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getPriceType($priceCode)
     {
@@ -102,8 +102,6 @@ class ConfiguredPriceBox extends FinalPriceBox
     }
 
     /**
-     * Get Configured Price
-     *
      * @return PriceInterface
      */
     public function getConfiguredPrice(): PriceInterface
@@ -119,8 +117,6 @@ class ConfiguredPriceBox extends FinalPriceBox
     }
 
     /**
-     * Get Configured Regular Price
-     *
      * @return PriceInterface
      */
     public function getConfiguredRegularPrice(): PriceInterface

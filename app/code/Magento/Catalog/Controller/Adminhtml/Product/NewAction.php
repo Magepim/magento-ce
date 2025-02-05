@@ -1,7 +1,8 @@
 <?php
 /**
- * Copyright 2014 Adobe
- * All Rights Reserved.
+ *
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
@@ -50,7 +51,7 @@ class NewAction extends \Magento\Catalog\Controller\Adminhtml\Product implements
         Initialization\StockDataFilter $stockFilter,
         \Magento\Framework\View\Result\PageFactory $resultPageFactory,
         \Magento\Backend\Model\View\Result\ForwardFactory $resultForwardFactory,
-        ?RegexValidator $regexValidator = null
+        RegexValidator $regexValidator = null
     ) {
         $this->stockFilter = $stockFilter;
         parent::__construct($context, $productBuilder);

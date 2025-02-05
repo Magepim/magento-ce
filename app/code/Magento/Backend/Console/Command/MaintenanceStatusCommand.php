@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2015 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 namespace Magento\Backend\Console\Command;
 
@@ -16,8 +16,6 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class MaintenanceStatusCommand extends AbstractSetupCommand
 {
-    public const NAME = 'maintenance:status';
-
     /**
      * @var MaintenanceMode $maintenanceMode
      */
@@ -42,7 +40,7 @@ class MaintenanceStatusCommand extends AbstractSetupCommand
      */
     protected function configure(): void
     {
-        $this->setName(self::NAME)
+        $this->setName('maintenance:status')
             ->setDescription('Displays maintenance mode status');
 
         parent::configure();

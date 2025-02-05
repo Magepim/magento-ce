@@ -96,7 +96,7 @@ class CacheIdentifierPluginTest extends TestCase
      *
      * @return array
      */
-    public static function afterGetValueDataProvider()
+    public function afterGetValueDataProvider()
     {
         return [
             'Varnish + PageCache enabled' => [Config::VARNISH, true, null, false, false],

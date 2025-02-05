@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2016 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 
 namespace Magento\Catalog\Ui\DataProvider\Product\Form\Modifier;
@@ -45,7 +45,7 @@ class General extends AbstractModifier
     public function __construct(
         LocatorInterface $locator,
         ArrayManager $arrayManager,
-        ?AttributeRepositoryInterface $attributeRepository = null
+        AttributeRepositoryInterface $attributeRepository = null
     ) {
         $this->locator = $locator;
         $this->arrayManager = $arrayManager;
@@ -392,18 +392,6 @@ class General extends AbstractModifier
             ]
         );
 
-        $urlAttribute = $this->attributeRepository->get(
-            ProductAttributeInterface::ENTITY_TYPE_CODE,
-            ProductAttributeInterface::CODE_SEO_FIELD_URL_KEY
-        );
-        $scopeLabel = '';
-        if ($urlAttribute->isScopeGlobal()) {
-            $scopeLabel = '[GLOBAL]';
-        } elseif ($urlAttribute->isScopeWebsite()) {
-            $scopeLabel = '[WEBSITE]';
-        } elseif ($urlAttribute->isScopeStore()) {
-            $scopeLabel = '[STORE VIEW]';
-        }
         $urlKeyConfig = [
             'tooltip' => [
                 'link' => 'https://experienceleague.adobe.com/docs/commerce-admin/catalog/catalog/catalog-urls.html',
@@ -411,7 +399,6 @@ class General extends AbstractModifier
                     'The URL key should consist of lowercase characters with hyphens to separate words.'
                 ),
             ],
-            'scopeLabel' => __($scopeLabel)
         ];
 
         $urkKeyPath = $this->arrayManager->findPath(

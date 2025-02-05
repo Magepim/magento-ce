@@ -438,7 +438,7 @@ class MysqlTest extends TestCase
     {
         return [
             [
-                'options' => [
+                'columnData' => [
                     'TYPE'        => 'integer',
                     'IDENTITY'    => true,
                     'UNSIGNED'    => true,
@@ -873,7 +873,7 @@ class MysqlTest extends TestCase
      *
      * @return array[]
      */
-    public static function columnDataAndValueForTest(): array
+    public function columnDataAndValueForTest(): array
     {
         return [
             [
@@ -949,7 +949,7 @@ class MysqlTest extends TestCase
      *
      * @return array[]
      */
-    public static function providerForSanitizeColumnDataType()
+    public function providerForSanitizeColumnDataType()
     {
         return [
             [

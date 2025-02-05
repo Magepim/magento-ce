@@ -129,13 +129,13 @@ class IndexerSetDimensionsModeCommandTest extends AbstractIndexerCommandCommonSe
     {
         return [
             'was_changed'     => [
-                'indexerTitle' => 'indexer_title',
+                'indexer_title' => 'indexer_title',
                 'previousMode'  => 'none',
                 'command'       => [
                     'indexer' => 'indexer_title',
                     'mode'    => 'store',
                 ],
-                'consoleOutput'        => sprintf(
+                'output'        => sprintf(
                     'Dimensions mode for indexer "%s" was changed from \'%s\' to \'%s\'',
                     'indexer_title',
                     'none',
@@ -144,13 +144,13 @@ class IndexerSetDimensionsModeCommandTest extends AbstractIndexerCommandCommonSe
                 ,
             ],
             'was_not_changed' => [
-                'indexerTitle' => 'indexer_title',
+                'indexer_title' => 'indexer_title',
                 'previousMode'  => 'none',
                 'command'       => [
                     'indexer' => 'indexer_title',
                     'mode'    => 'none',
                 ],
-                'consoleOutput'        => sprintf(
+                'output'        => sprintf(
                     'Dimensions mode for indexer "%s" has not been changed',
                     'indexer_title'
                 ) . PHP_EOL

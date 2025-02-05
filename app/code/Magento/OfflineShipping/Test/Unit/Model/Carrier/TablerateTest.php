@@ -230,7 +230,7 @@ class TablerateTest extends TestCase
     /**
      * @return array
      */
-    public static function collectRatesWithGlobalFreeShippingDataProvider()
+    public function collectRatesWithGlobalFreeShippingDataProvider()
     {
         return [
             ['freeshipping' => true, 'isShipSeparately' => false],

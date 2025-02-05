@@ -94,12 +94,12 @@ class FixturesTest extends FixturesAbstractClass implements FixturesInterface
     {
         return [
             'first_data_set' => [
-                'configs' => [
+                'admin_configs' => [
                     'test_section/test_group/field_1' => 'overridden config fixture value for class',
                     'test_section/test_group/field_2' => 'overridden config fixture value for method',
                     'test_section/test_group/field_3' => 'new_value',
                 ],
-                'storeConfigs' => [
+                'store_configs' => [
                     'test_section/test_group/field_1' => 'overridden config fixture value for class',
                     'test_section/test_group/field_2' => 'overridden config fixture value for method',
                     'test_section/test_group/field_3' => 'new_value',
@@ -112,12 +112,12 @@ class FixturesTest extends FixturesAbstractClass implements FixturesInterface
                 ],
             ],
             'second_data_set' => [
-                'configs' => [
+                'admin_configs' => [
                     'test_section/test_group/field_1' => 'overridden config fixture value for class',
                     'test_section/test_group/field_2' => 'overridden config fixture value for method',
                     'test_section/test_group/field_3' => '3rd field default value',
                 ],
-                'storeConfigs' => [
+                'store_configs' => [
                     'test_section/test_group/field_1' => 'overridden config fixture value for class',
                     'test_section/test_group/field_2' => 'overridden config fixture value for method',
                     'test_section/test_group/field_3' => '3rd field website scope default value',
@@ -139,12 +139,12 @@ class FixturesTest extends FixturesAbstractClass implements FixturesInterface
     {
         return [
             'first_data_set' => [
-                'configs' => [
+                'admin_configs' => [
                     'test_section/test_group/field_1' => 'overridden config fixture value for class',
                     'test_section/test_group/field_2' => '2nd field default value',
                     'test_section/test_group/field_3' => 'overridden config fixture value for data set from abstract',
                 ],
-                'storeConfigs' => [
+                'store_configs' => [
                     'test_section/test_group/field_1' => 'overridden config fixture value for class',
                     'test_section/test_group/field_2' => '2nd field default value',
                     'test_section/test_group/field_3' => 'overridden config fixture value for data set from abstract',
@@ -157,12 +157,12 @@ class FixturesTest extends FixturesAbstractClass implements FixturesInterface
                 ],
             ],
             'second_data_set' => [
-                'configs' => [
+                'admin_configs' => [
                     'test_section/test_group/field_1' => 'overridden config fixture value for data set from abstract',
                     'test_section/test_group/field_2' => '2nd field default value',
                     'test_section/test_group/field_3' => '3rd field default value',
                 ],
-                'storeConfigs' => [
+                'store_configs' => [
                     'test_section/test_group/field_1' => 'overridden config fixture value for data set from abstract',
                     'test_section/test_group/field_2' => '2nd field default value',
                     'test_section/test_group/field_3' => '3rd field website scope default value',

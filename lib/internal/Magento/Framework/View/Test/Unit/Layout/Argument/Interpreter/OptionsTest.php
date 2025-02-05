@@ -82,7 +82,7 @@ class OptionsTest extends TestCase
     /**
      * @return array
      */
-    public static function evaluateWrongModelDataProvider()
+    public function evaluateWrongModelDataProvider()
     {
         return [
             'no model' => [[], '\InvalidArgumentException', 'Options source model class is missing'],

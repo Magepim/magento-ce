@@ -112,7 +112,7 @@ class ReportUrlProviderTest extends TestCase
     /**
      * @return array
      */
-    public static function getUrlDataProvider(): array
+    public function getUrlDataProvider(): array
     {
         return [
             'TokenDoesNotExist' => [false, null, 'analytics/url/documentation'],

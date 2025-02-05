@@ -71,7 +71,7 @@ class DateTest extends TestCase
     /**
      * @return array
      */
-    public static function outputValueDataProvider()
+    public function outputValueDataProvider()
     {
         return [
             [
@@ -117,7 +117,7 @@ class DateTest extends TestCase
     /**
      * @return array
      */
-    public static function validateValueDataProvider()
+    public function validateValueDataProvider()
     {
         return [
             [
@@ -188,7 +188,7 @@ class DateTest extends TestCase
     /**
      * @return array
      */
-    public static function compactValueDataProvider()
+    public function compactValueDataProvider()
     {
         return [
             ['value' => 'value', 'expectedResult' => 'value'],

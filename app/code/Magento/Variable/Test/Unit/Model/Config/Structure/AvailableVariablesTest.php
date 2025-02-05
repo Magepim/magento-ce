@@ -28,7 +28,7 @@ class AvailableVariablesTest extends TestCase
     /**
      * @return array
      */
-    public static function getConfigPathsDataProvider()
+    public function getConfigPathsDataProvider()
     {
         return [
             [[],[]],

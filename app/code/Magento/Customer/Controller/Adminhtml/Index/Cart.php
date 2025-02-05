@@ -3,8 +3,6 @@
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-declare(strict_types=1);
-
 namespace Magento\Customer\Controller\Adminhtml\Index;
 
 use Magento\Backend\App\Action\Context;
@@ -45,7 +43,6 @@ use Magento\Store\Model\StoreManagerInterface;
  *
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  * @deprecated 101.0.0
- * @see no alternatives
  */
 class Cart extends BaseAction implements HttpGetActionInterface, HttpPostActionInterface
 {
@@ -57,13 +54,6 @@ class Cart extends BaseAction implements HttpGetActionInterface, HttpPostActionI
      * @var StoreManagerInterface
      */
     private $storeManager;
-
-    /**
-     * Authorization level of a basic admin cart
-     *
-     * @see _isAllowed()
-     */
-    public const ADMIN_RESOURCE = 'Magento_Cart::cart';
 
     /**
      * Constructor
@@ -123,7 +113,7 @@ class Cart extends BaseAction implements HttpGetActionInterface, HttpPostActionI
         PageFactory $resultPageFactory,
         ForwardFactory $resultForwardFactory,
         JsonFactory $resultJsonFactory,
-        ?QuoteFactory $quoteFactory = null,
+        QuoteFactory $quoteFactory = null,
         ?StoreManagerInterface $storeManager = null
     ) {
         parent::__construct(

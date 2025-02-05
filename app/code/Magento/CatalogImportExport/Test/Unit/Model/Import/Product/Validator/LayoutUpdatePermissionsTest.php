@@ -86,7 +86,7 @@ class LayoutUpdatePermissionsTest extends TestCase
         }
     }
 
-    public static function configurationsProvider()
+    public function configurationsProvider()
     {
         return [
             ['', null, null, true],

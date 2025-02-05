@@ -1,16 +1,13 @@
 <?php
-
 /**
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-
 declare(strict_types=1);
 
 namespace Magento\Theme\Test\Unit\Controller\Result;
 
 use Magento\Theme\Controller\Result\AsyncCssPlugin;
-use Magento\Csp\Api\InlineUtilInterface;
 use Magento\Framework\App\Response\Http;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -24,7 +21,7 @@ use Magento\Framework\TestFramework\Unit\Helper\ObjectManager as ObjectManagerHe
  */
 class AsyncCssPluginTest extends TestCase
 {
-    private const STUB_XML_PATH_USE_CSS_CRITICAL_PATH = 'dev/css/use_css_critical_path';
+    const STUB_XML_PATH_USE_CSS_CRITICAL_PATH = 'dev/css/use_css_critical_path';
 
     /**
      * @var AsyncCssPlugin
@@ -41,15 +38,8 @@ class AsyncCssPluginTest extends TestCase
      */
     private $httpMock;
 
-    /**
-     * @var Layout|MockObject
-     */
+    /** @var Layout|MockObject */
     private $layoutMock;
-
-    /**
-     * @var InlineUtilInterface|MockObject
-     */
-    private $cspInlineUtilMock;
 
     /**
      * @inheritdoc
@@ -63,14 +53,12 @@ class AsyncCssPluginTest extends TestCase
 
         $this->httpMock = $this->createMock(Http::class);
         $this->layoutMock = $this->createMock(Layout::class);
-        $this->cspInlineUtilMock = $this->createMock(InlineUtilInterface::class);
 
         $objectManager = new ObjectManagerHelper($this);
         $this->plugin = $objectManager->getObject(
             AsyncCssPlugin::class,
             [
-                'scopeConfig' => $this->scopeConfigMock,
-                'cspInlineUtil' => $this->cspInlineUtilMock
+                'scopeConfig' => $this->scopeConfigMock
             ]
         );
     }
@@ -80,14 +68,14 @@ class AsyncCssPluginTest extends TestCase
      *
      * @return array
      */
-    public static function renderResultDataProvider(): array
+    public function renderResultDataProvider(): array
     {
         return [
             [
                 "content" => "<head><link rel=\"stylesheet\" href=\"css/async.css\">" .
                     "<style>.critical-css{}</style>" .
                     "</head>",
-                "isSetFlag" => true,
+                "flag" => true,
                 "result" => "<head><style>.critical-css{}</style>\n" .
                     "<link " .
                         "rel=\"stylesheet\" media=\"print\" onload=\"this.onload=null;this.media='all'\" " .
@@ -98,7 +86,7 @@ class AsyncCssPluginTest extends TestCase
                 "content" => "<head><link rel=\"stylesheet\" href=\"css/async.css\">" .
                     "<link rel=\"preload\" href=\"other-file.html\">" .
                     "</head>",
-                "isSetFlag" => true,
+                "flag" => true,
                 "result" => "<head><link rel=\"preload\" href=\"other-file.html\">\n" .
                     "<link " .
                         "rel=\"stylesheet\" media=\"print\" onload=\"this.onload=null;this.media='all'\" " .
@@ -109,7 +97,7 @@ class AsyncCssPluginTest extends TestCase
                 "content" => "<head><link rel=\"stylesheet\" href=\"css/async.css\">" .
                     "<link rel=\"preload\" href=\"other-file.html\">" .
                     "</head>",
-                "isSetFlag" => false,
+                "flag" => false,
                 "result" => "<head><link rel=\"stylesheet\" href=\"css/async.css\">" .
                     "<link rel=\"preload\" href=\"other-file.html\">" .
                     "</head>",
@@ -119,7 +107,7 @@ class AsyncCssPluginTest extends TestCase
                     "<link rel=\"stylesheet\" href=\"css/second.css\">" .
                     "<style>.critical-css{}</style>" .
                     "</head>",
-                "isSetFlag" => true,
+                "flag" => true,
                 "result" => "<head><style>.critical-css{}</style>\n" .
                     "<link " .
                         "rel=\"stylesheet\" media=\"print\" onload=\"this.onload=null;this.media='all'\" " .
@@ -131,12 +119,12 @@ class AsyncCssPluginTest extends TestCase
             ],
             [
                 "content" => "<head><style>.critical-css{}</style></head>",
-                "isSetFlag" => false,
+                "flag" => false,
                 "result" => "<head><style>.critical-css{}</style></head>"
             ],
             [
                 "content" => "<head><style>.critical-css{}</style></head>",
-                "isSetFlag" => true,
+                "flag" => true,
                 "result" => "<head><style>.critical-css{}</style></head>"
             ]
         ];
@@ -161,14 +149,6 @@ class AsyncCssPluginTest extends TestCase
             ->with(self::STUB_XML_PATH_USE_CSS_CRITICAL_PATH, ScopeInterface::SCOPE_STORE)
             ->willReturn($isSetFlag);
 
-        if ($isSetFlag) {
-            $this->cspInlineUtilMock->expects($this->any())
-                ->method('renderEventListener')
-                ->with(
-                    'onload',
-                    "this.onload=null;this.media='all'"
-                )->willReturn('onload="this.onload=null;this.media=\'all\'"');
-        }
         // Expects
         $this->httpMock->expects($this->any())
             ->method('setContent')
@@ -183,7 +163,7 @@ class AsyncCssPluginTest extends TestCase
      *
      * @return array
      */
-    public static function ifGetContentIsNotAStringDataProvider(): array
+    public function ifGetContentIsNotAStringDataProvider(): array
     {
         return [
             [

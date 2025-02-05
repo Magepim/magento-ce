@@ -60,7 +60,7 @@ class ExtractAssetsFromContentWithRenditionTest extends TestCase
      *
      * @return array
      */
-    public static function contentProvider()
+    public function contentProvider()
     {
         return [
             'Empty Content' => [

@@ -43,7 +43,7 @@ class AlphanumTest extends TestCase
     /**
      * @return array
      */
-    public static function getLastIdDataProvider()
+    public function getLastIdDataProvider()
     {
         return [
             [

@@ -40,7 +40,7 @@ class ConfigProviderTest extends TestCase
     /**
      * @var integer
      */
-    protected static $formId = 1;
+    protected $formId = 1;
 
     /**
      * @var ConfigProvider
@@ -53,7 +53,7 @@ class ConfigProviderTest extends TestCase
         $this->captchaHelperMock = $this->createMock(Data::class);
         $this->captchaMock = $this->createMock(DefaultModel::class);
         $this->storeMock = $this->createMock(Store::class);
-        $formIds = [self::$formId];
+        $formIds = [$this->formId];
 
         $this->model = new ConfigProvider(
             $this->storeManagerMock,
@@ -70,7 +70,7 @@ class ConfigProviderTest extends TestCase
      */
     public function testGetConfig($isRequired, $captchaGenerations, $expectedConfig)
     {
-        $this->captchaHelperMock->expects($this->any())->method('getCaptcha')->with(self::$formId)
+        $this->captchaHelperMock->expects($this->any())->method('getCaptcha')->with($this->formId)
             ->willReturn($this->captchaMock);
 
         $this->captchaMock->expects($this->any())->method('isCaseSensitive')->willReturn(1);
@@ -87,14 +87,14 @@ class ConfigProviderTest extends TestCase
             ->willReturn('https://magento.com/captcha');
 
         $config = $this->model->getConfig();
-        unset($config['captcha'][self::$formId]['timestamp']);
+        unset($config['captcha'][$this->formId]['timestamp']);
         $this->assertEquals($config, $expectedConfig);
     }
 
     /**
      * @return array
      */
-    public static function getConfigDataProvider()
+    public function getConfigDataProvider()
     {
         return [
             [
@@ -102,7 +102,7 @@ class ConfigProviderTest extends TestCase
                 'captchaGenerations' => 1,
                 'expectedConfig' => [
                     'captcha' => [
-                        self::$formId => [
+                        $this->formId => [
                             'isCaseSensitive' => true,
                             'imageHeight' => '12px',
                             'imageSrc' => 'source',
@@ -117,7 +117,7 @@ class ConfigProviderTest extends TestCase
                 'captchaGenerations' => 0,
                 'expectedConfig' => [
                     'captcha' => [
-                        self::$formId => [
+                        $this->formId => [
                             'isCaseSensitive' => true,
                             'imageHeight' => '12px',
                             'imageSrc' => '',

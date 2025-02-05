@@ -105,7 +105,7 @@ class CartTotalManagementTest extends TestCase
     /**
      * @return array
      */
-    public static function collectTotalsShippingData()
+    public function collectTotalsShippingData()
     {
         return [
             ['careful_carrier', null],

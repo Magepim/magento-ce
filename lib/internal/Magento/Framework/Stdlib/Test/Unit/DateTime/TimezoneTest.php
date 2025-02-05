@@ -116,7 +116,7 @@ class TimezoneTest extends TestCase
      *
      * @return array
      */
-    public static function dateIncludeTimeDataProvider(): array
+    public function dateIncludeTimeDataProvider(): array
     {
         /**
          * Greek locale needs to be installed on the system, to pass.
@@ -216,7 +216,7 @@ class TimezoneTest extends TestCase
     /**
      * @return array
      */
-    public static function getDatetimeFormatDataProvider(): array
+    public function getDatetimeFormatDataProvider(): array
     {
         return [
             ['en_US', \IntlDateFormatter::SHORT, 'M/d/yy h:mm a'],
@@ -240,7 +240,7 @@ class TimezoneTest extends TestCase
     /**
      * @return array
      */
-    public static function getDateFormatWithLongYearDataProvider(): array
+    public function getDateFormatWithLongYearDataProvider(): array
     {
         return [
             ['en_US', 'M/d/y'],
@@ -265,7 +265,7 @@ class TimezoneTest extends TestCase
      *
      * @return array
      */
-    public static function getConvertConfigTimeToUtcFixtures(): array
+    public function getConvertConfigTimeToUtcFixtures(): array
     {
         return [
             'string' => [
@@ -306,7 +306,7 @@ class TimezoneTest extends TestCase
      *
      * @return array
      */
-    public static function getConvertConfigTimeToUTCDataFixtures()
+    public function getConvertConfigTimeToUTCDataFixtures()
     {
         return [
             'datetime' => [
@@ -330,7 +330,7 @@ class TimezoneTest extends TestCase
      *
      * @return array
      */
-    public static function getDateFixtures(): array
+    public function getDateFixtures(): array
     {
         return [
             'now_datetime_utc' => [
@@ -398,7 +398,7 @@ class TimezoneTest extends TestCase
      * @param string $configuredTimezone
      * @param string|null $scope
      */
-    private function scopeConfigWillReturnConfiguredTimezone(string $configuredTimezone, ?string $scope = null)
+    private function scopeConfigWillReturnConfiguredTimezone(string $configuredTimezone, string $scope = null)
     {
         $this->scopeConfig->expects($this->atLeastOnce())
             ->method('getValue')
@@ -429,7 +429,7 @@ class TimezoneTest extends TestCase
     /**
      * @return array
      */
-    public static function scopeDateDataProvider(): array
+    public function scopeDateDataProvider(): array
     {
         $utcTz = new \DateTimeZone('UTC');
 

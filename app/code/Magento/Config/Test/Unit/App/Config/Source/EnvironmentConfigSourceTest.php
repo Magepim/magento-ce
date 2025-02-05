@@ -84,7 +84,7 @@ class EnvironmentConfigSourceTest extends TestCase
     /**
      * @return array
      */
-    public static function getDataProvider()
+    public function getDataProvider()
     {
         return [
             ['', ['unit' => ['test' => ['value' => 'test_value']]]],

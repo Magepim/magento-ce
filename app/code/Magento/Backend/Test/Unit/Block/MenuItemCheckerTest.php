@@ -81,7 +81,7 @@ class MenuItemCheckerTest extends TestCase
     /**
      * @return array
      */
-    public static function dataProvider()
+    public function dataProvider()
     {
         return [
             'outputItemEquals' => ['1', '1', false, true],

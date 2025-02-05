@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2017 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
@@ -21,7 +21,7 @@ class DbSchemaReader implements DbSchemaReaderInterface
     /**
      * Table type in information_schema.TABLES which allows to identify only tables and ignore views
      */
-    public const MYSQL_TABLE_TYPE = 'BASE TABLE';
+    const MYSQL_TABLE_TYPE = 'BASE TABLE';
 
     /**
      * @var ResourceConnection
@@ -54,17 +54,6 @@ class DbSchemaReader implements DbSchemaReaderInterface
     {
         $adapter = $this->resourceConnection->getConnection($resource);
         $dbName = $this->resourceConnection->getSchemaName($resource);
-        $collationNameColumn = 'charset_applicability.collation_name';
-
-        /* In case of mariadb>=11.4 check if column FULL_COLLATION_NAME is exist */
-        if ($adapter->tableColumnExists(
-            'COLLATION_CHARACTER_SET_APPLICABILITY',
-            'FULL_COLLATION_NAME',
-            'information_schema'
-        )) {
-            $collationNameColumn = 'charset_applicability.full_collation_name';
-        }
-
         $stmt = $adapter->select()
             ->from(
                 ['i_tables' => 'information_schema.TABLES'],
@@ -76,7 +65,7 @@ class DbSchemaReader implements DbSchemaReaderInterface
             )
             ->joinInner(
                 ['charset_applicability' => 'information_schema.COLLATION_CHARACTER_SET_APPLICABILITY'],
-                'i_tables.table_collation = '.$collationNameColumn,
+                'i_tables.table_collation = charset_applicability.collation_name',
                 [
                     'charset' => 'charset_applicability.CHARACTER_SET_NAME'
                 ]
@@ -109,9 +98,7 @@ class DbSchemaReader implements DbSchemaReaderInterface
                     'nullable' => new Expression('IF(IS_NULLABLE="YES", true, false)'),
                     'definition' => 'COLUMN_TYPE',
                     'extra' => 'EXTRA',
-                    'comment' => new Expression('IF(COLUMN_COMMENT="", NULL, COLUMN_COMMENT)'),
-                    'charset' => 'CHARACTER_SET_NAME',
-                    'collation' => 'COLLATION_NAME'
+                    'comment' => new Expression('IF(COLUMN_COMMENT="", NULL, COLUMN_COMMENT)')
                 ]
             )
             ->where('TABLE_SCHEMA = ?', $dbName)

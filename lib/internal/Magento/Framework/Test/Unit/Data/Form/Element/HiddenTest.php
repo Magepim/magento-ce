@@ -78,7 +78,7 @@ class HiddenTest extends TestCase
     {
         return [
             ['some_value'],
-            ['value' => ['1', '2']],
+            ['store_ids[]' => ['1', '2']],
         ];
     }
 }

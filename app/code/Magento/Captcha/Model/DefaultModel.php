@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2012 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
@@ -25,17 +25,17 @@ class DefaultModel extends \Laminas\Captcha\Image implements \Magento\Captcha\Mo
     /**
      * Key in session for captcha code
      */
-    public const SESSION_WORD = 'word';
+    const SESSION_WORD = 'word';
 
     /**
      * Min captcha lengths default value
      */
-    public const DEFAULT_WORD_LENGTH_FROM = 3;
+    const DEFAULT_WORD_LENGTH_FROM = 3;
 
     /**
      * Max captcha lengths default value
      */
-    public const DEFAULT_WORD_LENGTH_TO = 5;
+    const DEFAULT_WORD_LENGTH_TO = 5;
 
     /**
      * @var Data
@@ -114,7 +114,7 @@ class DefaultModel extends \Laminas\Captcha\Image implements \Magento\Captcha\Mo
         \Magento\Captcha\Helper\Data $captchaData,
         \Magento\Captcha\Model\ResourceModel\LogFactory $resLogFactory,
         $formId,
-        ?Random $randomMath = null,
+        Random $randomMath = null,
         ?UserContextInterface $userContext = null
     ) {
         parent::__construct();
@@ -577,7 +577,6 @@ class DefaultModel extends \Laminas\Captcha\Image implements \Magento\Captcha\Mo
      */
     protected function gc()
     {
-        // phpcs:ignore
         return; // required for static testing to pass
     }
 

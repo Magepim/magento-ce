@@ -29,7 +29,7 @@ class ThemePackageTest extends TestCase
     /**
      * @return array
      */
-    public static function constructBadKeyDataProvider()
+    public function constructBadKeyDataProvider()
     {
         return [
             [''],

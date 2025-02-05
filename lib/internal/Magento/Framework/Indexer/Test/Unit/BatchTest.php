@@ -39,7 +39,7 @@ class BatchTest extends TestCase
     /**
      * @return array
      */
-    public static function getItemsDataProvider()
+    public function getItemsDataProvider()
     {
         return [
             'empty' => [

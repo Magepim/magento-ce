@@ -61,7 +61,7 @@ class FormatTest extends TestCase
      *
      * @return array
      */
-    public static function toOptionArrayDataProvider()
+    public function toOptionArrayDataProvider()
     {
         return [
             'Empty file format' => [

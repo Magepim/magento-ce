@@ -191,7 +191,7 @@ class FileInfoTest extends TestCase
     /**
      * @return array
      */
-    public static function isExistProvider()
+    public function isExistProvider()
     {
         return [
             ['/filename.ext1', '/catalog/category/filename.ext1'],
@@ -216,7 +216,7 @@ class FileInfoTest extends TestCase
     /**
      * @return array
      */
-    public static function isBeginsWithMediaDirectoryPathProvider()
+    public function isBeginsWithMediaDirectoryPathProvider()
     {
         return [
             ['/pub/media/test/filename.ext1', true],

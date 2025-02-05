@@ -1,10 +1,8 @@
 <?php
-
 /**
- * Copyright 2017 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
-
 declare(strict_types=1);
 
 namespace Magento\Cron\Test\Unit\Console\Command;
@@ -82,7 +80,7 @@ class CronCommandTest extends TestCase
             new CronCommand($this->objectManagerFactory, $this->deploymentConfigMock)
         );
         $commandTester->execute([]);
-        $expectedMsg = '';
+        $expectedMsg = 'Ran jobs by schedule.' . PHP_EOL;
         $this->assertEquals($expectedMsg, $commandTester->getDisplay());
     }
 }

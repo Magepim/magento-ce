@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2011 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 namespace Magento\Catalog\Model\ResourceModel\Product;
 
@@ -14,6 +14,7 @@ use Magento\Catalog\Api\Data\ProductInterface;
 /**
  * Catalog Product Relations Resource model
  *
+ * @author      Magento Core Team <core@magentocommerce.com>
  */
 class Relation extends AbstractDb
 {
@@ -30,7 +31,7 @@ class Relation extends AbstractDb
     public function __construct(
         Context $context,
         $connectionName = null,
-        ?MetadataPool $metadataPool = null
+        MetadataPool $metadataPool = null
     ) {
         parent::__construct($context, $connectionName);
         $this->metadataPool = $metadataPool ?: ObjectManager::getInstance()->get(MetadataPool::class);

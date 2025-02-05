@@ -41,7 +41,7 @@ class SecurityInfoTest extends TestCase
     /**
      * @return array
      */
-    public static function secureUrlDataProvider()
+    public function secureUrlDataProvider()
     {
         return [
             ['/account', true],

@@ -72,10 +72,10 @@ class Date extends AbstractBaseAttributeData
             parent::getUpdateProvider(),
             [
                 "{$frontendInput}_other_attribute_code" => [
-                    'postData' => [
+                    'post_data' => [
                         'attribute_code' => 'text_attribute_update',
                     ],
-                    'expectedData' => [
+                    'expected_data' => [
                         'attribute_code' => 'date_attribute',
                     ],
                 ],
@@ -94,10 +94,10 @@ class Date extends AbstractBaseAttributeData
             parent::getUpdateProviderWithErrorMessage(),
             [
                 "{$frontendInput}_wrong_default_value" => [
-                    'postData' => [
+                    'post_data' => [
                         'default_value_date' => '//2019/12/12',
                     ],
-                    'errorMessage' => (string)__('The default date is invalid. Verify the date and try again.'),
+                    'error_message' => (string)__('The default date is invalid. Verify the date and try again.'),
                 ],
             ]
         );

@@ -82,8 +82,8 @@ class ImportResultTest extends \Magento\TestFramework\TestCase\AbstractBackendCo
     {
         return [
             [
-                'fileName' => 'invalid_catalog_products.csv',
-                'mimeType' => 'text/csv',
+                'file_name' => 'invalid_catalog_products.csv',
+                'mime-type' => 'text/csv',
                 'delimiter' => ',',
             ],
         ];

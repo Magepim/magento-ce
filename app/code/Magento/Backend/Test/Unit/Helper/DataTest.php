@@ -76,7 +76,7 @@ class DataTest extends TestCase
     /**
      * @return array
      */
-    public static function getPrepareFilterStringValuesDataProvider()
+    public function getPrepareFilterStringValuesDataProvider()
     {
         return [
             'both_spaces_value' => [

@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2014 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
@@ -10,7 +10,6 @@ namespace Magento\Quote\Model;
 use Magento\Customer\Api\AccountManagementInterface as AccountManagement;
 use Magento\Customer\Api\AddressRepositoryInterface as CustomerAddressRepository;
 use Magento\Customer\Api\CustomerRepositoryInterface as CustomerRepository;
-use Magento\Customer\Api\Data\AddressInterfaceFactory;
 use Magento\Customer\Model\AddressFactory;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\Validator\Exception as ValidatorException;
@@ -48,16 +47,10 @@ class CustomerManagement
     private $addressFactory;
 
     /**
-     * @var AddressInterfaceFactory
-     */
-    private $customerAddressFactory;
-
-    /**
      * CustomerManagement constructor.
      * @param CustomerRepository $customerRepository
      * @param CustomerAddressRepository $customerAddressRepository
      * @param AccountManagement $accountManagement
-     * @param AddressInterfaceFactory $customerAddressFactory
      * @param ValidatorFactory|null $validatorFactory
      * @param AddressFactory|null $addressFactory
      */
@@ -65,14 +58,12 @@ class CustomerManagement
         CustomerRepository $customerRepository,
         CustomerAddressRepository $customerAddressRepository,
         AccountManagement $accountManagement,
-        AddressInterfaceFactory $customerAddressFactory,
-        ?ValidatorFactory $validatorFactory = null,
-        ?AddressFactory $addressFactory = null
+        ValidatorFactory $validatorFactory = null,
+        AddressFactory $addressFactory = null
     ) {
         $this->customerRepository = $customerRepository;
         $this->customerAddressRepository = $customerAddressRepository;
         $this->accountManagement = $accountManagement;
-        $this->customerAddressFactory = $customerAddressFactory;
         $this->validatorFactory = $validatorFactory ?: ObjectManager::getInstance()
             ->get(ValidatorFactory::class);
         $this->addressFactory = $addressFactory ?: ObjectManager::getInstance()
@@ -159,29 +150,18 @@ class CustomerManagement
                 $quote->getShippingAddress()->getCustomerAddressId()
             );
         }
-        if (empty($addresses) && $quote->getCustomerIsGuest()) {
-            $billingAddress = $quote->getBillingAddress();
-            $customerAddress = $this->customerAddressFactory->create();
-            $customerAddress->setFirstname($billingAddress->getFirstname());
-            $customerAddress->setLastname($billingAddress->getLastname());
-            $customerAddress->setStreet($billingAddress->getStreet());
-            $customerAddress->setCity($billingAddress->getCity());
-            $customerAddress->setPostcode($billingAddress->getPostcode());
-            $customerAddress->setTelephone($billingAddress->getTelephone());
-            $customerAddress->setCountryId($billingAddress->getCountryId());
-            $customerAddress->setCustomAttributes($billingAddress->getCustomAttributes());
-            $addresses[] = $customerAddress;
-        }
-        foreach ($addresses as $address) {
-            $validator = $this->validatorFactory->createValidator('customer_address', 'save');
-            $addressModel = $this->addressFactory->create();
-            $addressModel->updateData($address);
-            if (!$validator->isValid($addressModel)) {
-                throw new ValidatorException(
-                    null,
-                    null,
-                    $validator->getMessages()
-                );
+        if (!empty($addresses)) {
+            foreach ($addresses as $address) {
+                $validator = $this->validatorFactory->createValidator('customer_address', 'save');
+                $addressModel = $this->addressFactory->create();
+                $addressModel->updateData($address);
+                if (!$validator->isValid($addressModel)) {
+                    throw new ValidatorException(
+                        null,
+                        null,
+                        $validator->getMessages()
+                    );
+                }
             }
         }
     }

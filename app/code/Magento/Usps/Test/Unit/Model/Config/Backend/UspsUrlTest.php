@@ -99,7 +99,7 @@ class UspsUrlTest extends TestCase
         $this->urlConfig->beforeSave();
     }
 
-    public static function validDataProvider(): array
+    public function validDataProvider(): array
     {
         return [
             [],
@@ -113,7 +113,7 @@ class UspsUrlTest extends TestCase
     /**
      * @return string[][]
      */
-    public static function invalidDataProvider(): array
+    public function invalidDataProvider(): array
     {
         return [
             ['https://shippingapis.com.fake.com'],

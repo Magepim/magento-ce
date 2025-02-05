@@ -9,7 +9,6 @@ use Magento\Framework\Amqp\Connection\Factory as ConnectionFactory;
 use Magento\Framework\Amqp\Connection\FactoryOptions;
 use Magento\Framework\App\DeploymentConfig;
 use Magento\Framework\App\ObjectManager;
-use Magento\Framework\ObjectManager\ResetAfterRequestInterface;
 use PhpAmqpLib\Channel\AMQPChannel;
 use PhpAmqpLib\Connection\AbstractConnection;
 
@@ -19,7 +18,7 @@ use PhpAmqpLib\Connection\AbstractConnection;
  * @api
  * @since 103.0.0
  */
-class Config implements ResetAfterRequestInterface
+class Config
 {
     /**
      * Queue config key
@@ -101,7 +100,7 @@ class Config implements ResetAfterRequestInterface
     public function __construct(
         DeploymentConfig $config,
         $connectionName = 'amqp',
-        ?ConnectionFactory $connectionFactory = null
+        ConnectionFactory $connectionFactory = null
     ) {
         $this->deploymentConfig = $config;
         $this->connectionName = $connectionName;
@@ -122,14 +121,6 @@ class Config implements ResetAfterRequestInterface
         } catch (\Throwable $e) {
             error_log($e->getMessage());
         }
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function _resetState(): void
-    {
-        $this->closeConnection();
     }
 
     /**

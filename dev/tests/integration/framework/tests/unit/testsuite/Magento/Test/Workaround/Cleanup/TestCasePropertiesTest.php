@@ -42,15 +42,17 @@ class TestCasePropertiesTest extends TestCase
         /** @var TestSuite $testSuite */
         $testSuite = current($phpUnitTestSuite->tests());
         $testSuite->run();
+        /** @var \Magento\Test\Workaround\Cleanup\TestCasePropertiesTest\DummyTestCase $testClass */
+        $testClass = current($testSuite->tests());
 
-        $reflectionClass = new \ReflectionClass($testSuite);
+        $reflectionClass = new \ReflectionClass($testClass);
         $classProperties = $reflectionClass->getProperties();
         $fixturePropertiesNames = array_keys($this->fixtureProperties);
 
         foreach ($classProperties as $property) {
             if (in_array($property->getName(), $fixturePropertiesNames)) {
                 $property->setAccessible(true);
-                $value = $property->getValue($testSuite);
+                $value = $property->getValue($testClass);
                 $this->assertNotNull($value);
             }
         }
@@ -60,7 +62,7 @@ class TestCasePropertiesTest extends TestCase
         foreach ($classProperties as $property) {
             if (in_array($property->getName(), $fixturePropertiesNames)) {
                 $property->setAccessible(true);
-                $value = $property->getValue($testSuite);
+                $value = $property->getValue($testClass);
                 $this->assertNull($value);
             }
         }

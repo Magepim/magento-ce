@@ -78,7 +78,7 @@ class ChangeOutputArrayTest extends TestCase
      * Data provider for testNoNegativeValue
      * @return array
      */
-    public static function negativeTotals()
+    public function negativeTotals()
     {
         return [
             [

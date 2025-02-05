@@ -7,6 +7,8 @@ namespace Magento\Customer\Model\Customer\Attribute\Source;
 
 /**
  * Customer store attribute source
+ *
+ * @author      Magento Core Team <core@magentocommerce.com>
  */
 class Store extends \Magento\Eav\Model\Entity\Attribute\Source\Table
 {
@@ -56,8 +58,6 @@ class Store extends \Magento\Eav\Model\Entity\Attribute\Source\Table
     }
 
     /**
-     * Return option text
-     *
      * @param string $value
      * @return array|string
      */
@@ -95,8 +95,6 @@ class Store extends \Magento\Eav\Model\Entity\Attribute\Source\Table
     }
 
     /**
-     * Return new stores collection
-     *
      * @return \Magento\Store\Model\ResourceModel\Store\Collection
      */
     protected function _createStoresCollection()

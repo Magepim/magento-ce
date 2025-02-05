@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2020 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
@@ -58,7 +58,7 @@ class CatalogProcessor implements CollectionProcessorInterface
         Collection $collection,
         SearchCriteriaInterface $searchCriteria,
         array $attributeNames,
-        ?ContextInterface $context = null
+        ContextInterface $context = null
     ): Collection {
         $this->collectionProcessor->process($searchCriteria, $collection);
         $store = $context->getExtensionAttributes()->getStore();

@@ -204,7 +204,7 @@ class VariableTest extends TestCase
     /**
      * @return array
      */
-    public static function validateDataProvider()
+    public function validateDataProvider()
     {
         $variable = [
             'variable_id' => 'matching_id',
@@ -219,7 +219,7 @@ class VariableTest extends TestCase
     /**
      * @return array
      */
-    public static function validateMissingInfoDataProvider()
+    public function validateMissingInfoDataProvider()
     {
         return [
             'Missing code' => ['', 'some-name'],
@@ -270,7 +270,7 @@ class VariableTest extends TestCase
      *
      * @return array
      */
-    public static function getWysiwygValidationCases(): array
+    public function getWysiwygValidationCases(): array
     {
         return [
             'changed-html-value-without-exception' => ['<b>Test Html</b>',true,true,false],

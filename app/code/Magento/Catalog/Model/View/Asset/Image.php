@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2016 Adobe
- * All Rights Reserved.
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 
 namespace Magento\Catalog\Model\View\Asset;
@@ -11,6 +11,7 @@ use Magento\Catalog\Model\Config\CatalogMediaConfig;
 use Magento\Catalog\Model\Product\Image\ConvertImageMiscParamsToReadableFormat;
 use Magento\Catalog\Model\Product\Media\ConfigInterface;
 use Magento\Framework\App\ObjectManager;
+use Magento\Framework\Encryption\Encryptor;
 use Magento\Framework\Encryption\EncryptorInterface;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\View\Asset\ContextInterface;
@@ -24,11 +25,6 @@ use Magento\Store\Model\StoreManagerInterface;
  */
 class Image implements LocalInterface
 {
-    /**
-     * Current hashing algorithm
-     */
-    private const HASH_ALGORITHM = 'md5';
-
     /**
      * Image type of image (thumbnail,small_image,image,swatch_image,swatch_thumb)
      *
@@ -100,8 +96,6 @@ class Image implements LocalInterface
      * @param CatalogMediaConfig $catalogMediaConfig
      * @param StoreManagerInterface $storeManager
      * @param ConvertImageMiscParamsToReadableFormat $convertImageMiscParamsToReadableFormat
-     *
-     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
         ConfigInterface $mediaConfig,
@@ -109,9 +103,9 @@ class Image implements LocalInterface
         EncryptorInterface $encryptor,
         $filePath,
         array $miscParams,
-        ?ImageHelper $imageHelper = null,
-        ?CatalogMediaConfig $catalogMediaConfig = null,
-        ?StoreManagerInterface $storeManager = null,
+        ImageHelper $imageHelper = null,
+        CatalogMediaConfig $catalogMediaConfig = null,
+        StoreManagerInterface $storeManager = null,
         ?ConvertImageMiscParamsToReadableFormat $convertImageMiscParamsToReadableFormat = null
     ) {
         if (isset($miscParams['image_type'])) {
@@ -266,27 +260,29 @@ class Image implements LocalInterface
     }
 
     /**
-     * Generate path from image info.
+     * Retrieve part of path based on misc params
+     *
+     * @return string
+     */
+    private function getMiscPath()
+    {
+        return $this->encryptor->hash(
+            implode('_', $this->convertToReadableFormat($this->miscParams)),
+            Encryptor::HASH_VERSION_MD5
+        );
+    }
+
+    /**
+     * Generate path from image info
      *
      * @return string
      */
     private function getImageInfo()
     {
-        $data = implode('_', $this->convertToReadableFormat($this->miscParams));
-
-        $pathTemplate = $this->getModule()
-            . DIRECTORY_SEPARATOR . "%s" . DIRECTORY_SEPARATOR
-            . $this->getFilePath();
-
-        /**
-         * New paths are generated without dependency on
-         * an encryption key.
-         */
-        return preg_replace(
-            '|\Q' . DIRECTORY_SEPARATOR . '\E+|',
-            DIRECTORY_SEPARATOR,
-            sprintf($pathTemplate, hash(self::HASH_ALGORITHM, $data))
-        );
+        $path = $this->getModule()
+            . DIRECTORY_SEPARATOR . $this->getMiscPath()
+            . DIRECTORY_SEPARATOR . $this->getFilePath();
+        return preg_replace('|\Q'. DIRECTORY_SEPARATOR . '\E+|', DIRECTORY_SEPARATOR, $path);
     }
 
     /**

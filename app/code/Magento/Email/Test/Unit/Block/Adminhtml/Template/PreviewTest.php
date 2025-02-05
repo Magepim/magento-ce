@@ -204,10 +204,10 @@ class PreviewTest extends TestCase
      *
      * @return array
      */
-    public static function toHtmlDataProvider()
+    public function toHtmlDataProvider()
     {
         return [
-            ['requestParamMap' => [
+            ['data 1' => [
                 ['type', null, ''],
                 ['text', null, self::MALICIOUS_TEXT],
                 ['styles', null, ''],

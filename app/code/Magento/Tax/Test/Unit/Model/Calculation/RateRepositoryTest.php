@@ -330,7 +330,7 @@ class RateRepositoryTest extends TestCase
     /**
      * @return array
      */
-    public static function saveThrowsExceptionIfCannotSaveTitlesDataProvider()
+    public function saveThrowsExceptionIfCannotSaveTitlesDataProvider()
     {
         return [
             'entity_already_exists' => [

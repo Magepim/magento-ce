@@ -157,40 +157,25 @@ class StoreManagerTest extends TestCase
      */
     public function testGetStores($storesList, $withDefault, $codeKey, $expectedStores)
     {
-        $storesListFinal = [];
-        foreach ($storesList as $list) {
-            $storesListFinal[] = $list($this);
-        }
-
-        $expectedStoresFinal = [];
-        foreach ($expectedStores as $key => $value) {
-            if (is_callable($value)) {
-                $expectedStoresFinal[$key] = $value($this);
-            }
-        }
-
-        $this->storeRepositoryMock->expects($this->any())->method('getList')->willReturn($storesListFinal);
-        $this->assertEquals($expectedStoresFinal, $this->model->getStores($withDefault, $codeKey));
-    }
-
-    protected function getMockForStoreInterfaceClass($idReturn, $codeReturn) {
-        $storeMock = $this->getMockBuilder(StoreInterface::class)
-            ->disableOriginalConstructor()
-            ->getMockForAbstractClass();
-        $storeMock->expects($this->any())->method('getId')->willReturn($idReturn);
-        $storeMock->expects($this->any())->method('getCode')->willReturn($codeReturn);
-        return $storeMock;
+        $this->storeRepositoryMock->expects($this->any())->method('getList')->willReturn($storesList);
+        $this->assertEquals($expectedStores, $this->model->getStores($withDefault, $codeKey));
     }
 
     /**
      * @return array
      */
-    public static function getStoresDataProvider()
+    public function getStoresDataProvider()
     {
-        $defaultStoreMock = static fn (self $testCase) =>
-            $testCase->getMockForStoreInterfaceClass(0, 'default');
-        $storeMock = static fn (self $testCase) =>
-            $testCase->getMockForStoreInterfaceClass(1, 'first_store');;
+        $defaultStoreMock = $this->getMockBuilder(StoreInterface::class)
+            ->disableOriginalConstructor()
+            ->getMockForAbstractClass();
+        $storeMock = $this->getMockBuilder(StoreInterface::class)
+            ->disableOriginalConstructor()
+            ->getMockForAbstractClass();
+        $defaultStoreMock->expects($this->any())->method('getId')->willReturn(0);
+        $defaultStoreMock->expects($this->any())->method('getCode')->willReturn('default');
+        $storeMock->expects($this->any())->method('getId')->willReturn(1);
+        $storeMock->expects($this->any())->method('getCode')->willReturn('first_store');
 
         return [
             'withoutDefaultAndId' => [

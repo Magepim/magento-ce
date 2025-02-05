@@ -51,7 +51,7 @@ class EncodedContextTest extends TestCase
     /**
      * @return array
      */
-    public static function constructDataProvider()
+    public function constructDataProvider()
     {
         return [
             'Without Initialization Vector' => ['content text', null],

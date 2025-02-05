@@ -118,6 +118,9 @@ class DefinitionAggregator implements DbDefinitionProcessorInterface
      */
     private function isMariaDbSqlConnection(): bool
     {
-        return $this->sqlVersionProvider->isMariaDbEngine();
+        return strpos(
+            $this->sqlVersionProvider->getSqlVersion(),
+            SqlVersionProvider::MARIA_DB_10_VERSION
+        ) === 0;
     }
 }

@@ -86,7 +86,7 @@ class PriceTest extends TestCase
     /**
      * @return array
      */
-    public static function prepareDataSourceDataProvider(): array
+    public function prepareDataSourceDataProvider(): array
     {
         return [
             [

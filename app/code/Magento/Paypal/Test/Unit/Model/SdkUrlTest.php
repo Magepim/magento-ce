@@ -129,7 +129,7 @@ class SdkUrlTest extends TestCase
      *
      * @return array
      */
-    public static function getConfigDataProvider()
+    public function getConfigDataProvider()
     {
         return include __DIR__ . '/_files/expected_url_config.php';
     }

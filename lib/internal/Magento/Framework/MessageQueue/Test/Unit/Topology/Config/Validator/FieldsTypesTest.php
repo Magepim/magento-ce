@@ -64,7 +64,7 @@ class FieldsTypesTest extends TestCase
      * @return array
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public static function invalidConfigDataProvider()
+    public function invalidConfigDataProvider()
     {
         return [
             'type name' => [

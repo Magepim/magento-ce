@@ -190,7 +190,7 @@ class AddSimpleProductToCartSingleMutationTest extends GraphQlAbstract
 
         self::assertArrayHasKey('user_errors', $response['addProductsToCart']);
         self::assertEquals(
-            'Not enough items for sale',
+            'The requested qty is not available',
             $response['addProductsToCart']['user_errors'][0]['message']
         );
         self::assertEquals(100, $response['addProductsToCart']['cart']['total_quantity']);
@@ -429,7 +429,7 @@ class AddSimpleProductToCartSingleMutationTest extends GraphQlAbstract
         return [
             'More quantity than in stock' => [
                 101,
-                'Not enough items for sale'
+                'The requested qty is not available'
             ],
             'Quantity equals zero' => [
                 0,

@@ -222,7 +222,7 @@ class ConfigTest extends TestCase
     /**
      * @return array
      */
-    public static function getConfigDataProvider()
+    public function getConfigDataProvider()
     {
         return [
             'add_variables IS FALSE, add_widgets IS FALSE, isAuthorizationAllowed IS FALSE' => [
@@ -294,7 +294,7 @@ class ConfigTest extends TestCase
     /**
      * @return array
      */
-    public static function isEnabledDataProvider()
+    public function isEnabledDataProvider()
     {
         return [
             ['wysiwygState' => 'enabled', 'expectedResult' => true],
@@ -323,7 +323,7 @@ class ConfigTest extends TestCase
     /**
      * @return array
      */
-    public static function isHiddenDataProvider()
+    public function isHiddenDataProvider()
     {
         return [
             ['status' => 'hidden', 'expectedResult' => true],

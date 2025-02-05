@@ -55,7 +55,7 @@ class PageSizeProviderTest extends TestCase
     /**
      * @return array
      */
-    public static function getPageSizeDataProvider()
+    public function getPageSizeDataProvider()
     {
         return [
             ['search', 10],
